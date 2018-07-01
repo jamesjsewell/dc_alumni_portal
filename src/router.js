@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
+import AlumniView from "./features/view_alumni/components/AlumniView.jsx"
+
 
 class Blank extends Component {
     render() {
@@ -26,9 +28,11 @@ class RouterConfig extends Component {
 
     render() {
         return (
+            
             <Router>
 
                 <Switch>
+                    <Route exact path="/alumni" component={AlumniView} />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/test/test" component={Test2} />
                     <Route path="*" component={Blank} />
