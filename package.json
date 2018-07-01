@@ -27,7 +27,6 @@
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.0.6",
     "lodash": "^4.17.5",
-    "material-ui": "^0.20.1",
     "mongoose": "^5.0.12",
     "node-sass": "^4.7.2",
     "nodemon": "^1.17.2",

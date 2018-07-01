@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../alumni"
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '@material-ui/core/Button';
 
 @connect(
   state => controller.selector(state),
@@ -23,7 +23,11 @@ class AlumniView extends Component {
 
   render() {
 
-    return <div><RaisedButton>hello</RaisedButton></div>
+    return (
+      <div>
+        <Button>fuck</Button>
+      </div>
+    )
   }
 }
 
