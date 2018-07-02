@@ -24,7 +24,7 @@ const initial_state = {
 
 }
 
-export function ajax(operation, ajaxPayload) {
+export function ajax_controller(operation, ajaxPayload) {
 
     return function (dispatch) {
 
@@ -124,7 +124,9 @@ export const itemsReducer = function(state = initial_state, action) {
 }
 
 const grads = state => state.grads
+const AJAX_payload = state => state.AJAX_payload
 
 export const selector = createStructuredSelector({
-    grads
+    grads,
+    AJAX_payload
 })
