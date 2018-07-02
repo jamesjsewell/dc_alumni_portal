@@ -22,25 +22,38 @@ class AlumniView extends Component {
     this.CRUD = this.props.actions.ajax_controller
     var Payload = this.props.alumni.AJAX_payload
     var thePayload = new Payload({operation: 'read', backbone_collection: this.props.alumni.collection})
-    console.log(thePayload)
-    this.CRUD({ 
-      operation: 'read', 
-      backbone_collection: this.props.alumni.collection
-    })
+    this.CRUD(thePayload)
 
 
   }
 
   componentWillReceiveProps(nextProps){
-    
+      console.log(nextProps)
+  }
+
+  render_grads(grads){
+
+    var gradsArray = grads
+    var renderedGrads = []
+
+    for(var i = 0; i < gradsArray.length; i++){
+      renderedGrads.push(gradsArray[i])
+    }
+
+    return renderedGrads
+
   }
 
   render() {
-  
+
+
+    const { alumni } = this.props
+    
     return (
       <div>
         <Button>test</Button>
-       
+
+        {alumni.array.length? this.render_grads(alumni.array) : null}
       </div>
     )
   }

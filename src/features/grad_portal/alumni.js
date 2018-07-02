@@ -19,7 +19,7 @@ const initial_state = {
     message: null,
     collection: new GradCollection(),
     model: Grad,
-    array: null,
+    array: [],
     AJAX_payload: CRUD_payload
 
 }
