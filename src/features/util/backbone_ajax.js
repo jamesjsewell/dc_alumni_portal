@@ -2,6 +2,7 @@ export var CRUD_payload = class Payload {
 
     constructor(properties){
 
+        this.operation = properties.operation
         this.backbone_collection = properties.backbone_collection
         this.backbone_model = properties.backbone_model
         this.id = properties.id
@@ -18,13 +19,41 @@ export var CRUD_methods = class CRUD {
     
     constructor(payload){
 
-        var { backbone_collection, backbone_model, id, updated_obj, query_obj } = payload
+        var { operation, backbone_collection, backbone_model, id, updated_obj, query_obj, on_success_callback, on_error_callback } = payload
         
         this.backboneCollection = backbone_collection
         this.backboneModel = backbone_model
         this.modelId = id
         this.updatedObj = updated_obj
         this.queryObj = query_obj
+        this.onSuccess = on_success_callback
+        this.onError = on_error_callback
+
+        switch(operation){
+            case "create":
+
+                this.create()
+
+                break
+
+            case "read":
+
+                this.read()
+                
+                break
+
+            case "update":
+
+                this.update()
+
+                break
+
+            case "delete":
+
+                this.delete()
+
+                break
+        }
 
     }
 
@@ -36,8 +65,8 @@ export var CRUD_methods = class CRUD {
             this.backboneModel,
             {
                 wait: true,
-                success: (response) => { this.parse_response(response) }, //onSuccess,
-                error: (error) => { this.parse_response(error) }//onError
+                success: (response) => { this.parse_response(response) }, 
+                error: (error) => { this.parse_response(error) }
             }
         )
 
@@ -108,7 +137,7 @@ export var CRUD_methods = class CRUD {
 
         if(response.attributes && response.attributes.error){
 
-            this.on_error_callback(response.attributes.message)
+            this.onError(response.attributes.message)
 
         }
         else{
@@ -116,8 +145,8 @@ export var CRUD_methods = class CRUD {
             if(response.collection){
                 collection = response.collection
             }
-
-            this.on_succes_callback(collection, this.successMessage)
+            
+            this.onSuccess(collection, this.successMessage)
 
         } 
 

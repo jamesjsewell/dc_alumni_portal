@@ -1,3 +1,3 @@
 
-export const API_URL = "https://general-purpose-api.herokuapp.com";
+export const API_URL = "http://localhost:3000";
 export const CLIENT_ROOT_URL = ""

@@ -20,11 +20,11 @@ const initial_state = {
     collection: new GradCollection(),
     model: Grad,
     array: null,
-    ajaxPayload: CRUD_payload
+    AJAX_payload: CRUD_payload
 
 }
 
-export function ajax_controller(operation, ajaxPayload) {
+export function ajax_controller(ajaxPayload) {
 
     return function (dispatch) {
 
@@ -45,7 +45,7 @@ export function ajax_controller(operation, ajaxPayload) {
 
             dispatch({
                 type: UPDATE_ALUMNI_COLLECTION,
-                payload: { collection: backbone_collection, array: collection.models }
+                payload: { collection: backbone_collection, array: backbone_collection.models }
             })
 
             handleNotification(message)
@@ -75,18 +75,18 @@ export function ajax_controller(operation, ajaxPayload) {
             })
 
         }
-
+        
         ajaxPayload.on_success_callback = onSuccess
         ajaxPayload.on_error_callback = onError
 
-        new CRUD(ajaxPayload).create()
+        new CRUD_methods(ajaxPayload)
 
     }
 
 }
 
 
-export const itemsReducer = function(state = initial_state, action) {
+export const alumniReducer = function(state = initial_state, action) {
 
     var payload = action.payload
 
@@ -123,10 +123,17 @@ export const itemsReducer = function(state = initial_state, action) {
     return state
 }
 
-const grads = state => state.grads
-const AJAX_payload = state => state.AJAX_payload
+// selected
+// editing
+// message
+// collection
+// model
+// array
+// AJAX_payload
+
+const alumni = state => state.alumni
+
 
 export const selector = createStructuredSelector({
-    grads,
-    AJAX_payload
+    alumni
 })
