@@ -1,24 +1,90 @@
 import _ from "underscore"
 import { combineReducers } from "redux"
 import { createStructuredSelector } from "reselect"
+import { Grad, GradCollection } from "./backbone_models/Grad.js"
 
+// actions
+import { CRUD_payload, CRUD_methods } from "../util/backbone_ajax.js"
 
 // reducers
-const UPDATE_ITEM_COLLECTION = "update_item_collection",
-    EDIT_ITEM = "edit_item",
+const UPDATE_ALUMNI_COLLECTION = "update_alumni_collection",
+    EDIT_GRAD = "edit_grad",
     MESSAGE = "message",
     ASYNC = "aysnc"
 
 const initial_state = {
 
-    is_selected: null,
+    selected: null,
     editing: null,
     message: null,
-    collection: null,
-    model: null,
-    array: null
+    collection: new GradCollection(),
+    model: Grad,
+    array: null,
+    ajaxPayload: CRUD_payload
 
 }
+
+export function ajax(operation, ajaxPayload) {
+
+    return function (dispatch) {
+
+        dispatch({
+            type: ASYNC,
+            payload: true
+        })
+
+        function editItem(collection, id) {
+            var model = collection.get(id)
+            dispatch({
+                type: EDIT_GRAD,
+                payload: { selected: model.attributes, editing: true }
+            })
+        }
+
+        function onSuccess(backbone_collection, message) {
+
+            dispatch({
+                type: UPDATE_ALUMNI_COLLECTION,
+                payload: { collection: backbone_collection, array: collection.models }
+            })
+
+            handleNotification(message)
+
+            dispatch({
+                type: ASYNC,
+                payload: false
+            })
+
+        }
+
+        function onError(message) {
+
+            handleNotification(message)
+
+            dispatch({
+                type: ASYNC,
+                payload: false
+            })
+        }
+
+        function handleNotification(message, time) {
+
+            dispatch({
+                type: MESSAGE,
+                payload: message
+            })
+
+        }
+
+        ajaxPayload.on_success_callback = onSuccess
+        ajaxPayload.on_error_callback = onError
+
+        new CRUD(ajaxPayload).create()
+
+    }
+
+}
+
 
 export const itemsReducer = function(state = initial_state, action) {
 
@@ -26,14 +92,14 @@ export const itemsReducer = function(state = initial_state, action) {
 
     switch (action.type) {
 
-        case UPDATE_ITEM_COLLECTION: {
+        case UPDATE_ALUMNI_COLLECTION: {
 
             return _.extend({}, state, {collection: payload.collection, array: payload.array, editing: false })
             break
 
         }
 
-        case EDIT_ITEM: {
+        case EDIT_GRAD: {
 
             return _.extend({}, state, {selected: payload.selected, editing: payload.editing, message: '...editing', async_in_progress: false })
             break
@@ -57,8 +123,8 @@ export const itemsReducer = function(state = initial_state, action) {
     return state
 }
 
-const items = state => state.items
+const grads = state => state.grads
 
 export const selector = createStructuredSelector({
-    items
+    grads
 })

@@ -22,10 +22,11 @@ class AlumniView extends Component {
   
 
   render() {
-
+   
     return (
       <div>
-        <Button>fuck</Button>
+        <Button>test</Button>
+       
       </div>
     )
   }
