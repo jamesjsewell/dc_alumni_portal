@@ -20,7 +20,6 @@ class AuthView extends Component {
     
     super(props)
 
-
   }
 
   componentWillReceiveProps(nextProps){

@@ -5,11 +5,13 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../alumni"
-import Button from '@material-ui/core/Button'
 import { GradCard } from './GradCard.jsx'
+import { GradCollection } from "../backbone_models/Grad";
+
+//material-ui
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import { GradCollection } from "../backbone_models/Grad";
+import Button from '@material-ui/core/Button'
 
 @connect(
   state => controller.selector(state),
