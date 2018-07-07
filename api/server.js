@@ -7,7 +7,7 @@ if(process.env.NODE_ENV == 'development'){
 }
 
 // connect to the database
-const connectToDB = require("./db_config.js").connectToDB
+const connectToDB = require("./grads/config/db_config.js").connectToDB
 connectToDB("test_project")
 
 // runs express app and sets defined port

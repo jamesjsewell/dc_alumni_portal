@@ -21,6 +21,7 @@ import { GradCollection } from "../backbone_models/Grad";
 class AlumniView extends Component {
 
   constructor(props) {
+    
     super(props)
  
     this.CRUD = this.props.actions.ajax_controller
@@ -32,7 +33,7 @@ class AlumniView extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-      console.log(nextProps)
+
   }
 
   render_grads(grads){
@@ -41,14 +42,20 @@ class AlumniView extends Component {
     var renderedGradCards = []
 
     for(var i = 0; i < gradsArray.length; i++){
-      var theGrad = gradsArray[i].attributes
-      console.log(theGrad)
-      renderedGradCards.push(
-        <Grid item xs>
-          <Paper>
-            <GradCard {...theGrad} />
-          </Paper>
-        </Grid>)
+
+      var theGrad = gradsArray[i]
+      
+      if( theGrad && theGrad.attributes ){
+
+        renderedGradCards.push(
+          <Grid item xs>
+            <Paper>
+              <GradCard {...theGrad.attributes} />
+            </Paper>
+          </Grid>)
+
+      }
+  
     }
 
     return renderedGradCards
