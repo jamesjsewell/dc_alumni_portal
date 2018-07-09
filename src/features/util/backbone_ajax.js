@@ -1,25 +1,9 @@
-export var CRUD_payload = class Payload {
 
-    constructor(properties){
-
-        this.operation = properties.operation
-        this.backbone_collection = properties.backbone_collection
-        this.backbone_model = properties.backbone_model
-        this.id = properties.id
-        this.updated_obj = properties.updated_obj
-        this.query_obj = properties.query_obj
-        this.on_success = properties.on_success
-        this.on_error = properties.on_error
-
-    }
-
-}
-
-export var CRUD_methods = class CRUD {
+export var CRUD = class {
     
-    constructor(payload){
+    constructor(options){
 
-        var { operation, backbone_collection, backbone_model, id, updated_obj, query_obj, on_success_callback, on_error_callback } = payload
+        var { operation, backbone_collection, backbone_model, id, updated_obj, query_obj, on_success_callback, on_error_callback } = options
         
         this.backboneCollection = backbone_collection
         this.backboneModel = backbone_model

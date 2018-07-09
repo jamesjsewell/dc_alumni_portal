@@ -4,13 +4,21 @@ import { createStructuredSelector } from "reselect"
 import { Grad, GradCollection } from "./backbone_models/Grad.js"
 
 // actions
-import { CRUD_payload, CRUD_methods } from "../util/backbone_ajax.js"
+import { CRUD } from "../util/backbone_ajax.js"
+import { Auth } from "./auth.js"
 
-// reducers
+
 const UPDATE_ALUMNI_COLLECTION = "update_alumni_collection",
     EDIT_GRAD = "edit_grad",
     MESSAGE = "message",
-    ASYNC = "aysnc"
+	ASYNC = "aysnc"
+	
+const RESET_PASSWORD = "reset_password",
+	LOGIN_ERROR = "login_error",
+	AUTHENTICATE = "authenticate",
+	ERROR_REGISTERING = "error_registering",
+	UNAUTHENTICATE = "unauthenticate",
+	FORGOT_PASSWORD = "forgot_password"
 
 const initial_state = {
 
@@ -24,7 +32,7 @@ const initial_state = {
 
 }
 
-export function ajax_controller(ajaxPayload) {
+export function ajax_controller(ajaxInfo) {
 
     return function (dispatch) {
 
@@ -76,18 +84,20 @@ export function ajax_controller(ajaxPayload) {
 
         }
         
-        ajaxPayload.on_success_callback = onSuccess
-        ajaxPayload.on_error_callback = onError
+        ajaxInfo.on_success_callback = onSuccess
+        ajaxInfo.on_error_callback = onError
 
-        new CRUD_methods(ajaxPayload)
+        new CRUD_methods(ajaxInfo)
 
     }
 
 }
 
-export function auth_controller(){
+export function auth_controller(authInfo){
 
     return function(dispatch){
+
+		new Auth_methods(authInfo)
 
         
 

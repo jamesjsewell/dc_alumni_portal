@@ -1,18 +1,17 @@
 import axios from "axios"
 
-RESET_PASSWORD_REQUEST
-LOGIN_ERROR
-AUTH_USER
-REGISTER_ERROR
-UNAUTH_USER
-FORGOT_PASSWORD_REQUEST
+import { RESET_PASSWORD,
+LOGIN_ERROR,
+AUTHENTICATE,
+ERROR_REGISTERING,
+UNAUTHENTICATE,
+FORGOT_PASSWORD } from "./alumni.js"
 
+export var Auth = class {
 
-export var Auth_methods = class CRUD {
+    constructor(authInfo){
 
-    constructor(payload){
-
-        var { operation, email, password, fname , lname, grad } = payload
+        var { operation, email, password, fname , lname, grad } = authInfo
         
         this.email = email
         this.password = password
@@ -71,7 +70,7 @@ export var Auth_methods = class CRUD {
         
                 cookies.set("token", response.data.token, { path: "/" });
                 cookies.set("user", response.data.user, { path: "/" });
-                dispatch({ type: AUTH_USER, payload: response.data.user });
+                dispatch({ type: AUTHENTICATE, payload: response.data.user });
             
             })
             .catch(error => {
@@ -97,12 +96,12 @@ export var Auth_methods = class CRUD {
             .then(response => {
                 cookies.set("token", response.data.token, { path: "/" });
                 cookies.set("grad", response.data, { path: "/" });
-                dispatch({ type: AUTH_USER, payload: response.data.grad });
+                dispatch({ type: AUTHENTICATE, payload: response.data.grad });
 
             })
             .catch(error => {
                 dispatch({
-                    type: REGISTER_ERROR,
+                    type: ERROR_REGISTERING,
                     payload: "unable to create account"
                 });
             });
@@ -113,7 +112,7 @@ export var Auth_methods = class CRUD {
 
         var shelterCookie = cookies.get("currentShelter");
         dispatch({
-            type: UNAUTH_USER,
+            type: UNAUTHENTICATE,
             payload: error
         });
         
@@ -125,7 +124,7 @@ export var Auth_methods = class CRUD {
     getForgotPasswordToken({ email }) {
         
         dispatch({
-            type: FORGOT_PASSWORD_REQUEST,
+            type: FORGOT_PASSWORD,
             payload: {
                 stateOfSend: "sending email",
                 sending: true,
@@ -137,7 +136,7 @@ export var Auth_methods = class CRUD {
             .post(`${API_URL}/auth/forgot-password`, { email })
             .then(response => {
                 dispatch({
-                    type: FORGOT_PASSWORD_REQUEST,
+                    type: FORGOT_PASSWORD,
                     payload: {
                         stateOfSend: "email sent",
                         sending: false,
@@ -148,7 +147,7 @@ export var Auth_methods = class CRUD {
             .catch(error => {
               
                 dispatch({
-                    type: FORGOT_PASSWORD_REQUEST,
+                    type: FORGOT_PASSWORD,
                     payload: {
                         stateOfSend: error.response.data.error,
                         sending: false,
@@ -165,7 +164,7 @@ export var Auth_methods = class CRUD {
             .post(`${API_URL}/auth/reset-password/${token}`, { password })
             .then(response => {
                 dispatch({
-                    type: RESET_PASSWORD_REQUEST,
+                    type: RESET_PASSWORD,
                     payload: {
                         message: response.data.message,
                         didReset: response.data.didReset
@@ -176,7 +175,7 @@ export var Auth_methods = class CRUD {
             })
             .catch(error => {
                 dispatch({
-                    type: RESET_PASSWORD_REQUEST,
+                    type: RESET_PASSWORD,
                     payload: {
                         message: error.response.data.error,
                         didReset: false
@@ -194,7 +193,7 @@ export var Auth_methods = class CRUD {
 			.then(response => {
 				if (response.data) {
 					dispatch({
-						type: AUTH_USER,
+						type: AUTHENTICATE,
 						payload: response.data
 					});
 				}
