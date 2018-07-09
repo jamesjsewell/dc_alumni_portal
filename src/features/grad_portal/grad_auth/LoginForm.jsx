@@ -35,25 +35,6 @@ class LoginForm extends Component {
       
         var userInput = formProps;
        
-        if (
-            Object.keys(formProps).length > 0 &&
-            formProps.constructor === Object
-        ) { 
-
-            switch(this.props.formType){
-                case 'create': {
-                   
-                    var item = new this.props.model(userInput)
-                    this.props.CRUD('create', {collection: this.props.itemCollection, item: item})
-                    break
-                }
-
-                case 'edit': {
-                    this.props.CRUD('update', {collection: this.props.itemCollection, item: this.props.item, info: userInput})  
-                    break
-                }
-            }    
-        }
     }
 
     render() {
@@ -61,7 +42,7 @@ class LoginForm extends Component {
         const { handleSubmit } = this.props
 
         return (
-            <Grid item xs={2}>
+            <Grid item xs={6}>
     
                 <Card>
                     <CardContent>

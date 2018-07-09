@@ -42,7 +42,7 @@ class RegisterForm extends Component {
         const { handleSubmit } = this.props
 
         return (
-            <Grid item xs={2}>
+            <Grid item xs={6}>
     
                 <Card>
                     <CardContent>
