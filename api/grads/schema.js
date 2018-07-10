@@ -4,12 +4,6 @@ const bcrypt = require("bcrypt");
 // mongoose schema class
 const Schema = mongoose.Schema
 
-// instance of mongoose Schema class 
-var Grad = new Schema({
-    username: { type: String },
-    bio: { type: String }
-}, { collection: 'alumni', timestamps: true })
-
 // Importing Node packages required for schema
 const { ROLE_GRAD, ROLE_OWNER, ROLE_ADMIN } = require("./config/roles")
 
@@ -21,7 +15,7 @@ const GradSchema = new Schema(
         email: {
             type: String,
             lowercase: true,
-            unique: true,
+            // unique: true,
             required: true
         },
         username: { type: String, default: "" },
@@ -85,4 +79,4 @@ GradSchema.methods.comparePassword = function(candidatePassword, cb) {
 };
 
 // exports mongoose model to the gradController.js file
-module.exports = mongoose.model("Grad", Grad)
+module.exports = mongoose.model("Grad", GradSchema)

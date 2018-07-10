@@ -27,9 +27,7 @@ class AlumniView extends Component {
     super(props)
  
     this.CRUD = this.props.actions.ajax_controller
-    var Payload = this.props.alumni.AJAX_payload
-    var thePayload = new Payload({operation: 'read', backbone_collection: this.props.alumni.collection})
-    this.CRUD(thePayload)
+    this.CRUD({operation: 'read', backbone_collection: this.props.alumni.collection})
 
 
   }

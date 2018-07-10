@@ -31,7 +31,7 @@ class AuthView extends Component {
     const { alumni } = this.props
     
     return (
-      <div><AuthLayout /></div>
+      <div><AuthLayout register={this.props.actions.register.bind(this)} /></div>
     )
   }
 }

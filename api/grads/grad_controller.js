@@ -11,8 +11,8 @@ const _ = require("underscore");
 
 // Generate JWT
 // TO-DO Add issuer and audience
-function generateToken(user) {
-    return jwt.sign(user, process.env.AUTH_SECRET, {
+function generateToken(grad) {
+    return jwt.sign(grad, process.env.AUTH_SECRET, {
         expiresIn: 604800 // in seconds
     })
 }
@@ -148,10 +148,7 @@ module.exports = {
 
     register: function(req, res, next) {
         // Check for registration errors
-        const email = req.body.email
-        const fname = req.body.fname
-        const lname = req.body.lname
-        const password = req.body.password
+        const { email, fname, lname, password } = req.body
     
         // Return error if no email provided
         if (!email) {
@@ -171,21 +168,22 @@ module.exports = {
             }
     
             // If user is not unique, return error
-            if (gradExisting) {
-                return res
-                    .status(422)
-                    .send({ error: "That email address is already in use." })
-            }
+            // if (gradExisting) {
+            //     return res
+            //         .status(422)
+            //         .send({ error: "That email address is already in use." })
+            // }
     
             // If email is unique and password was provided, create account
             const grad = new Grad({
-                email,
-                password,
-                fname, 
-                lname 
+                email: email,
+                password: password,
+                fname: fname, 
+                lname: lname 
             })
-    
-            grad.save((err, grad) => {
+           
+            grad.save((err, savedGrad) => {
+                
                 if (err) {
                     return next(err)
                 }
@@ -193,10 +191,11 @@ module.exports = {
     
                 // Respond with JWT if user was created
 
-    
+                var gradMinusPassword = _.omit(savedGrad.toObject(), 'password')
+                
                 res.status(201).json({
-                    token: `JWT ${generateToken(gradInfo)}`,
-                    grad: _.omit(grad.toObject(), 'password')
+                    token: `JWT ${generateToken(gradMinusPassword)}`,
+                    grad: gradMinusPassword
                 })
             })
         })

@@ -4,12 +4,9 @@ import { API_URL } from "../../util/util.js"
 export const Grad = Backbone.Model.extend({
 	urlRoot: `${API_URL}/grads`,
 	idAttribute: "_id",
-	defaults: function() {
-		return {
-			name: null,
-			description: null
-		};
-	}
+	// defaults: function() {
+		
+	// }
 });
 
 export const GradCollection = Backbone.Collection.extend({
