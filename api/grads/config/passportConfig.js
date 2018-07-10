@@ -13,6 +13,7 @@ const localOptions = {
 
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
+  
     Grad.findOne({ email }, (err, grad) => {
         if (err) {
             return done(err)
@@ -23,16 +24,22 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
             })
         }
 
+        
+
         grad.comparePassword(password, (err, isMatch) => {
+           
             if (err) {
+              
                 return done(err)
             }
             if (!isMatch) {
+               
                 return done(null, false, {
                     error: "Your login details could not be verified. Please try again."
                 })
-            }
 
+            }
+           
             return done(null, grad)
         })
     })

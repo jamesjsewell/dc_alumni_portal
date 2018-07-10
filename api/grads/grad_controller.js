@@ -109,7 +109,6 @@ module.exports = {
                 }
             }
         )
-
     },
 
     // takes the desired Grad's id from the request parameters, then performs a method that the selects the record in the database
@@ -139,9 +138,27 @@ module.exports = {
 
     login: function(req, res, next) {
     
-        res.status(200).json({
-            token: `JWT ${generateToken(gradInfo)}`,
-            grad: _.omit(req.grad.toObject(), 'password')
+      
+        Grad.findOne({ email: req.body.email }, (err, gradExisting) => {
+          
+            if (err) {
+                return next(err)
+            }
+
+            if (gradExisting) {
+
+                var gradMinusPassword = _.omit(gradExisting.toObject(), 'password')
+                res.status(200).json({
+                    token: `JWT ${generateToken(gradMinusPassword)}`,
+                    grad: gradMinusPassword
+                })
+                
+            }
+            else{
+                res.status(401).json({ error: "grad doesn't exist"})
+
+            }
+
         })
 
     },
@@ -168,11 +185,11 @@ module.exports = {
             }
     
             // If user is not unique, return error
-            // if (gradExisting) {
-            //     return res
-            //         .status(422)
-            //         .send({ error: "That email address is already in use." })
-            // }
+            if (gradExisting) {
+                return res
+                    .status(422)
+                    .send({ error: "That email address is already in use." })
+            }
     
             // If email is unique and password was provided, create account
             const grad = new Grad({

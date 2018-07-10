@@ -21,8 +21,8 @@ gradRoutes.delete("/grads/:id", requireAuth, gradController.delete)
 
 gradRoutes.post("/grad/register", gradController.register)
 gradRoutes.post("/grad/login", requireLogin, gradController.login)
-gradRoutes.post("/grad/forgot-password", requireAuth, gradController.forgotPassword)
-gradRoutes.post("/grad/reset-password/:token", requireAuth, gradController.changePassword)
+gradRoutes.post("/grad/forgot-password", gradController.forgotPassword)
+gradRoutes.post("/grad/reset-password/:token", gradController.changePassword)
 gradRoutes.get("/grad/authenticate", requireAuth, (req, res) => {
 	res.send({ authenticated: true })
 })

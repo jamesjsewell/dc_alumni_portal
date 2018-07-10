@@ -15,7 +15,7 @@ const GradSchema = new Schema(
         email: {
             type: String,
             lowercase: true,
-            // unique: true,
+            unique: true,
             required: true
         },
         username: { type: String, default: "" },
@@ -50,16 +50,16 @@ const GradSchema = new Schema(
 
 // Pre-save of user to database, hash password if password is modified or new
 GradSchema.pre("save", function(next) {
-    const user = this, SALT_FACTOR = 5;
-
-    if (!user.isModified("password")) return next();
+    const grad = this, SALT_FACTOR = 5;
+    
+    if (!grad.isModified("password")) return next();
 
     bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
         if (err) return next(err);
 
-        bcrypt.hash(user.password, salt, (err, hash) => {
+        bcrypt.hash(grad.password, salt, (err, hash) => {
             if (err) return next(err);
-            user.password = hash;
+            grad.password = hash;
             next();
         });
     });
@@ -67,9 +67,10 @@ GradSchema.pre("save", function(next) {
     //next()
 });
 
-// Method to compare password for login
+// Method to compare password for login, cb stands for callback
 GradSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        
         if (err) {
             return cb(err);
         }

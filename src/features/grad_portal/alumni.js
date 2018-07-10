@@ -33,15 +33,16 @@ export function login({ email, password }) {
 	return function(dispatch){
 
 		axios
-		.post(`${API_URL}/grads/login`, { email, password })
+		.post(`${API_URL}/grad/login`, { email, password })
 		.then(response => {
-	
+			console.log(response)
 			cookies.set("grad_token", response.data.grad_token, { path: "/" })
-			cookies.set("user", response.data.grad, { path: "/" })
+			cookies.set("grad", response.data.grad, { path: "/" })
 			dispatch({ type: AUTHENTICATE, payload: response.data.grad })
 		
 		})
 		.catch(error => {
+			console.log(error)
 			dispatch({
 				type: LOGIN_ERROR,
 				payload: "invalid email or password"
@@ -195,8 +196,8 @@ export const alumniReducer = function(state = initial_state, action) {
     switch (action.type) {
 
         case AUTHENTICATE: {
-			console.log(payload)
-            return _.extend({}, state, { })
+			
+            return _.extend({}, state, { grad: grad })
             break
 
         }

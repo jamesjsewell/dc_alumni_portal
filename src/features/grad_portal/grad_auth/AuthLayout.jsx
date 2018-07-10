@@ -16,7 +16,7 @@ export const AuthLayout = (props) => {
 
     return(<div>
     <Grid container spacing={24}>
-        <LoginForm />
+        <LoginForm login={props.login} />
         <RegisterForm register={props.register} />
     </Grid></div>)
 

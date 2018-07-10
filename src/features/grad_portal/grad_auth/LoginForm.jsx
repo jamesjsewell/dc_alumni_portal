@@ -3,12 +3,13 @@ import { Form, Field, reduxForm, change, reset } from "redux-form";
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
 
 import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import { FormField } from "./FormFields.jsx"
 
 
 const afterSubmit = (result, dispatch, props) => {
@@ -31,9 +32,9 @@ class LoginForm extends Component {
         
     }
 
-    doThisOnSubmit(formProps) {
-      
-        var userInput = formProps;
+    doThisOnSubmit(input) {
+       
+        this.props.login({email: input.email_login, password: input.password_login})
        
     }
 
@@ -45,20 +46,26 @@ class LoginForm extends Component {
             <Grid item xs={6}>
     
                 <Card>
+
                     <CardContent>
+
                         <Typography gutterBottom variant="headline" component="h2">
                             Login
                         </Typography>
                         <Typography component="p">
-                            login form goes here
+                            enter your login credentials
                         </Typography>
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
+
+                            <Field type="email" name="email_login" label="email" component={FormField} />
+                            <Field type="password" name="password_login" label="password" component={FormField} />
 
                             <Button type="submit">
                                 submit
                             </Button>
 
                         </form >
+
                     </CardContent>
             
                 </Card>
@@ -70,7 +77,7 @@ class LoginForm extends Component {
 }
 
 export default reduxForm({
-    form: 'login',
+    form: 'register',
     // fields: ["name"],
     // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
     // asyncBlurFields: ["name"],
