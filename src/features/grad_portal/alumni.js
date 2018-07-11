@@ -28,16 +28,17 @@ const initial_state = {
 
 }
 
-export function auto_log_in(authenticate_grad){
+export function auto_log_in(authenticate_grad, loggedInGrad){
 	return function(dispatch){
-	
-		var token = cookies.get("grad_token");
-		var grad = cookies.get("grad");
-	
-		if (token && grad) {
-			authenticate_grad(grad, token)
-		} 
-		   
+		
+		if(!loggedInGrad){
+			var token = cookies.get("grad_token");
+			var grad = cookies.get("grad");
+		
+			if (token && grad) {
+				authenticate_grad(grad, token)
+			} 
+		}	   
 	}
 }
 
@@ -55,14 +56,13 @@ export function authenticate(grad, token) {
 				if (response.data) {
 					dispatch({
 						type: AUTHENTICATE,
-						payload: response.data
+						payload: response.data.grad
 					})
 				}
 			})
 			.catch(error => {console.log(error)})
 		}
 	}
-
 };
 
 export function login({ email, password }) {
@@ -72,7 +72,7 @@ export function login({ email, password }) {
 		axios
 		.post(`${API_URL}/grad/login`, { email, password })
 		.then(response => {
-			
+			console.log(response.data.grad)
 			cookies.set("grad_token", response.data.grad_token, { path: "/" })
 			cookies.set("grad", response.data.grad, { path: "/" })
 			dispatch({ type: AUTHENTICATE, payload: response.data.grad })
@@ -85,9 +85,7 @@ export function login({ email, password }) {
 				payload: "invalid email or password"
 			})
 		})
-
-	}
-	
+	}	
 }
 
 export function register({ email, fname, lname, password }) {
@@ -130,8 +128,7 @@ export function logout(error) {
 		cookies.remove("grad_token", { path: "/" })
 		cookies.remove("grad", { path: "/" })
 
-	}
-	
+	}	
 }
 
 export function getForgotPasswordToken({ email }) {
@@ -199,9 +196,7 @@ export function resetPassword(grad_token, { password }) {
 				}
 			})
 		})
-
 	}
-	
 }
 
 
@@ -217,8 +212,6 @@ export const alumniReducer = function(state = initial_state, action) {
             break
 
         }
-
-		
 
     }
 
