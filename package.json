@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "run-p dev_api dev_webpack",
-    "dev_api": "NODE_ENV=development node ./api/server.js",
+    "dev_api": "NODE_ENV=development nodemon api/server.js",
     "dev_webpack": "webpack-dev-server --open --config webpack.dev.js -d",
     "prod_api": "NODE_ENV=production node ./api/server.js",
     "prod_build": "webpack --config webpack.prod.js"

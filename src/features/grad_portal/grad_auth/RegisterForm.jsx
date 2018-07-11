@@ -43,7 +43,7 @@ class RegisterForm extends Component {
         const { handleSubmit } = this.props
 
         return (
-            <Grid item xs={6}>
+            <Grid item >
     
                 <Card>
 
@@ -53,7 +53,7 @@ class RegisterForm extends Component {
                             Register
                         </Typography>
                         <Typography component="p">
-                            register form goes here
+                            create an alumni account
                         </Typography>
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 

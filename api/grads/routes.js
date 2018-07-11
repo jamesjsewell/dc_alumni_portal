@@ -23,8 +23,7 @@ gradRoutes.post("/grad/register", gradController.register)
 gradRoutes.post("/grad/login", requireLogin, gradController.login)
 gradRoutes.post("/grad/forgot-password", gradController.forgotPassword)
 gradRoutes.post("/grad/reset-password/:token", gradController.changePassword)
-gradRoutes.get("/grad/authenticate", requireAuth, (req, res) => {
-	res.send({ authenticated: true })
-})
+gradRoutes.get("/grad/authenticate/:_id", requireAuth, gradController.authenticate)
+gradRoutes.put("/grad/:id", requireAuth, gradController.update)
 
 module.exports = gradRoutes

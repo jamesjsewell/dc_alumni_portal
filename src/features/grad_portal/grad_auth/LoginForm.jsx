@@ -43,7 +43,7 @@ class LoginForm extends Component {
         const { handleSubmit } = this.props
 
         return (
-            <Grid item xs={6}>
+            <Grid item>
     
                 <Card>
 

@@ -25,11 +25,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 let router = require("./router.js")
 
 app.all('*', function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
-	res.setHeader('Access-Control-Allow-Credentials', true); // If needed
-    next()
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+	res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
+	next()
 });
 
 // base router for CRUD api

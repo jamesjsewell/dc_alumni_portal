@@ -136,6 +136,33 @@ module.exports = {
 
     },
 
+    authenticate: function(req, res, next){
+
+        var id = req.params._id
+
+        Grad.findById(id, (err, gradExisting) => {
+          
+            if (err) {
+                return next(err)
+            }
+
+            if (gradExisting) {
+
+                var gradMinusPassword = _.omit(gradExisting.toObject(), 'password')
+                res.status(200).json({
+                    grad: gradMinusPassword
+                })
+                
+            }
+            else{
+                res.status(401).json({ error: "grad doesn't exist"})
+
+            }
+
+        })
+
+    },
+
     login: function(req, res, next) {
     
       
@@ -149,7 +176,7 @@ module.exports = {
 
                 var gradMinusPassword = _.omit(gradExisting.toObject(), 'password')
                 res.status(200).json({
-                    token: `JWT ${generateToken(gradMinusPassword)}`,
+                    grad_token: `JWT ${generateToken(gradMinusPassword)}`,
                     grad: gradMinusPassword
                 })
                 

@@ -57,6 +57,7 @@ const jwtOptions = {
 
 // Setting up JWT login strategy
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+  
     Grad.findById(payload._id, (err, grad) => {
         if (err) {
             return done(err, false)

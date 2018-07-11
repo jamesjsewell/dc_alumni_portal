@@ -28,6 +28,43 @@ const initial_state = {
 
 }
 
+export function auto_log_in(authenticate_grad){
+	return function(dispatch){
+	
+		var token = cookies.get("grad_token");
+		var grad = cookies.get("grad");
+	
+		if (token && grad) {
+			authenticate_grad(grad, token)
+		} 
+		   
+	}
+}
+
+export function authenticate(grad, token) {
+
+	return function(dispatch){
+
+		if(grad){
+			axios
+			.get(`${API_URL}/grad/authenticate/${grad._id}`, {
+				headers: { Authorization: token? token : cookies.get("grad_token") }
+			})
+			.then(response => {
+			
+				if (response.data) {
+					dispatch({
+						type: AUTHENTICATE,
+						payload: response.data
+					})
+				}
+			})
+			.catch(error => {console.log(error)})
+		}
+	}
+
+};
+
 export function login({ email, password }) {
 
 	return function(dispatch){
@@ -35,14 +72,14 @@ export function login({ email, password }) {
 		axios
 		.post(`${API_URL}/grad/login`, { email, password })
 		.then(response => {
-			console.log(response)
+			
 			cookies.set("grad_token", response.data.grad_token, { path: "/" })
 			cookies.set("grad", response.data.grad, { path: "/" })
 			dispatch({ type: AUTHENTICATE, payload: response.data.grad })
 		
 		})
 		.catch(error => {
-			console.log(error)
+		
 			dispatch({
 				type: LOGIN_ERROR,
 				payload: "invalid email or password"
@@ -65,18 +102,18 @@ export function register({ email, fname, lname, password }) {
 			password
 		})
 		.then(response => {
-			console.log(response)
+		
 			cookies.set("grad_token", response.data.grad_token, { path: "/" })
 			cookies.set("grad", response.data, { path: "/" })
-			//dispatch({ type: AUTHENTICATE, payload: response.data.grad });
+			dispatch({ type: AUTHENTICATE, payload: response.data.grad });
 
 		})
 		.catch(error => {
-			console.log(error)
-			// dispatch({
-			//     type: ERROR_REGISTERING,
-			//     payload: "unable to create account"
-			// });
+			
+			dispatch({
+			    type: ERROR_REGISTERING,
+			    payload: "unable to create account"
+			});
 		})
 	}
 }
@@ -167,27 +204,6 @@ export function resetPassword(grad_token, { password }) {
 	
 }
 
-export function authenticate(grad) {
-
-	return function(dispatch){
-
-		axios
-			.get(`${API_URL}/grad/authenticate/${grad._id}`, {
-				headers: { Authorization: cookies.get("grad_token") }
-			})
-			.then(response => {
-				if (response.data) {
-					dispatch({
-						type: AUTHENTICATE,
-						payload: response.data
-					})
-				}
-			})
-			.catch(error => {})
-
-	}
-
-};
 
 export const alumniReducer = function(state = initial_state, action) {
 
@@ -196,8 +212,8 @@ export const alumniReducer = function(state = initial_state, action) {
     switch (action.type) {
 
         case AUTHENTICATE: {
-			
-            return _.extend({}, state, { grad: grad })
+			console.log(payload)
+            return _.extend({}, state, { grad: payload })
             break
 
         }

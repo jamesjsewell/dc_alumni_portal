@@ -20,9 +20,7 @@ class AuthView extends Component {
     
     super(props)
 
-  }
-
-  componentWillReceiveProps(nextProps){
+    this.props.actions.auto_log_in(this.props.actions.authenticate)
 
   }
 
