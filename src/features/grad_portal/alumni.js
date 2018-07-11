@@ -102,7 +102,7 @@ export function register({ email, fname, lname, password }) {
 		.then(response => {
 		
 			cookies.set("grad_token", response.data.grad_token, { path: "/" })
-			cookies.set("grad", response.data, { path: "/" })
+			cookies.set("grad", response.data.grad, { path: "/" })
 			dispatch({ type: AUTHENTICATE, payload: response.data.grad });
 
 		})

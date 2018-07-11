@@ -238,7 +238,7 @@ module.exports = {
                 var gradMinusPassword = _.omit(savedGrad.toObject(), 'password')
                 
                 res.status(201).json({
-                    token: `JWT ${generateToken(gradMinusPassword)}`,
+                    grad_token: `JWT ${generateToken(gradMinusPassword)}`,
                     grad: gradMinusPassword
                 })
             })
