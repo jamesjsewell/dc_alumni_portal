@@ -57,7 +57,7 @@ class ForgotPasswordForm extends Component {
                     request
                 </Button> : null}
 
-                { password_request === "failed" ? <p>something went wrong, try again</p> : null }
+                { password_request === "failed" ? <Card><CardContent><Typography component="p" color="error">something went wrong, try again</Typography></CardContent></Card> : null }
 
             </form > 
             
