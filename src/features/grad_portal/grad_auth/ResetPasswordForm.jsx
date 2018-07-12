@@ -32,10 +32,10 @@ class ResetPasswordForm extends Component {
         
     }
 
-    doThisOnSubmit({password}) {
+    doThisOnSubmit(input) {
        
         const resetToken = this.props.match.params.resetToken
-        this.props.resetPassword(resetToken, { password })
+        this.props.resetPassword(resetToken, input.new_password)
         // this.state.dispatchedReset = true
     }
 

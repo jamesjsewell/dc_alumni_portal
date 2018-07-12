@@ -22,9 +22,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
             return done(null, false, {
                 error: "Your login details could not be verified. Please try again."
             })
-        }
-
-        
+        } 
 
         grad.comparePassword(password, (err, isMatch) => {
            

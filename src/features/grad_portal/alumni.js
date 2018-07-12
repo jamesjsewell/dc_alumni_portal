@@ -150,7 +150,7 @@ export function getForgotPasswordToken({ email }) {
 		// })
 	
 		axios
-			.post(`${API_URL}/grad/forgot-password`, {email: 'jamesjosephsewell@gmail.com'})
+			.post(`${API_URL}/grad/forgot-password`, { email: 'jamesjosephsewell@gmail.com' })
 			.then(response => {
 				console.log(response)
 				// dispatch({
@@ -176,12 +176,12 @@ export function getForgotPasswordToken({ email }) {
 	}
 }
 
-export function resetPassword(grad_token, { password }) {
+export function resetPassword(grad_token, password) {
 
 	return function(dispatch){
 
 		axios
-		.post(`${API_URL}/grad/reset-password/${grad_token}`, { password })
+		.post(`${API_URL}/grad/reset-password/${grad_token}`, { password: password })
 		.then(response => {
 			dispatch({
 				type: RESET_PASSWORD,

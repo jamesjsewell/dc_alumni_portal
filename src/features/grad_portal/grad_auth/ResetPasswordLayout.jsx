@@ -12,7 +12,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-export const AuthLayout = (props) => {
+export const ResetPasswordLayout = (props) => {
 
     return(<div>
     <Grid container spacing={24}>

@@ -29,7 +29,7 @@ class ResetPasswordView extends Component {
     const { alumni } = this.props
     
     return (
-      <div><ResetPasswordForm match={this.props.match} resetPassword={this.props.actions.resetPassword.bind(this)} /></div>
+      <div><ResetPasswordLayout match={this.props.match} resetPassword={this.props.actions.resetPassword.bind(this)} /></div>
     )
   }
 }

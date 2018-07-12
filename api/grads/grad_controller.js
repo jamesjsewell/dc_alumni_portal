@@ -269,7 +269,7 @@ module.exports = {
 
     forgotPassword: function(req, res, next) {
         const email = req.body.email
-        console.log(req.body)
+       
         Grad.findOne({ email }, (err, gradExisting) => {
             // If user is not found, return error
             if (err || gradExisting == null) {
@@ -347,6 +347,7 @@ module.exports = {
     },
 
     changePassword: function(req, res, next) {
+        console.log(req.body)
         Grad.findOne(
             {
                 resetPasswordToken: req.params.token,

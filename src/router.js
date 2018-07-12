@@ -35,10 +35,11 @@ class RouterConfig extends Component {
 
                 <Switch>
                     <Route exact path="/alumni" component={AlumniView} />
-                    <Route exact paht="/login" component={AuthView} />
+                    <Route exact path="/login" component={AuthView} />
                     <Route
                         location={location}
                         key={location.key}
+                        exact 
                         path="/reset-password/:resetToken"
                         component={ResetPasswordView}
                     />
