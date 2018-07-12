@@ -37,6 +37,7 @@ const GradSchema = new Schema(
             enum: [ROLE_GRAD, ROLE_OWNER, ROLE_ADMIN],
             default: ROLE_GRAD
         },
+        publicEmail: { type: String },
         resetPasswordToken: { type: String },
         resetPasswordExpires: { type: Date }
     },

@@ -11,12 +11,12 @@ const cookies = new Cookies()
 const MESSAGE = "message",
 	ASYNC = "aysnc"
 	
-const RESET_PASSWORD = "reset_password",
-	LOGIN_ERROR = "login_error",
-	AUTHENTICATE = "authenticate",
-	ERROR_REGISTERING = "error_registering",
+const AUTHENTICATE = "authenticate",
 	UNAUTHENTICATE = "unauthenticate",
-	FORGOT_PASSWORD = "forgot_password"
+	FORGOT_PASSWORD = "forgot_password",
+	RESET_PASSWORD = "reset_password",
+	LOGIN_ERROR = "login_error",
+	ERROR_REGISTERING = "error_registering"
 
 const initial_state = {
 
@@ -24,22 +24,51 @@ const initial_state = {
     collection: new GradCollection(),
     model: Grad,
 	array: [],
-	grad: null
+	grad: null,
+	auth_message: null
 
 }
 
 export function auto_log_in(authenticate_grad, loggedInGrad){
+
 	return function(dispatch){
 		
 		if(!loggedInGrad){
-			var token = cookies.get("grad_token");
-			var grad = cookies.get("grad");
+			var token = cookies.get("grad_token")
+			var grad = cookies.get("grad")
 		
 			if (token && grad) {
 				authenticate_grad(grad, token)
 			} 
 		}	   
 	}
+}
+
+export function login({ email, password }) {
+
+	return function(dispatch){
+
+		if(email && password){
+
+			axios
+			.post(`${API_URL}/grad/login`, { email, password })
+			.then(response => {
+				
+				cookies.set("grad_token", response.data.grad_token, { path: "/" })
+				cookies.set("grad", response.data.grad, { path: "/" })
+				dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+			
+			})
+			.catch(error => {
+			
+				dispatch({
+					type: LOGIN_ERROR,
+					payload: { message: " something went wrong" }
+				})
+			})
+
+		}	
+	}	
 }
 
 export function authenticate(grad, token) {
@@ -60,74 +89,54 @@ export function authenticate(grad, token) {
 					})
 				}
 			})
-			.catch(error => {console.log(error)})
+			.catch(error => { return })
 		}
 	}
-};
-
-export function login({ email, password }) {
-
-	return function(dispatch){
-
-		axios
-		.post(`${API_URL}/grad/login`, { email, password })
-		.then(response => {
-			console.log(response.data.grad)
-			cookies.set("grad_token", response.data.grad_token, { path: "/" })
-			cookies.set("grad", response.data.grad, { path: "/" })
-			dispatch({ type: AUTHENTICATE, payload: response.data.grad })
-		
-		})
-		.catch(error => {
-		
-			dispatch({
-				type: LOGIN_ERROR,
-				payload: "invalid email or password"
-			})
-		})
-	}	
 }
 
 export function register({ email, fname, lname, password }) {
 
 	return function(dispatch){
 
-		axios
-		.post(`${API_URL}/grad/register`, {
-			email,
-			fname,
-			lname,
-			password
-		})
-		.then(response => {
-		
-			cookies.set("grad_token", response.data.grad_token, { path: "/" })
-			cookies.set("grad", response.data.grad, { path: "/" })
-			dispatch({ type: AUTHENTICATE, payload: response.data.grad });
+		if(email && password){
 
-		})
-		.catch(error => {
+			axios
+			.post(`${API_URL}/grad/register`, {
+				email,
+				fname,
+				lname,
+				password
+			})
+			.then(response => {
 			
-			dispatch({
-			    type: ERROR_REGISTERING,
-			    payload: "unable to create account"
-			});
-		})
+				cookies.set("grad_token", response.data.grad_token, { path: "/" })
+				cookies.set("grad", response.data.grad, { path: "/" })
+				dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+
+			})
+			.catch(error => {
+				
+				dispatch({
+					type: ERROR_REGISTERING,
+					payload: { message: " unable to create account" }
+				})
+			})
+
+		}	
 	}
 }
 
-export function logout(error) {
+export function logout() {
 
 	return function(dispatch){
 
-		dispatch({
-			type: UNAUTHENTICATE,
-			payload: error
-		})
-	
 		cookies.remove("grad_token", { path: "/" })
 		cookies.remove("grad", { path: "/" })
 
+		dispatch({
+			type: UNAUTHENTICATE,
+			payload: null
+		})
 	}	
 }
 
@@ -135,37 +144,34 @@ export function getForgotPasswordToken({ email }) {
 	
 	return function(dispatch){
 
-		dispatch({
-			type: FORGOT_PASSWORD,
-			payload: {
-				stateOfSend: "sending email",
-				sending: true,
-				sendSuccessful: false
-			}
-		})
+		// dispatch({
+		// 	type: FORGOT_PASSWORD,
+		// 	payload: null
+		// })
 	
 		axios
-			.post(`${API_URL}/auth/forgot-password`, { email })
+			.post(`${API_URL}/grad/forgot-password`, {email: 'jamesjosephsewell@gmail.com'})
 			.then(response => {
-				dispatch({
-					type: FORGOT_PASSWORD,
-					payload: {
-						stateOfSend: "email sent",
-						sending: false,
-						sendSuccessful: true
-					}
-				})
+				console.log(response)
+				// dispatch({
+				// 	type: FORGOT_PASSWORD,
+				// 	payload: {
+				// 		stateOfSend: "email sent",
+				// 		sending: false,
+				// 		sendSuccessful: true
+				// 	}
+				// })
 			})
 			.catch(error => {
-			  
-				dispatch({
-					type: FORGOT_PASSWORD,
-					payload: {
-						stateOfSend: error.response.data.error,
-						sending: false,
-						sendSuccessful: false
-					}
-				})
+				console.log(response)
+				// dispatch({
+				// 	type: FORGOT_PASSWORD,
+				// 	payload: {
+				// 		stateOfSend: error.response.data.error,
+				// 		sending: false,
+				// 		sendSuccessful: false
+				// 	}
+				// })
 			})
 	}
 }
@@ -175,7 +181,7 @@ export function resetPassword(grad_token, { password }) {
 	return function(dispatch){
 
 		axios
-		.post(`${API_URL}/auth/reset-password/${grad_token}`, { password })
+		.post(`${API_URL}/grad/reset-password/${grad_token}`, { password })
 		.then(response => {
 			dispatch({
 				type: RESET_PASSWORD,
@@ -183,9 +189,9 @@ export function resetPassword(grad_token, { password }) {
 					message: response.data.message,
 					didReset: response.data.didReset
 				}
-			});
+			})
 			// Redirect to login page on successful password reset
-			//browserHistory.push('/login');
+			//browserHistory.push('/login')
 		})
 		.catch(error => {
 			dispatch({
@@ -207,11 +213,29 @@ export const alumniReducer = function(state = initial_state, action) {
     switch (action.type) {
 
         case AUTHENTICATE: {
-			console.log(payload)
+		
             return _.extend({}, state, { grad: payload })
             break
 
-        }
+		}
+		
+		case UNAUTHENTICATE: {
+			
+			return _.extend({}, state, { grad: null})
+			break
+		}
+
+		case ERROR_REGISTERING: {
+
+			return _.extend({}, state, {auth_message: payload.message})
+			break
+		}
+
+		case LOGIN_ERROR: {
+
+			return _.extend({}, state, {auth_message: payload.message})
+			break
+		}
 
     }
 

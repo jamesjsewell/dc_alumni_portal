@@ -269,10 +269,11 @@ module.exports = {
 
     forgotPassword: function(req, res, next) {
         const email = req.body.email
-    
+        console.log(req.body)
         Grad.findOne({ email }, (err, gradExisting) => {
             // If user is not found, return error
             if (err || gradExisting == null) {
+                console.log(err, gradExisting)
                 res.status(422).json({
                     error: "Your request could not be processed as entered. Please try again."
                 })
@@ -311,14 +312,14 @@ module.exports = {
                         port: 25,
                         secure: false, // secure:true for port 465, secure:false for port 587
                         auth: {
-                            grad: process.env.NODEMAILER_USERNAME,
+                            user: process.env.NODEMAILER_USERNAME,
                             pass: process.env.NODEMAILER_PASSWORD
                         }
                     })
     
                     // setup email data with unicode symbols
                     let mailOptions = {
-                        from: "nodemailjs@gmail.com", // sender address
+                        from: process.env.NODEMAILER_USERNAME, // sender address
                         to: gradExisting.email, // list of receivers
                         subject: "reset password", // Subject line
                         text: message.body,

@@ -5,6 +5,7 @@ import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
 import AlumniView from "./features/grad_portal/grad_view/AlumniView.jsx"
 import AuthView from "./features/grad_portal/grad_auth/AuthView.jsx"
+import ResetPasswordView from "./features/grad_portal/grad_auth/ResetPasswordView.jsx"
 
 
 class Blank extends Component {
@@ -35,6 +36,12 @@ class RouterConfig extends Component {
                 <Switch>
                     <Route exact path="/alumni" component={AlumniView} />
                     <Route exact paht="/login" component={AuthView} />
+                    <Route
+                        location={location}
+                        key={location.key}
+                        path="/reset-password/:resetToken"
+                        component={ResetPasswordView}
+                    />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/test/test" component={Test2} />
                     <Route path="*" component={Blank} />

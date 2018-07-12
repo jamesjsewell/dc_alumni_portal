@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../alumni"
-import { AuthLayout } from "./AuthLayout.jsx"
+import { ResetPasswordLayout } from "./ResetPasswordLayout.jsx"
 
 @connect(
   state => controller.selector(state),
@@ -14,7 +14,7 @@ import { AuthLayout } from "./AuthLayout.jsx"
   })
 )
 
-class AuthView extends Component {
+class ResetPasswordView extends Component {
 
   constructor(props) {
     
@@ -29,15 +29,9 @@ class AuthView extends Component {
     const { alumni } = this.props
     
     return (
-      <div>
-        <AuthLayout register={this.props.actions.register.bind(this)}
-        login={this.props.actions.login.bind(this)} />
-
-        <button onClick={this.props.actions.getForgotPasswordToken.bind(this)}>reset password</button>
-      
-      </div>
+      <div><ResetPasswordForm match={this.props.match} resetPassword={this.props.actions.resetPassword.bind(this)} /></div>
     )
   }
 }
 
-export default withRouter(AuthView)
+export default withRouter(ResetPasswordView)
