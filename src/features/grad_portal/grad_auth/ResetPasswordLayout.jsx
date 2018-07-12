@@ -22,7 +22,7 @@ const Error_resetting = (props) => {
                 <Typography color="error" component="p">
                     Something went wrong, navigate to the login page and request to reset your password again
                 </Typography>
-                <NavLink to="/login"><Typography component="p">
+                <NavLink to="/login"><Typography component="a">
                     Login Page
                 </Typography></NavLink>
             </CardContent>
@@ -37,8 +37,11 @@ const Did_Reset = (props) => {
         <Card>
             <CardContent>
                 <Typography color="primary" component="p">
-                    Your password has been reset
+                    Your password has been reset, navigate to the login page and sign in with your new credentials
                 </Typography>
+                <NavLink to="/login"><Typography component="a">
+                    Login Page
+                </Typography></NavLink>
             </CardContent>
         </Card>
     </Grid>)
