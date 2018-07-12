@@ -31,9 +31,10 @@ class AuthView extends Component {
     return (
       <div>
         <AuthLayout register={this.props.actions.register.bind(this)}
-        login={this.props.actions.login.bind(this)} />
+        login={this.props.actions.login.bind(this)}
+        getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} />
 
-        <button onClick={this.props.actions.getForgotPasswordToken.bind(this)}>reset password</button>
+        <button>reset password</button>
       
       </div>
     )

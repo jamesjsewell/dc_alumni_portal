@@ -35,12 +35,12 @@ export const AuthLayout = (props) => {
             // onClose={this.handleClose}
             aria-labelledby="responsive-dialog-title"
         >
-            <DialogTitle id="responsive-dialog-title">{"Change Password"}</DialogTitle>
+            <DialogTitle id="responsive-dialog-title">{"Password Change"}</DialogTitle>
             <DialogContent>
             <DialogContentText>
-                enter the new password you wish to use
+                enter the email associated with this account
             </DialogContentText>
-                <ForgotPasswordForm />
+                <ForgotPasswordForm getForgotPasswordToken={props.getForgotPasswordToken}/>
             </DialogContent>
         </Dialog>
     </div>)

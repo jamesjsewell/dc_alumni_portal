@@ -68,9 +68,11 @@ class ForgotPasswordForm extends Component {
     }
 
     doThisOnSubmit(input) {
-       
-        this.props.register({email: input.email, password: input.password, fname: "testting", lname: "testinng"})
-       
+        
+        if(input && input.email){
+            this.props.getForgotPasswordToken(input.email)
+        }
+           
     }
 
     render() {
@@ -85,7 +87,7 @@ class ForgotPasswordForm extends Component {
                 <Field type="email" name="email_confirm" label="confirm email" component={FormField} />
 
                 <Button type="submit">
-                    send email
+                    Request
                 </Button>
 
             </form > 

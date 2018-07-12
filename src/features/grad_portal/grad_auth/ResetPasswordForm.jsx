@@ -54,7 +54,7 @@ class ResetPasswordForm extends Component {
                             Reset Password
                         </Typography>
                         <Typography component="p">
-                            enter your new password
+                            enter the new password you wish to use
                         </Typography>
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
