@@ -347,7 +347,7 @@ module.exports = {
     },
 
     changePassword: function(req, res, next) {
-        console.log(req.body)
+        
         Grad.findOne(
             {
                 resetPasswordToken: req.params.token,

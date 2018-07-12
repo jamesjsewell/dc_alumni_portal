@@ -1,38 +1,3 @@
-{/* <Form onSubmit={handleSubmit((formProps)=>{requestPasswordAction(formProps)})}>
-
-    {sendSuccessful
-        ? <Segment>check your email and follow the link</Segment>
-        : <Field
-                name="email"
-                component={FormField}
-                type="text"
-                label="enter your email"
-                placeholder="enter email"
-                required={false}
-            />}
-
-    {sendSuccessful
-        ? <div />
-        : <Field
-                name="emailConfirm"
-                component={FormField}
-                type="text"
-                placeholder="confirm email"
-                required={false}
-            />}
-
-    <Message
-        visible={this.state.messageShowing ? true : false}
-        hidden={this.state.messageShowing ? false : true}
-        floating
-        content={stateOfSend}
-    />
-
-    <Button type="submit" loading={sendingEmail}>
-        {sendSuccessful ? "resend email" : "send email"}
-    </Button>
-
-</Form> */}
 import React, { Component } from "react";
 import { Form, Field, reduxForm, change, reset } from "redux-form";
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
@@ -64,6 +29,7 @@ class ForgotPasswordForm extends Component {
 
         //to reset the form
         //this.props.reset()
+    
         
     }
 
@@ -77,18 +43,21 @@ class ForgotPasswordForm extends Component {
 
     render() {
 
-        const { handleSubmit } = this.props
-
+        const { handleSubmit, password_request } = this.props
+        
+        
         return (
     
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                <Field type="email" name="email" label="email" component={FormField} />
-                <Field type="email" name="email_confirm" label="confirm email" component={FormField} />
+                { password_request === null || password_request === "failed" ? <div><Field type="email" name="email" label="email" component={FormField} />
+                <Field type="email" name="email_confirm" label="confirm email" component={FormField} /> </div> : null }
 
-                <Button type="submit">
-                    Request
-                </Button>
+                { password_request === "sending" ? <p>...sending request</p> : <Button type="submit">
+                    request
+                </Button> }
+
+                { password_request === "failed" ? <p>something went wrong, try again</p> : null }
 
             </form > 
             

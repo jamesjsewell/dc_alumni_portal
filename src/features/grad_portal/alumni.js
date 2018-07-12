@@ -18,6 +18,11 @@ const AUTHENTICATE = "authenticate",
 	LOGIN_ERROR = "login_error",
 	ERROR_REGISTERING = "error_registering"
 
+const PASSWORD_RESET_REQUEST = "password_reset_request",
+	PASSWORD_REQUEST_FAILED = "password_request_failed",
+	PASSWORD_REQUEST_SENT = "password_request_sent"
+
+
 const initial_state = {
 
     message: null,
@@ -25,7 +30,8 @@ const initial_state = {
     model: Grad,
 	array: [],
 	grad: null,
-	auth_message: null
+	auth_message: null,
+	password_request: null
 
 }
 
@@ -144,34 +150,26 @@ export function getForgotPasswordToken(email) {
 	
 	return function(dispatch){
 
-		// dispatch({
-		// 	type: FORGOT_PASSWORD,
-		// 	payload: null
-		// })
+		dispatch({
+			type: PASSWORD_RESET_REQUEST,
+			payload: null
+		})
 	
 		axios
 			.post(`${API_URL}/grad/forgot-password`, { email: email })
 			.then(response => {
-				console.log(response)
-				// dispatch({
-				// 	type: FORGOT_PASSWORD,
-				// 	payload: {
-				// 		stateOfSend: "email sent",
-				// 		sending: false,
-				// 		sendSuccessful: true
-				// 	}
-				// })
+				
+				dispatch({
+					type: PASSWORD_REQUEST_SENT,
+					payload: null
+				})
 			})
 			.catch(error => {
-				console.log(response)
-				// dispatch({
-				// 	type: FORGOT_PASSWORD,
-				// 	payload: {
-				// 		stateOfSend: error.response.data.error,
-				// 		sending: false,
-				// 		sendSuccessful: false
-				// 	}
-				// })
+				
+				dispatch({
+					type: PASSWORD_REQUEST_FAILED,
+					payload: null
+				})
 			})
 	}
 }
@@ -234,6 +232,24 @@ export const alumniReducer = function(state = initial_state, action) {
 		case LOGIN_ERROR: {
 
 			return _.extend({}, state, {auth_message: payload.message})
+			break
+		}
+
+		case PASSWORD_RESET_REQUEST: {
+
+			return _.extend({}, state, { password_request: "sending" })
+			break
+		}
+
+		case PASSWORD_REQUEST_SENT: {
+			
+			return _.extend({}, state, { password_request: "sent" })
+			break
+		}
+
+		case PASSWORD_REQUEST_FAILED: {
+			
+			return _.extend({}, state, { password_request: "faied" })
 			break
 		}
 

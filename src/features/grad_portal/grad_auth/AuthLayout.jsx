@@ -19,9 +19,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
-
 export const AuthLayout = (props) => {
-
+    const { password_request } = props
     return(
     <div>
         <Grid container spacing={24}>
@@ -31,16 +30,17 @@ export const AuthLayout = (props) => {
         <Button>forgot password?</Button>
         <Dialog
             fullScreen={false}
-            open={true}
+            open={password_request != "sent"? true : false}
             // onClose={this.handleClose}
             aria-labelledby="responsive-dialog-title"
         >
             <DialogTitle id="responsive-dialog-title">{"Password Change"}</DialogTitle>
+
             <DialogContent>
-            <DialogContentText>
-                enter the email associated with this account
-            </DialogContentText>
-                <ForgotPasswordForm getForgotPasswordToken={props.getForgotPasswordToken}/>
+                <DialogContentText>
+                    enter the email associated with this account
+                </DialogContentText>
+                <ForgotPasswordForm password_request={props.password_request} getForgotPasswordToken={props.getForgotPasswordToken}/> 
             </DialogContent>
         </Dialog>
     </div>)
