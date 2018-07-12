@@ -30,7 +30,8 @@ const initial_state = {
 	array: [],
 	grad: null,
 	auth_message: null,
-	password_request: null
+	password_request: null,
+	email_recipient: null
 
 }
 
@@ -151,7 +152,7 @@ export function getForgotPasswordToken(email) {
 
 		dispatch({
 			type: PASSWORD_RESET_REQUEST,
-			payload: null
+			payload: email
 		})
 	
 		axios
@@ -160,7 +161,7 @@ export function getForgotPasswordToken(email) {
 				
 				dispatch({
 					type: PASSWORD_REQUEST_SENT,
-					payload: null
+					payload: email
 				})
 			})
 			.catch(error => {
@@ -202,7 +203,6 @@ export function resetPassword(grad_token, password) {
 	}
 }
 
-
 export const alumniReducer = function(state = initial_state, action) {
 
     var payload = action.payload
@@ -236,13 +236,13 @@ export const alumniReducer = function(state = initial_state, action) {
 
 		case PASSWORD_RESET_REQUEST: {
 
-			return _.extend({}, state, { password_request: "sending" })
+			return _.extend({}, state, { password_request: "sending", email_recipient: payload })
 			break
 		}
 
 		case PASSWORD_REQUEST_SENT: {
 			
-			return _.extend({}, state, { password_request: "sent" })
+			return _.extend({}, state, { password_request: "sent", email_recipient: payload  })
 			break
 		}
 

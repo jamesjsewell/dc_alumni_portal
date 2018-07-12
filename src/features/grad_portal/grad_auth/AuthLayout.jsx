@@ -19,11 +19,11 @@ export default class AuthLayout extends Component {
     }
 
     render(){
-        const { login, register, password_request, getForgotPasswordToken } = this.props
+        const { login, register, password_request, getForgotPasswordToken, email_recipient } = this.props
         return(
         <div>
             <Grid container spacing={24}>
-                <LoginForm login={login} password_request={password_request} getForgotPasswordToken={getForgotPasswordToken} />
+                <LoginForm login={login} password_request={password_request} getForgotPasswordToken={getForgotPasswordToken} email_recipient={email_recipient} />
                 <RegisterForm register={register} />
             </Grid>
         </div>)

@@ -34,7 +34,9 @@ class AuthView extends Component {
         register={this.props.actions.register.bind(this)}
         login={this.props.actions.login.bind(this)}
         getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
-        password_request={alumni.password_request}/>
+        password_request={alumni.password_request}
+        email_recipient={alumni.email_recipient}
+        />
       </div>
     )
   }

@@ -53,7 +53,7 @@ class LoginForm extends Component {
 
     render() {
 
-        const { handleSubmit, password_request, getForgotPasswordToken } = this.props
+        const { handleSubmit, password_request, getForgotPasswordToken, email_recipient } = this.props
 
         return (
             <Grid item>
@@ -89,15 +89,21 @@ class LoginForm extends Component {
                         // onClose={this.handleClose}
                         aria-labelledby="responsive-dialog-title"
                     >
-                        <DialogTitle id="responsive-dialog-title">{"Password Change "}</DialogTitle>
+                        <DialogTitle id="responsive-dialog-title">{password_request === "sent"? "Success!" : "Password Change "}</DialogTitle>
 
                         <DialogContent>
-                            <DialogContentText>
-                                { password_request === null || password_request === "failed" ? "enter the email associated with this account" : null }
-                                { password_request === "sending" ? "...sending request" : null }
-                                { password_request === "sent" ? "an email was sent to the address you provided, open the email to continue" : null }
-                            </DialogContentText>
+                            <Card>
+                                <CardContent>
+                                    <DialogContentText>
+                                        { password_request === null || password_request === "failed" ? "enter the email associated with this account" : null }
+                                        { password_request === "sending" ? "...sending request" : null }
+                                        { password_request === "sent" ? "an email was sent to the address you provided, open the email to continue" : null }
+                                    </DialogContentText>
+                                </CardContent>
+                            </Card>
                             <ForgotPasswordForm password_request={password_request} getForgotPasswordToken={getForgotPasswordToken}/> 
+                            {email_recipient && password_request != "sending"? <Card><CardContent><Typography paragraph>didn't receive the email?</Typography><Button variant="outlined" size="small" onClick={()=>{getForgotPasswordToken(email_recipient)}}>Try Again</Button></CardContent></Card> : null}
+                     
                         </DialogContent>
                         <DialogActions>
                             { password_request != "sending"? <Button onClick={()=>{this.closePasswordDialog()}} color="primary">
