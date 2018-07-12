@@ -36,6 +36,7 @@ class AuthView extends Component {
         getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
         password_request={alumni.password_request}
         email_recipient={alumni.email_recipient}
+        match={this.props.match}
         />
       </div>
     )

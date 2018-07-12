@@ -19,7 +19,8 @@ const AUTHENTICATE = "authenticate",
 const PASSWORD_RESET_REQUEST = "password_reset_request",
 	PASSWORD_REQUEST_FAILED = "password_request_failed",
 	PASSWORD_REQUEST_SENT = "password_request_sent",
-	RESET_PASSWORD = "reset_password"
+	RESET_PASSWORD = "reset_password",
+	RESET_PASSWORD_ERROR = "reset_password_error"
 
 
 const initial_state = {
@@ -31,7 +32,9 @@ const initial_state = {
 	grad: null,
 	auth_message: null,
 	password_request: null,
-	email_recipient: null
+	email_recipient: null,
+	password_did_reset: false,
+	error_resetting_password: false
 
 }
 
@@ -183,21 +186,13 @@ export function resetPassword(grad_token, password) {
 		.then(response => {
 			dispatch({
 				type: RESET_PASSWORD,
-				payload: {
-					message: response.data.message,
-					didReset: response.data.didReset
-				}
+				payload: null
 			})
-			// Redirect to login page on successful password reset
-			//browserHistory.push('/login')
 		})
 		.catch(error => {
 			dispatch({
-				type: RESET_PASSWORD,
-				payload: {
-					message: error.response.data.error,
-					didReset: false
-				}
+				type: RESET_PASSWORD_ERROR,
+				payload: null
 			})
 		})
 	}
@@ -249,6 +244,18 @@ export const alumniReducer = function(state = initial_state, action) {
 		case PASSWORD_REQUEST_FAILED: {
 			
 			return _.extend({}, state, { password_request: "failed" })
+			break
+		}
+		
+		case RESET_PASSWORD: {
+
+			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false  })
+			break
+		}
+
+		case RESET_PASSWORD_ERROR: {
+
+			return _.extend({}, state, { password_did_reset: false, error_resetting_password: true })
 			break
 		}
 

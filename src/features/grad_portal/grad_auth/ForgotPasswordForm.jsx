@@ -50,10 +50,10 @@ class ForgotPasswordForm extends Component {
     
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                { password_request != "sent" ? <div><Field type="email" name="email" label="email" component={FormField} />
-                <Field type="email" name="email_confirm" label="confirm email" component={FormField} /> </div> : null }
+                <Field type="text" name="email" label="email" component={FormField} />
+                <Field type="text" name="email_confirm" label="confirm email" component={FormField} />
 
-                { password_request != "sent" && password_request != "sending" ? <Button variant="contained" type="submit">
+                { password_request != "sending" ? <Button variant="contained" type="submit">
                     request
                 </Button> : null}
 

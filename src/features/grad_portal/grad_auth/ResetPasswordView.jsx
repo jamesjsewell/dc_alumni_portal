@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../alumni"
-import { ResetPasswordLayout } from "./ResetPasswordLayout.jsx"
+import ResetPasswordLayout from "./ResetPasswordLayout.jsx"
 
 @connect(
   state => controller.selector(state),
@@ -29,7 +29,15 @@ class ResetPasswordView extends Component {
     const { alumni } = this.props
     
     return (
-      <div><ResetPasswordLayout match={this.props.match} resetPassword={this.props.actions.resetPassword.bind(this)} /></div>
+      <div><ResetPasswordLayout 
+      match={this.props.match} 
+      resetPassword={this.props.actions.resetPassword.bind(this)} 
+      error_resetting={alumni.error_resetting_password} 
+      did_reset={alumni.password_did_reset}
+      password_request={alumni.password_request}
+      getForgotPasswordToken={alumni.getForgotPasswordToken} 
+      /></div>
+
     )
   }
 }
