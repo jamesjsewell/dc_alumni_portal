@@ -1,7 +1,6 @@
-import React from "react"
+import React, { Component } from "react";
 import LoginForm from "./LoginForm.jsx"
 import RegisterForm from "./RegisterForm.jsx"
-import ForgotPasswordForm from "./ForgotPasswordForm.jsx"
 
 //material-ui
 import Grid from '@material-ui/core/Grid'
@@ -13,36 +12,22 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
+export default class AuthLayout extends Component {
+    constructor(props) {
+        super(props);
 
-export const AuthLayout = (props) => {
-    const { password_request } = props
-    return(
-    <div>
-        <Grid container spacing={24}>
-            <LoginForm login={props.login} />
-            <RegisterForm register={props.register} />
-        </Grid>
-        <Button>forgot password?</Button>
-        <Dialog
-            fullScreen={false}
-            open={password_request != "sent"? true : false}
-            // onClose={this.handleClose}
-            aria-labelledby="responsive-dialog-title"
-        >
-            <DialogTitle id="responsive-dialog-title">{"Password Change"}</DialogTitle>
+    }
 
-            <DialogContent>
-                <DialogContentText>
-                    enter the email associated with this account
-                </DialogContentText>
-                <ForgotPasswordForm password_request={props.password_request} getForgotPasswordToken={props.getForgotPasswordToken}/> 
-            </DialogContent>
-        </Dialog>
-    </div>)
+    render(){
+        const { login, register, password_request, getForgotPasswordToken } = this.props
+        return(
+        <div>
+            <Grid container spacing={24}>
+                <LoginForm login={login} password_request={password_request} getForgotPasswordToken={getForgotPasswordToken} />
+                <RegisterForm register={register} />
+            </Grid>
+        </div>)
+    }
+
 
 }

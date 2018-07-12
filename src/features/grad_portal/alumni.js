@@ -13,14 +13,13 @@ const MESSAGE = "message",
 	
 const AUTHENTICATE = "authenticate",
 	UNAUTHENTICATE = "unauthenticate",
-	FORGOT_PASSWORD = "forgot_password",
-	RESET_PASSWORD = "reset_password",
 	LOGIN_ERROR = "login_error",
 	ERROR_REGISTERING = "error_registering"
 
 const PASSWORD_RESET_REQUEST = "password_reset_request",
 	PASSWORD_REQUEST_FAILED = "password_request_failed",
-	PASSWORD_REQUEST_SENT = "password_request_sent"
+	PASSWORD_REQUEST_SENT = "password_request_sent",
+	RESET_PASSWORD = "reset_password"
 
 
 const initial_state = {
@@ -249,7 +248,7 @@ export const alumniReducer = function(state = initial_state, action) {
 
 		case PASSWORD_REQUEST_FAILED: {
 			
-			return _.extend({}, state, { password_request: "faied" })
+			return _.extend({}, state, { password_request: "failed" })
 			break
 		}
 

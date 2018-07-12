@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, Field, reduxForm, change, reset } from "redux-form";
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
+import ForgotPasswordForm from "./ForgotPasswordForm.jsx"
+import { FormField } from "./FormFields.jsx"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -9,8 +11,13 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { FormField } from "./FormFields.jsx"
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
@@ -21,16 +28,22 @@ const afterSubmit = (result, dispatch, props) => {
 class LoginForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {password_dialog_open: false}
 
     }
 
     componentWillReceiveProps(nextProps){
 
-        //to reset the form
-        //this.props.reset()
-        
     }
+
+    openPasswordDialog(){
+        this.setState({password_dialog_open: true})
+    }
+
+    closePasswordDialog(){
+        this.setState({password_dialog_open: false})
+    }
+
 
     doThisOnSubmit(input) {
        
@@ -40,7 +53,7 @@ class LoginForm extends Component {
 
     render() {
 
-        const { handleSubmit } = this.props
+        const { handleSubmit, password_request, getForgotPasswordToken } = this.props
 
         return (
             <Grid item>
@@ -60,14 +73,39 @@ class LoginForm extends Component {
                             <Field type="email" name="email_login" label="email" component={FormField} />
                             <Field type="password" name="password_login" label="password" component={FormField} />
 
-                            <Button type="submit">
-                                submit
+                            <Button variant="contained" type="submit">
+                                Login
                             </Button>
 
                         </form >
 
                     </CardContent>
-            
+
+                    <CardActions><Button variant="outlined" size="small" onClick={()=>{this.openPasswordDialog()}}>forgot password?</Button></CardActions>
+
+                    <Dialog
+                        fullScreen={false}
+                        open={this.state.password_dialog_open ? true : false}
+                        // onClose={this.handleClose}
+                        aria-labelledby="responsive-dialog-title"
+                    >
+                        <DialogTitle id="responsive-dialog-title">{"Password Change "}</DialogTitle>
+
+                        <DialogContent>
+                            <DialogContentText>
+                                { password_request === null || password_request === "failed" ? "enter the email associated with this account" : null }
+                                { password_request === "sending" ? "...sending request" : null }
+                                { password_request === "sent" ? "an email was sent to the address you provided, open the email to continue" : null }
+                            </DialogContentText>
+                            <ForgotPasswordForm password_request={password_request} getForgotPasswordToken={getForgotPasswordToken}/> 
+                        </DialogContent>
+                        <DialogActions>
+                            { password_request != "sending"? <Button onClick={()=>{this.closePasswordDialog()}} color="primary">
+                                close
+                            </Button> : null}
+                        </DialogActions>
+                    </Dialog>
+                    
                 </Card>
 
             </Grid>
