@@ -155,7 +155,7 @@ module.exports = {
                 
             }
             else{
-                res.status(401).json({ error: "grad doesn't exist"})
+                res.status(200).json({ error: "grad with those credentials doesn't exist"})
 
             }
 
@@ -182,7 +182,7 @@ module.exports = {
                 
             }
             else{
-                res.status(401).json({ error: "grad doesn't exist"})
+                res.status(200).json({ error: "grad with those credentials doesn't exist"})
 
             }
 

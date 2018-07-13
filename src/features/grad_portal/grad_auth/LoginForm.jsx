@@ -53,7 +53,7 @@ class LoginForm extends Component {
 
     render() {
 
-        const { handleSubmit, password_request, getForgotPasswordToken, email_recipient } = this.props
+        const { handleSubmit, login_error_message, password_request, getForgotPasswordToken, email_recipient } = this.props
 
         return (
             <Grid item>
@@ -78,6 +78,8 @@ class LoginForm extends Component {
                             </Button>
 
                         </form >
+
+                        {login_error_message? <Card><CardContent><Typography component="p" color="error">{login_error_message}</Typography></CardContent></Card> : null}
 
                     </CardContent>
 

@@ -65,16 +65,26 @@ export function login({ email, password }) {
 			.post(`${API_URL}/grad/login`, { email, password })
 			.then(response => {
 				
-				cookies.set("grad_token", response.data.grad_token, { path: "/" })
-				cookies.set("grad", response.data.grad, { path: "/" })
-				dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+				if(response && response.data && response.data.grad_token){
+					cookies.set("grad_token", response.data.grad_token, { path: "/" })
+					cookies.set("grad", response.data.grad, { path: "/" })
+					dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+				}
+
+				if(response && response.data && response.data.error){
+					dispatch({
+						type: LOGIN_ERROR,
+						payload: { message: response.data.error }
+					})
+				}
+				
 			
 			})
 			.catch(error => {
 			
 				dispatch({
 					type: LOGIN_ERROR,
-					payload: { message: " something went wrong" }
+					payload: { message: " make sure the email and password are correct" }
 				})
 			})
 
@@ -218,7 +228,7 @@ export const alumniReducer = function(state = initial_state, action) {
 
         case AUTHENTICATE: {
 		
-            return _.extend({}, state, { grad: payload })
+            return _.extend({}, state, { grad: payload, login_error_message: null, register_error_message: null })
             break
 
 		}
