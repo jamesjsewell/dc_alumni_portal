@@ -31,6 +31,8 @@ const initial_state = {
 	array: [],
 	grad: null,
 	auth_message: null,
+	login_error_message: null,
+	register_error_message: null,
 	password_request: null,
 	email_recipient: null,
 	password_did_reset: false,
@@ -117,17 +119,27 @@ export function register({ email, fname, lname, password }) {
 				password
 			})
 			.then(response => {
-			
-				cookies.set("grad_token", response.data.grad_token, { path: "/" })
-				cookies.set("grad", response.data.grad, { path: "/" })
-				dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+				
+				if(response && response.data && response.data.grad_token){
+					cookies.set("grad_token", response.data.grad_token, { path: "/" })
+					cookies.set("grad", response.data.grad, { path: "/" })
+					dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+
+				}
+				if(response && response.data && response.data.error){
+					dispatch({
+						type: ERROR_REGISTERING,
+						payload: { message: response.data.error }
+					})
+				}
+				
 
 			})
 			.catch(error => {
-				
+			
 				dispatch({
 					type: ERROR_REGISTERING,
-					payload: { message: " unable to create account" }
+					payload: { message: " something went wrong, unable to create account" }
 				})
 			})
 
@@ -219,13 +231,13 @@ export const alumniReducer = function(state = initial_state, action) {
 
 		case ERROR_REGISTERING: {
 
-			return _.extend({}, state, {auth_message: payload.message})
+			return _.extend({}, state, {register_error_message: payload.message})
 			break
 		}
 
 		case LOGIN_ERROR: {
 
-			return _.extend({}, state, {auth_message: payload.message})
+			return _.extend({}, state, {login_error_message: payload.message})
 			break
 		}
 

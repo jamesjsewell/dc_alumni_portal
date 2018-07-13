@@ -40,7 +40,7 @@ class RegisterForm extends Component {
 
     render() {
 
-        const { handleSubmit } = this.props
+        const { handleSubmit, register_error_message } = this.props
 
         return (
             <Grid item >
@@ -65,6 +65,10 @@ class RegisterForm extends Component {
                             <Button type="submit">
                                 submit
                             </Button>
+
+                            {register_error_message? <Card><CardContent>
+                                <Typography component="p" color="error">{register_error_message}</Typography>
+                            </CardContent></Card> : null}
 
                         </form >
 

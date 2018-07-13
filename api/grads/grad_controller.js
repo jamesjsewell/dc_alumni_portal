@@ -214,7 +214,7 @@ module.exports = {
             // If user is not unique, return error
             if (gradExisting) {
                 return res
-                    .status(422)
+                    .status(200)
                     .send({ error: "That email address is already in use." })
             }
     

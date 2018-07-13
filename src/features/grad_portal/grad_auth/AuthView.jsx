@@ -33,6 +33,8 @@ class AuthView extends Component {
         <AuthLayout 
         register={this.props.actions.register.bind(this)}
         login={this.props.actions.login.bind(this)}
+        login_error_message={alumni.login_error_message}
+        register_error_message={alumni.register_error_message}
         getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
         password_request={alumni.password_request}
         email_recipient={alumni.email_recipient}
