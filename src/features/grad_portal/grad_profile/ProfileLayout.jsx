@@ -22,7 +22,13 @@ export default class AuthLayout extends Component {
         <div>
             <Grid container spacing={24}>
                <Grid item>
-                    <Card><CardContent>test test</CardContent></Card>
+                    <Card><CardContent>bio</CardContent></Card>
+               </Grid> 
+               <Grid item>
+                    <Card><CardContent>profile pic</CardContent></Card>
+               </Grid> 
+               <Grid item>
+                    <Card><CardContent>resume</CardContent></Card>
                </Grid> 
             </Grid>
         </div>)
