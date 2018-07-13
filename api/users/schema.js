@@ -43,7 +43,7 @@ const UserSchema = new Schema(
     },
     {
         timestamps: true,
-        collection: 'alumni'
+        collection: 'users'
     }
 );
 

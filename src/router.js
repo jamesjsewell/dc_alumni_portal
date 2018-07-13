@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
-import AlumniView from "./features/user_portal/user_view/AlumniView.jsx"
 import AuthView from "./features/user_portal/user_auth/AuthView.jsx"
 import ResetPasswordView from "./features/user_portal/user_auth/ResetPasswordView.jsx"
 import UserProfileView from "./features/user_portal/user_profile/ProfileView.jsx"
@@ -46,7 +45,6 @@ class RouterConfig extends Component {
                     />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/test/test" component={Test2} />
-                    <Route exact path="/alumni" component={AlumniView} />
                     <Route path="*" component={Blank} />
 
                 </Switch>

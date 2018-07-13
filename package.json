@@ -13,6 +13,7 @@
   "author": "jamesjsewell",
   "license": "ISC",
   "devDependencies": {
+    "@material-ui/core": "^1.3.1",
     "axios": "^0.18.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
