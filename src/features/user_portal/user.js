@@ -220,7 +220,7 @@ export function resetPassword(user_token, password) {
 	}
 }
 
-export const alumniReducer = function(state = initial_state, action) {
+export const usersReducer = function(state = initial_state, action) {
 
     var payload = action.payload
 
@@ -294,9 +294,9 @@ export const alumniReducer = function(state = initial_state, action) {
 // array
 // AJAX_payload
 
-const alumni = state => state.alumni
+const users = state => state.users
 
 
 export const selector = createStructuredSelector({
-    alumni
+    users
 })

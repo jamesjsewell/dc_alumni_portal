@@ -21,7 +21,7 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
-    props.untouch(["email", "password"]);
+    props.untouch(["email_login", "password_login"]);
 
 }
 

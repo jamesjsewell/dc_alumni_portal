@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 import { reducer as formReducer } from "redux-form"
-import { alumniReducer } from "./user_portal/alumni.js"
+import { usersReducer } from "./user_portal/user.js"
 
-const rootReducer = combineReducers({alumni: alumniReducer, form: formReducer})
+const rootReducer = combineReducers({users: usersReducer, form: formReducer})
 
 export default rootReducer

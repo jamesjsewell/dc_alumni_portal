@@ -14,7 +14,7 @@ import { FormField } from "./FormFields.jsx"
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
-    props.untouch(["email", "password"]);
+    props.untouch(["email", "email_confirm"]);
 
 }
 
@@ -50,8 +50,8 @@ class ForgotPasswordForm extends Component {
     
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                <Field type="text" name="email" label="email" component={FormField} />
-                <Field type="text" name="email_confirm" label="confirm email" component={FormField} />
+                <Field type="email" name="email" label="email" component={FormField} />
+                <Field type="email" name="email_confirm" label="confirm email" component={FormField} />
 
                 { password_request != "sending" ? <Button variant="contained" type="submit">
                     request

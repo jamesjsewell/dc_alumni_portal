@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
-import * as controller from "../alumni"
+import * as controller from "../user.js"
 import AuthLayout from "./AuthLayout.jsx"
 
 @connect(
@@ -20,24 +20,24 @@ class AuthView extends Component {
     
     super(props)
 
-    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.alumni.user)
+    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.users.user)
 
   }
 
   render() {
 
-    const { alumni } = this.props
+    const { users } = this.props
     
     return (
       <div>
         <AuthLayout 
         register={this.props.actions.register.bind(this)}
         login={this.props.actions.login.bind(this)}
-        login_error_message={alumni.login_error_message}
-        register_error_message={alumni.register_error_message}
+        login_error_message={users.login_error_message}
+        register_error_message={users.register_error_message}
         getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
-        password_request={alumni.password_request}
-        email_recipient={alumni.email_recipient}
+        password_request={users.password_request}
+        email_recipient={users.email_recipient}
         match={this.props.match}
         />
       </div>

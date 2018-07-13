@@ -14,7 +14,7 @@ import { FormField } from "./FormFields.jsx"
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
-    props.untouch(["email", "password"]);
+    props.untouch(["email", "password", "fname", "lname"]);
 
 }
 
@@ -53,7 +53,7 @@ class RegisterForm extends Component {
                             Register
                         </Typography>
                         <Typography component="p">
-                            create an alumni account
+                            create an account
                         </Typography>
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
@@ -63,7 +63,7 @@ class RegisterForm extends Component {
                             <Field type="password" name="password" label="password" component={FormField} />
 
                             <Button type="submit">
-                                submit
+                                register
                             </Button>
 
                             {register_error_message? <Card><CardContent>
