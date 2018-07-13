@@ -6,6 +6,7 @@ import createHistory from "history/createBrowserHistory"
 import AlumniView from "./features/grad_portal/grad_view/AlumniView.jsx"
 import AuthView from "./features/grad_portal/grad_auth/AuthView.jsx"
 import ResetPasswordView from "./features/grad_portal/grad_auth/ResetPasswordView.jsx"
+import GradProfileView from "./features/grad_portal/grad_profile/ProfileView.jsx"
 
 
 class Blank extends Component {
@@ -34,8 +35,8 @@ class RouterConfig extends Component {
             <Router>
 
                 <Switch>
-                    <Route exact path="/alumni" component={AlumniView} />
                     <Route exact path="/login" component={AuthView} />
+                    <Route exact path="/grad/profile" component={GradProfileView} />
                     <Route
                         location={location}
                         key={location.key}
@@ -45,6 +46,7 @@ class RouterConfig extends Component {
                     />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/test/test" component={Test2} />
+                    <Route exact path="/alumni" component={AlumniView} />
                     <Route path="*" component={Blank} />
 
                 </Switch>
