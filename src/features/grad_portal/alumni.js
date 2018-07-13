@@ -4,7 +4,7 @@ import { combineReducers } from "redux"
 import { createStructuredSelector } from "reselect"
 import Cookies from "universal-cookie"
 import { API_URL } from "../util/util.js"
-import { Grad, GradCollection } from "./backbone_models/Grad.js"
+import { User, UserCollection } from "./backbone_models/User.js"
 
 const cookies = new Cookies()
 
@@ -26,10 +26,10 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 const initial_state = {
 
     message: null,
-    collection: new GradCollection(),
-    model: Grad,
+    collection: new UserCollection(),
+    model: User,
 	array: [],
-	grad: null,
+	user: null,
 	auth_message: null,
 	login_error_message: null,
 	register_error_message: null,
@@ -40,16 +40,16 @@ const initial_state = {
 
 }
 
-export function auto_log_in(authenticate_grad, loggedInGrad){
+export function auto_log_in(authenticate_user, loggedInUser){
 
 	return function(dispatch){
 		
-		if(!loggedInGrad){
-			var token = cookies.get("grad_token")
-			var grad = cookies.get("grad")
+		if(!loggedInUser){
+			var token = cookies.get("user_token")
+			var user = cookies.get("user")
 		
-			if (token && grad) {
-				authenticate_grad(grad, token)
+			if (token && user) {
+				authenticate_user(user, token)
 			} 
 		}	   
 	}
@@ -62,13 +62,13 @@ export function login({ email, password }) {
 		if(email && password){
 
 			axios
-			.post(`${API_URL}/grad/login`, { email, password })
+			.post(`${API_URL}/user/login`, { email, password })
 			.then(response => {
 				
-				if(response && response.data && response.data.grad_token){
-					cookies.set("grad_token", response.data.grad_token, { path: "/" })
-					cookies.set("grad", response.data.grad, { path: "/" })
-					dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+				if(response && response.data && response.data.user_token){
+					cookies.set("user_token", response.data.user_token, { path: "/" })
+					cookies.set("user", response.data.user, { path: "/" })
+					dispatch({ type: AUTHENTICATE, payload: response.data.user })
 				}
 
 				if(response && response.data && response.data.error){
@@ -92,21 +92,21 @@ export function login({ email, password }) {
 	}	
 }
 
-export function authenticate(grad, token) {
+export function authenticate(user, token) {
 
 	return function(dispatch){
 
-		if(grad){
+		if(user){
 			axios
-			.get(`${API_URL}/grad/authenticate/${grad._id}`, {
-				headers: { Authorization: token? token : cookies.get("grad_token") }
+			.get(`${API_URL}/user/authenticate/${user._id}`, {
+				headers: { Authorization: token? token : cookies.get("user_token") }
 			})
 			.then(response => {
 			
 				if (response.data) {
 					dispatch({
 						type: AUTHENTICATE,
-						payload: response.data.grad
+						payload: response.data.user
 					})
 				}
 			})
@@ -122,7 +122,7 @@ export function register({ email, fname, lname, password }) {
 		if(email && password){
 
 			axios
-			.post(`${API_URL}/grad/register`, {
+			.post(`${API_URL}/user/register`, {
 				email,
 				fname,
 				lname,
@@ -130,10 +130,10 @@ export function register({ email, fname, lname, password }) {
 			})
 			.then(response => {
 				
-				if(response && response.data && response.data.grad_token){
-					cookies.set("grad_token", response.data.grad_token, { path: "/" })
-					cookies.set("grad", response.data.grad, { path: "/" })
-					dispatch({ type: AUTHENTICATE, payload: response.data.grad })
+				if(response && response.data && response.data.user_token){
+					cookies.set("user_token", response.data.user_token, { path: "/" })
+					cookies.set("user", response.data.user, { path: "/" })
+					dispatch({ type: AUTHENTICATE, payload: response.data.user })
 
 				}
 				if(response && response.data && response.data.error){
@@ -161,8 +161,8 @@ export function logout() {
 
 	return function(dispatch){
 
-		cookies.remove("grad_token", { path: "/" })
-		cookies.remove("grad", { path: "/" })
+		cookies.remove("user_token", { path: "/" })
+		cookies.remove("user", { path: "/" })
 
 		dispatch({
 			type: UNAUTHENTICATE,
@@ -181,7 +181,7 @@ export function getForgotPasswordToken(email) {
 		})
 	
 		axios
-			.post(`${API_URL}/grad/forgot-password`, { email: email })
+			.post(`${API_URL}/user/forgot-password`, { email: email })
 			.then(response => {
 				
 				dispatch({
@@ -199,12 +199,12 @@ export function getForgotPasswordToken(email) {
 	}
 }
 
-export function resetPassword(grad_token, password) {
+export function resetPassword(user_token, password) {
 
 	return function(dispatch){
 
 		axios
-		.post(`${API_URL}/grad/reset-password/${grad_token}`, { password: password })
+		.post(`${API_URL}/user/reset-password/${user_token}`, { password: password })
 		.then(response => {
 			dispatch({
 				type: RESET_PASSWORD,
@@ -228,14 +228,14 @@ export const alumniReducer = function(state = initial_state, action) {
 
         case AUTHENTICATE: {
 		
-            return _.extend({}, state, { grad: payload, login_error_message: null, register_error_message: null })
+            return _.extend({}, state, { user: payload, login_error_message: null, register_error_message: null })
             break
 
 		}
 		
 		case UNAUTHENTICATE: {
 			
-			return _.extend({}, state, { grad: null})
+			return _.extend({}, state, { user: null})
 			break
 		}
 

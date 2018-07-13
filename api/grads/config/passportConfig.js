@@ -1,6 +1,6 @@
 // Importing Passport, strategies, and config
 const passport = require("passport"),
-    Grad = require("../schema.js"),
+    User = require("../schema.js"),
     jwtSecret = process.env.AUTH_SECRET,
     JwtStrategy = require("passport-jwt").Strategy,
     ExtractJwt = require("passport-jwt").ExtractJwt,
@@ -14,17 +14,17 @@ const localOptions = {
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
   
-    Grad.findOne({ email }, (err, grad) => {
+    User.findOne({ email }, (err, user) => {
         if (err) {
             return done(err)
         }
-        if (!grad) {
+        if (!user) {
             return done(null, false, {
                 error: "Your login details could not be verified. Please try again."
             })
         } 
 
-        grad.comparePassword(password, (err, isMatch) => {
+        user.comparePassword(password, (err, isMatch) => {
            
             if (err) {
               
@@ -38,7 +38,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 
             }
            
-            return done(null, grad)
+            return done(null, user)
         })
     })
 })
@@ -56,13 +56,13 @@ const jwtOptions = {
 // Setting up JWT login strategy
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   
-    Grad.findById(payload._id, (err, grad) => {
+    User.findById(payload._id, (err, user) => {
         if (err) {
             return done(err, false)
         }
 
-        if (grad) {
-            done(null, grad)
+        if (user) {
+            done(null, user)
         } else {
             done(null, false)
         }

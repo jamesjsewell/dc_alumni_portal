@@ -5,12 +5,12 @@ const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema
 
 // Importing Node packages required for schema
-const { ROLE_GRAD, ROLE_OWNER, ROLE_ADMIN } = require("./config/roles")
+const { ROLE_USER, ROLE_OWNER, ROLE_ADMIN } = require("./config/roles")
 
 //= ===============================
 // User Schema
 //= ===============================
-const GradSchema = new Schema(
+const UserSchema = new Schema(
     {
         email: {
             type: String,
@@ -34,8 +34,8 @@ const GradSchema = new Schema(
         bio: { type: String, default: "" },
         role: {
             type: String,
-            enum: [ROLE_GRAD, ROLE_OWNER, ROLE_ADMIN],
-            default: ROLE_GRAD
+            enum: [ROLE_USER, ROLE_OWNER, ROLE_ADMIN],
+            default: ROLE_USER
         },
         publicEmail: { type: String },
         resetPasswordToken: { type: String },
@@ -50,17 +50,17 @@ const GradSchema = new Schema(
 //ORM methods
 
 // Pre-save of user to database, hash password if password is modified or new
-GradSchema.pre("save", function(next) {
-    const grad = this, SALT_FACTOR = 5;
+UserSchema.pre("save", function(next) {
+    const user = this, SALT_FACTOR = 5;
     
-    if (!grad.isModified("password")) return next();
+    if (!user.isModified("password")) return next();
 
     bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
         if (err) return next(err);
 
-        bcrypt.hash(grad.password, salt, (err, hash) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
             if (err) return next(err);
-            grad.password = hash;
+            user.password = hash;
             next();
         });
     });
@@ -69,7 +69,7 @@ GradSchema.pre("save", function(next) {
 });
 
 // Method to compare password for login, cb stands for callback
-GradSchema.methods.comparePassword = function(candidatePassword, cb) {
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
         
         if (err) {
@@ -80,5 +80,5 @@ GradSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 
-// exports mongoose model to the gradController.js file
-module.exports = mongoose.model("Grad", GradSchema)
+// exports mongoose model to the userController.js file
+module.exports = mongoose.model("User", UserSchema)

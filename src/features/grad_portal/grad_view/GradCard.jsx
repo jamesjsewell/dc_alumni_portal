@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 import React from "react"
 
-export const GradCard = (props) => {
+export const UserCard = (props) => {
 
     var {username, bio} = props
     return(<div>

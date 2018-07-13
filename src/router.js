@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
-import AlumniView from "./features/grad_portal/grad_view/AlumniView.jsx"
-import AuthView from "./features/grad_portal/grad_auth/AuthView.jsx"
-import ResetPasswordView from "./features/grad_portal/grad_auth/ResetPasswordView.jsx"
-import GradProfileView from "./features/grad_portal/grad_profile/ProfileView.jsx"
+import AlumniView from "./features/user_portal/user_view/AlumniView.jsx"
+import AuthView from "./features/user_portal/user_auth/AuthView.jsx"
+import ResetPasswordView from "./features/user_portal/user_auth/ResetPasswordView.jsx"
+import UserProfileView from "./features/user_portal/user_profile/ProfileView.jsx"
 
 
 class Blank extends Component {
@@ -36,7 +36,7 @@ class RouterConfig extends Component {
 
                 <Switch>
                     <Route exact path="/login" component={AuthView} />
-                    <Route exact path="/grad/profile" component={GradProfileView} />
+                    <Route exact path="/user/profile" component={UserProfileView} />
                     <Route
                         location={location}
                         key={location.key}

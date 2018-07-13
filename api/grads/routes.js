@@ -1,6 +1,6 @@
 const express = require("express"),
-    gradController = require("./grad_controller.js"),
-    gradRoutes = express.Router()
+    userController = require("./user_controller.js"),
+    userRoutes = express.Router()
 
 
 	passport = require("passport"),
@@ -11,19 +11,19 @@ const requireAuth = passport.authenticate("jwt", { session: false })
 const requireLogin = passport.authenticate("local", { session: false })
 
 
-gradRoutes.post("/grads", gradController.register)
-gradRoutes.post("/grads/filter", gradController.get)
-gradRoutes.get("/grads/:id", gradController.get)
-gradRoutes.get("/grads", gradController.get)
-gradRoutes.put("/grads/:id", requireAuth, gradController.update)
-gradRoutes.delete("/grads/:id", requireAuth, gradController.delete)
+userRoutes.post("/users", userController.register)
+userRoutes.post("/users/filter", userController.get)
+userRoutes.get("/users/:id", userController.get)
+userRoutes.get("/users", userController.get)
+userRoutes.put("/users/:id", requireAuth, userController.update)
+userRoutes.delete("/users/:id", requireAuth, userController.delete)
 
 
-gradRoutes.post("/grad/register", gradController.register)
-gradRoutes.post("/grad/login", requireLogin, gradController.login)
-gradRoutes.post("/grad/forgot-password", gradController.forgotPassword)
-gradRoutes.post("/grad/reset-password/:token", gradController.changePassword)
-gradRoutes.get("/grad/authenticate/:_id", requireAuth, gradController.authenticate)
-gradRoutes.put("/grad/:id", requireAuth, gradController.update)
+userRoutes.post("/user/register", userController.register)
+userRoutes.post("/user/login", requireLogin, userController.login)
+userRoutes.post("/user/forgot-password", userController.forgotPassword)
+userRoutes.post("/user/reset-password/:token", userController.changePassword)
+userRoutes.get("/user/authenticate/:_id", requireAuth, userController.authenticate)
+userRoutes.put("/user/:id", requireAuth, userController.update)
 
-module.exports = gradRoutes
+module.exports = userRoutes

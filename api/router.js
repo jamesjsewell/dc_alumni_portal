@@ -4,10 +4,10 @@ const express = require("express")
 const apiRoutes = express.Router()
 
 // import api sub-routes
-const gradRoutes = require("./grads/routes.js")
+const userRoutes = require("./users/routes.js")
 
 // tells main express router to use subroutes
-apiRoutes.use("", gradRoutes)
+apiRoutes.use("", userRoutes)
 
 // exports api routes to the main server file
 module.exports = apiRoutes

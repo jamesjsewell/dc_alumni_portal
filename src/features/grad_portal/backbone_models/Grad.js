@@ -1,15 +1,15 @@
 import Backbone from "backbone";
 import { API_URL } from "../../util/util.js"
 
-export const Grad = Backbone.Model.extend({
-	urlRoot: `${API_URL}/grads`,
+export const User = Backbone.Model.extend({
+	urlRoot: `${API_URL}/users`,
 	idAttribute: "_id",
 	// defaults: function() {
 		
 	// }
 });
 
-export const GradCollection = Backbone.Collection.extend({
+export const UserCollection = Backbone.Collection.extend({
 	comparator: function (mod) {
 		return new Date(mod.get("createdAt")).getTime() * -1;
 	},
@@ -18,11 +18,11 @@ export const GradCollection = Backbone.Collection.extend({
 		if (options.data) {
 
 			options.type = 'POST';
-			options.url = `${API_URL}/grads/filter`
+			options.url = `${API_URL}/users/filter`
 
 		}
 		else{
-			options.url = `${API_URL}/grads`
+			options.url = `${API_URL}/users`
 		}
 	
 		Backbone.Collection.prototype.fetch.call(this, options);
@@ -32,5 +32,5 @@ export const GradCollection = Backbone.Collection.extend({
 		return response
 
 	},
-	model: Grad
+	model: User
 });

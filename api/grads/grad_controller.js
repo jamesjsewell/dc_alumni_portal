@@ -1,5 +1,5 @@
-// mongooese model imported from the Grad's schema file
-const Grad = require("./schema.js")
+// mongooese model imported from the User's schema file
+const User = require("./schema.js")
 
 const jwt = require("jsonwebtoken")
 const crypto = require("crypto")
@@ -11,8 +11,8 @@ const _ = require("underscore");
 
 // Generate JWT
 // TO-DO Add issuer and audience
-function generateToken(grad) {
-    return jwt.sign(grad, process.env.AUTH_SECRET, {
+function generateToken(user) {
+    return jwt.sign(user, process.env.AUTH_SECRET, {
         expiresIn: 604800 // in seconds
     })
 }
@@ -25,17 +25,17 @@ const errorHandler = require("./on_error.js").error,
 // exports the functions as methods that are the 'endpoints' of routes, where logic gets handled and 
 // the output of the method is returned over http as json or any other variable specified. the contents of the response are
 // returned back to where you made the http request
-// these functions are utilized in the GradRoutes.js file
+// these functions are utilized in the UserRoutes.js file
 module.exports = {
 
-    // returns a collection of all 'Grad' records in the database, or a filtered set
+    // returns a collection of all 'User' records in the database, or a filtered set
     // of records if specified. The results of the query are returned in an http response back to
     // where the http request was initiated
     get: function (req, res, next) {
 
         // builds a json object of key value pairs
         // if the json object ends up with key/value pairs
-        // they will be used to filter for 'Grad' records 
+        // they will be used to filter for 'User' records 
         // that have matching parameters
         var queryObj = req.body
      
@@ -45,18 +45,18 @@ module.exports = {
         }
 
         // if the queryObj variable doesnt have any values assigned to it
-        // the find method will return all 'Grad' records in a collection.
+        // the find method will return all 'User' records in a collection.
         // if it does have values assigned to it, the method will only 
         // return records that have matching parameters
 
-        // Grad is a mongoose model class that contains a method called find. Find takes
+        // User is a mongoose model class that contains a method called find. Find takes
         // a query object if you specifiy one, if the object is empty it will returned
         // an unfiltered collection of records, otherwise it will return a filtered set
-        Grad.find(queryObj, "-password",  function (err, results) {
+        User.find(queryObj, "-password",  function (err, results) {
             //returns an 'error' message over an http response to the entity where the http request was made
             if (err) {
 
-                var message = "server error, Grad not found"
+                var message = "server error, User not found"
                 return errorHandler(req, res, message, err)
                 
 
@@ -68,42 +68,42 @@ module.exports = {
 
     },
 
-    // this method will take the id of the desired grad from the request
+    // this method will take the id of the desired user from the request
     // parameters. it will then perform a 'find by id and update' function, using the new data obtained
     // from the 'body' of the request. When that is complete, it sends the newly updated record back
     // as a response to the entity that made the http put request.
     update: function (req, res, next) {
 
-        // the Grad is a mongoose model class, which contains a method called findByIdAndUpdate, 
+        // the User is a mongoose model class, which contains a method called findByIdAndUpdate, 
         // the method takes an id and the new information that you want to be patched on the record
         // it then returns the result with either an error or the updated object
 
-        const gradId = req.params.id;
+        const userId = req.params.id;
 
-        if (req.grad._id.toString() !== gradId) {
+        if (req.user._id.toString() !== userId) {
             return res.status(401).json({
-                error: "You are not authorized to update this grad profile."
+                error: "You are not authorized to update this user profile."
             });
         }
 
-        Grad.findByIdAndUpdate(
+        User.findByIdAndUpdate(
             { _id: req.params.id },
             req.body,
             { new: true},
             function (err, results) {
                 if (err) {
                     // if there was an error, this will send the error as an http response to the request that was made
-                    var message = "server error, could not update Grad"
+                    var message = "server error, could not update User"
                     return errorHandler(req, res, message, err)
 
                 } else if (!results) {
                     // if it could not find the record, sends an error message as a response over http back to where the request was made
-                    var message = "server error, Grad not found"
+                    var message = "server error, User not found"
                     return errorHandler(req, res, message, err)
 
                 } else {
                     // sends the newly updated record over http request back to where the request was made
-                    var message = "Grad updated"
+                    var message = "User updated"
                     return successHandler(req, res, message, results)
 
                 }
@@ -111,25 +111,25 @@ module.exports = {
         )
     },
 
-    // takes the desired Grad's id from the request parameters, then performs a method that the selects the record in the database
+    // takes the desired User's id from the request parameters, then performs a method that the selects the record in the database
     // and removes it
     delete: function (req, res, next) {
 
-        // Grad is a mongoose model class that contains a method called remove. remove takes the id that was sent
+        // User is a mongoose model class that contains a method called remove. remove takes the id that was sent
         // in the http request parameters. If a record can be found that has the desired id, it will be removed
         // from the database collection
 
-        Grad.remove({ _id: req.params.id }, function (err) {
+        User.remove({ _id: req.params.id }, function (err) {
             if (err) {
                 // if an error occures in the process of selecting or removing the record, the error will be sent
                 // back over an http response to where the http request was made
-                var message = "server error, could not remove Grad"
+                var message = "server error, could not remove User"
                 return errorHandler(req, res, message, err)
                 
             }
 
             // if the record was found and removed, a confirmation message will be sent back as an http response to where the request was made
-            var message = "Grad deleted"
+            var message = "User deleted"
             //return successHandler(req, res, message)
             return res.status(201).json({id: req.params.id})
         })
@@ -140,22 +140,22 @@ module.exports = {
 
         var id = req.params._id
 
-        Grad.findById(id, (err, gradExisting) => {
+        User.findById(id, (err, userExisting) => {
           
             if (err) {
                 return next(err)
             }
 
-            if (gradExisting) {
+            if (userExisting) {
 
-                var gradMinusPassword = _.omit(gradExisting.toObject(), 'password')
+                var userMinusPassword = _.omit(userExisting.toObject(), 'password')
                 res.status(200).json({
-                    grad: gradMinusPassword
+                    user: userMinusPassword
                 })
                 
             }
             else{
-                res.status(200).json({ error: "grad with those credentials doesn't exist"})
+                res.status(200).json({ error: "user with those credentials doesn't exist"})
 
             }
 
@@ -166,23 +166,23 @@ module.exports = {
     login: function(req, res, next) {
     
       
-        Grad.findOne({ email: req.body.email }, (err, gradExisting) => {
+        User.findOne({ email: req.body.email }, (err, userExisting) => {
           
             if (err) {
                 return next(err)
             }
 
-            if (gradExisting) {
+            if (userExisting) {
 
-                var gradMinusPassword = _.omit(gradExisting.toObject(), 'password')
+                var userMinusPassword = _.omit(userExisting.toObject(), 'password')
                 res.status(200).json({
-                    grad_token: `JWT ${generateToken(gradMinusPassword)}`,
-                    grad: gradMinusPassword
+                    user_token: `JWT ${generateToken(userMinusPassword)}`,
+                    user: userMinusPassword
                 })
                 
             }
             else{
-                res.status(200).json({ error: "grad with those credentials doesn't exist"})
+                res.status(200).json({ error: "user with those credentials doesn't exist"})
 
             }
 
@@ -206,27 +206,27 @@ module.exports = {
             return res.status(422).send({ error: "You must enter a password." })
         }
     
-        Grad.findOne({ email }, (err, gradExisting) => {
+        User.findOne({ email }, (err, userExisting) => {
             if (err) {
                 return next(err)
             }
     
             // If user is not unique, return error
-            if (gradExisting) {
+            if (userExisting) {
                 return res
                     .status(200)
                     .send({ error: "That email address is already in use." })
             }
     
             // If email is unique and password was provided, create account
-            const grad = new Grad({
+            const user = new User({
                 email: email,
                 password: password,
                 fname: fname, 
                 lname: lname 
             })
            
-            grad.save((err, savedGrad) => {
+            user.save((err, savedUser) => {
                 
                 if (err) {
                     return next(err)
@@ -235,11 +235,11 @@ module.exports = {
     
                 // Respond with JWT if user was created
 
-                var gradMinusPassword = _.omit(savedGrad.toObject(), 'password')
+                var userMinusPassword = _.omit(savedUser.toObject(), 'password')
                 
                 res.status(201).json({
-                    grad_token: `JWT ${generateToken(gradMinusPassword)}`,
-                    grad: gradMinusPassword
+                    user_token: `JWT ${generateToken(userMinusPassword)}`,
+                    user: userMinusPassword
                 })
             })
         })
@@ -247,16 +247,16 @@ module.exports = {
 
     roleAuthorization: function(requiredRole) {
         return function(req, res, next) {
-            const grad = req.grad
+            const user = req.user
     
-            Grad.findById(grad._id, (err, foundGrad) => {
+            User.findById(user._id, (err, foundUser) => {
                 if (err) {
                     res.status(422).json({ error: "No user was found." })
                     return next(err)
                 }
     
                 // If user is found, check role.
-                if (getRole(foundGrad.role) >= getRole(requiredRole)) {
+                if (getRole(foundUser.role) >= getRole(requiredRole)) {
                     return next()
                 }
     
@@ -270,10 +270,10 @@ module.exports = {
     forgotPassword: function(req, res, next) {
         const email = req.body.email
        
-        Grad.findOne({ email }, (err, gradExisting) => {
+        User.findOne({ email }, (err, userExisting) => {
             // If user is not found, return error
-            if (err || gradExisting == null) {
-                console.log(err, gradExisting)
+            if (err || userExisting == null) {
+                console.log(err, userExisting)
                 res.status(422).json({
                     error: "Your request could not be processed as entered. Please try again."
                 })
@@ -289,10 +289,10 @@ module.exports = {
                     return next(err)
                 }
     
-                gradExisting.resetPasswordToken = resetToken
-                gradExisting.resetPasswordExpires = Date.now() + 3600000 // 1 hour
+                userExisting.resetPasswordToken = resetToken
+                userExisting.resetPasswordExpires = Date.now() + 3600000 // 1 hour
     
-                gradExisting.save(err => {
+                userExisting.save(err => {
                     // If error in saving token, return it
                     if (err) {
                         console.log(err)
@@ -320,7 +320,7 @@ module.exports = {
                     // setup email data with unicode symbols
                     let mailOptions = {
                         from: process.env.NODEMAILER_USERNAME, // sender address
-                        to: gradExisting.email, // list of receivers
+                        to: userExisting.email, // list of receivers
                         subject: "reset password", // Subject line
                         text: message.body,
                         html: "" // html body
@@ -348,14 +348,14 @@ module.exports = {
 
     changePassword: function(req, res, next) {
         
-        Grad.findOne(
+        User.findOne(
             {
                 resetPasswordToken: req.params.token,
                 resetPasswordExpires: { $gt: Date.now() }
             },
-            (err, grad) => {
+            (err, user) => {
                 // If query returned no results, token expired or was invalid. Return error.
-                if (!grad) {
+                if (!user) {
                     res.status(422).json({
                         error: "Your token has expired. Please request to reset your password again."
                     })
@@ -364,11 +364,11 @@ module.exports = {
                 }
     
                 // Otherwise, save new password and clear resetToken from database
-                grad.password = req.body.password
-                grad.resetPasswordToken = undefined
-                grad.resetPasswordExpires = undefined
+                user.password = req.body.password
+                user.resetPasswordToken = undefined
+                user.resetPasswordExpires = undefined
     
-                grad.save(err => {
+                user.save(err => {
                     if (err) {
                         return next(err)
                     }
@@ -381,7 +381,7 @@ module.exports = {
                     }
     
                     // Otherwise, send user email confirmation of password change via Mailgun
-                    //mailgun.sendEmail(grad.email, message)
+                    //mailgun.sendEmail(user.email, message)
     
                     return res.status(200).json({
                         message: "Password changed successfully. Please login with your new password.",

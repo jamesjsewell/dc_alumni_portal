@@ -5,8 +5,8 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../alumni"
-import { GradCard } from './GradCard.jsx'
-import { GradCollection } from "../backbone_models/Grad";
+import { UserCard } from './UserCard.jsx'
+import { UserCollection } from "../backbone_models/User";
 
 //material-ui
 import Paper from '@material-ui/core/Paper'
@@ -36,21 +36,21 @@ class AlumniView extends Component {
 
   }
 
-  render_grads(grads){
+  render_users(users){
 
-    var gradsArray = grads
-    var renderedGradCards = []
+    var usersArray = users
+    var renderedUserCards = []
 
-    for(var i = 0; i < gradsArray.length; i++){
+    for(var i = 0; i < usersArray.length; i++){
 
-      var theGrad = gradsArray[i]
+      var theUser = usersArray[i]
       
-      if( theGrad && theGrad.attributes ){
+      if( theUser && theUser.attributes ){
 
-        renderedGradCards.push(
+        renderedUserCards.push(
           <Grid item xs>
             <Paper>
-              <GradCard {...theGrad.attributes} />
+              <UserCard {...theUser.attributes} />
             </Paper>
           </Grid>)
 
@@ -58,7 +58,7 @@ class AlumniView extends Component {
   
     }
 
-    return renderedGradCards
+    return renderedUserCards
 
   }
 
@@ -69,7 +69,7 @@ class AlumniView extends Component {
     
     return (
       <Grid container spacing={8}>
-        {alumni.array && alumni.array.length? this.render_grads(alumni.array) : null}
+        {alumni.array && alumni.array.length? this.render_users(alumni.array) : null}
       </Grid>
     )
   }

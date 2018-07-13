@@ -1,4 +1,4 @@
-const { ROLE_GRAD, ROLE_OWNER, ROLE_ADMIN } = require("../grads/config/roles.js")
+const { ROLE_USER, ROLE_OWNER, ROLE_ADMIN } = require("../users/config/roles.js")
 
 const getRole = function getRole(checkRole) {
     let role
@@ -10,7 +10,7 @@ const getRole = function getRole(checkRole) {
         case ROLE_OWNER:
             role = 3
             break
-        case ROLE_GRAD:
+        case ROLE_USER:
             role = 2
             break
         default:
