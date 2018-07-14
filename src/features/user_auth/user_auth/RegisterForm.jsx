@@ -9,16 +9,20 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { FormField } from "./FormFields.jsx"
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+
+import { FormField } from "../../util/FormFields.jsx"
+
 
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
-    props.untouch(["email", "password"]);
+    props.untouch(["email", "password", "fname", "lname"]);
 
 }
 
-class ResetPasswordForm extends Component {
+class RegisterForm extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -34,36 +38,43 @@ class ResetPasswordForm extends Component {
 
     doThisOnSubmit(input) {
        
-        const resetToken = this.props.match.params.resetToken
-        this.props.resetPassword(resetToken, input.new_password)
-        // this.state.dispatchedReset = true
+        this.props.register({email: input.email, password: input.password, fname: input.fname, lname: input.lname, account_type: this.props.account_type})
+       
     }
 
     render() {
 
-        const { handleSubmit } = this.props
+        const { handleSubmit, register_error_message } = this.props
 
         return (
-            <Grid item>
+            <Grid item >
     
                 <Card>
 
                     <CardContent>
 
                         <Typography gutterBottom variant="headline" component="h2">
-                            Reset Password
+                            Register
                         </Typography>
+
                         <Typography component="p">
-                            enter the new password you wish to use
+                            create an account
                         </Typography>
+
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                            <Field type="password" name="new_password" label="new password" component={FormField} />
-                            <Field type="password" name="confirm_password" label="confirm password" component={FormField} />
+                            <Field type="text" name="fname" label="first name" component={FormField} />
+                            <Field type="text" name="lname" label="last name" component={FormField} />
+                            <Field type="email" name="email" label="email" component={FormField} />
+                            <Field type="password" name="password" label="password" component={FormField} />
 
                             <Button type="submit">
-                                submit
+                                register
                             </Button>
+
+                            {register_error_message? <Card><CardContent>
+                                <Typography component="p" color="error">{register_error_message}</Typography>
+                            </CardContent></Card> : null}
 
                         </form >
 
@@ -78,10 +89,10 @@ class ResetPasswordForm extends Component {
 }
 
 export default reduxForm({
-    form: 'reset_password',
+    form: 'register',
     // fields: ["name"],
     // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
     // asyncBlurFields: ["name"],
     // shouldAsyncValidate,
     onSubmitSuccess: afterSubmit
-})(ResetPasswordForm);
+})(RegisterForm);

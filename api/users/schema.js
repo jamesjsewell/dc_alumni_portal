@@ -24,6 +24,7 @@ const UserSchema = new Schema(
             required: true,
             select: true 
         },
+        account_type: { type: String },
         fname: { type: String },
         lname: { type: String },
         website: { type: String, default: "" },

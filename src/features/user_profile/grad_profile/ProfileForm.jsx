@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
-import ForgotPasswordForm from "./ForgotPasswordForm.jsx"
-import { FormField } from "./FormFields.jsx"
+import { FormField } from "../../util/FormFields.jsx"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -25,7 +24,7 @@ const afterSubmit = (result, dispatch, props) => {
 
 }
 
-class ProfileForm extends Component {
+class GradProfileForm extends Component {
     constructor(props) {
         super(props)
         this.state = {password_dialog_open: false}
@@ -53,7 +52,7 @@ class ProfileForm extends Component {
 
     render() {
 
-        // const { handleSubmit, login_error_message, password_request, getForgotPasswordToken, email_recipient } = this.props
+        const { handleSubmit } = this.props
 
         return (
             
@@ -61,9 +60,11 @@ class ProfileForm extends Component {
 
                 <Field type="email" name="email_login" label="email" component={FormField} />
                 <Field type="password" name="password_login" label="password" component={FormField} />
+                <Field type="text" name="fname" label="First Name" component={FormField} />
+                <Field type="text" name="lname" label="Last Name" component={FormField} />
 
                 <Button variant="contained" type="submit">
-                    Login
+                    Save
                 </Button>
 
             </form >
@@ -73,10 +74,10 @@ class ProfileForm extends Component {
 }
 
 export default reduxForm({
-    form: 'edit_profile',
+    form: 'grad_profile_form',
     // fields: ["name"],
     // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
     // asyncBlurFields: ["name"],
     // shouldAsyncValidate,
     onSubmitSuccess: afterSubmit
-})(ProfileForm)
+})(GradProfileForm)

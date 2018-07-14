@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import LoginForm from "./LoginForm.jsx"
-import RegisterForm from "./RegisterForm.jsx"
 
 //material-ui
 import Grid from '@material-ui/core/Grid'
@@ -12,20 +10,28 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-export default class AuthLayout extends Component {
+import ProfileForm from "./ProfileForm.jsx"
+
+export default class GradProfileLayout extends Component {
     constructor(props) {
         super(props);
 
     }
 
     render(){
-        const { login, register, login_error_message, register_error_message, password_request, getForgotPasswordToken, email_recipient, match } = this.props
+        const { match } = this.props
         return(
         <div>
             <Grid container spacing={24}>
-                <LoginForm login={login} login_error_message={login_error_message} password_request={password_request} getForgotPasswordToken={getForgotPasswordToken} email_recipient={email_recipient} match={match} />
-                <RegisterForm register={register} register_error_message={register_error_message} />
-                
+               <Grid item>
+                    <Card><CardContent><ProfileForm /></CardContent></Card>
+               </Grid> 
+               <Grid item>
+                    <Card><CardContent>profile pic</CardContent></Card>
+               </Grid> 
+               <Grid item>
+                    <Card><CardContent>resume</CardContent></Card>
+               </Grid> 
             </Grid>
         </div>)
     }

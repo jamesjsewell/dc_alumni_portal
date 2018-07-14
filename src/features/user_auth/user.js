@@ -29,7 +29,7 @@ const initial_state = {
     collection: new UserCollection(),
     model: User,
 	array: [],
-	user: null,
+	loggedIn: null,
 	auth_message: null,
 	login_error_message: null,
 	register_error_message: null,
@@ -115,7 +115,7 @@ export function authenticate(user, token) {
 	}
 }
 
-export function register({ email, fname, lname, password }) {
+export function register({ email, fname, lname, password, account_type }) {
 
 	return function(dispatch){
 
@@ -126,7 +126,8 @@ export function register({ email, fname, lname, password }) {
 				email,
 				fname,
 				lname,
-				password
+				password,
+				account_type
 			})
 			.then(response => {
 				
@@ -142,7 +143,6 @@ export function register({ email, fname, lname, password }) {
 						payload: { message: response.data.error }
 					})
 				}
-				
 
 			})
 			.catch(error => {
@@ -228,14 +228,14 @@ export const usersReducer = function(state = initial_state, action) {
 
         case AUTHENTICATE: {
 		
-            return _.extend({}, state, { user: payload, login_error_message: null, register_error_message: null })
+            return _.extend({}, state, { loggedIn: payload, login_error_message: null, register_error_message: null })
             break
 
 		}
 		
 		case UNAUTHENTICATE: {
 			
-			return _.extend({}, state, { user: null})
+			return _.extend({}, state, { loggedIn: null})
 			break
 		}
 

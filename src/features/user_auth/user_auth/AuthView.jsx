@@ -20,25 +20,27 @@ class AuthView extends Component {
     
     super(props)
 
-    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.users.user)
+    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user.loggedIn)
 
   }
 
   render() {
 
-    const { users } = this.props
+    const { user } = this.props
     
     return (
       <div>
         <AuthLayout 
-        register={this.props.actions.register.bind(this)}
-        login={this.props.actions.login.bind(this)}
-        login_error_message={users.login_error_message}
-        register_error_message={users.register_error_message}
-        getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
-        password_request={users.password_request}
-        email_recipient={users.email_recipient}
-        match={this.props.match}
+          match={this.props.match}
+          account_type={this.props.account_type}
+          register={this.props.actions.register.bind(this)}
+          login={this.props.actions.login.bind(this)}
+          getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
+          login_error_message={user.login_error_message}
+          register_error_message={user.register_error_message}
+          password_request={user.password_request}
+          email_recipient={user.email_recipient}
+    
         />
       </div>
     )

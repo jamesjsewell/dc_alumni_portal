@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../user.js"
-import UserProfileLayout from "./ProfileLayout.jsx"
+import GradProfileLayout from "./ProfileLayout.jsx"
 
 @connect(
   state => controller.selector(state),
@@ -14,7 +14,7 @@ import UserProfileLayout from "./ProfileLayout.jsx"
   })
 )
 
-class UserProfileView extends Component {
+class GradProfileView extends Component {
 
   constructor(props) {
     
@@ -30,10 +30,10 @@ class UserProfileView extends Component {
     
     return (
       <div>
-        <UserProfileLayout />
+        <GradProfileLayout />
       </div>
     )
   }
 }
 
-export default withRouter(UserProfileView)
+export default withRouter(GradProfileView)

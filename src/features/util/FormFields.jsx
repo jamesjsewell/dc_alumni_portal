@@ -7,6 +7,7 @@ export const FormField = ({
     input,
     label,
     type,
+    select,
     placeholder,
     required,
     asyncValidation,
@@ -25,6 +26,7 @@ export const FormField = ({
             
         /> */}
         <TextField
+            select={select? true : false}
             name={input.name}
             type={type}
             label={label}
@@ -77,3 +79,11 @@ export const TextArea = ({
                     </div>))}
     </div>
 )
+
+
+//example of a select
+/* <TextField  onChange={(event)=>{this.updatedAccountType(event)}} value={this.state.accountType} select helperText="select your account type" margin="normal">
+<MenuItem value="grad">
+    Grad
+</MenuItem>
+</TextField> */
