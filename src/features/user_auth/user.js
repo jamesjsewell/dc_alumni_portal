@@ -294,9 +294,9 @@ export const usersReducer = function(state = initial_state, action) {
 // array
 // AJAX_payload
 
-const users = state => state.users
+const user = state => state.user
 
 
 export const selector = createStructuredSelector({
-    users
+    user
 })

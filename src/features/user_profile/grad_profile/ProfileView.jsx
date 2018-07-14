@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
-import * as controller from "../user.js"
+import * as controller from "../profile.js"
 import GradProfileLayout from "./ProfileLayout.jsx"
 
 @connect(

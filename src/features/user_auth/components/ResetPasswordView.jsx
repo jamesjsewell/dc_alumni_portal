@@ -20,7 +20,7 @@ class ResetPasswordView extends Component {
     
     super(props)
 
-    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.users.user)
+    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user.loggedIn)
 
   }
 

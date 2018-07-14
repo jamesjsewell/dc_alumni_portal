@@ -4,7 +4,6 @@ import { combineReducers } from "redux"
 import { createStructuredSelector } from "reselect"
 import Cookies from "universal-cookie"
 import { API_URL } from "../util/util.js"
-import { User, UserCollection } from "./backbone_models/User.js"
 
 const cookies = new Cookies()
 

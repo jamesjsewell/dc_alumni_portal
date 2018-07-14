@@ -25,7 +25,7 @@ class AuthView extends Component {
   }
 
   render() {
-
+    console.log(this.props)
     const { user } = this.props
     
     return (

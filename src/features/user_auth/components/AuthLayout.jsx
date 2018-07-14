@@ -24,22 +24,29 @@ export default class AuthLayout extends Component {
         const { login, register, login_error_message, register_error_message, password_request, getForgotPasswordToken, email_recipient, match, account_type } = this.props
 
         return(
+
             <Grid container spacing={24}>
 
                 <LoginForm 
+
                     login = {login} 
                     getForgotPasswordToken = {getForgotPasswordToken} 
                     login_error_message = {login_error_message} 
                     password_request = {password_request} 
                     email_recipient = {email_recipient} 
                     match = {match} 
+
                 />
+
+                
                 <RegisterForm 
+
                     account_type={account_type}
                     register={register} 
-                    register_error_message={register_error_message} 
-                />
-    
+                    register_error_message={register_error_message}
+
+                /> 
+                    
             </Grid>)
 
     }

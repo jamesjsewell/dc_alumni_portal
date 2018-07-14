@@ -44,7 +44,7 @@ class RegisterForm extends Component {
 
     render() {
 
-        const { handleSubmit, register_error_message } = this.props
+        const { account_type, handleSubmit, register_error_message } = this.props
 
         return (
             <Grid item >
@@ -62,11 +62,18 @@ class RegisterForm extends Component {
                         </Typography>
 
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
+            
+                            <Field type="email" name="email" label="Email" component={FormField} />
+                            <Field type="password" name="password" label="Password" component={FormField} /> 
+                            <Field type="text" name="fname" label="First Name" component={FormField} />
+                            <Field type="text" name="lname" label="Last Name" component={FormField} />
 
-                            <Field type="text" name="fname" label="first name" component={FormField} />
-                            <Field type="text" name="lname" label="last name" component={FormField} />
-                            <Field type="email" name="email" label="email" component={FormField} />
-                            <Field type="password" name="password" label="password" component={FormField} />
+                            { account_type === "employer" ? 
+                                <div>
+                                    <Field type="text" name="company" label="Company Name" component={FormField} />
+                                    <Field type="text" name="companyURL" label="Company URL" component={FormField} />
+                                    <Field type="text" name="phone" label="Phone Number" component={FormField} /> 
+                                </div> : null }
 
                             <Button type="submit">
                                 register
