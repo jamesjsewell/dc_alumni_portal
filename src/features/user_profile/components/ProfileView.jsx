@@ -6,6 +6,7 @@ import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../profile.js"
 import GradProfileLayout from "./ProfileLayout.jsx"
+import Navbar from "../../navbar/Navbar.jsx"
 
 @connect(
   state => controller.selector(state),
@@ -23,11 +24,10 @@ class GradProfileView extends Component {
   }
 
   render() {
-
-    const { users } = this.props
     
     return (
       <div>
+        <Navbar/>
         <GradProfileLayout />
       </div>
     )

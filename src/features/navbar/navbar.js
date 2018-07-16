@@ -8,12 +8,7 @@ import { UNAUTHENTICATE } from "../user_auth/user.js"
 
 const cookies = new Cookies()
 
-const initial_state = {
-
-
-}
-
-export function logout() {
+export function logout(history) {
 
 	return function(dispatch){
 
@@ -23,7 +18,8 @@ export function logout() {
 		dispatch({
 			type: UNAUTHENTICATE,
 			payload: null
-		})
+        })
+        history.replace("/alumni")
 	}	
 }
 

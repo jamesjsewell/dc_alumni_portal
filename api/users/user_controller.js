@@ -380,7 +380,8 @@ module.exports = {
     
                     return res.status(200).json({
                         message: "Password changed successfully. Please login with your new password.",
-                        didReset: true
+                        didReset: true,
+                        user: user
                     })
                 })
             }

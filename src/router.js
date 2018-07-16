@@ -7,8 +7,9 @@ import createHistory from "history/createBrowserHistory"
 import { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE } from "./nav_links.js"
 import AuthView from "./features/user_auth/components/AuthView.jsx"
 import ResetPasswordView from "./features/user_auth/components/ResetPasswordView.jsx"
-import GradProfileView from "./features/user_profile/grad_profile/ProfileView.jsx"
+import GradProfileView from "./features/user_profile/components/ProfileView.jsx"
 import AlumniView from "./features/alumni/AlumniView.jsx"
+import * as controller from './global_state'
 
 
 const EmployerLoginPage = (props) => {
@@ -47,10 +48,19 @@ class Blank extends Component {
 
 // -------------------------------------------------- //
 
+@connect(
+    state => controller.selector(state),
+    dispatch => ({
+      actions: bindActionCreators(controller, dispatch)
+    })
+  )
+
 class RouterConfig extends Component {
 
     constructor(props){
         super(props)
+        
+        this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user.loggedIn)
     }
 
     componentWillReceiveProps(nextProps){
@@ -58,8 +68,7 @@ class RouterConfig extends Component {
     }
 
     render() {
-      
-        const { user } = this.props
+    
 
         return (
             

@@ -40,6 +40,7 @@ const initial_state = {
 
 }
 
+
 export function auto_log_in(authenticate_user, loggedInUser){
 
 	return function(dispatch){
@@ -204,7 +205,7 @@ export function resetPassword(user_token, password) {
 		.then(response => {
 			dispatch({
 				type: RESET_PASSWORD,
-				payload: null
+				payload: {user: response.data.user}
 			})
 		})
 		.catch(error => {
@@ -267,7 +268,7 @@ export const usersReducer = function(state = initial_state, action) {
 		
 		case RESET_PASSWORD: {
 
-			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false  })
+			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false, loggedIn: action.payload  })
 			break
 		}
 
