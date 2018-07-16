@@ -193,7 +193,7 @@ module.exports = {
     register: function(req, res, next) {
         // Check for registration errors
         const { email, fname, lname, password } = req.body
-    
+       
         // Return error if no email provided
         if (!email) {
             return res
@@ -219,12 +219,7 @@ module.exports = {
             }
     
             // If email is unique and password was provided, create account
-            const user = new User({
-                email: email,
-                password: password,
-                fname: fname, 
-                lname: lname 
-            })
+            const user = new User(req.body)
            
             user.save((err, savedUser) => {
                 

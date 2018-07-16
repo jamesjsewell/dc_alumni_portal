@@ -25,11 +25,22 @@ class AuthView extends Component {
   }
 
   render() {
-    console.log(this.props)
+    
     const { user } = this.props
+    if(user.loggedIn){
+
+      if(user.loggedIn.account_type === "grad"){
+        this.props.history.replace("/edit-grad-profile");
+      }
+      if(user.loggedIn.account_type === "employer"){
+        this.props.history.replace("/alumni")
+      }
+      
+    }
     
     return (
       <div>
+  
         <AuthLayout 
           match={this.props.match}
           account_type={this.props.account_type}

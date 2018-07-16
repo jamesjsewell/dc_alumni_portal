@@ -11,7 +11,7 @@ const cookies = new Cookies()
 const MESSAGE = "message",
 	ASYNC = "aysnc"
 	
-const AUTHENTICATE = "authenticate",
+export const AUTHENTICATE = "authenticate",
 	UNAUTHENTICATE = "unauthenticate",
 	LOGIN_ERROR = "login_error",
 	ERROR_REGISTERING = "error_registering"
@@ -115,20 +115,16 @@ export function authenticate(user, token) {
 	}
 }
 
-export function register({ email, fname, lname, password, account_type }) {
+export function register(info) {
 
 	return function(dispatch){
 
+		const { email, password } = info
+		
 		if(email && password){
 
 			axios
-			.post(`${API_URL}/user/register`, {
-				email,
-				fname,
-				lname,
-				password,
-				account_type
-			})
+			.post(`${API_URL}/user/register`, info)
 			.then(response => {
 				
 				if(response && response.data && response.data.user_token){

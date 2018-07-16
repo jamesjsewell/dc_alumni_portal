@@ -4,8 +4,8 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
-import * as controller from "../profile.js"
-import GradProfileLayout from "./ProfileLayout.jsx"
+import * as controller from "./alumni.js"
+import Navbar from "../navbar/Navbar.jsx"
 
 @connect(
   state => controller.selector(state),
@@ -14,7 +14,7 @@ import GradProfileLayout from "./ProfileLayout.jsx"
   })
 )
 
-class GradProfileView extends Component {
+class AlumniView extends Component {
 
   constructor(props) {
     
@@ -23,15 +23,16 @@ class GradProfileView extends Component {
   }
 
   render() {
-
-    const { users } = this.props
-    
+   
+    const { user } = this.props
+    console.log(this.props)
     return (
       <div>
-        <GradProfileLayout />
+        <Navbar/>
+        alumni view
       </div>
     )
   }
 }
 
-export default withRouter(GradProfileView)
+export default withRouter(AlumniView)

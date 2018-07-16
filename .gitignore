@@ -1,4 +1,4 @@
 node_modules
 db_admin.js
 .env
-client_secrets.js
+nav_links.js

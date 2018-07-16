@@ -37,8 +37,8 @@ class RegisterForm extends Component {
     }
 
     doThisOnSubmit(input) {
-       
-        this.props.register({email: input.email, password: input.password, fname: input.fname, lname: input.lname, account_type: this.props.account_type})
+        input.account_type = this.props.account_type
+        this.props.register(input)
        
     }
 

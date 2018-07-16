@@ -19,7 +19,7 @@ module.exports = {
             },
             {
                 test: /\.(js|jsx)$/,
-                exclude: [/node_modules/, /api/],
+                exclude: [/node_modules/, /api/, /dist/],
                 use: {
                   loader: "babel-loader",
                   options: {

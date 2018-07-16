@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
-import { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE } from "./client_secrets.js"
+import { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE } from "./nav_links.js"
 import AuthView from "./features/user_auth/components/AuthView.jsx"
 import ResetPasswordView from "./features/user_auth/components/ResetPasswordView.jsx"
 import GradProfileView from "./features/user_profile/grad_profile/ProfileView.jsx"
-import * as controller from "./controller.js"
+import AlumniView from "./features/alumni/AlumniView.jsx"
 
 
 const EmployerLoginPage = (props) => {
@@ -29,6 +29,16 @@ const GradLoginPage = (props) => {
     )
 }
 
+const AlumniPage = (props) => {
+    console.log(props)
+    return (
+        <AlumniView 
+        {...props}
+        
+        />
+    )
+}
+
 class Blank extends Component {
     render() {
         return <div>blank</div>
@@ -36,13 +46,6 @@ class Blank extends Component {
 }
 
 // -------------------------------------------------- //
-
-@connect(
-    state => controller.selector(state),
-    dispatch => ({
-      actions: bindActionCreators(controller, dispatch)
-    })
-  )
 
 class RouterConfig extends Component {
 
@@ -55,7 +58,7 @@ class RouterConfig extends Component {
     }
 
     render() {
-
+      
         const { user } = this.props
 
         return (
@@ -64,10 +67,10 @@ class RouterConfig extends Component {
 
                 <Switch>
 
-                    { true ? <Route exact path={EMPLOYER_LOGIN} render={EmployerLoginPage} /> : null }
-                    { true ? <Route exact path={GRAD_LOGIN} render={GradLoginPage} /> : null }
-                    { user.loggedIn ? <Route exact path={GRAD_PROFILE} component={GradProfileView} /> : null }
-                    
+                    <Route exact path={EMPLOYER_LOGIN} render={EmployerLoginPage} /> 
+                    <Route exact path={GRAD_LOGIN} render={GradLoginPage} /> 
+                    <Route exact path={"/edit-grad-profile"} component={GradProfileView} /> 
+                    <Route exact path="/alumni" render={AlumniPage} /> 
                     <Route location={location} key={location.key} exact path="/reset-password/:resetToken" component={ResetPasswordView} />
                     <Route path="*" component={Blank} />
 
@@ -84,5 +87,5 @@ export default withRouter(RouterConfig)
 
 
 
-
-
+       
+  
