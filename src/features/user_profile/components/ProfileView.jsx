@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "../profile.js"
-import GradProfileLayout from "./ProfileLayout.jsx"
+import ProfileLayout from "./ProfileLayout.jsx"
 import Navbar from "../../navbar/Navbar.jsx"
 
 @connect(
@@ -24,12 +24,12 @@ class GradProfileView extends Component {
   }
 
   render() {
-    
+    const { user } = this.props
     return (
       <div>
         <Navbar/>
-        <GradProfileLayout />
-      </div>
+        <ProfileLayout user={user} />
+      </div> 
     )
   }
 }

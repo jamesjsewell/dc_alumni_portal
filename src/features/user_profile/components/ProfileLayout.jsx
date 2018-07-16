@@ -10,21 +10,21 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import ProfileForm from "./ProfileForm.jsx"
+import GradProfileForm from "./GradProfileForm.jsx"
 
-export default class GradProfileLayout extends Component {
+export default class ProfileLayout extends Component {
     constructor(props) {
         super(props);
 
     }
 
     render(){
-        const { match } = this.props
+        const { user } = this.props
         return(
         <div>
             <Grid container spacing={24}>
                <Grid item>
-                    <Card><CardContent><ProfileForm /></CardContent></Card>
+                    <Card><CardContent>{user.loggedIn && user.loggedIn.account_type === "grad"? <GradProfileForm /> : null}</CardContent></Card>
                </Grid> 
                <Grid item>
                     <Card><CardContent>profile pic</CardContent></Card>

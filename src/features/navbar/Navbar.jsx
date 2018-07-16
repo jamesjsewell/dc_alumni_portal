@@ -23,8 +23,6 @@ import Menu from "@material-ui/core/Menu";
 
 
 const NavMenu = ( props ) => {
-
-  console.log('PROPS', props)
   
   return(
     <AppBar position="static">
@@ -63,10 +61,10 @@ const MenuDrawer = ( props ) => {
           <ListItemText inset primary="Logout" />
         </MenuItem>
       </MenuList>
+      <Button onClick={(event)=>{props.toggleDrawer(event, false)}} size="small" color="inherit">cancel</Button>
     </Paper>)
 
 }
-
 
 @connect(
   state => controller.selector(state),
@@ -80,6 +78,7 @@ class Navbar extends Component {
   constructor(props) {
     
     super(props)
+    this.state = {drawerOpen: false}
 
   }
 
@@ -88,6 +87,11 @@ class Navbar extends Component {
     e.preventDefault()
     this.props.actions.logout(this.props.history)
 
+  }
+
+  handleToggleDrawer(e, open){
+    e.preventDefault()
+    this.setState({drawerOpen: open})
   }
 
   render() {
@@ -100,7 +104,7 @@ class Navbar extends Component {
 
           <AppBar position="static">
             <Toolbar>
-              <IconButton color="inherit" aria-label="Menu">
+              <IconButton onClick={(event)=>{this.handleToggleDrawer(event, true)}} color="inherit" aria-label="Menu">
                 <MenuIcon />
               </IconButton>
             </Toolbar>
@@ -109,13 +113,13 @@ class Navbar extends Component {
           <Drawer
             variant="temporary"
             anchor={'left'}
-            // open={this.state.mobileOpen}
-            // onClose={this.handleDrawerToggle}
+            open={this.state.drawerOpen}
+            onClose={(event)=>{this.handleToggleDrawer(event, false)}}
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <MenuDrawer logout={this.handleLogout.bind(this)} loggedIn={loggedIn}/>
+            <MenuDrawer toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} loggedIn={loggedIn}/>
           </Drawer>
         </Hidden>
         <Hidden smDown>
