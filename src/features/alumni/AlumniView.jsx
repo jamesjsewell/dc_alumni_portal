@@ -25,7 +25,7 @@ class AlumniView extends Component {
   render() {
    
     const { user } = this.props
-    console.log(this.props)
+    
     return (
       <div>
         <Navbar/>

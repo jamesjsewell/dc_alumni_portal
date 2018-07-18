@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form"
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper'
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 //example for the outer div, for styling based on state: className={asyncValidating ? 'async-validating' : ''} required={required} error={error && touched ? true : false}
 export const FormField = ({
@@ -57,11 +60,15 @@ export const TextArea = ({
     initialValues,
     meta: { touched, error, warning, value, asyncValidating, pristine }
 }) => (
-    <div>
-        <label style={{display: 'block'}}>{label}</label>
-        <textarea
+    <Paper>
+
+    
+        <TextField
             name={input.name}
-            type={type}
+            multiline={true}
+            rows={4}
+            rowsMax={8}
+            fullWidth={true}
             value={input.value}
             onChange={input.onChange}
             placeholder={placeholder}
@@ -77,7 +84,7 @@ export const TextArea = ({
                     <div>
                         <span>{warning}</span>
                     </div>))}
-    </div>
+    </Paper>
 )
 
 
