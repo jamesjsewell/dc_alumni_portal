@@ -63,6 +63,35 @@ const skills = [
     'python'
 
 ]
+
+const SkillsSelect = ({selectedSkills, handleSkills}) => (
+        <FormControl>
+            <Typography>Select top 3 Skills</Typography>
+            <Select
+                
+                multiple
+                value={selectedSkills}
+                onChange={handleSkills}
+                input={<Input name="skills" id="select-multiple-chip" />}
+                renderValue={selected => (
+                    <div >
+                        {selected.map(value => <Chip key={value} label={value} />)}
+                    </div>
+                )}
+                
+            >
+                {skills.map(skill => (
+                <MenuItem
+                    key={skill}
+                    value={skill}
+                >
+                    {skill}
+                </MenuItem>
+                ))}
+            </Select>
+        </FormControl> 
+    )
+
         
 const afterSubmit = (result, dispatch, props) => {
     props.reset()
@@ -93,6 +122,8 @@ class GradProfileForm extends Component {
     doThisOnSubmit(input) {
        
         
+        input.skills = this.state.selectedSkills
+        console.log(input)
        
     }
 
@@ -183,30 +214,7 @@ class GradProfileForm extends Component {
                     
                     <Grid item >
                                 
-                        <FormControl>
-                            <Typography>Select top 3 Skills</Typography>
-                            <Select
-                                multiple
-                                value={this.state.selectedSkills}
-                                onChange={this.handleSkills.bind(this)}
-                                input={<Input id="select-multiple-chip" />}
-                                renderValue={selected => (
-                                    <div >
-                                        {selected.map(value => <Chip key={value} label={value} />)}
-                                    </div>
-                                )}
-                                
-                            >
-                                {skills.map(skill => (
-                                <MenuItem
-                                    key={skill}
-                                    value={skill}
-                                >
-                                    {skill}
-                                </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>    
+                        <SkillsSelect handleSkills={this.handleSkills.bind(this)} selectedSkills={this.state.selectedSkills}/>
                         
                     </Grid>
 
@@ -215,6 +223,8 @@ class GradProfileForm extends Component {
                             Save
                         </Button>
                     </Grid>
+
+                
 
                 </Grid>
             
