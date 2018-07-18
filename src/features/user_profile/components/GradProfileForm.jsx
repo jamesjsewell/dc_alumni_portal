@@ -73,7 +73,7 @@ const afterSubmit = (result, dispatch, props) => {
 class GradProfileForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {password_dialog_open: false, selectedSkills: []}
+        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: []}
 
     }
 
@@ -104,136 +104,121 @@ class GradProfileForm extends Component {
       
     };
 
-    render() {
+    handleExpansionPanel(event, expanded, panel){
+        this.setState({
+          expanded: expanded ? panel : false,
+        });
+    }
 
+    render() {
+        
         const { handleSubmit } = this.props
+        const { expanded } = this.state
 
         return (
             
-            
-               
-                    <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
-                     <Grid container spacing={24}>
+            <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
+                <Grid container spacing={24}>
                     <Grid item>
-        
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography> Account </Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails>
-                                        <Card>
-                                        <CardContent>
-                                        <Field type="email" name="email" label="Email" component={FormField} />
-                                        <Field type="password" name="password" label="Password" component={FormField} />
-                                        <Field type="text" name="fname" label="First Name" component={FormField} />
-                                        <Field type="text" name="lname" label="Last Name" component={FormField} />
-                                        </CardContent>
-                                        </Card>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
 
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography> Info </Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails>
-                                        <Card>
-                                        <CardContent>
-                                        <Field type="text" name="city" label="City" component={FormField} />
-                                        <Field type="text" name="state" label="State" component={FormField} />
-                                        <Field type="text" name="website" label="Personal Website" component={FormField} />
-                                        <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
-                                        </CardContent>
-                                        </Card>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
+                        <ExpansionPanel expanded={expanded === 'panel1'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel1')}}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-1" />}>
+                                <Typography> Account </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Card>
+                                <CardContent>
+                                <Field type="email" name="email" label="Email" component={FormField} />
+                                <Field type="password" name="password" label="Password" component={FormField} />
+                                <Field type="text" name="fname" label="First Name" component={FormField} />
+                                <Field type="text" name="lname" label="Last Name" component={FormField} />
+                                </CardContent>
+                                </Card>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
 
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography> Social </Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails>
-                                        <Card>
-                                            <CardContent>
-                                        <Field type="text" name="github" label="Github" component={FormField} />
-                                        <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
-                                        <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
-                                        <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
-                                        <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
-                                        </CardContent>
-                                        </Card>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                          
+                        <ExpansionPanel  expanded={expanded === 'panel2'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel2')}}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-2" />}>
+                                <Typography> Info </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Card>
+                                <CardContent>
+                                <Field type="text" name="city" label="City" component={FormField} />
+                                <Field type="text" name="state" label="State" component={FormField} />
+                                <Field type="text" name="website" label="Personal Website" component={FormField} />
+                                <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+                                </CardContent>
+                                </Card>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+
+                        <ExpansionPanel expanded={expanded === 'panel3'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel3')}}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-3"/>}>
+                                <Typography> Social </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Card>
+                                    <CardContent>
+                                <Field type="text" name="github" label="Github" component={FormField} />
+                                <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
+                                <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
+                                <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
+                                <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
+                                </CardContent>
+                                </Card>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                            
                     </Grid>
-                  
+                    
                     <Grid item>
 
-                      
-                                <Typography variant="title" component="h2">Bio</Typography>
-                                <Field type="text" name="bio" label="Bio" component={TextArea} />
-                          
+                        
+                        <Typography variant="title" component="h2">Bio</Typography>
+                        <Field type="text" name="bio" label="Bio" component={TextArea} />
+                    
 
                     </Grid>     
-                 
+                    
                     <Grid item >
-
-                        
                                 
-                                <FormControl>
-                                    <Typography>Select top 3 Skills</Typography>
-                                    <Select
-                                        multiple
-                                        value={this.state.selectedSkills}
-                                        onChange={this.handleSkills.bind(this)}
-                                        input={<Input id="select-multiple-chip" />}
-                                        renderValue={selected => (
-                                            <div >
-                                                {selected.map(value => <Chip key={value} label={value} />)}
-                                            </div>
-                                        )}
-                                        
-                                    >
-                                        {skills.map(skill => (
-                                        <MenuItem
-                                            key={skill}
-                                            value={skill}
-                                        >
-                                            {skill}
-                                        </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
+                        <FormControl>
+                            <Typography>Select top 3 Skills</Typography>
+                            <Select
+                                multiple
+                                value={this.state.selectedSkills}
+                                onChange={this.handleSkills.bind(this)}
+                                input={<Input id="select-multiple-chip" />}
+                                renderValue={selected => (
+                                    <div >
+                                        {selected.map(value => <Chip key={value} label={value} />)}
+                                    </div>
+                                )}
                                 
+                            >
+                                {skills.map(skill => (
+                                <MenuItem
+                                    key={skill}
+                                    value={skill}
+                                >
+                                    {skill}
+                                </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>    
                         
-                            
-                      
-                 
-                          
-                       
                     </Grid>
 
                     <Grid item>
                         <Button variant="outlined" type="submit">
                             Save
                         </Button>
-                
-
                     </Grid>
 
-                    </Grid>
-                    
-                    
-                    </form >
-
-                
-                                
-                
-
-
+                </Grid>
             
-            
-        )
+            </form >)
     }
 }
 

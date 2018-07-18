@@ -2,3 +2,4 @@ node_modules
 db_admin.js
 .env
 nav_links.js
+*npm_debug*
