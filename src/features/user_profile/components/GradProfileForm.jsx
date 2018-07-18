@@ -27,6 +27,12 @@ import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Divider } from "@material-ui/core";
+
 
 // email
 // password
@@ -104,100 +110,128 @@ class GradProfileForm extends Component {
 
         return (
             
-            <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
-                <Grid container spacing={16}>
-                
-                    <Grid item >
-                        <Card>
-                            <CardContent>
-                                <Typography> Account </Typography>
-                                <Field type="email" name="email" label="Email" component={FormField} />
-                                <Field type="password" name="password" label="Password" component={FormField} />
-                                <Field type="text" name="fname" label="First Name" component={FormField} />
-                                <Field type="text" name="lname" label="Last Name" component={FormField} />
-                            </CardContent>
-                        </Card>
-                    </Grid>
+            
                
+                    <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
+                     <Grid container spacing={24}>
                     <Grid item>
-                        <Card>
-                            <CardContent>
-                                <Typography> Info </Typography>
-                                <Field type="text" name="city" label="City" component={FormField} />
-                                <Field type="text" name="state" label="State" component={FormField} />
-                                <Field type="text" name="website" label="Personal Website" component={FormField} />
-                                <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+        
+                                <ExpansionPanel>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography> Account </Typography>
+                                    </ExpansionPanelSummary>
+                                    <ExpansionPanelDetails>
+                                        <Card>
+                                        <CardContent>
+                                        <Field type="email" name="email" label="Email" component={FormField} />
+                                        <Field type="password" name="password" label="Password" component={FormField} />
+                                        <Field type="text" name="fname" label="First Name" component={FormField} />
+                                        <Field type="text" name="lname" label="Last Name" component={FormField} />
+                                        </CardContent>
+                                        </Card>
+                                    </ExpansionPanelDetails>
+                                </ExpansionPanel>
 
-                            </CardContent>
-                        </Card>
+                                <ExpansionPanel>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography> Info </Typography>
+                                    </ExpansionPanelSummary>
+                                    <ExpansionPanelDetails>
+                                        <Card>
+                                        <CardContent>
+                                        <Field type="text" name="city" label="City" component={FormField} />
+                                        <Field type="text" name="state" label="State" component={FormField} />
+                                        <Field type="text" name="website" label="Personal Website" component={FormField} />
+                                        <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+                                        </CardContent>
+                                        </Card>
+                                    </ExpansionPanelDetails>
+                                </ExpansionPanel>
+
+                                <ExpansionPanel>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography> Social </Typography>
+                                    </ExpansionPanelSummary>
+                                    <ExpansionPanelDetails>
+                                        <Card>
+                                            <CardContent>
+                                        <Field type="text" name="github" label="Github" component={FormField} />
+                                        <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
+                                        <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
+                                        <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
+                                        <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
+                                        </CardContent>
+                                        </Card>
+                                    </ExpansionPanelDetails>
+                                </ExpansionPanel>
+                          
                     </Grid>
+                  
+                    <Grid item>
 
+                      
+                                <Typography variant="title" component="h2">Bio</Typography>
+                                <Field type="text" name="bio" label="Bio" component={TextArea} />
+                          
+
+                    </Grid>     
+                 
                     <Grid item >
-                        <Card>
-                            <CardContent>
-                                <Typography> Social </Typography>
-                                <Field type="text" name="github" label="Github" component={FormField} />
-                                <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
-                                <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
-                                <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
-                                <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
-                            </CardContent>
-                        </Card>
+
+                        
+                                
+                                <FormControl>
+                                    <Typography>Select top 3 Skills</Typography>
+                                    <Select
+                                        multiple
+                                        value={this.state.selectedSkills}
+                                        onChange={this.handleSkills.bind(this)}
+                                        input={<Input id="select-multiple-chip" />}
+                                        renderValue={selected => (
+                                            <div >
+                                                {selected.map(value => <Chip key={value} label={value} />)}
+                                            </div>
+                                        )}
+                                        
+                                    >
+                                        {skills.map(skill => (
+                                        <MenuItem
+                                            key={skill}
+                                            value={skill}
+                                        >
+                                            {skill}
+                                        </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                                
+                        
+                            
+                      
+                 
+                          
+                       
                     </Grid>
 
-                </Grid>
-
-                <Grid xs={12} item>
-                    <Card>
-                        <CardContent>
-                            <Typography> Bio </Typography>
-                            <Field type="text" name="bio" label="Bio" component={TextArea} />
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-                <Grid item>
-                    <Card>
-                        <CardContent>
-                            
-                            <FormControl>
-                                <Typography>Select top 3 Skills</Typography>
-                                <Select
-                                    multiple
-                                    value={this.state.selectedSkills}
-                                    onChange={this.handleSkills.bind(this)}
-                                    input={<Input id="select-multiple-chip" />}
-                                    renderValue={selected => (
-                                        <div >
-                                            {selected.map(value => <Chip key={value} label={value} />)}
-                                        </div>
-                                    )}
-                                    
-                                >
-                                    {skills.map(skill => (
-                                    <MenuItem
-                                        key={skill}
-                                        value={skill}
-                                    >
-                                        {skill}
-                                    </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-                <Card>
-                    <CardContent>
+                    <Grid item>
                         <Button variant="outlined" type="submit">
                             Save
                         </Button>
-                    </CardContent>
-                </Card>
+                
 
-            </form >
+                    </Grid>
+
+                    </Grid>
+                    
+                    
+                    </form >
+
+                
+                                
+                
+
+
+            
             
         )
     }
