@@ -1,3 +1,4 @@
+import _ from "underscore"
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
@@ -91,7 +92,7 @@ const SkillsSelect = ({selectedSkills, handleSkills}) => (
         </FormControl> 
     )
 
-        
+var fieldValues = {}        
 const afterSubmit = (result, dispatch, props) => {
     props.reset()
     props.untouch([])
@@ -102,10 +103,19 @@ class GradProfileForm extends Component {
     constructor(props) {
         super(props)
         this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: []}
+        
+        var userValues = _.omit(this.props.user.loggedIn, "__v", "_id", "updatedAt")
+        fieldValues = _.extend(fieldValues, userValues)
+        
 
     }
 
     componentWillReceiveProps(nextProps){
+
+        if(nextProps.user.loggedIn){
+            var user = nextProps.user.loggedIn
+            fieldValues = user
+        }
 
     }
 
@@ -235,5 +245,6 @@ export default reduxForm({
     // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
     // asyncBlurFields: ["name"],
     // shouldAsyncValidate,
-    onSubmitSuccess: afterSubmit
+    onSubmitSuccess: afterSubmit,
+    initialValues: fieldValues
 })(GradProfileForm)
