@@ -30,8 +30,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Divider } from "@material-ui/core";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 
 // email
@@ -123,22 +122,22 @@ class GradProfileForm extends Component {
        
         
         input.skills = this.state.selectedSkills
-        console.log(input)
+        this.props.updateUser(this.props.user.loggedIn._id, input)
        
     }
 
     handleSkills(event){
 
         if(this.state.selectedSkills.length <= 3 && event.target.value.length <= 3){
-            this.setState({ selectedSkills: event.target.value });
+            this.setState({ selectedSkills: event.target.value })
         }
       
-    };
+    }
 
     handleExpansionPanel(event, expanded, panel){
         this.setState({
           expanded: expanded ? panel : false,
-        });
+        })
     }
 
     render() {
@@ -158,12 +157,12 @@ class GradProfileForm extends Component {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Card>
-                                <CardContent>
-                                <Field type="email" name="email" label="Email" component={FormField} />
-                                <Field type="password" name="password" label="Password" component={FormField} />
-                                <Field type="text" name="fname" label="First Name" component={FormField} />
-                                <Field type="text" name="lname" label="Last Name" component={FormField} />
-                                </CardContent>
+                                    <CardContent>
+                                        <Field type="email" name="email" label="Email" component={FormField} />
+                                        <Field type="password" name="password" label="Password" component={FormField} />
+                                        <Field type="text" name="fname" label="First Name" component={FormField} />
+                                        <Field type="text" name="lname" label="Last Name" component={FormField} />
+                                    </CardContent>
                                 </Card>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -174,12 +173,12 @@ class GradProfileForm extends Component {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Card>
-                                <CardContent>
-                                <Field type="text" name="city" label="City" component={FormField} />
-                                <Field type="text" name="state" label="State" component={FormField} />
-                                <Field type="text" name="website" label="Personal Website" component={FormField} />
-                                <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
-                                </CardContent>
+                                    <CardContent>
+                                        <Field type="text" name="city" label="City" component={FormField} />
+                                        <Field type="text" name="state" label="State" component={FormField} />
+                                        <Field type="text" name="website" label="Personal Website" component={FormField} />
+                                        <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+                                    </CardContent>
                                 </Card>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -191,12 +190,12 @@ class GradProfileForm extends Component {
                             <ExpansionPanelDetails>
                                 <Card>
                                     <CardContent>
-                                <Field type="text" name="github" label="Github" component={FormField} />
-                                <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
-                                <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
-                                <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
-                                <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
-                                </CardContent>
+                                        <Field type="text" name="github" label="Github" component={FormField} />
+                                        <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
+                                        <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
+                                        <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
+                                        <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
+                                    </CardContent>
                                 </Card>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -223,8 +222,6 @@ class GradProfileForm extends Component {
                             Save
                         </Button>
                     </Grid>
-
-                
 
                 </Grid>
             

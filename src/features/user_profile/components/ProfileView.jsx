@@ -28,7 +28,7 @@ class GradProfileView extends Component {
     return (
       <div>
         <Navbar/>
-        <ProfileLayout user={user} />
+        <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} />
       </div> 
     )
   }

@@ -14,7 +14,9 @@ const MESSAGE = "message",
 export const AUTHENTICATE = "authenticate",
 	UNAUTHENTICATE = "unauthenticate",
 	LOGIN_ERROR = "login_error",
-	ERROR_REGISTERING = "error_registering"
+	ERROR_REGISTERING = "error_registering",
+	UPDATE_USER = "update_user",
+	ERROR_UPDATING_USER = "error_updating_user"
 
 const PASSWORD_RESET_REQUEST = "password_reset_request",
 	PASSWORD_REQUEST_FAILED = "password_request_failed",
@@ -36,7 +38,8 @@ const initial_state = {
 	password_request: null,
 	email_recipient: null,
 	password_did_reset: false,
-	error_resetting_password: false
+	error_resetting_password: false,
+	error_updating_user: true
 
 }
 
@@ -217,6 +220,29 @@ export function resetPassword(user_token, password) {
 	}
 }
 
+export function updateUser(userId, updated) {
+	
+	return function(dispatch){
+		var token = cookies.get("user_token")
+	
+		axios({ method: 'put', url: `${API_URL}/user/${userId}`, data: updated, headers: { Authorization: cookies.get("user_token") }})
+			.then(response => {
+				
+				dispatch({
+					type: UPDATE_USER,
+					payload: response.data.user
+				})
+			})
+			.catch(error => {
+				
+				dispatch({
+					type: ERROR_UPDATING_USER,
+					payload: null
+				})
+			})
+	}
+}
+
 export const usersReducer = function(state = initial_state, action) {
 
     var payload = action.payload
@@ -268,13 +294,25 @@ export const usersReducer = function(state = initial_state, action) {
 		
 		case RESET_PASSWORD: {
 
-			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false, loggedIn: action.payload  })
+			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false, loggedIn: payload  })
 			break
 		}
 
 		case RESET_PASSWORD_ERROR: {
 
 			return _.extend({}, state, { password_did_reset: false, error_resetting_password: true })
+			break
+		}
+
+		case UPDATE_USER: {
+
+			return _.extend({}, state, { loggedIn: payload.user, error_updating_user: false } )
+			break
+		}
+
+		case ERROR_UPDATING_USER: {
+
+			return _.extend({}, state, { error_updating_user: true})
 			break
 		}
 

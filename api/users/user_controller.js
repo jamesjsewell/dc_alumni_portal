@@ -89,14 +89,14 @@ module.exports = {
         User.findByIdAndUpdate(
             { _id: req.params.id },
             req.body,
-            { new: true},
-            function (err, results) {
+            function (err, updated) {
+                console.log(updated)
                 if (err) {
                     // if there was an error, this will send the error as an http response to the request that was made
                     var message = "server error, could not update User"
                     return errorHandler(req, res, message, err)
 
-                } else if (!results) {
+                } else if (!updated) {
                     // if it could not find the record, sends an error message as a response over http back to where the request was made
                     var message = "server error, User not found"
                     return errorHandler(req, res, message, err)
@@ -104,7 +104,7 @@ module.exports = {
                 } else {
                     // sends the newly updated record over http request back to where the request was made
                     var message = "User updated"
-                    return successHandler(req, res, message, results)
+                    return res.status(200).json({user: updated})
 
                 }
             }
