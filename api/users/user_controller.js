@@ -89,6 +89,7 @@ module.exports = {
         User.findByIdAndUpdate(
             { _id: req.params.id },
             req.body,
+            {new: true},
             function (err, updated) {
                 console.log(updated)
                 if (err) {

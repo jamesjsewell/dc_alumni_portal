@@ -19,12 +19,12 @@ export default class ProfileLayout extends Component {
     }
 
     render(){
-        const { user, updateUser} = this.props
+        const { profile, user, updateUser} = this.props
         return(
         <div>
             <Grid container spacing={24}>
                <Grid item>
-                    <Card><CardContent>{user.loggedIn && user.loggedIn.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user}/> : null}</CardContent></Card>
+                    <Card><CardContent>{user.loggedIn && user.loggedIn.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} profile={profile}/> : null}</CardContent></Card>
                </Grid> 
                <Grid item>
                     <Card><CardContent>profile pic</CardContent></Card>

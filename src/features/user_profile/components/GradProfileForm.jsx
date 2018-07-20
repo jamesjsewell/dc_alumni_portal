@@ -102,19 +102,21 @@ const afterSubmit = (result, dispatch, props) => {
 class GradProfileForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: []}
-        
-        var userValues = _.omit(this.props.user.loggedIn, "__v", "_id", "updatedAt")
+        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: this.props.profile.skills}
+        var userValues = _.omit(this.props.profile, "__v", "_id", "updatedAt")
         fieldValues = _.extend(fieldValues, userValues)
         
-
     }
 
     componentWillReceiveProps(nextProps){
 
-        if(nextProps.user.loggedIn){
-            var user = nextProps.user.loggedIn
-            fieldValues = user
+        if(this.props.profile != nextProps.profile){
+            for(var attribute in nextProps.profile){
+    
+                var value = nextProps.profile[attribute]
+                this.props.change(attribute, value)
+            
+            }
         }
 
     }
@@ -169,7 +171,6 @@ class GradProfileForm extends Component {
                                 <Card>
                                     <CardContent>
                                         <Field type="email" name="email" label="Email" component={FormField} />
-                                        <Field type="password" name="password" label="Password" component={FormField} />
                                         <Field type="text" name="fname" label="First Name" component={FormField} />
                                         <Field type="text" name="lname" label="Last Name" component={FormField} />
                                     </CardContent>
@@ -202,7 +203,7 @@ class GradProfileForm extends Component {
                                     <CardContent>
                                         <Field type="text" name="github" label="Github" component={FormField} />
                                         <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
-                                        <Field type="text" name="stackOverFlow" label="Stack Overflow" component={FormField} />
+                                        <Field type="text" name="stackOverflow" label="Stack Overflow" component={FormField} />
                                         <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
                                         <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
                                     </CardContent>

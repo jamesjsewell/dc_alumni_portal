@@ -20,15 +20,25 @@ class GradProfileView extends Component {
   constructor(props) {
     
     super(props)
+    
 
   }
 
+  componentWillReceiveProps(nextProps){
+    if(!this.props.user.loggedIn && nextProps.user.loggedIn){
+    
+      this.props.actions.getProfileData(nextProps.user.loggedIn)
+    }
+  }
+
   render() {
-    const { user } = this.props
+    
+    const { user, profile } = this.props
+    console.log(profile)
     return (
       <div>
         <Navbar/>
-        <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} />
+        {profile.email? <ProfileLayout user={user} profile={profile} updateUser={this.props.actions.updateUser.bind(this)} /> : null }
       </div> 
     )
   }
