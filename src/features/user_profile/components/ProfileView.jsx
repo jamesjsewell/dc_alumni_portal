@@ -1,4 +1,3 @@
-
 import React, { Component } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
@@ -20,7 +19,7 @@ class GradProfileView extends Component {
   constructor(props) {
     
     super(props)
-    
+    this.props.actions.getProfileData(this.props.user.loggedIn)
 
   }
 
@@ -34,7 +33,7 @@ class GradProfileView extends Component {
   render() {
     
     const { user, profile } = this.props
-    console.log(profile)
+    
     return (
       <div>
         <Navbar/>

@@ -33,28 +33,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-
-// email
-// password
-// account_type
-// fname
-// lname
-// bio
-// avatar
-// city
-// state
-// website
-// github
-// linkedin
-// stackOverflow
-// mediumBlog
-// portfolio
-// publicEmail
-// skills
-// willingnessToRelocate
-// DCgraduationDate
-// DCprogramType
-
 const skills = [
 
     'html',
