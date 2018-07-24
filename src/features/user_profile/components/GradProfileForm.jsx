@@ -32,6 +32,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Divider, CardHeader } from "@material-ui/core";
 
 const skills = [
 
@@ -161,7 +162,7 @@ class GradProfileForm extends Component {
                         </ExpansionPanel>
 
                         <ExpansionPanel expanded={expanded === 'panel3'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel3')}}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-3"/>}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-4"/>}>
                                 <Typography> Social </Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
@@ -176,22 +177,29 @@ class GradProfileForm extends Component {
                                 </Card>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
+
+                        <ExpansionPanel expanded={expanded === 'panel4'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel4')}}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-3"/>}>
+                                <Typography> bio </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
                             
-                    </Grid>
+                                <Field type="text" name="bio" label="Bio" component={TextArea} />
+                                 
                     
-                    <Grid item>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
 
-                        
-                        <Typography variant="title" component="h2">Bio</Typography>
-                        <Field type="text" name="bio" label="Bio" component={TextArea} />
-                    
-
-                    </Grid>     
-                    
-                    <Grid item >
+                        <ExpansionPanel expanded={expanded === 'panel5'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel5')}}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-3"/>}>
+                                <Typography> skills </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <SkillsSelect handleSkills={this.handleSkills.bind(this)} selectedSkills={this.state.selectedSkills}/>
                                 
-                        <SkillsSelect handleSkills={this.handleSkills.bind(this)} selectedSkills={this.state.selectedSkills}/>
-                        
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                            
                     </Grid>
 
                     <Grid item>
