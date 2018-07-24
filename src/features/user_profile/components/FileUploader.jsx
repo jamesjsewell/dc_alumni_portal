@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Dashboard } from '@uppy/react'
+import { DashboardModal } from '@uppy/react'
 const Uppy = require('@uppy/core')
 const AwsS3 = require('@uppy/aws-s3')
 const ms = require('ms')
@@ -32,6 +33,8 @@ class UppyDashboardComponent extends Component {
 
     super(props)
 
+    this.state = {avatarUploadOpen: false, resumeUploadOpen: false}
+
     this.uppy = Uppy({
       debug: true,
       autoProceed: false,
@@ -39,7 +42,7 @@ class UppyDashboardComponent extends Component {
         maxFileSize: 4000000,
         maxNumberOfFiles: 1,
         minNumberOfFiles: 1,
-        allowedFileTypes: ['image/*']
+        allowedFileTypes: this.props.resume? ['application/*', 'image/*'] : ['image/*']
       }
     })
     .use(AwsS3, {
@@ -50,23 +53,35 @@ class UppyDashboardComponent extends Component {
     })
       
     this.uppy.on('upload-success', (file, data) => {
-      this.props.updateUser(this.props.user.loggedIn._id, { avatar: data.location })
-      file.meta['key'] // the S3 object key of the uploaded file
+      //file.meta['key'] // the S3 object key of the uploaded file
+
+      var userId = this.props.user.loggedIn._id
+      if(this.props.avatar){
+        this.props.updateUser(userId, { avatar: data.location })
+      }
+
+      if(this.props.resume){
+        this.props.updateUser(userId, { resume: data.location })  
+      }
+
+      
     })
   }
 
 	render(){
 
+    const {resume, avatar} = this.props
+
 		return (
-      <Dashboard 
+      <DashboardModal
       uppy={this.uppy} 
       inline={false}
-      trigger= '.uppy_opener'
+      trigger= {resume? '.uppy_opener_resume' : '.uppy_opener_avatar'}
       target= 'body'
       replaceTargetContent= {false}
       showProgressDetails= {true}
       note= 'Images only, 1 file, up to 4 MB'
-
+      closeModalOnClickOutside={true}
       metaFields = {[
       { id: 'name', name: 'Name', placeholder: 'file name' },
       { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }

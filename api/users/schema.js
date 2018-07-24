@@ -28,6 +28,7 @@ const UserSchema = new Schema(
         lname: { type: String },
         bio: { type: String, default: null },
         avatar: { type: String, default: null },
+        resume: { type: String, default: null },
         city: { type: String, default: null },
         state: { type: String, default: null },
         website: { type: String, default: null },

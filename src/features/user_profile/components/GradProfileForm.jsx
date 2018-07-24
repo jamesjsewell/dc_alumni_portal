@@ -141,20 +141,6 @@ class GradProfileForm extends Component {
                 <Grid container spacing={24}>
                     <Grid item>
 
-                        <ExpansionPanel expanded={expanded === 'panel1'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel1')}}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-1" />}>
-                                <Typography> Account </Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Card>
-                                    <CardContent>
-                                        <Field type="email" name="email" label="Email" component={FormField} />
-                                        <Field type="text" name="fname" label="First Name" component={FormField} />
-                                        <Field type="text" name="lname" label="Last Name" component={FormField} />
-                                    </CardContent>
-                                </Card>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
 
                         <ExpansionPanel  expanded={expanded === 'panel2'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel2')}}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-2" />}>
@@ -163,6 +149,8 @@ class GradProfileForm extends Component {
                             <ExpansionPanelDetails>
                                 <Card>
                                     <CardContent>
+                                        <Field type="text" name="fname" label="First Name" component={FormField} />
+                                        <Field type="text" name="lname" label="Last Name" component={FormField} />
                                         <Field type="text" name="city" label="City" component={FormField} />
                                         <Field type="text" name="state" label="State" component={FormField} />
                                         <Field type="text" name="website" label="Personal Website" component={FormField} />
