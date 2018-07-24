@@ -84,8 +84,10 @@ export const profileReducer = function(state = initial_state, action) {
 
 const profile = state => state.profile
 const user = state => state.user
+const uppy = state => state.uppy
 
 export const selector = createStructuredSelector({
 	profile,
-	user
+	user,
+	uppy
 })

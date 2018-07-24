@@ -38,7 +38,7 @@ export default class ProfileLayout extends Component {
                <Grid item>
                     <Card>
                         <CardContent>
-                            <UppyDashboardComponent />
+                            <UppyDashboardComponent user={user} updateUser={updateUser}/>
                             <Typography component="p">Update Profile Image</Typography>
                             <IconButton size="large" className="uppy_opener" arial_label="Delete"><Icon>camera_alt</Icon></IconButton>
                         </CardContent>

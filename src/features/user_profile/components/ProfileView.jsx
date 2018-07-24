@@ -21,7 +21,7 @@ class GradProfileView extends Component {
     
     super(props)
     this.props.actions.getProfileData(this.props.user.loggedIn)
-
+    console.log(props)
   }
 
   componentWillReceiveProps(nextProps){
