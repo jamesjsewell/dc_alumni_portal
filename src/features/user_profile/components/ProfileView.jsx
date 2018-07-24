@@ -6,6 +6,11 @@ import { withRouter } from "react-router"
 import * as controller from "../profile.js"
 import ProfileLayout from "./ProfileLayout.jsx"
 import Navbar from "../../navbar/Navbar.jsx"
+import Typography from "@material-ui/core/Typography"
+import Paper from "@material-ui/core/Paper"
+import Divider from "@material-ui/core/divider"
+import CardContent from "@material-ui/core/CardContent"
+import Card from "@material-ui/core/Card"
 
 
 @connect(
@@ -38,6 +43,9 @@ class GradProfileView extends Component {
     return (
       <div>
         <Navbar/>
+        <Divider inset></Divider>
+        <Card square={true}><CardContent><Paper elevation={0} square={true}><Typography variant="title">Your Profile</Typography></Paper></CardContent></Card>
+        <Divider inset></Divider>
         {profile.email? <ProfileLayout user={user} profile={profile} updateUser={this.props.actions.updateUser.bind(this)} /> : null }
       </div> 
     )
