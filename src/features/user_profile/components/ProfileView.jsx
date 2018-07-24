@@ -7,6 +7,7 @@ import * as controller from "../profile.js"
 import ProfileLayout from "./ProfileLayout.jsx"
 import Navbar from "../../navbar/Navbar.jsx"
 
+
 @connect(
   state => controller.selector(state),
   dispatch => ({
