@@ -32,7 +32,9 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { Divider, CardHeader } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
+import CardHeader from "@material-ui/core/CardHeader"
+
 
 const skills = [
 
@@ -141,8 +143,6 @@ class GradProfileForm extends Component {
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
                 <Grid container spacing={24}>
                     <Grid item>
-
-
                         <ExpansionPanel  expanded={expanded === 'panel2'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel2')}}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-2" />}>
                                 <Typography> Info </Typography>

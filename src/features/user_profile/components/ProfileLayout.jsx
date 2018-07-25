@@ -16,6 +16,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import GradProfileForm from "./GradProfileForm.jsx"
 import UppyDashboardComponent from "./FileUploader.jsx"
+import EmployerProfileForm from "./EmployerProfileForm.jsx";
 
 
 export default class ProfileLayout extends Component {
@@ -47,10 +48,11 @@ export default class ProfileLayout extends Component {
                     <Card>
                         <CardContent>
                         {user.loggedIn && user.loggedIn.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} profile={profile}/> : null}
+                        {user.loggedIn && user.loggedIn.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} profile={profile}/> : null}
                         </CardContent>
                     </Card>
                </Grid> 
-               <Grid item>
+               { user.loggedIn.account_type === "grad"? <Grid item>
 
                     <Card>
                         <CardHeader title="Profile Image" subheader="Update your profile image" />
@@ -70,8 +72,8 @@ export default class ProfileLayout extends Component {
                             {profile.avatar? <IconButton onClick={(event)=>{this.removeFile('avatar')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
-               </Grid> 
-               <Grid item>
+               </Grid> : null }
+               { user.loggedIn.account_type === "grad" ? <Grid item>
                     <Card>
                         <CardHeader title="Resume" subheader="Update your resume" />
                         <CardContent>
@@ -83,7 +85,7 @@ export default class ProfileLayout extends Component {
                             {profile.resume? <IconButton onClick={(event)=>{this.removeFile('resume')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
-               </Grid> 
+               </Grid> : null } 
             </Grid>
        )
     }

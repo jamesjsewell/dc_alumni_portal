@@ -8,7 +8,6 @@ import ProfileLayout from "./ProfileLayout.jsx"
 import Navbar from "../../navbar/Navbar.jsx"
 import Typography from "@material-ui/core/Typography"
 import Paper from "@material-ui/core/Paper"
-import Divider from "@material-ui/core/divider"
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 
@@ -20,13 +19,13 @@ import Card from "@material-ui/core/Card"
   })
 )
 
-class GradProfileView extends Component {
+class ProfileView extends Component {
 
   constructor(props) {
     
     super(props)
     this.props.actions.getProfileData(this.props.user.loggedIn)
-    console.log(props)
+
   }
 
   componentWillReceiveProps(nextProps){
@@ -43,13 +42,13 @@ class GradProfileView extends Component {
     return (
       <div>
         <Navbar/>
-        <Divider inset></Divider>
-        <Card square={true}><CardContent><Paper elevation={0} square={true}><Typography variant="title">Your Profile</Typography></Paper></CardContent></Card>
-        <Divider inset></Divider>
+
+        <Card square={true}><CardContent><Typography variant="title">Your Profile </Typography></CardContent></Card>
+      
         {profile.email? <ProfileLayout user={user} profile={profile} updateUser={this.props.actions.updateUser.bind(this)} /> : null }
       </div> 
     )
   }
 }
 
-export default withRouter(GradProfileView)
+export default withRouter(ProfileView)

@@ -4,19 +4,20 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
-import { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE } from "./nav_links.js"
+import * as routes from "./nav_links.js"
 import AuthView from "./features/user_auth/components/AuthView.jsx"
 import ResetPasswordView from "./features/user_auth/components/ResetPasswordView.jsx"
-import GradProfileView from "./features/user_profile/components/ProfileView.jsx"
+import ProfileView from "./features/user_profile/components/ProfileView.jsx"
 import AlumniView from "./features/alumni/AlumniView.jsx"
 import * as controller from './global_state'
-
+// { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE, EMPLOYER_PROFILE }
 
 const EmployerLoginPage = (props) => {
     return (
         <AuthView 
         {...props}
         account_type="employer"
+        routes={routes}
         />
     );
 }
@@ -26,6 +27,27 @@ const GradLoginPage = (props) => {
         <AuthView 
         {...props}
         account_type="grad"
+        routes={routes}
+        />
+    )
+}
+
+const GradProfilePage = (props) => {
+    return (
+        <ProfileView 
+        {...props}
+        account_type="grad"
+        routes={routes}
+        />
+    )
+}
+
+const EmployerProfilePage = (props) => {
+    return (
+        <ProfileView 
+        {...props}
+        account_type="employer"
+        routes={routes}
         />
     )
 }
@@ -35,7 +57,7 @@ const AlumniPage = (props) => {
     return (
         <AlumniView 
         {...props}
-        
+        routes={routes}
         />
     )
 }
@@ -76,9 +98,10 @@ class RouterConfig extends Component {
 
                 <Switch>
 
-                    <Route exact path={EMPLOYER_LOGIN} render={EmployerLoginPage} /> 
-                    <Route exact path={GRAD_LOGIN} render={GradLoginPage} /> 
-                    <Route exact path={"/edit-grad-profile"} component={GradProfileView} /> 
+                    <Route exact path={routes.EMPLOYER_LOGIN} render={EmployerLoginPage} /> 
+                    <Route exact path={routes.GRAD_LOGIN} render={GradLoginPage} /> 
+                    <Route exact path={routes.GRAD_PROFILE} component={GradProfilePage} /> 
+                    <Route exact path={routes.EMPLOYER_PROFILE} component={EmployerProfilePage} /> 
                     <Route exact path="/alumni" render={AlumniPage} /> 
                     <Route location={location} key={location.key} exact path="/reset-password/:resetToken" component={ResetPasswordView} />
                     <Route path="*" component={Blank} />

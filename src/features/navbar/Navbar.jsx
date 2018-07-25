@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import * as controller from "./navbar.js"
+import * as links from "../../nav_links.js"
 
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -27,8 +28,8 @@ const NavMenu = ( props ) => {
   return(
     <AppBar position="static">
       <Toolbar>
-        <Button color="inherit" disabled={props.alumni? true : false}>Alumni</Button> 
-        {props.loggedIn? <Button color="inherit" disabled={props.account? true : false}>Account</Button> : null}
+        <Button onClick={()=>{props.history.replace("/alumni")}} color="inherit" disabled={props.alumni? true : false}>Alumni</Button> 
+        {props.loggedIn? <Button onClick={(event)=>{props.navigateToAccount()}} color="inherit" disabled={props.account? true : false}>Account</Button> : null}
         {props.loggedIn? <Button onClick={(event)=>{props.logout(event)}} color="inherit" >Logout</Button> : null}
       </Toolbar>
     </AppBar>
@@ -89,6 +90,19 @@ class Navbar extends Component {
 
   }
 
+  navigateToAccount(){
+    if(this.props.user && this.props.user.loggedIn){
+      var user = this.props.user.loggedIn
+      if(user.account_type === "grad"){
+        this.props.history.replace(links.GRAD_PROFILE)
+      }
+ 
+      if(user.account_type === "employer"){
+        this.props.history.replace(links.EMPLOYER_PROFILE)
+      }
+    }
+  }
+
   handleToggleDrawer(e, open){
     e.preventDefault()
     this.setState({drawerOpen: open})
@@ -123,7 +137,7 @@ class Navbar extends Component {
           </Drawer>
         </Hidden>
         <Hidden smDown>
-          <NavMenu logout={this.handleLogout.bind(this)} loggedIn={loggedIn}/>
+          <NavMenu logout={this.handleLogout.bind(this)} loggedIn={loggedIn} navigateToAccount={()=>{this.navigateToAccount()}} history={this.props.history}/>
         </Hidden>
       </div>
     )

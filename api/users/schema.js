@@ -44,6 +44,7 @@ const UserSchema = new Schema(
         DCprogramType: { type: String, default: null },
         companyName: { type: String },
         companyURL: { type: String },
+        phone: { type: String },
         role: {
             type: String,
             enum: [ROLE_USER, ROLE_OWNER, ROLE_ADMIN],

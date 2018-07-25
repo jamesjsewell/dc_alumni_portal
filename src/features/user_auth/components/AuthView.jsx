@@ -30,7 +30,7 @@ class AuthView extends Component {
     if(user.loggedIn){
 
       if(user.loggedIn.account_type === "grad"){
-        this.props.history.replace("/edit-grad-profile");
+        this.props.history.replace(this.props.routes.GRAD_PROFILE);
       }
       if(user.loggedIn.account_type === "employer"){
         this.props.history.replace("/alumni")
