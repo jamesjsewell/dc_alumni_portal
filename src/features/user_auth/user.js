@@ -20,16 +20,13 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 	PASSWORD_REQUEST_FAILED = "password_request_failed",
 	PASSWORD_REQUEST_SENT = "password_request_sent",
 	RESET_PASSWORD = "reset_password",
-	RESET_PASSWORD_ERROR = "reset_password_error"
+	RESET_PASSWORD_ERROR = "reset_password_error",
+	UPDATE_USER = "update_user",
+	ERROR_UPDATING_USER = "error_updating_user"
 
 
 const initial_state = {
-
-    message: null,
-    collection: new UserCollection(),
-    model: User,
-	array: [],
-	loggedIn: null,
+	
 	auth_message: null,
 	login_error_message: null,
 	register_error_message: null,
@@ -40,6 +37,15 @@ const initial_state = {
 	error_updating_user: true
 
 }
+
+// auth_message: null
+// login_error_message: null
+// register_error_message: null
+// password_request: null
+// email_recipient: null
+// password_did_reset: false
+// error_resetting_password: false
+// error_updating_user: true
 
 
 export function auto_log_in(authenticate_user, loggedInUser){
@@ -219,6 +225,30 @@ export function resetPassword(user_token, password) {
 }
 
 
+export function updateUser(userId, updated) {
+	
+	return function(dispatch){
+		var token = cookies.get("user_token")
+	
+		axios({ method: 'put', url: `${API_URL}/user/${userId}`, data: updated, headers: { Authorization: cookies.get("user_token") }})
+			.then(response => {
+				
+				dispatch({
+					type: UPDATE_USER,
+					payload: { user: response.data.user }
+				})
+			})
+			.catch(error => {
+				
+				dispatch({
+					type: ERROR_UPDATING_USER,
+					payload: null
+				})
+			})
+	}
+}
+
+
 export const usersReducer = function(state = initial_state, action) {
 
     var payload = action.payload
@@ -227,7 +257,7 @@ export const usersReducer = function(state = initial_state, action) {
 
         case AUTHENTICATE: {
 		
-            return _.extend({}, state, { loggedIn: payload, login_error_message: null, register_error_message: null })
+            return _.extend({}, state, payload, { loggedIn: payload, login_error_message: null, register_error_message: null })
             break
 
 		}
@@ -280,10 +310,22 @@ export const usersReducer = function(state = initial_state, action) {
 			break
 		}
 
+		case UPDATE_USER: {
+
+			return _.extend({}, state, payload.user)
+		}
+
+		case ERROR_UPDATING_USER: {
+
+			return _.extend({}, state, { error_updating_user: true})
+			break
+		}
+
     }
 
     return state
 }
+
 
 // selected
 // editing
@@ -295,7 +337,6 @@ export const usersReducer = function(state = initial_state, action) {
 
 const user = state => state.user
 
-
 export const selector = createStructuredSelector({
-    user
+	user
 })

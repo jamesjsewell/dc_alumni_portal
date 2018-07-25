@@ -26,7 +26,7 @@ export default class ProfileLayout extends Component {
     }
 
     removeFile(type){
-        var userId = this.props.user.loggedIn._id
+        var userId = this.props.user._id
 
         if(type === "avatar"){
             this.props.updateUser(userId, {avatar: null})
@@ -39,20 +39,19 @@ export default class ProfileLayout extends Component {
     }
 
     render(){
-        const { profile, user, updateUser} = this.props
+        const { user, updateUser} = this.props
         return(
-      
             
             <Grid container spacing={24}>
                <Grid item>
                     <Card>
                         <CardContent>
-                        {user.loggedIn && user.loggedIn.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} profile={profile}/> : null}
-                        {user.loggedIn && user.loggedIn.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} profile={profile}/> : null}
+                        {user.loggedIn && user.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} /> : null}
+                        {user.loggedIn && user.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
                         </CardContent>
                     </Card>
                </Grid> 
-               { user.loggedIn.account_type === "grad"? <Grid item>
+               { user.account_type === "grad"? <Grid item>
 
                     <Card>
                         <CardHeader title="Profile Image" subheader="Update your profile image" />
@@ -60,16 +59,15 @@ export default class ProfileLayout extends Component {
 
                             <Avatar
                                 sizes="large"
-                                src={profile.avatar}
+                                src={user.avatar}
                             />
 
-                        
-                            {!profile.avatar? <UppyDashboardComponent user={user} updateUser={updateUser} avatar/> : null}
+                            {!user.avatar? <UppyDashboardComponent user={user} updateUser={updateUser} avatar/> : null}
                             
                         </CardContent>
                         <CardActions>
-                            {!profile.avatar? <IconButton size="large" className="uppy_opener_avatar" arial_label="Upload"><Icon>camera_alt</Icon></IconButton> : null}
-                            {profile.avatar? <IconButton onClick={(event)=>{this.removeFile('avatar')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
+                            {!user.avatar? <IconButton size="large" className="uppy_opener_avatar" arial_label="Upload"><Icon>camera_alt</Icon></IconButton> : null}
+                            {user.avatar? <IconButton onClick={(event)=>{this.removeFile('avatar')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
                </Grid> : null }
@@ -77,12 +75,12 @@ export default class ProfileLayout extends Component {
                     <Card>
                         <CardHeader title="Resume" subheader="Update your resume" />
                         <CardContent>
-                            {profile.resume? <a href={profile.resume}>your current resume</a> : <Typography component="p">Upload your resume</Typography>}
-                            {!profile.resume? <UppyDashboardComponent user={user} updateUser={updateUser} resume/> : null}
+                            {user.resume? <a href={user.resume}>your current resume</a> : <Typography component="p">Upload your resume</Typography>}
+                            {!user.resume? <UppyDashboardComponent user={user} updateUser={updateUser} resume/> : null}
                         </CardContent>
                         <CardActions>
-                            {!profile.resume? <IconButton size="large" className="uppy_opener_resume" arial_label="Upload"><Icon>description</Icon></IconButton> : null}
-                            {profile.resume? <IconButton onClick={(event)=>{this.removeFile('resume')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
+                            {!user.resume? <IconButton size="large" className="uppy_opener_resume" arial_label="Upload"><Icon>description</Icon></IconButton> : null}
+                            {user.resume? <IconButton onClick={(event)=>{this.removeFile('resume')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
                </Grid> : null } 

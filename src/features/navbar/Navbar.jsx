@@ -29,8 +29,8 @@ const NavMenu = ( props ) => {
     <AppBar position="static">
       <Toolbar>
         <Button onClick={()=>{props.history.replace("/alumni")}} color="inherit" disabled={props.alumni? true : false}>Alumni</Button> 
-        {props.loggedIn? <Button onClick={(event)=>{props.navigateToAccount()}} color="inherit" disabled={props.account? true : false}>Account</Button> : null}
-        {props.loggedIn? <Button onClick={(event)=>{props.logout(event)}} color="inherit" >Logout</Button> : null}
+        {props.user? <Button onClick={(event)=>{props.navigateToAccount()}} color="inherit" disabled={props.account? true : false}>Account</Button> : null}
+        {props.user? <Button onClick={(event)=>{props.logout(event)}} color="inherit" >Logout</Button> : null}
       </Toolbar>
     </AppBar>
   )
@@ -91,8 +91,8 @@ class Navbar extends Component {
   }
 
   navigateToAccount(){
-    if(this.props.user && this.props.user.loggedIn){
-      var user = this.props.user.loggedIn
+    if(this.props.user){
+      var user = this.props.user
       if(user.account_type === "grad"){
         this.props.history.replace(links.GRAD_PROFILE)
       }
@@ -110,7 +110,7 @@ class Navbar extends Component {
 
   render() {
 
-    const { loggedIn } = this.props.user
+    const { user } = this.props
     
     return (
       <div>
@@ -133,11 +133,11 @@ class Navbar extends Component {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <MenuDrawer toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} loggedIn={loggedIn}/>
+            <MenuDrawer user={user} toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} />
           </Drawer>
         </Hidden>
         <Hidden smDown>
-          <NavMenu logout={this.handleLogout.bind(this)} loggedIn={loggedIn} navigateToAccount={()=>{this.navigateToAccount()}} history={this.props.history}/>
+          <NavMenu user={user} logout={this.handleLogout.bind(this)} navigateToAccount={()=>{this.navigateToAccount()}} history={this.props.history}/>
         </Hidden>
       </div>
     )

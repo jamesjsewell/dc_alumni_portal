@@ -83,22 +83,20 @@ const afterSubmit = (result, dispatch, props) => {
 class GradProfileForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: this.props.profile.skills}
-        var userValues = _.omit(this.props.profile, "__v", "_id", "updatedAt")
+        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: this.props.user.skills}
+        var userValues = _.omit(this.props.user, "__v", "_id", "updatedAt")
         fieldValues = _.extend(fieldValues, userValues)
         
     }
 
     componentWillReceiveProps(nextProps){
 
-        if(this.props.profile != nextProps.profile){
-            for(var attribute in nextProps.profile){
-    
-                var value = nextProps.profile[attribute]
-                this.props.change(attribute, value)
-            
-            }
-        }
+        // for(var attribute in nextProps.user){
+
+        //     var value = nextProps.user[attribute]
+        //     this.props.change(attribute, value)
+        
+        // }
 
     }
 
@@ -115,7 +113,7 @@ class GradProfileForm extends Component {
        
         
         input.skills = this.state.selectedSkills
-        this.props.updateUser(this.props.user.loggedIn._id, input)
+        this.props.updateUser(this.props.user._id, input)
        
     }
 

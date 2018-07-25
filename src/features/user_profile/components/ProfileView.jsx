@@ -24,20 +24,16 @@ class ProfileView extends Component {
   constructor(props) {
     
     super(props)
-    this.props.actions.getProfileData(this.props.user.loggedIn)
 
   }
 
   componentWillReceiveProps(nextProps){
-    if(!this.props.user.loggedIn && nextProps.user.loggedIn){
-    
-      this.props.actions.getProfileData(nextProps.user.loggedIn)
-    }
+
   }
 
   render() {
     
-    const { user, profile } = this.props
+    const { user } = this.props
     
     return (
       <div>
@@ -45,7 +41,7 @@ class ProfileView extends Component {
 
         <Card square={true}><CardContent><Typography variant="title">Your Profile </Typography></CardContent></Card>
       
-        {profile.email? <ProfileLayout user={user} profile={profile} updateUser={this.props.actions.updateUser.bind(this)} /> : null }
+        {user.email? <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} /> : null }
       </div> 
     )
   }

@@ -55,7 +55,7 @@ class UppyDashboardComponent extends Component {
     this.uppy.on('upload-success', (file, data) => {
       //file.meta['key'] // the S3 object key of the uploaded file
 
-      var userId = this.props.user.loggedIn._id
+      var userId = this.props.user._id
       if(this.props.avatar){
         this.props.updateUser(userId, { avatar: data.location })
       }

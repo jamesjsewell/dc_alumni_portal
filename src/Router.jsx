@@ -5,16 +5,13 @@ import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import createHistory from "history/createBrowserHistory"
 import * as routes from "./nav_links.js"
-import AuthView from "./features/user_auth/components/AuthView.jsx"
-import ResetPasswordView from "./features/user_auth/components/ResetPasswordView.jsx"
-import ProfileView from "./features/user_profile/components/ProfileView.jsx"
-import AlumniView from "./features/alumni/AlumniView.jsx"
 import * as controller from './global_state'
+import Page from "./Page.jsx"
 // { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE, EMPLOYER_PROFILE }
 
 const EmployerLoginPage = (props) => {
     return (
-        <AuthView 
+        <Page
         {...props}
         account_type="employer"
         routes={routes}
@@ -24,7 +21,7 @@ const EmployerLoginPage = (props) => {
 
 const GradLoginPage = (props) => {
     return (
-        <AuthView 
+        <Page
         {...props}
         account_type="grad"
         routes={routes}
@@ -34,7 +31,7 @@ const GradLoginPage = (props) => {
 
 const GradProfilePage = (props) => {
     return (
-        <ProfileView 
+        <Page
         {...props}
         account_type="grad"
         routes={routes}
@@ -44,7 +41,7 @@ const GradProfilePage = (props) => {
 
 const EmployerProfilePage = (props) => {
     return (
-        <ProfileView 
+        <Page
         {...props}
         account_type="employer"
         routes={routes}
@@ -55,7 +52,7 @@ const EmployerProfilePage = (props) => {
 const AlumniPage = (props) => {
     console.log(props)
     return (
-        <AlumniView 
+        <Page 
         {...props}
         routes={routes}
         />

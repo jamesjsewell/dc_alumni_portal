@@ -20,19 +20,19 @@ class AuthView extends Component {
     
     super(props)
 
-    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user.loggedIn)
+    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user)
 
   }
 
   render() {
     
     const { user } = this.props
-    if(user.loggedIn){
+    if(user){
 
-      if(user.loggedIn.account_type === "grad"){
+      if(user.account_type === "grad"){
         this.props.history.replace(this.props.routes.GRAD_PROFILE);
       }
-      if(user.loggedIn.account_type === "employer"){
+      if(user.account_type === "employer"){
         this.props.history.replace("/alumni")
       }
       
