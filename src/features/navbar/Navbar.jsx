@@ -42,23 +42,14 @@ const MenuDrawer = ( props ) => {
     <Paper>
       <MenuList>
         <MenuItem>
-          {/* <ListItemIcon className={classes.icon}>
-            <SendIcon />
-          </ListItemIcon> */}
           <ListItemText inset primary="Alumni" />
         </MenuItem>
         <Divider/>
         <MenuItem>
-          {/* <ListItemIcon className={classes.icon}>
-            <DraftsIcon />
-          </ListItemIcon> */}
           <ListItemText inset primary="Account" />
         </MenuItem>
         <Divider/>
         <MenuItem>
-          {/* <ListItemIcon className={classes.icon}>
-            <InboxIcon />
-          </ListItemIcon> */}
           <ListItemText inset primary="Logout" />
         </MenuItem>
       </MenuList>
@@ -66,13 +57,6 @@ const MenuDrawer = ( props ) => {
     </Paper>)
 
 }
-
-// @connect(
-//   state => controller.selector(state),
-//   dispatch => ({
-//     actions: bindActionCreators(controller, dispatch)
-//   })
-// )
 
 class Navbar extends Component {
 

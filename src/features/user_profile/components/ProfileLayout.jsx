@@ -62,7 +62,7 @@ export default class ProfileLayout extends Component {
                                 src={user.avatar}
                             />
 
-                            {!user.avatar? <UppyDashboardComponent user={user} updateUser={updateUser} avatar/> : null}
+                            {!user.avatar? <UppyDashboardComponent user={user} updateUser={updateUser} avatar={true}/> : null}
                             
                         </CardContent>
                         <CardActions>
@@ -76,7 +76,7 @@ export default class ProfileLayout extends Component {
                         <CardHeader title="Resume" subheader="Update your resume" />
                         <CardContent>
                             {user.resume? <a href={user.resume}>your current resume</a> : <Typography component="p">Upload your resume</Typography>}
-                            {!user.resume? <UppyDashboardComponent user={user} updateUser={updateUser} resume/> : null}
+                            {!user.resume? <UppyDashboardComponent user={user} updateUser={updateUser} resume={true}/> : null}
                         </CardContent>
                         <CardActions>
                             {!user.resume? <IconButton size="large" className="uppy_opener_resume" arial_label="Upload"><Icon>description</Icon></IconButton> : null}

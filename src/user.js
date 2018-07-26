@@ -34,10 +34,10 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 
 
 export function auto_log_in(authenticate_user, loggedInUser){
-
+    
 	return function(dispatch){
 		
-		if(!loggedInUser){
+		if(!loggedInUser.email){
 			var token = cookies.get("user_token")
 			var user = cookies.get("user")
 		

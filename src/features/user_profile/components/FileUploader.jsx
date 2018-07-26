@@ -11,8 +11,6 @@ class UppyDashboardComponent extends Component {
 
     super(props)
 
-    this.state = {avatarUploadOpen: false, resumeUploadOpen: false}
-
     this.uppy = Uppy({
       debug: true,
       autoProceed: false,
@@ -42,6 +40,7 @@ class UppyDashboardComponent extends Component {
         this.props.updateUser(userId, { resume: data.location })  
       }
 
+      this.uppy.close()
       
     })
   }
@@ -49,17 +48,19 @@ class UppyDashboardComponent extends Component {
 	render(){
 
     const {resume, avatar} = this.props
-
+    console.log(this)
 		return (
       <DashboardModal
       uppy={this.uppy} 
       inline={false}
       trigger= {resume? '.uppy_opener_resume' : '.uppy_opener_avatar'}
-      target= 'body'
-      replaceTargetContent= {false}
+      inline={false}
+      // target= {}
+      // replaceTargetContent= {true}
       showProgressDetails= {true}
       note= 'Images only, 1 file, up to 4 MB'
       closeModalOnClickOutside={true}
+      disablePageScrollWhenModalOpen={false}
       metaFields = {[
       { id: 'name', name: 'Name', placeholder: 'file name' },
       { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }

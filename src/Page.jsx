@@ -16,8 +16,6 @@ import Paper from "@material-ui/core/Paper"
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 
-
-
 @connect(
     state => controller.selector(state),
     dispatch => ({
@@ -30,7 +28,7 @@ class Page extends Component {
     constructor(props) {
         
         super(props)
-        this.props.actions.autoLogin
+        this.props.actions.auto_log_in( this.props.actions.authenticate, this.props.user )
     }
 
     componentWillReceiveProps(nextProps){
@@ -38,7 +36,7 @@ class Page extends Component {
     }
 
     showPage(){
-        console.log(this.props)
+      
         const { currentRoute } = this.props
         const { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE, EMPLOYER_PROFILE } = this.props.routes
        
@@ -82,7 +80,11 @@ class Page extends Component {
         
         const { user } = this.props
         
-        return (<div> <Navbar {...this.props}/> {this.showPage()} </div>)
+        return (<div> <Navbar {...this.props}/> 
+                
+                    {this.showPage()}
+                
+                </div>)
 
     }
 

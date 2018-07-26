@@ -91,12 +91,14 @@ class GradProfileForm extends Component {
 
     componentWillReceiveProps(nextProps){
 
-        // for(var attribute in nextProps.user){
+        if(nextProps.user != this.props.user){
+            for(var attribute in nextProps.user){
 
-        //     var value = nextProps.user[attribute]
-        //     this.props.change(attribute, value)
-        
-        // }
+                var value = nextProps.user[attribute]
+                this.props.change(attribute, value)
+            
+            }
+        }
 
     }
 
