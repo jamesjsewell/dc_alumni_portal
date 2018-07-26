@@ -2,7 +2,7 @@ import _ from "underscore"
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
-import { FormField, TextArea } from "../../util/FormFields.jsx"
+import { FormField, TextArea } from "../../forms/FormFields.jsx"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'

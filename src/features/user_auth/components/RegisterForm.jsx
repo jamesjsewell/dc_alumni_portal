@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import { FormField } from "../../util/FormFields.jsx"
+import { FormField } from "../../forms/FormFields.jsx"
 
 
 

@@ -3,8 +3,7 @@ import axios from "axios"
 import { combineReducers } from "redux"
 import { createStructuredSelector } from "reselect"
 import Cookies from "universal-cookie"
-import { API_URL } from "../../global_vars.js"
-
+import { API_URL } from "./global_vars"
 
 const cookies = new Cookies()
 

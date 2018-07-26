@@ -1,7 +1,7 @@
 import _ from "underscore"
 import axios from "axios"
 import { createStructuredSelector } from "reselect"
-import { API_URL } from "../util/util.js"
+import { API_URL } from "../../global_vars.js"
 
 
 const initial_state = {
