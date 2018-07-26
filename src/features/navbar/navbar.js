@@ -1,29 +1,29 @@
-import _ from "underscore"
-import axios from "axios"
-import { combineReducers } from "redux"
-import { createStructuredSelector } from "reselect"
-import Cookies from "universal-cookie"
-import { UNAUTHENTICATE } from "../user_auth/user.js"
+// import _ from "underscore"
+// import axios from "axios"
+// import { combineReducers } from "redux"
+// import { createStructuredSelector } from "reselect"
+// import Cookies from "universal-cookie"
+// import { UNAUTHENTICATE } from "../user_auth/user_auth.js"
 
-const cookies = new Cookies()
+// const cookies = new Cookies()
 
-export function logout(history) {
+// export function logout(history) {
 
-	return function(dispatch){
+// 	return function(dispatch){
 
-		cookies.remove("user_token", { path: "/" })
-		cookies.remove("user", { path: "/" })
+// 		cookies.remove("user_token", { path: "/" })
+// 		cookies.remove("user", { path: "/" })
 
-		dispatch({
-			type: UNAUTHENTICATE,
-			payload: null
-        })
-        history.replace("/alumni")
-	}	
-}
+// 		dispatch({
+// 			type: UNAUTHENTICATE,
+// 			payload: null
+//         })
+//         history.replace("/alumni")
+// 	}	
+// }
 
-const user = state => state.user
+// const user = state => state.user
 
-export const selector = createStructuredSelector({
-    user
-})
+// export const selector = createStructuredSelector({
+//     user
+// })

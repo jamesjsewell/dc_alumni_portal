@@ -46,8 +46,8 @@ export default class ProfileLayout extends Component {
                <Grid item>
                     <Card>
                         <CardContent>
-                        {user.loggedIn && user.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} /> : null}
-                        {user.loggedIn && user.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
+                        {user && user.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} /> : null}
+                        {user && user.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
                         </CardContent>
                     </Card>
                </Grid> 
@@ -71,7 +71,7 @@ export default class ProfileLayout extends Component {
                         </CardActions>
                     </Card>
                </Grid> : null }
-               { user.loggedIn.account_type === "grad" ? <Grid item>
+               { user.account_type === "grad" ? <Grid item>
                     <Card>
                         <CardHeader title="Resume" subheader="Update your resume" />
                         <CardContent>

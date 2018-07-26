@@ -23,20 +23,6 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 	UPDATE_USER = "update_user",
 	ERROR_UPDATING_USER = "error_updating_user"
 
-
-const initial_state = {
-	
-	auth_message: null,
-	login_error_message: null,
-	register_error_message: null,
-	password_request: null,
-	email_recipient: null,
-	password_did_reset: false,
-	error_resetting_password: false,
-	error_updating_user: true
-
-}
-
 // auth_message: null
 // login_error_message: null
 // register_error_message: null
@@ -75,7 +61,7 @@ export function login({ email, password }) {
 				if(response && response.data && response.data.user_token){
 					cookies.set("user_token", response.data.user_token, { path: "/" })
 					cookies.set("user", response.data.user, { path: "/" })
-					dispatch({ type: AUTHENTICATE, payload: response.data.user })
+					dispatch({ type: AUTHENTICATE, payload: { user: response.data.user } })
 				}
 
 				if(response && response.data && response.data.error){
@@ -113,7 +99,7 @@ export function authenticate(user, token) {
 				if (response.data) {
 					dispatch({
 						type: AUTHENTICATE,
-						payload: response.data.user
+						payload: { user: response.data.user }
 					})
 				}
 			})
@@ -137,7 +123,7 @@ export function register(info) {
 				if(response && response.data && response.data.user_token){
 					cookies.set("user_token", response.data.user_token, { path: "/" })
 					cookies.set("user", response.data.user, { path: "/" })
-					dispatch({ type: AUTHENTICATE, payload: response.data.user })
+					dispatch({ type: AUTHENTICATE, payload: { user: response.data.user }})
 
 				}
 				if(response && response.data && response.data.error){
@@ -247,8 +233,9 @@ export function updateUser(userId, updated) {
 	}
 }
 
+const initial_user = {}
 
-export const userReducer = function(state = initial_state, action) {
+export const userReducer = function(state = initial_user, action) {
 
     var payload = action.payload
 
@@ -256,15 +243,59 @@ export const userReducer = function(state = initial_state, action) {
 
         case AUTHENTICATE: {
 		
-            return _.extend({}, state, payload, { loggedIn: payload, login_error_message: null, register_error_message: null })
+            return _.extend({}, state, payload.user)
             break
 
 		}
 		
 		case UNAUTHENTICATE: {
 			
-			return _.extend({}, state, { loggedIn: null})
+			return _.extend({}, state, null)
 			break
+		}
+		
+		case RESET_PASSWORD: {
+
+			return _.extend({}, state, payload.user)
+			break
+		}
+
+		case UPDATE_USER: {
+
+            return _.extend({}, state, payload.user)
+            break
+		}
+
+
+    }
+
+    return state
+}
+
+const initial_user_state = {
+
+    auth_message: null,
+	login_error_message: null,
+	register_error_message: null,
+	password_request: null,
+	email_recipient: null,
+	password_did_reset: false,
+	error_resetting_password: false,
+	error_updating_user: true
+
+}
+
+export const userStateReducer = function(state = initial_user_state, action) {
+
+    var payload = action.payload
+
+    switch (action.type) {
+
+        case AUTHENTICATE: {
+		
+            return _.extend({}, state, payload, { login_error_message: null, register_error_message: null })
+            break
+
 		}
 
 		case ERROR_REGISTERING: {
@@ -299,7 +330,7 @@ export const userReducer = function(state = initial_state, action) {
 		
 		case RESET_PASSWORD: {
 
-			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false, loggedIn: payload  })
+			return _.extend({}, state, { password_did_reset: true, error_resetting_password: false })
 			break
 		}
 
@@ -307,11 +338,6 @@ export const userReducer = function(state = initial_state, action) {
 
 			return _.extend({}, state, { password_did_reset: false, error_resetting_password: true })
 			break
-		}
-
-		case UPDATE_USER: {
-
-			return _.extend({}, state, payload.user)
 		}
 
 		case ERROR_UPDATING_USER: {
@@ -335,7 +361,9 @@ export const userReducer = function(state = initial_state, action) {
 // AJAX_payload
 
 const user = state => state.user
+const userState = state => state.userState
 
 export const selector = createStructuredSelector({
-	user
+    user,
+    userState
 })

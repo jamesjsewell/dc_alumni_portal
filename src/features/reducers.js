@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 import { reducer as formReducer } from "redux-form"
-import { userReducer } from "./user_auth/user.js"
+import { userReducer, userStateReducer } from "../user.js"
 
-const rootReducer = combineReducers({user: userReducer, form: formReducer})
+const rootReducer = combineReducers({user: userReducer, userState: userStateReducer, form: formReducer})
 
 export default rootReducer

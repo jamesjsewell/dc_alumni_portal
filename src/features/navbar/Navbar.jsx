@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
-import * as controller from "./navbar.js"
+// import * as controller from "./navbar.js"
 import * as links from "../../nav_links.js"
 
 import Drawer from '@material-ui/core/Drawer';
@@ -67,12 +67,12 @@ const MenuDrawer = ( props ) => {
 
 }
 
-@connect(
-  state => controller.selector(state),
-  dispatch => ({
-    actions: bindActionCreators(controller, dispatch)
-  })
-)
+// @connect(
+//   state => controller.selector(state),
+//   dispatch => ({
+//     actions: bindActionCreators(controller, dispatch)
+//   })
+// )
 
 class Navbar extends Component {
 

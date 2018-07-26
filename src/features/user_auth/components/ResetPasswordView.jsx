@@ -4,15 +4,15 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
-import * as controller from "../user.js"
+// import * as controller from "../user_auth.js"
 import ResetPasswordLayout from "./ResetPasswordLayout.jsx"
 
-@connect(
-  state => controller.selector(state),
-  dispatch => ({
-    actions: bindActionCreators(controller, dispatch)
-  })
-)
+// @connect(
+//   state => controller.selector(state),
+//   dispatch => ({
+//     actions: bindActionCreators(controller, dispatch)
+//   })
+// )
 
 class ResetPasswordView extends Component {
 
@@ -20,7 +20,7 @@ class ResetPasswordView extends Component {
     
     super(props)
 
-    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user.loggedIn)
+    this.props.userActions.auto_log_in(this.props.userActions.authenticate, this.props.user)
 
   }
 

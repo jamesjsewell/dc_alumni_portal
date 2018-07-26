@@ -11,14 +11,6 @@ import Paper from "@material-ui/core/Paper"
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 
-
-@connect(
-  state => controller.selector(state),
-  dispatch => ({
-    actions: bindActionCreators(controller, dispatch)
-  })
-)
-
 class ProfileView extends Component {
 
   constructor(props) {
@@ -37,7 +29,6 @@ class ProfileView extends Component {
     
     return (
       <div>
-        <Navbar/>
 
         <Card square={true}><CardContent><Typography variant="title">Your Profile </Typography></CardContent></Card>
       

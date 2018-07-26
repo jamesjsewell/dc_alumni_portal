@@ -30,7 +30,7 @@ class Page extends Component {
     constructor(props) {
         
         super(props)
-
+        this.props.actions.autoLogin
     }
 
     componentWillReceiveProps(nextProps){
@@ -38,20 +38,33 @@ class Page extends Component {
     }
 
     showPage(){
-
-        const { currentRoute, EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE, EMPLOYER_PROFILE } = this.props
-
+        console.log(this.props)
+        const { currentRoute } = this.props
+        const { EMPLOYER_LOGIN, GRAD_LOGIN, GRAD_PROFILE, EMPLOYER_PROFILE } = this.props.routes
+       
         switch ( currentRoute ) {
 
-            case EMPLOYER_LOGIN || GRAD_LOGIN:
+            case GRAD_LOGIN:
+                
+                return <AuthView { ...this.props }/>
 
-                return <AuthView { ...this.props } />
+                break
+            
+            case EMPLOYER_LOGIN:
+
+                return <AuthView { ...this.props }/>
 
                 break
 
-            case GRAD_PROFILE || EMPLOYER_PROFILE:
+            case GRAD_PROFILE:
 
-                return <ProfileView { ...this.props } />
+                return <ProfileView { ...this.props }/>
+
+                break
+
+            case EMPLOYER_PROFILE:
+
+                return <ProfileView { ...this.props }/>
 
                 break
 
@@ -69,7 +82,7 @@ class Page extends Component {
         
         const { user } = this.props
         
-        return (<div> <Navbar/> {this.showPage()} </div>)
+        return (<div> <Navbar {...this.props}/> {this.showPage()} </div>)
 
     }
 
