@@ -48,12 +48,14 @@ class EmployerProfileForm extends Component {
     componentWillReceiveProps(nextProps){
 
     
+        if(nextProps.user != this.props.user){
             for(var attribute in nextProps.user){
-    
+
                 var value = nextProps.user[attribute]
                 this.props.change(attribute, value)
             
             }
+        }
 
     }
 

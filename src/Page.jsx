@@ -33,7 +33,7 @@ class Page extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-
+       
     }
 
     showPage(){

@@ -29,8 +29,8 @@ const NavMenu = ( props ) => {
     <AppBar position="static">
       <Toolbar>
         <Button onClick={()=>{props.history.replace("/alumni")}} color="inherit" disabled={props.alumni? true : false}>Alumni</Button> 
-        {props.user? <Button onClick={(event)=>{props.navigateToAccount()}} color="inherit" disabled={props.account? true : false}>Account</Button> : null}
-        {props.user? <Button onClick={(event)=>{props.logout(event)}} color="inherit" >Logout</Button> : null}
+        {props.user && props.user.email? <Button onClick={(event)=>{props.navigateToAccount()}} color="inherit" disabled={props.account? true : false}>Account</Button> : null}
+        {props.user && props.user.email? <Button onClick={(event)=>{props.logout(event)}} color="inherit" >Logout</Button> : null}
       </Toolbar>
     </AppBar>
   )
@@ -68,7 +68,7 @@ class Navbar extends Component {
   }
 
   handleLogout(e){
-    console.log(this.props)
+  
     e.preventDefault()
     this.props.actions.logout(this.props.history, this.props.user, this.props.routes)
 

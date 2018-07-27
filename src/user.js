@@ -152,9 +152,14 @@ export function logout(history, user, routes) {
             history.replace( routes.EMPLOYER_LOGIN )
         }
 
+        var emptyUser = {}
+        for(var attribute in user){
+            emptyUser[attribute] = null
+        }
+
 		dispatch({
 			type: UNAUTHENTICATE,
-			payload: null
+			payload: {user: emptyUser}
 		})
 	}	
 }
@@ -249,21 +254,24 @@ export const userReducer = function(state = initial_user, action) {
 		}
 		
 		case UNAUTHENTICATE: {
-			
-			return { }
-			break
+           
+			return _.extend({}, state, payload.user)
+            break
+            
 		}
 		
 		case RESET_PASSWORD: {
 
 			return _.extend({}, state, payload.user)
-			break
+            break
+            
 		}
 
 		case UPDATE_USER: {
 
             return _.extend({}, state, payload.user)
             break
+
 		}
 
     }

@@ -24,8 +24,22 @@ class ProfileView extends Component {
   }
 
   render() {
-    
-    const { user } = this.props
+
+    const { user, account_type, history, routes } = this.props
+
+    if(user){
+      if(!user.email){
+
+        if(account_type === "grad"){
+          history.replace(routes.GRAD_LOGIN)
+        }
+
+        if(account_type === "employer"){
+          history.replace(routes.EMPLOYER_LOGIN)
+        }
+          
+      }
+    }
     
     return (
       <div>

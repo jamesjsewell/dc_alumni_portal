@@ -71,7 +71,7 @@ class RegisterForm extends Component {
 
                             { account_type === "employer" ? 
                                 <div>
-                                    <Field type="text" name="company" label="Company Name" component={FormField} />
+                                    <Field type="text" name="companyName" label="Company Name" component={FormField} />
                                     <Field type="text" name="companyURL" label="Company URL" component={FormField} />
                                     <Field type="text" name="phone" label="Phone Number" component={FormField} /> 
                                 </div> : null }
