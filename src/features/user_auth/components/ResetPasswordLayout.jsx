@@ -20,11 +20,8 @@ const Error_resetting = (props) => {
         <Card>
             <CardContent>
                 <Typography color="error" component="p">
-                    Something went wrong, navigate to the login page and request to reset your password again
+                    Something went wrong resetting the password
                 </Typography>
-                <NavLink to="/login"><Typography component="a">
-                    Login Page
-                </Typography></NavLink>
             </CardContent>
         </Card>
     </Grid>)
@@ -33,13 +30,23 @@ const Error_resetting = (props) => {
 
 const Did_Reset = (props) => {
 
+    var goToRoute = null
+
+    if(props.user.account_type === "grad"){
+        goToRoute = props.routes.GRAD_LOGIN
+    }
+
+    if(props.user.account_type === "employer"){
+        goToRoute = props.routes.EMPLOYER_LOGIN
+    }
+
     return(<Grid item>
         <Card>
             <CardContent>
                 <Typography color="primary" component="p">
                     Your password has been reset, navigate to the login page and sign in with your new credentials
                 </Typography>
-                <NavLink to="/login"><Typography component="a">
+                <NavLink to={goToRoute}><Typography component="a">
                     Login Page
                 </Typography></NavLink>
             </CardContent>
@@ -65,7 +72,7 @@ export default class ResetPasswordLayout extends Component {
 
     render(){
 
-        const {error_resetting, did_reset, password_request, getForgotPasswordToken, resetPassword, match} = this.props
+        const {user, routes, error_resetting, did_reset, password_request, getForgotPasswordToken, resetPassword, match} = this.props
         return(
             <div>
                 <Grid container spacing={24}>
@@ -81,7 +88,7 @@ export default class ResetPasswordLayout extends Component {
                         </Card>
                     </Grid> : null}
 
-                    {did_reset === true ? <Did_Reset/> : null}
+                    {did_reset === true ? <Did_Reset user={user} routes={routes}/> : null}
                 </Grid>
             </div>)
 

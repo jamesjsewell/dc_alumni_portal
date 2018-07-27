@@ -43,7 +43,7 @@ class AuthView extends Component {
   
         <AuthLayout 
             match={this.props.match}
-            account_type={user.account_type}
+            account_type={this.props.account_type}
             register={this.props.actions.register.bind(this)}
             login={this.props.actions.login.bind(this)}
             getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 

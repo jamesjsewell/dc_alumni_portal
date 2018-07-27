@@ -20,22 +20,24 @@ class ResetPasswordView extends Component {
     
     super(props)
 
-    this.props.userActions.auto_log_in(this.props.userActions.authenticate, this.props.user)
+    this.props.actions.auto_log_in(this.props.actions.authenticate, this.props.user)
 
   }
 
   render() {
 
-    const { user } = this.props
+    const { user, userState, routes } = this.props
     
     return (
       <div><ResetPasswordLayout 
+      user={user}
+      routes={routes}
       match={this.props.match} 
       resetPassword={this.props.actions.resetPassword.bind(this)} 
-      error_resetting={user.error_resetting_password} 
-      did_reset={user.password_did_reset}
-      password_request={user.password_request}
-      getForgotPasswordToken={user.getForgotPasswordToken} 
+      error_resetting={userState.error_resetting_password} 
+      did_reset={userState.password_did_reset}
+      password_request={userState.password_request}
+      getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
       /></div>
 
     )

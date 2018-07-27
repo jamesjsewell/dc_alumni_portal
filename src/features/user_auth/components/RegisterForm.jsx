@@ -37,6 +37,7 @@ class RegisterForm extends Component {
     }
 
     doThisOnSubmit(input) {
+        
         input.account_type = this.props.account_type
         this.props.register(input)
        

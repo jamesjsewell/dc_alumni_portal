@@ -67,6 +67,18 @@ const AlumniPage = (props) => {
     )
 }
 
+const ResetPasswordPage = (props) => {
+ 
+    return (
+        <Page 
+        {...props}
+        routes={routes}
+        currentRoute="reset_password"
+        />
+    )
+}
+
+
 class Blank extends Component {
     render() {
         return <div>blank</div>
@@ -85,7 +97,7 @@ ReactDOM.render(
                     <Route exact path={routes.GRAD_PROFILE} component={GradProfilePage} /> 
                     <Route exact path={routes.EMPLOYER_PROFILE} component={EmployerProfilePage} /> 
                     <Route exact path="/alumni" render={AlumniPage} /> 
-                    <Route location={location} key={location.key} exact path="/reset-password/:resetToken" component={ResetPasswordView} />
+                    <Route location={location} key={location.key} exact path="/reset-password/:resetToken" component={ResetPasswordPage} />
                     <Route path="*" component={Blank} />
 
                 </Switch>

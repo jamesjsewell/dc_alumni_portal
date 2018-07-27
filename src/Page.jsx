@@ -28,6 +28,7 @@ class Page extends Component {
     constructor(props) {
         
         super(props)
+        
         this.props.actions.auto_log_in( this.props.actions.authenticate, this.props.user )
     }
 
@@ -72,7 +73,15 @@ class Page extends Component {
 
                 break
 
+            case "reset_password":
+
+                return <ResetPasswordView { ...this.props } />
+
+                break
+
         }
+
+
 
     }
 

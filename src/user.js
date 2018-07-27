@@ -23,15 +23,6 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 	UPDATE_USER = "update_user",
 	ERROR_UPDATING_USER = "error_updating_user"
 
-// auth_message: null
-// login_error_message: null
-// register_error_message: null
-// password_request: null
-// email_recipient: null
-// password_did_reset: false
-// error_resetting_password: false
-// error_updating_user: true
-
 
 export function auto_log_in(authenticate_user, loggedInUser){
     
@@ -146,12 +137,20 @@ export function register(info) {
 	}
 }
 
-export function logout() {
+export function logout(history, user, routes) {
 
 	return function(dispatch){
 
 		cookies.remove("user_token", { path: "/" })
-		cookies.remove("user", { path: "/" })
+        cookies.remove("user", { path: "/" })
+        
+        if(user.account_type === "grad"){
+            history.replace( routes.GRAD_LOGIN )
+        }
+
+        if(user.account_type === "employer"){
+            history.replace( routes.EMPLOYER_LOGIN )
+        }
 
 		dispatch({
 			type: UNAUTHENTICATE,
@@ -213,6 +212,7 @@ export function resetPassword(user_token, password) {
 export function updateUser(userId, updated) {
 	
 	return function(dispatch){
+
 		var token = cookies.get("user_token")
 	
 		axios({ method: 'put', url: `${API_URL}/user/${userId}`, data: updated, headers: { Authorization: cookies.get("user_token") }})
@@ -250,7 +250,7 @@ export const userReducer = function(state = initial_user, action) {
 		
 		case UNAUTHENTICATE: {
 			
-			return _.extend({}, state, null)
+			return { }
 			break
 		}
 		
@@ -265,7 +265,6 @@ export const userReducer = function(state = initial_user, action) {
             return _.extend({}, state, payload.user)
             break
 		}
-
 
     }
 
@@ -350,15 +349,6 @@ export const userStateReducer = function(state = initial_user_state, action) {
 
     return state
 }
-
-
-// selected
-// editing
-// message
-// collection
-// model
-// array
-// AJAX_payload
 
 const user = state => state.user
 const userState = state => state.userState
