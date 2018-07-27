@@ -30,25 +30,12 @@ const Error_resetting = (props) => {
 
 const Did_Reset = (props) => {
 
-    var goToRoute = null
-
-    if(props.user.account_type === "grad"){
-        goToRoute = props.routes.GRAD_LOGIN
-    }
-
-    if(props.user.account_type === "employer"){
-        goToRoute = props.routes.EMPLOYER_LOGIN
-    }
-
     return(<Grid item>
         <Card>
             <CardContent>
                 <Typography color="primary" component="p">
-                    Your password has been reset, navigate to the login page and sign in with your new credentials
+                    Your password has been reset
                 </Typography>
-                <NavLink to={goToRoute}><Typography component="a">
-                    Login Page
-                </Typography></NavLink>
             </CardContent>
         </Card>
     </Grid>)
