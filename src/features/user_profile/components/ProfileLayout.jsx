@@ -42,7 +42,7 @@ export default class ProfileLayout extends Component {
         const { user, updateUser} = this.props
         return(
             
-            <Grid container spacing={24}>
+            <Grid container justify="center" spacing={24}>
                <Grid item>
                     <Card>
                         <CardContent>
@@ -51,16 +51,17 @@ export default class ProfileLayout extends Component {
                         </CardContent>
                     </Card>
                </Grid> 
-               { user.account_type === "grad"? <Grid item>
+               { user.account_type === "grad"? 
+               <Grid item>
 
                     <Card>
                         <CardHeader title="Profile Image" subheader="Update your profile image" />
                         <CardContent>
 
-                            <Avatar
+                            {user.avatar? <Avatar
                                 sizes="large"
                                 src={user.avatar}
-                            />
+                            /> : <Typography component="p">Upload a profile image</Typography>}
 
                             {!user.avatar? <UppyDashboardComponent user={user} updateUser={updateUser} avatar={true}/> : null}
                             
@@ -70,12 +71,11 @@ export default class ProfileLayout extends Component {
                             {user.avatar? <IconButton onClick={(event)=>{this.removeFile('avatar')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
-               </Grid> : null }
-               { user.account_type === "grad" ? <Grid item>
+
                     <Card>
                         <CardHeader title="Resume" subheader="Update your resume" />
                         <CardContent>
-                            {user.resume? <a href={user.resume}>your current resume</a> : <Typography component="p">Upload your resume</Typography>}
+                            {user.resume? <Button href={user.resume} variant="outlined">view</Button> : <Typography component="p">Upload your resume</Typography>}
                             {!user.resume? <UppyDashboardComponent user={user} updateUser={updateUser} resume={true}/> : null}
                         </CardContent>
                         <CardActions>

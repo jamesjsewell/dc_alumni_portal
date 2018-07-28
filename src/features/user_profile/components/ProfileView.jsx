@@ -42,12 +42,10 @@ class ProfileView extends Component {
     }
     
     return (
-      <div>
-
-        <Card square={true}><CardContent><Typography variant="title">Your Profile </Typography></CardContent></Card>
+    
       
-        {user.email? <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} /> : null }
-      </div> 
+        <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} /> 
+
     )
   }
 }
