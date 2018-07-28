@@ -1,8 +1,8 @@
 import _ from "underscore"
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
-//import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
 import { FormField, TextArea, RadioSelect, DatePicker } from "../../forms/FormFields.jsx"
+import * as check from "../../forms/formValidation.js"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -150,12 +150,12 @@ class GradProfileForm extends Component {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <FormGroup>
-                                    <Field type="text" name="fname" label="First Name" component={FormField} />
-                                    <Field type="text" name="lname" label="Last Name" component={FormField} />
-                                    <Field type="text" name="city" label="City" component={FormField} />
-                                    <Field type="text" name="state" label="State" component={FormField} />
+                                    <Field type="text" name="fname" label="First Name" component={FormField} validate={[check.alphaNumeric]} />
+                                    <Field type="text" name="lname" label="Last Name" component={FormField} validate={[check.alphaNumeric]}  />
+                                    <Field type="text" name="city" label="City" component={FormField} validate={[check.alphaNumeric]}  />
+                                    <Field type="text" name="state" label="State" component={FormField} validate={[check.alphaNumeric]}  />
                                     <Field type="text" name="website" label="Personal Website" component={FormField} />
-                                    <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+                                    <Field type="text" name="publicEmail" label="Public Email" component={FormField} validate={[check.email]}  />
                                     <Field id="willingnessToRelocate" name="willingnessToRelocate" component={RadioSelect} type="checkbox" label="Willing to Relocate?"/>
                                     <Field id="DCgraduationDate" name="DCgraduationDate" component={DatePicker} label="Graduated from DC"/>
                                 </FormGroup>
@@ -182,7 +182,7 @@ class GradProfileForm extends Component {
                                 <Typography> bio </Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Field type="text" name="bio" label="Bio" component={TextArea} />
+                                <Field type="text" name="bio" label="Bio" component={TextArea} validate={[check.maxLength140]}  />
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
 

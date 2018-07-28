@@ -82,11 +82,11 @@ export const TextArea = ({
         {touched &&
             ((error &&
                 <div>
-                    <span>{error}</span>
+                    <Typography color="secondary" >{error}</Typography>
                 </div>) ||
                 (warning &&
                     <div>
-                        <span>{warning}</span>
+                        <Typography color="secondary" >{error}</Typography>
                     </div>))}
     </Paper>
 )

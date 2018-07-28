@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Field, reduxForm, change, reset } from "redux-form";
-//import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
 import ForgotPasswordForm from "./ForgotPasswordForm.jsx"
 import { FormField } from "../../forms/FormFields.jsx"
 import * as check from "../../forms/formValidation.js"

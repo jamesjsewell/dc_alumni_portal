@@ -19,7 +19,7 @@ export const maxLength = max => value =>
     value && value.length > max
         ? `Must be ${max} characters or less`
         : undefined;
-//export const maxLength15 = maxLength(15)
+export const maxLength140 = maxLength(140)
 
 export const minLength = min => value =>
     value && value.length < min
