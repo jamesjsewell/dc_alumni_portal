@@ -48,16 +48,18 @@ const MenuDrawer = ( props ) => {
     <Paper>
       <MenuList>
         <MenuItem>
-          <ListItemText inset primary="Alumni" />
+          <ListItemText onClick={()=>{props.history.replace("/alumni")}} inset primary="Alumni" />
         </MenuItem>
         <Divider/>
-        {props.user && props.user.email? <MenuItem>
-          <ListItemText onClick={(event)=>{props.navigateToAccount()}} inset primary="Account" /> 
-        </MenuItem> : null}
+        {props.user && props.user.email? 
+          <MenuItem>
+            <ListItemText onClick={(event)=>{props.navigateToAccount()}} inset primary="Account" /> 
+          </MenuItem> : null}
         <Divider/>
-        {props.user && props.user.email? <MenuItem>
-          <ListItemText onClick={(event)=>{props.logout(event)}} inset primary="Logout" />
-        </MenuItem> : null}
+        {props.user && props.user.email? 
+          <MenuItem>
+            <ListItemText onClick={(event)=>{props.logout(event)}} inset primary="Logout" />
+          </MenuItem> : null}
       </MenuList>
       <Button onClick={(event)=>{props.toggleDrawer(event, false)}} size="small" color="inherit">cancel</Button>
     </Paper>)
@@ -123,7 +125,7 @@ class Navbar extends Component {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <MenuDrawer user={user} toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} />
+            <MenuDrawer user={user} toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} history={this.props.history} navigateToAccount={()=>{this.navigateToAccount()}} />
           </Drawer>
         </Hidden>
         <Hidden smDown>
