@@ -24,13 +24,19 @@ import Menu from "@material-ui/core/Menu";
 
 
 const NavMenu = ( props ) => {
+ 
+  const { currentRoute, routes, user } = props
   
   return(
     <AppBar position="static">
       <Toolbar>
-        <Button onClick={()=>{props.history.replace("/alumni")}} color="inherit" disabled={props.alumni? true : false}>Alumni</Button> 
-        {props.user && props.user.email? <Button onClick={(event)=>{props.navigateToAccount()}} color="inherit" disabled={props.account? true : false}>Account</Button> : null}
-        {props.user && props.user.email? <Button onClick={(event)=>{props.logout(event)}} color="inherit" >Logout</Button> : null}
+        <Button color="inherit" disabled={ currentRoute === "/alumni"? true : false } onClick={()=>{props.history.replace("/alumni")}}>Alumni</Button> 
+        {user && user.email? 
+          <Button color="inherit" disabled={ currentRoute === routes.GRAD_PROFILE || currentRoute === routes.EMPLOYER_PROFILE? true : false} onClick={(event)=>{props.navigateToAccount()}} >Account</Button> : null
+        }
+        {user && user.email? 
+          <Button color="inherit" onClick={(event)=>{props.logout(event)}}  >Logout</Button> : null
+        }
       </Toolbar>
     </AppBar>
   )
@@ -45,13 +51,13 @@ const MenuDrawer = ( props ) => {
           <ListItemText inset primary="Alumni" />
         </MenuItem>
         <Divider/>
-        <MenuItem>
-          <ListItemText inset primary="Account" />
-        </MenuItem>
+        {props.user && props.user.email? <MenuItem>
+          <ListItemText onClick={(event)=>{props.navigateToAccount()}} inset primary="Account" /> 
+        </MenuItem> : null}
         <Divider/>
-        <MenuItem>
-          <ListItemText inset primary="Logout" />
-        </MenuItem>
+        {props.user && props.user.email? <MenuItem>
+          <ListItemText onClick={(event)=>{props.logout(event)}} inset primary="Logout" />
+        </MenuItem> : null}
       </MenuList>
       <Button onClick={(event)=>{props.toggleDrawer(event, false)}} size="small" color="inherit">cancel</Button>
     </Paper>)
@@ -94,7 +100,7 @@ class Navbar extends Component {
 
   render() {
 
-    const { user } = this.props
+    const { user, currentRoute, routes } = this.props
     
     return (
       <div>
@@ -121,7 +127,7 @@ class Navbar extends Component {
           </Drawer>
         </Hidden>
         <Hidden smDown>
-          <NavMenu user={user} logout={this.handleLogout.bind(this)} navigateToAccount={()=>{this.navigateToAccount()}} history={this.props.history}/>
+          <NavMenu currentRoute={currentRoute} routes={routes} user={user} logout={this.handleLogout.bind(this)} navigateToAccount={()=>{this.navigateToAccount()}} history={this.props.history}/>
         </Hidden>
       </div>
     )

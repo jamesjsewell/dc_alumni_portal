@@ -192,19 +192,42 @@ export function getForgotPasswordToken(email) {
 	}
 }
 
-export function resetPassword(user_token, password) {
+export function resetPassword(user_token, password, routes, history) {
 
 	return function(dispatch){
 
 		axios
 		.post(`${API_URL}/user/reset-password/${user_token}`, { password: password })
 		.then(response => {
-			dispatch({
-				type: RESET_PASSWORD,
-				payload: {user: response.data.user}
-			})
+
+            if(response && response.data && response.data.user_token){
+                cookies.set("user_token", response.data.user_token, { path: "/" })
+                cookies.set("user", response.data.user, { path: "/" })
+                dispatch({
+                    type: RESET_PASSWORD,
+                    payload: {user: response.data.user}
+                })
+
+                var user = response.data.user
+                if(user.account_type === "grad"){
+                    history.replace(routes.GRAD_PROFILE)
+                }
+                if(user.account_type === "employer"){
+                    history.replace(routes.EMPLOYER_PROFILE)
+                }
+
+            }
+            if(response && response.data && response.data.error){
+                
+                dispatch({
+                    type: RESET_PASSWORD_ERROR,
+                    payload: null
+                })
+            }
+			
 		})
 		.catch(error => {
+        
 			dispatch({
 				type: RESET_PASSWORD_ERROR,
 				payload: null
@@ -243,33 +266,38 @@ const initial_user = {}
 export const userReducer = function(state = initial_user, action) {
 
     var payload = action.payload
+    var user = {}
+
+    if(payload && payload.user){
+        user =  payload.user
+    }
 
     switch (action.type) {
 
         case AUTHENTICATE: {
 		
-            return _.extend({}, state, payload.user)
+            return _.extend({}, state, user)
             break
 
 		}
 		
 		case UNAUTHENTICATE: {
            
-			return _.extend({}, state, payload.user)
+			return _.extend({}, state, user)
             break
             
 		}
 		
 		case RESET_PASSWORD: {
 
-			return _.extend({}, state, payload.user)
+			return _.extend({}, state, user)
             break
             
 		}
 
 		case UPDATE_USER: {
 
-            return _.extend({}, state, payload.user)
+            return _.extend({}, state, user)
             break
 
 		}

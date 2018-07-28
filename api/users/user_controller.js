@@ -86,9 +86,11 @@ module.exports = {
             });
         }
 
+        var updatedMinusPassword = _.omit(req.body, 'password')
+
         User.findByIdAndUpdate(
             { _id: req.params.id },
-            req.body,
+            updatedMinusPassword,
             {new: true},
             function (err, updated) {
                 console.log(updated)
@@ -378,11 +380,14 @@ module.exports = {
     
                     // Otherwise, send user email confirmation of password change via Mailgun
                     //mailgun.sendEmail(user.email, message)
+
+                    var userMinusPassword = _.omit(user.toObject(), 'password')
     
                     return res.status(200).json({
                         message: "Password changed successfully. Please login with your new password.",
                         didReset: true,
-                        user: user
+                        user: userMinusPassword,
+                        user_token: `JWT ${generateToken(userMinusPassword)}`
                     })
                 })
             }

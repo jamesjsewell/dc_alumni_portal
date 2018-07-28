@@ -59,12 +59,12 @@ export default class ResetPasswordLayout extends Component {
 
     render(){
 
-        const {user, routes, error_resetting, did_reset, password_request, getForgotPasswordToken, resetPassword, match} = this.props
+        const {user, routes, error_resetting, did_reset, password_request, getForgotPasswordToken, resetPassword, match, history} = this.props
         return(
             <div>
                 <Grid container spacing={24}>
 
-                    {did_reset === false && error_resetting === false ? <ResetPasswordForm match={match} resetPassword={resetPassword} /> : null}
+                    {did_reset === false && error_resetting === false ? <ResetPasswordForm match={match} resetPassword={resetPassword} history={history} routes={routes}/> : null}
                     {error_resetting === true ? 
                     <Grid item>
                         <Card>

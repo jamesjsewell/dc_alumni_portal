@@ -33,6 +33,7 @@ class ResetPasswordView extends Component {
       user={user}
       routes={routes}
       match={this.props.match} 
+      history={this.props.history}
       resetPassword={this.props.actions.resetPassword.bind(this)} 
       error_resetting={userState.error_resetting_password} 
       did_reset={userState.password_did_reset}
