@@ -8,6 +8,7 @@ import thunk from "redux-thunk"
 import * as routes from "./nav_links.js"
 import Page from "./Page.jsx"
 import ResetPasswordView from "./features/user_auth/components/ResetPasswordView.jsx"
+import "./style.scss"
 
 const middleware = applyMiddleware(thunk)
 const store = createStore(rootReducer, middleware)

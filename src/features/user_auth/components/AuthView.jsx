@@ -39,7 +39,6 @@ class AuthView extends Component {
     }
     
     return (
-      <div>
   
         <AuthLayout 
             match={this.props.match}
@@ -53,7 +52,6 @@ class AuthView extends Component {
             email_recipient={userState.email_recipient}
     
         />
-      </div>
     )
   }
 }

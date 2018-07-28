@@ -2,7 +2,7 @@ import _ from "underscore"
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
-import { FormField, TextArea } from "../../forms/FormFields.jsx"
+import { FormField, TextArea, Radio } from "../../forms/FormFields.jsx"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -34,6 +34,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Divider from "@material-ui/core/Divider";
 import CardHeader from "@material-ui/core/CardHeader"
+
 
 
 const skills = [
@@ -113,9 +114,9 @@ class GradProfileForm extends Component {
 
     doThisOnSubmit(input) {
        
-        
         input.skills = this.state.selectedSkills
         this.props.updateUser(this.props.user._id, input)
+        console.log(input)
        
     }
 
@@ -156,6 +157,7 @@ class GradProfileForm extends Component {
                                         <Field type="text" name="state" label="State" component={FormField} />
                                         <Field type="text" name="website" label="Personal Website" component={FormField} />
                                         <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+                                        <Field id="willingnessToRelocate" name="willingnessToRelocate" component={Radio} type="checkbox" label="Willing to Relocate?"/>
                                     </CardContent>
                                 </Card>
                             </ExpansionPanelDetails>
@@ -203,6 +205,7 @@ class GradProfileForm extends Component {
                     </Grid>
 
                     <Grid item>
+
                         <Button variant="outlined" type="submit">
                             Save
                         </Button>

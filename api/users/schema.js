@@ -39,7 +39,7 @@ const UserSchema = new Schema(
         portfolio: { type: String, default: null },
         publicEmail: { type: String },
         skills: [{type: String}],
-        willingnessToRelocate: { type: Boolean, default: null },
+        willingnessToRelocate: { type: Boolean, default: false },
         DCgraduationDate: { type: Date, default: null },
         DCprogramType: { type: String, default: null },
         companyName: { type: String },

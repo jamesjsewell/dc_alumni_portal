@@ -89,11 +89,13 @@ class Page extends Component {
         
         const { user } = this.props
         
-        return (<div> <Navbar {...this.props}/> 
+        return (<div> 
+            
+            <Navbar {...this.props}/> 
                 
-                    {this.showPage()}
+            {this.showPage()}
                 
-                </div>)
+        </div>)
 
     }
 

@@ -56,7 +56,7 @@ class LoginForm extends Component {
         const { handleSubmit, login_error_message, password_request, getForgotPasswordToken, email_recipient } = this.props
 
         return (
-            <Grid item>
+            <Grid item >
     
                 <Card>
 
