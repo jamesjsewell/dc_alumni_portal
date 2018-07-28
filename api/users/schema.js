@@ -40,7 +40,7 @@ const UserSchema = new Schema(
         publicEmail: { type: String },
         skills: [{type: String}],
         willingnessToRelocate: { type: Boolean, default: false },
-        DCgraduationDate: { type: Date, default: null },
+        DCgraduationDate: { type: String, default: null },
         DCprogramType: { type: String, default: null },
         companyName: { type: String },
         companyURL: { type: String },

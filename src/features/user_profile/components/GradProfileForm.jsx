@@ -114,7 +114,7 @@ class GradProfileForm extends Component {
 
 
     doThisOnSubmit(input) {
-        console.log(input)
+       
         input.skills = this.state.selectedSkills
         this.props.updateUser(this.props.user._id, input)
        
@@ -182,10 +182,7 @@ class GradProfileForm extends Component {
                                 <Typography> bio </Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                            
                                 <Field type="text" name="bio" label="Bio" component={TextArea} />
-                                 
-                    
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
 
@@ -195,7 +192,6 @@ class GradProfileForm extends Component {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <SkillsSelect handleSkills={this.handleSkills.bind(this)} selectedSkills={this.state.selectedSkills}/>
-                                
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                             
