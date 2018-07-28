@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form"
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -44,11 +45,11 @@ export const FormField = ({
         {touched &&
             ((error &&
                 <div>
-                    <span>{error}</span>
+                    <Typography color="secondary" >{error}</Typography>
                 </div>) ||
                 (warning &&
                     <div>
-                        <span>{warning}</span>
+                        <Typography color="secondary">{warning}</Typography>
                     </div>))}
     </div>
 )

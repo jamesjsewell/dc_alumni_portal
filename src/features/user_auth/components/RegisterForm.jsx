@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 
 import { FormField } from "../../forms/FormFields.jsx"
+import * as check from "../../forms/formValidation.js"
 
 
 
@@ -64,10 +65,10 @@ class RegisterForm extends Component {
 
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
             
-                            <Field type="email" name="email" label="Email" component={FormField} />
-                            <Field type="password" name="password" label="Password" component={FormField} /> 
-                            <Field type="text" name="fname" label="First Name" component={FormField} />
-                            <Field type="text" name="lname" label="Last Name" component={FormField} />
+                            <Field type="email" name="email" label="Email" component={FormField} validate={[check.required, check.email]} required={true}  />
+                            <Field type="password" name="password" label="Password" component={FormField} validate={[check.required]} required={true}  /> 
+                            <Field type="text" name="fname" label="First Name" component={FormField} validate={[check.alphaNumeric, check.required]} required={true}  />
+                            <Field type="text" name="lname" label="Last Name" component={FormField} validate={[check.alphaNumeric, check.required]} required={true}  />
 
                             { account_type === "employer" ? 
                                 <div>

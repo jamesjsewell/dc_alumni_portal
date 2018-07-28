@@ -3,6 +3,7 @@ import { Form, Field, reduxForm, change, reset } from "redux-form";
 //import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
 import ForgotPasswordForm from "./ForgotPasswordForm.jsx"
 import { FormField } from "../../forms/FormFields.jsx"
+import * as check from "../../forms/formValidation.js"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -70,8 +71,8 @@ class LoginForm extends Component {
                         </Typography>
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                            <Field type="email" name="email_login" label="email" component={FormField} />
-                            <Field type="password" name="password_login" label="password" component={FormField} />
+                            <Field type="email" name="email_login" label="email" component={FormField} validate={[check.required, check.email]} required={true}  />
+                            <Field type="password" name="password_login" label="password" component={FormField} validate={[check.required]} required={true}  />
 
                             <Button variant="contained" type="submit">
                                 Login
@@ -122,7 +123,7 @@ class LoginForm extends Component {
 }
 
 export default reduxForm({
-    form: 'register',
+    form: 'login',
     // fields: ["name"],
     // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
     // asyncBlurFields: ["name"],
