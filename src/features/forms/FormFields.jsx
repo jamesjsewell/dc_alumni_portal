@@ -114,8 +114,9 @@ export const DatePicker = ({
     meta: {  value }
 }) => (
     <TextField
-        value={input.value}
-        onChange={input.onChange}
+        {...input}
+        // value={input.value}
+        // onChange={input.onChange}
         label={label}
         type="date"
     

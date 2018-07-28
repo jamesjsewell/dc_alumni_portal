@@ -86,7 +86,7 @@ class GradProfileForm extends Component {
     constructor(props) {
         super(props)
         this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: this.props.user.skills}
-        var userValues = _.omit(this.props.user, "__v", "_id", "updatedAt")
+        var userValues = _.omit(this.props.user, "__v", "_id", "updatedAt", "password")
         fieldValues = _.extend(fieldValues, userValues)
         
     }
@@ -157,7 +157,7 @@ class GradProfileForm extends Component {
                                     <Field type="text" name="website" label="Personal Website" component={FormField} />
                                     <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
                                     <Field id="willingnessToRelocate" name="willingnessToRelocate" component={RadioSelect} type="checkbox" label="Willing to Relocate?"/>
-                                    <Field name="DCgraduationDate" component={DatePicker} label="Graduated from DC"/>
+                                    <Field id="DCgraduationDate" name="DCgraduationDate" component={DatePicker} label="Graduated from DC"/>
                                 </FormGroup>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>

@@ -94,7 +94,9 @@ module.exports = {
             {new: true},
             function (err, updated) {
 
-                var updatedMinusPassword = _.omit(updated, 'password')
+                var updatedMinusPassword = _.omit(updated.toObject(), 'password')
+
+                console.log(updatedMinusPassword)
             
                 if (err) {
                     // if there was an error, this will send the error as an http response to the request that was made
