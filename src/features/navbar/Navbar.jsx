@@ -25,17 +25,17 @@ import Menu from "@material-ui/core/Menu";
 
 const NavMenu = ( props ) => {
  
-  const { currentRoute, routes, user } = props
+  const { currentRoute, routes, history, user, logout, navigateToAccount, navigateToAlumni} = props
   
   return(
     <AppBar position="static">
       <Toolbar>
-        <Button color="inherit" disabled={ currentRoute === "/alumni"? true : false } onClick={()=>{props.history.replace("/alumni")}}>Alumni</Button> 
+        <Button color="inherit" disabled={ currentRoute === "/alumni"? true : false } onClick={(event)=>{navigateToAlumni(event)}}>Alumni</Button> 
         {user && user.email? 
-          <Button color="inherit" disabled={ currentRoute === routes.GRAD_PROFILE || currentRoute === routes.EMPLOYER_PROFILE? true : false} onClick={(event)=>{props.navigateToAccount()}} >Account</Button> : null
+          <Button color="inherit" disabled={ currentRoute === routes.GRAD_PROFILE || currentRoute === routes.EMPLOYER_PROFILE? true : false} onClick={(event)=>{navigateToAccount(event)}} >Account</Button> : null
         }
         {user && user.email? 
-          <Button color="inherit" onClick={(event)=>{props.logout(event)}}  >Logout</Button> : null
+          <Button color="inherit" onClick={(event)=>{logout(event)}}  >Logout</Button> : null
         }
       </Toolbar>
     </AppBar>
@@ -44,24 +44,26 @@ const NavMenu = ( props ) => {
 
 const MenuDrawer = ( props ) => {
 
+  const { currentRoute, routes, history, user, logout, navigateToAccount, navigateToAlumni, toggleDrawer} = props
+
   return(
     <Paper>
       <MenuList>
-        <MenuItem>
-          <ListItemText onClick={()=>{props.history.replace("/alumni")}} inset primary="Alumni" />
+        <MenuItem onClick={(event)=>{navigateToAlumni(event)}} selected={currentRoute === "/alumni"? true : false}>
+          <ListItemText inset primary="Alumni" />
         </MenuItem>
         <Divider/>
         {props.user && props.user.email? 
-          <MenuItem>
-            <ListItemText onClick={(event)=>{props.navigateToAccount()}} inset primary="Account" /> 
+          <MenuItem  onClick={(event)=>{navigateToAccount(event)}}  selected={currentRoute === routes.GRAD_PROFILE || currentRoute === routes.EMPLOYER_PROFILE? true : false} >
+            <ListItemText inset primary="Account" /> 
           </MenuItem> : null}
         <Divider/>
         {props.user && props.user.email? 
-          <MenuItem>
-            <ListItemText onClick={(event)=>{props.logout(event)}} inset primary="Logout" />
+          <MenuItem onClick={(event)=>{logout(event)}}>
+            <ListItemText inset primary="Logout" />
           </MenuItem> : null}
       </MenuList>
-      <Button onClick={(event)=>{props.toggleDrawer(event, false)}} size="small" color="inherit">cancel</Button>
+      <Button onClick={(event)=>{toggleDrawer(event, false)}} size="small" color="inherit">close</Button>
     </Paper>)
 
 }
@@ -82,7 +84,8 @@ class Navbar extends Component {
 
   }
 
-  navigateToAccount(){
+  navigateToAccount(e){
+   
     if(this.props.user){
       var user = this.props.user
       if(user.account_type === "grad"){
@@ -95,8 +98,13 @@ class Navbar extends Component {
     }
   }
 
+  navigateToAlumni(e){
+   
+    this.props.history.replace("/alumni")
+  }
+
   handleToggleDrawer(e, open){
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({drawerOpen: open})
   }
 
@@ -108,28 +116,28 @@ class Navbar extends Component {
       <div>
         <Hidden mdUp>
 
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton onClick={(event)=>{this.handleToggleDrawer(event, true)}} color="inherit" aria-label="Menu">
-                <MenuIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          
-          <Drawer
-            variant="temporary"
-            anchor={'left'}
-            open={this.state.drawerOpen}
-            onClose={(event)=>{this.handleToggleDrawer(event, false)}}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            <MenuDrawer user={user} toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} history={this.props.history} navigateToAccount={()=>{this.navigateToAccount()}} />
-          </Drawer>
+            <AppBar position="static">
+              <Toolbar>
+                <IconButton onClick={(event)=>{this.handleToggleDrawer(event, true)}} color="inherit" aria-label="Menu">
+                  <MenuIcon />
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+            
+            <Drawer
+              variant="temporary"
+              anchor={'left'}
+              open={this.state.drawerOpen}
+              onClose={(event)=>{this.handleToggleDrawer(event, false)}}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              <MenuDrawer routes={routes} currentRoute={currentRoute} user={user} toggleDrawer={this.handleToggleDrawer.bind(this)} logout={this.handleLogout.bind(this)} navigateToAccount={this.navigateToAccount.bind(this)} navigateToAlumni={this.navigateToAlumni.bind(this)} navigateToAccount={this.navigateToAccount.bind(this)} history={this.props.history} />
+            </Drawer>
         </Hidden>
         <Hidden smDown>
-          <NavMenu currentRoute={currentRoute} routes={routes} user={user} logout={this.handleLogout.bind(this)} navigateToAccount={()=>{this.navigateToAccount()}} history={this.props.history}/>
+            <NavMenu  routes={routes} currentRoute={currentRoute} user={user} logout={this.handleLogout.bind(this)} navigateToAccount={this.navigateToAccount.bind(this)} navigateToAlumni={this.navigateToAlumni.bind(this)} history={this.props.history}/>
         </Hidden>
       </div>
     )
