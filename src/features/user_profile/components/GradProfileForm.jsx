@@ -25,6 +25,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import Chip from '@material-ui/core/Chip'
 import Select from '@material-ui/core/Select'
 import FormControl from '@material-ui/core/FormControl'
+import FormGroup from '@material-ui/core/FormGroup'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
@@ -149,17 +150,15 @@ class GradProfileForm extends Component {
                                 <Typography> Info </Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Card>
-                                    <CardContent>
-                                        <Field type="text" name="fname" label="First Name" component={FormField} />
-                                        <Field type="text" name="lname" label="Last Name" component={FormField} />
-                                        <Field type="text" name="city" label="City" component={FormField} />
-                                        <Field type="text" name="state" label="State" component={FormField} />
-                                        <Field type="text" name="website" label="Personal Website" component={FormField} />
-                                        <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
-                                        <Field id="willingnessToRelocate" name="willingnessToRelocate" component={Radio} type="checkbox" label="Willing to Relocate?"/>
-                                    </CardContent>
-                                </Card>
+                                <FormGroup>
+                                    <Field type="text" name="fname" label="First Name" component={FormField} />
+                                    <Field type="text" name="lname" label="Last Name" component={FormField} />
+                                    <Field type="text" name="city" label="City" component={FormField} />
+                                    <Field type="text" name="state" label="State" component={FormField} />
+                                    <Field type="text" name="website" label="Personal Website" component={FormField} />
+                                    <Field type="text" name="publicEmail" label="Public Email" component={FormField} />
+                                    <Field id="willingnessToRelocate" name="willingnessToRelocate" component={Radio} type="checkbox" label="Willing to Relocate?"/>
+                                </FormGroup>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
 
@@ -168,15 +167,13 @@ class GradProfileForm extends Component {
                                 <Typography> Social </Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Card>
-                                    <CardContent>
-                                        <Field type="text" name="github" label="Github" component={FormField} />
-                                        <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
-                                        <Field type="text" name="stackOverflow" label="Stack Overflow" component={FormField} />
-                                        <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
-                                        <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
-                                    </CardContent>
-                                </Card>
+                                <FormGroup>
+                                    <Field type="text" name="github" label="Github" component={FormField} />
+                                    <Field type="text" name="linkedin" label="Linkedin" component={FormField} />
+                                    <Field type="text" name="stackOverflow" label="Stack Overflow" component={FormField} />
+                                    <Field type="text" name="mediumBlog" label="Medium Blog" component={FormField} />
+                                    <Field type="text" name="portfolio" label="Portfolio Url" component={FormField} />
+                                </FormGroup>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
 
