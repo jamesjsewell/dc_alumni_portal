@@ -90,7 +90,7 @@ export const TextArea = ({
     </Paper>
 )
 
-export const Radio = ({
+export const RadioSelect = ({
     input,
     label,
     meta: {  value }
@@ -107,6 +107,21 @@ export const Radio = ({
           label={label}
         />
 )
+
+export const DatePicker = ({
+    input,
+    label,
+    meta: {  value }
+}) => (
+    <TextField
+        value={input.value}
+        onChange={input.onChange}
+        label={label}
+        type="date"
+    
+      />
+)
+
 
 
 //example of a select

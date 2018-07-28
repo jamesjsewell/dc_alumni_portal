@@ -86,14 +86,16 @@ module.exports = {
             });
         }
 
-        var updatedMinusPassword = _.omit(req.body, 'password')
+        var inputMinusPassword = _.omit(req.body, 'password')
 
         User.findByIdAndUpdate(
             { _id: req.params.id },
-            updatedMinusPassword,
+            inputMinusPassword,
             {new: true},
             function (err, updated) {
-                console.log(updated)
+
+                var updatedMinusPassword = _.omit(updated, 'password')
+            
                 if (err) {
                     // if there was an error, this will send the error as an http response to the request that was made
                     var message = "server error, could not update User"
@@ -107,7 +109,7 @@ module.exports = {
                 } else {
                     // sends the newly updated record over http request back to where the request was made
                     var message = "User updated"
-                    return res.status(200).json({user: updated})
+                    return res.status(200).json({user: updatedMinusPassword})
 
                 }
             }
