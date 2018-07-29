@@ -25,7 +25,7 @@ export default class AuthLayout extends Component {
 
         return(
 
-            <Grid  justify="center" alignItems="center" direction="row" container spacing={16}>
+            <Grid  justify="center" direction="row" container spacing={16}>
 
                 <LoginForm 
 

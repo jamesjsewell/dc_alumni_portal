@@ -1,8 +1,8 @@
 import _ from "underscore"
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
-//import { alphaNumeric, required, shouldAsyncValidate, asyncValidate } from "../../util/forms/formValidation.js"
 import { FormField, TextArea } from "../../forms/FormFields.jsx"
+import * as check from "../../forms/formValidation.js"
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -92,9 +92,9 @@ class EmployerProfileForm extends Component {
 
                             <CardContent>
                                 
-                            <Field type="text" name="companyName" label="Company Name" component={FormField} />
+                            <Field type="text" name="companyName" label="Company Name" component={FormField} validate={[check.alphaNumeric]} />
                             <Field type="text" name="companyURL" label="Company URL" component={FormField} />
-                            <Field type="text" name="phone" label="Phone Number" component={FormField} /> 
+                            <Field type="text" name="phone" label="Phone Number" component={FormField} validate={[check.phoneNumber]} /> 
                     
                             </CardContent>
 

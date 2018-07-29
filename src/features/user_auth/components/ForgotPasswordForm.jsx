@@ -10,11 +10,12 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { FormField } from "../../forms/FormFields.jsx"
+import * as check from "../../forms/formValidation.js"
 
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
-    props.untouch(["email", "email_confirm"]);
+    props.untouch(["email"]);
 
 }
 
@@ -50,8 +51,7 @@ class ForgotPasswordForm extends Component {
     
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                <Field type="email" name="email" label="email" component={FormField} />
-                <Field type="email" name="email_confirm" label="confirm email" component={FormField} />
+                <Field type="email" name="email" label="email" component={FormField} validate={[check.required, check.email]} required={true}  />
 
                 { password_request != "sending" ? <Button variant="contained" type="submit">
                     request

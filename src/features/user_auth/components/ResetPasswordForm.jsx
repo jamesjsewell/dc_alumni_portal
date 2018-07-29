@@ -10,11 +10,12 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { FormField } from "../../forms/FormFields.jsx"
+import * as check from "../../forms/formValidation.js"
 
 
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
-    props.untouch(["email", "password"]);
+    props.untouch(["new_password"]);
 
 }
 
@@ -58,8 +59,7 @@ class ResetPasswordForm extends Component {
                         </Typography>
                         <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-                            <Field type="password" name="new_password" label="new password" component={FormField} />
-                            <Field type="password" name="confirm_password" label="confirm password" component={FormField} />
+                            <Field type="password" name="new_password" label="new password" component={FormField} validate={[check.required]} required={true}  />
 
                             <Button type="submit">
                                 submit
