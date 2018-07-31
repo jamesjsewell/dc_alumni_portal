@@ -67,7 +67,7 @@ class Page extends Component {
 
                 break
 
-            case "alumni":
+            case "/alumni":
 
                 return <AlumniView { ...this.props } />
 
