@@ -7,14 +7,43 @@ import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
 
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import withMobileDialog from '@material-ui/core/withMobileDialog'
+import Avatar from '@material-ui/core/Avatar'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Paper from '@material-ui/core/Paper'
+
+// fname 
+// lname 
+// city
+// state
+// bio
+
+// resume
+
+// website
+// github
+// linkedin
+// stackOverflow
+// mediumBlog
+// portfolio
+// publicEmail 
+
+// skills
+
+// willingnessToRelocate 
+// DCgraduationDate
+// DCprogramType
 
 
 class AlumniLayout extends Component {
@@ -85,11 +114,39 @@ class AlumniLayout extends Component {
                     open={this.state.modal_open ? true : false}
                     aria-labelledby="responsive-dialog-title"
                 >
-                    <DialogTitle id="responsive-dialog-title">{selectedGrad.fname} {' ' + selectedGrad.lname}</DialogTitle>
+                    <DialogTitle id="responsive-dialog-title">
+                        <Paper>
+                        
+                        <Card >
+
+                            <CardMedia component="img" image={selectedGrad.avatar}>
+
+
+                            </CardMedia>
+                        
+                            <CardHeader
+                                avatar={
+                                    <Avatar
+                                        src={selectedGrad.avatar}
+                                    />}
+
+                                title={ selectedGrad.fname && selectedGrad.lname? selectedGrad.fname + " " + selectedGrad.lname : null}
+                                subheader={ selectedGrad.city && selectedGrad.state? selectedGrad.city + ", " + selectedGrad.state: null}
+                                />
+                            <CardContent>
+                            
+                            </CardContent>
+                        <Avatar  />
+                        </Card>
+                        </Paper>
+                    
+                    </DialogTitle>
 
                     <DialogContent>
                     
                         <DialogContentText>
+
+                            {selectedGrad.bio}
                             
                         </DialogContentText>    
                     

@@ -17,10 +17,6 @@ function generateToken(user) {
     })
 }
 
-// see file for more info
-const errorHandler = require("./on_error.js").error,
-    successHandler = require("./on_success.js").success
-
 
 // exports the functions as methods that are the 'endpoints' of routes, where logic gets handled and 
 // the output of the method is returned over http as json or any other variable specified. the contents of the response are
@@ -57,13 +53,13 @@ module.exports = {
             if (err) {
 
                 var message = "server error, User not found"
-                return errorHandler(req, res, message, err)
-                
 
+                return res.json({error: true, message: message, info: err})
+            
             }
 
             //returns the results of the query over an http response to the entity where the http request was made
-            return successHandler(req, res, message, results)
+            return res.status(201).json(results)
         })
 
     },
@@ -95,18 +91,16 @@ module.exports = {
             function (err, updated) {
 
                 var updatedMinusPassword = _.omit(updated.toObject(), 'password')
-
-                console.log(updatedMinusPassword)
             
                 if (err) {
                     // if there was an error, this will send the error as an http response to the request that was made
                     var message = "server error, could not update User"
-                    return errorHandler(req, res, message, err)
+                    return res.json({error: true, message: message, info: err})
 
                 } else if (!updated) {
                     // if it could not find the record, sends an error message as a response over http back to where the request was made
                     var message = "server error, User not found"
-                    return errorHandler(req, res, message, err)
+                    return res.json({error: true, message: message, info: err})
 
                 } else {
                     // sends the newly updated record over http request back to where the request was made
@@ -131,13 +125,13 @@ module.exports = {
                 // if an error occures in the process of selecting or removing the record, the error will be sent
                 // back over an http response to where the http request was made
                 var message = "server error, could not remove User"
-                return errorHandler(req, res, message, err)
+                return res.json({error: true, message: message, info: err})
                 
             }
 
             // if the record was found and removed, a confirmation message will be sent back as an http response to where the request was made
             var message = "User deleted"
-            //return successHandler(req, res, message)
+         
             return res.status(201).json({id: req.params.id})
         })
 
@@ -234,9 +228,7 @@ module.exports = {
                     return next(err)
                 }
 
-    
                 // Respond with JWT if user was created
-
                 var userMinusPassword = _.omit(savedUser.toObject(), 'password')
                 
                 res.status(201).json({
@@ -275,7 +267,7 @@ module.exports = {
         User.findOne({ email }, (err, userExisting) => {
             // If user is not found, return error
             if (err || userExisting == null) {
-                console.log(err, userExisting)
+                
                 res.status(422).json({
                     error: "Your request could not be processed as entered. Please try again."
                 })
@@ -297,7 +289,7 @@ module.exports = {
                 userExisting.save(err => {
                     // If error in saving token, return it
                     if (err) {
-                        console.log(err)
+                       
                         return next(err)
                     }
     
@@ -331,13 +323,9 @@ module.exports = {
                     // send mail with defined transport object
                     transporter.sendMail(mailOptions, (error, info) => {
                         if (error) {
-                            return console.log(error)
+                            return 
                         }
-                        console.log(
-                            "Message %s sent: %s",
-                            info.messageId,
-                            info.response
-                        )
+                    
                     })
     
                     return res.status(200).json({
