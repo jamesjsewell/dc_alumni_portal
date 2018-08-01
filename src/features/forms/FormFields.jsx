@@ -22,16 +22,7 @@ export const FormField = ({
     meta: { touched, error, warning, value, asyncValidating, pristine}
 }) => (
     <div>
-    
-        {/* <input
-            name={input.name}
-            type={type}
-            value={input.value}
-            onChange={input.onChange}
-            placeholder={placeholder}
-            onBlur={input.onBlur}
-            
-        /> */}
+
         <TextField
             select={select? true : false}
             name={input.name}
@@ -127,11 +118,3 @@ export const DatePicker = ({
         />
 )
 
-
-
-//example of a select
-/* <TextField  onChange={(event)=>{this.updatedAccountType(event)}} value={this.state.accountType} select helperText="select your account type" margin="normal">
-<MenuItem value="grad">
-    Grad
-</MenuItem>
-</TextField> */

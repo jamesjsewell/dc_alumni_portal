@@ -9,49 +9,13 @@ import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
 import Grid from '@material-ui/core/Grid'
-
-
-
-// @connect(
-//   state => controller.selector(state),
-//   dispatch => ({
-//     actions: bindActionCreators(controller, dispatch)
-//   })
-// )
+import AlumniLayout from './AlumniLayout.jsx'
 
 class AlumniView extends Component {
 
   constructor(props) {
     
     super(props)
-    this.state = { alumniArray: [] }
-    this.getAlumniArray()
-
-  }
-
-  getAlumniArray(){
-    
-    axios
-			.get(`${API_URL}/users`)
-			.then(response => {
-        
-				if (response.data) {
-          console.log(response.data)
-					this.setState({ alumniArray: response.data })
-					
-				}
-			})
-			.catch(error => { return })
-  }
-
-  generateProfileCards(alumniArray) {
-
-    var rendered = []
-    for(var i = 0; i < alumniArray.length; i++ ){
-      var grad = alumniArray[i]
-      rendered.push(<ProfileCard grad={grad} />)
-    }
-    return rendered
 
   }
 
@@ -60,9 +24,7 @@ class AlumniView extends Component {
     const { user } = this.props
     
     return (
-      <Grid justify="center" alignItems="stretch" container spacing={16}>
-        {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
-      </Grid>
+      <AlumniLayout {...this.props} />
     )
   }
 }

@@ -17,6 +17,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton'
 import Icon from '@material-ui/core/Icon'
 
 class ProfileCard extends Component {
@@ -27,63 +28,56 @@ class ProfileCard extends Component {
 
   }
 
-  generateProfileCards() {
-
-
-  }
-
   render() {
-    const { grad } = this.props
+    const { grad, openModal } = this.props
     
     return (
 
       <Grid item xs>
-        <Paper>
-            <Card>
-                <CardHeader
+      
+        <Card>
+            <CardHeader
 
-                    avatar={
-                        <Avatar
-                            src={grad.avatar}
-                        />}
-                    
-                    title={grad.fname + " " + grad.lname}
-                    subheader={grad.city + " " + grad.state}
-                >
+                avatar={
+                    <Avatar
+                        src={grad.avatar}
+                    />}
+                
+                title={ grad.fname && grad.lname? grad.fname + " " + grad.lname : ''}
+                subheader={grad.city && grad.state? grad.city + " " + grad.state : ''}
+            >
 
-                </CardHeader>
-                <CardContent>
+            </CardHeader>
+            <CardContent>
+                
+                {grad.bio? <Typography component="p">{grad.bio}</Typography>  : null}
 
-                    <Typography component="p">{grad.bio}</Typography> 
-
-                    <List component="ul">
-                        <ListSubheader component="div">skills</ListSubheader>
-                        <Divider />
-                        
-                        {grad.skills.map((skill)=>{
-
-                            return (
-                            <div>
-                                <ListItem>
-                                    <ListItemText primary={skill} />
-                                </ListItem>
-                            </div>)
-
-                        })}
-        
-                    </List>
-
+                {grad.skills && grad.skills.length? <List component="ul">
+                    <ListSubheader component="div">skills</ListSubheader>
                     <Divider />
                     
-                    {grad.willingnessToRelocate? <Paper elevation={0} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography component="span">willing to relocate</Typography></Paper>: null}
-                    
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
+                    {grad.skills.map((skill)=>{
 
-            </Card>
-        </Paper>
+                        return ( 
+                            <ListItem>
+                                <ListItemText primary={skill} />
+                            </ListItem>)
+
+                    })}
+    
+                </List> : null}
+                
+                {grad.willingnessToRelocate? <Paper elevation={0} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography component="span">willing to relocate</Typography></Paper>: null}
+            
+                
+            </CardContent>
+            <CardActions>
+                <IconButton onClick={()=>{openModal(grad)}} color="primary" component="span">
+                    <Icon size="xl">pageview</Icon> 
+                </IconButton>
+            </CardActions>
+
+        </Card>
         
       </Grid>
     )
