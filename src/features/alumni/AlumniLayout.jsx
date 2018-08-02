@@ -5,6 +5,9 @@ import * as controller from "./alumni.js"
 import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
+import githubIcon from "../../images/github.svg"
+import stackIcon from "../../images/stackoverflow.svg"
+import linkedinIcon from "../../images/linkedin.svg"
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -22,6 +25,13 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Paper from '@material-ui/core/Paper'
+import Chip from '@material-ui/core/Chip'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
+import List from "@material-ui/core/ListItem"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemAvatar from "@material-ui/core/ListItemAvatar"
+import ListItemText from "@material-ui/core/ListItemText"
 
 // fname 
 // lname 
@@ -33,6 +43,7 @@ import Paper from '@material-ui/core/Paper'
 
 // website
 // github
+
 // linkedin
 // stackOverflow
 // mediumBlog
@@ -110,47 +121,43 @@ class AlumniLayout extends Component {
                 {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
 
                 { selectedGrad && selectedGrad.email ? <Dialog
-                    fullScreen={false}
+                    fullScreen={true}
                     open={this.state.modal_open ? true : false}
                     aria-labelledby="responsive-dialog-title"
                 >
-                    <DialogTitle id="responsive-dialog-title">
-                        <Paper>
-                        
-                        <Card >
+                    
 
-                            <CardMedia component="img" image={selectedGrad.avatar}>
+                        <Grid justify="center">
 
-
-                            </CardMedia>
-                        
-                            <CardHeader
-                                avatar={
-                                    <Avatar
-                                        src={selectedGrad.avatar}
-                                    />}
-
-                                title={ selectedGrad.fname && selectedGrad.lname? selectedGrad.fname + " " + selectedGrad.lname : null}
-                                subheader={ selectedGrad.city && selectedGrad.state? selectedGrad.city + ", " + selectedGrad.state: null}
-                                />
-                            <CardContent>
                             
-                            </CardContent>
-                        <Avatar  />
-                        </Card>
-                        </Paper>
-                    
-                    </DialogTitle>
+                            <Card>
 
-                    <DialogContent>
-                    
-                        <DialogContentText>
+                                <CardMedia style={{maxWidth: '100px'}} component="img" image={selectedGrad.avatar} />
 
-                            {selectedGrad.bio}
-                            
-                        </DialogContentText>    
+                                <CardContent>
+                                    
+                                </CardContent>
+
+                            </Card>
+
+                            <Grid item xs>
+                                <List component="ul">
+                                    <ListItem button component="a" href="https://www.google.com">
+                                        <ListItemText  primary="Github" />
+                                    </ListItem>
+
+                                    <ListItem button component="a" href="https://www.google.com">
+                                        <ListItemText primary="Linkedin" />
+                                    </ListItem>
+
+                                    <ListItem button component="a" href="https://www.google.com">
+                                        <ListItemText primary="Stack Overflow" />
+                                    </ListItem>
+                                </List>
+                            </Grid>
+
+                        </Grid>
                     
-                    </DialogContent>
 
                     <DialogActions>
                         <Button onClick={()=>{this.closeModal()}} color="primary">
