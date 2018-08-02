@@ -62,7 +62,7 @@ class LoginForm extends Component {
 
                     <CardContent>
 
-                        <Typography gutterBottom variant="headline" component="h2">
+                        <Typography color="primary" gutterBottom variant="headline" component="h2">
                             Login
                         </Typography>
                         <Typography component="p">
@@ -73,7 +73,7 @@ class LoginForm extends Component {
                             <Field type="email" name="email_login" label="email" component={FormField} validate={[check.required, check.email]} required={true}  />
                             <Field type="password" name="password_login" label="password" component={FormField} validate={[check.required]} required={true}  />
 
-                            <Button variant="contained" type="submit">
+                            <Button color="primary" variant="contained" type="submit">
                                 Login
                             </Button>
 

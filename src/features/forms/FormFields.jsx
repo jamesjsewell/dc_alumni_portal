@@ -36,11 +36,11 @@ export const FormField = ({
         {touched &&
             ((error &&
                 <div>
-                    <Typography color="secondary" >{error}</Typography>
+                    <Typography color="error" >{error}</Typography>
                 </div>) ||
                 (warning &&
                     <div>
-                        <Typography color="secondary">{warning}</Typography>
+                        <Typography color="error">{warning}</Typography>
                     </div>))}
     </div>
 )
@@ -73,11 +73,11 @@ export const TextArea = ({
         {touched &&
             ((error &&
                 <div>
-                    <Typography color="secondary" >{error}</Typography>
+                    <Typography color="error" >{error}</Typography>
                 </div>) ||
                 (warning &&
                     <div>
-                        <Typography color="secondary" >{error}</Typography>
+                        <Typography color="error" >{error}</Typography>
                     </div>))}
     </Paper>
 )

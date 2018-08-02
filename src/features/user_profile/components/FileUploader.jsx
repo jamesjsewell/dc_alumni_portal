@@ -48,23 +48,21 @@ class UppyDashboardComponent extends Component {
 	render(){
 
     const {resume, avatar} = this.props
-    console.log(this)
+   
 		return (
       <DashboardModal
-      uppy={this.uppy} 
-      inline={false}
-      trigger= {resume? '.uppy_opener_resume' : '.uppy_opener_avatar'}
-      inline={false}
-      // target= {}
-      // replaceTargetContent= {true}
-      showProgressDetails= {true}
-      note= 'Images only, 1 file, up to 4 MB'
-      closeModalOnClickOutside={true}
-      disablePageScrollWhenModalOpen={false}
-      metaFields = {[
-      { id: 'name', name: 'Name', placeholder: 'file name' },
-      { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
-      ]}
+        uppy={this.uppy} 
+        inline={false}
+        trigger= {resume? '.uppy_opener_resume' : '.uppy_opener_avatar'}
+        inline={false}
+        showProgressDetails= {true}
+        note= 'Images only, 1 file, up to 4 MB'
+        closeModalOnClickOutside={true}
+        disablePageScrollWhenModalOpen={false}
+        metaFields = {[
+        { id: 'name', name: 'Name', placeholder: 'file name' },
+        { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+        ]}
 
       />)
 

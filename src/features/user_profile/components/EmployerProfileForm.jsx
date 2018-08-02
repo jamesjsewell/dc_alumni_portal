@@ -90,7 +90,7 @@ class EmployerProfileForm extends Component {
 
                         <Card>
 
-                            <CardContent>
+                            <CardContent >
                                 
                             <Field type="text" name="companyName" label="Company Name" component={FormField} validate={[check.alphaNumeric]} />
                             <Field type="text" name="companyURL" label="Company URL" component={FormField} />

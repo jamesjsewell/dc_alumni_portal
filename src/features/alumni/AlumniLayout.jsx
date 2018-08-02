@@ -5,9 +5,6 @@ import * as controller from "./alumni.js"
 import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
-import githubIcon from "../../images/github.svg"
-import stackIcon from "../../images/stackoverflow.svg"
-import linkedinIcon from "../../images/linkedin.svg"
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'

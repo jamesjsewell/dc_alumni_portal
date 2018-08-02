@@ -14,8 +14,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { FormField } from "../../forms/FormFields.jsx"
 import * as check from "../../forms/formValidation.js"
 
-
-
 const afterSubmit = (result, dispatch, props) => {
     props.reset();
     props.untouch(["email", "password", "fname", "lname"]);
@@ -54,7 +52,7 @@ class RegisterForm extends Component {
 
                     <CardContent>
 
-                        <Typography gutterBottom variant="headline" component="h2">
+                        <Typography color="secondary" gutterBottom variant="headline" component="h2">
                             Register
                         </Typography>
 
@@ -76,7 +74,7 @@ class RegisterForm extends Component {
                                     <Field type="text" name="phone" label="Phone Number" component={FormField} /> 
                                 </div> : null }
 
-                            <Button type="submit">
+                            <Button color="secondary" type="submit">
                                 register
                             </Button>
 
