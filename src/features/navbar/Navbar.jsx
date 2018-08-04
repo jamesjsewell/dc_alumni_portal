@@ -63,7 +63,7 @@ const MenuDrawer = ( props ) => {
             <ListItemText inset primary="Logout" />
           </MenuItem> : null}
       </MenuList>
-      <Button onClick={(event)=>{toggleDrawer(event, false)}} size="small" color="inherit">close</Button>
+      <Button variant="outlined" onClick={(event)=>{toggleDrawer(event, false)}} size="small" color="inherit">close</Button>
     </Paper>)
 
 }

@@ -10,7 +10,11 @@ import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
 import Grid from '@material-ui/core/Grid'
 import AlumniLayout from './AlumniLayout.jsx'
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = {
+  
+}
 class AlumniView extends Component {
 
   constructor(props) {
@@ -29,4 +33,4 @@ class AlumniView extends Component {
   }
 }
 
-export default withRouter(AlumniView)
+export default withStyles(styles)(withRouter(AlumniView))

@@ -5,6 +5,7 @@ import * as controller from "./alumni.js"
 import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
+import SeeMoreModal from "./SeeMoreModal.jsx"
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -25,10 +26,7 @@ import Paper from '@material-ui/core/Paper'
 import Chip from '@material-ui/core/Chip'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-import List from "@material-ui/core/ListItem"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemAvatar from "@material-ui/core/ListItemAvatar"
-import ListItemText from "@material-ui/core/ListItemText"
+
 
 // fname 
 // lname 
@@ -59,20 +57,20 @@ class AlumniLayout extends Component {
     constructor(props) {
 
         super(props)
-        this.state = { alumniArray: [], modal_open: false, selectedGrad: {} }
+        this.state = { alumniArray: [], modalOpen: false, selectedGrad: {} }
         this.getAlumniArray()
 
     }
 
     openModal(grad){
     
-        this.setState({modal_open: true, selectedGrad: grad })
+        this.setState({modalOpen: true, selectedGrad: grad })
 
     }
 
     closeModal(){
 
-        this.setState({modal_open: false, selectedGrad: {}})
+        this.setState({modalOpen: false, selectedGrad: {}})
 
     }
 
@@ -117,52 +115,8 @@ class AlumniLayout extends Component {
 
                 {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
 
-                { selectedGrad && selectedGrad.email ? <Dialog
-                    fullScreen={true}
-                    open={this.state.modal_open ? true : false}
-                    aria-labelledby="responsive-dialog-title"
-                >
-                    
+                <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} />
 
-                        <Grid justify="center">
-
-                            
-                            <Card>
-
-                                <CardMedia style={{maxWidth: '100px'}} component="img" image={selectedGrad.avatar} />
-
-                                <CardContent>
-                                    
-                                </CardContent>
-
-                            </Card>
-
-                            <Grid item xs>
-                                <List component="ul">
-                                    <ListItem button component="a" href="https://www.google.com">
-                                        <ListItemText  primary="Github" />
-                                    </ListItem>
-
-                                    <ListItem button component="a" href="https://www.google.com">
-                                        <ListItemText primary="Linkedin" />
-                                    </ListItem>
-
-                                    <ListItem button component="a" href="https://www.google.com">
-                                        <ListItemText primary="Stack Overflow" />
-                                    </ListItem>
-                                </List>
-                            </Grid>
-
-                        </Grid>
-                    
-
-                    <DialogActions>
-                        <Button onClick={()=>{this.closeModal()}} color="primary">
-                            close
-                        </Button> 
-                    </DialogActions>
-
-                </Dialog> : null}
 
             </Grid>
         )

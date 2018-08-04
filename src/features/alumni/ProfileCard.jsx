@@ -20,16 +20,29 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton'
 import Icon from '@material-ui/core/Icon'
 
+
+const styles = {
+    card: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%', // 16:9
+    },
+  };
+
 class ProfileCard extends Component {
 
   constructor(props) {
     
     super(props)
 
+    
+
   }
 
   render() {
-    const { grad, openModal } = this.props
+    const { grad, openModal, classes} = this.props
     
     return (
 
@@ -84,4 +97,4 @@ class ProfileCard extends Component {
   }
 }
 
-export default ProfileCard
+export default withStyles(styles)(ProfileCard)
