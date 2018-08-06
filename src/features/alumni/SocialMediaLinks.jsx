@@ -20,11 +20,16 @@ import Divider from "@material-ui/core/Divider";
 const styles={
 
     root:{
-        width: '100%',
-        display: 'block',
-        minWidth: '200px',
-        maxWidth: '250px'
+        margin: 'auto',
+        width: '90%',
+        display: 'flex',
+        justifyContent: 'center'
     },
+
+    avatar:{
+        width: '2rem',
+        height: '2rem'
+    }
 
 }
 
@@ -34,28 +39,16 @@ class SocialMediaLinks extends Component{
         const {classes} = this.props
         return(
           
-            <List className={classes.root} disablePadding dense component="ul">
-                <ListItem dense color="secondary" button component="a" href="https://www.google.com">
-                    <ListItemAvatar >
-                        <Avatar src={githubIcon} />
-                    </ListItemAvatar>
-                    <ListItemText primary="github"/>
-                </ListItem>
-                <Divider inset />
-                <ListItem dense button component="a" href="https://www.google.com">
-                    <ListItemAvatar >
-                        <Avatar src={linkedinIcon} />
-                    </ListItemAvatar>
-                    <ListItemText primary="linkedin"/>
-                </ListItem>
-                <Divider inset />
-                <ListItem dense button component="a" href="https://www.google.com">
-                    <ListItemAvatar >
-                        <Avatar src={stackOverflowIcon} />
-                    </ListItemAvatar>
-                    <ListItemText primary="stack overflow"/>
-                </ListItem>
-            </List>
+            <Paper elevation={0} className={classes.root} component="div">
+                    
+                        <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={githubIcon} />
+                    
+                        <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={linkedinIcon} />
+            
+                        <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={stackOverflowIcon} />
+                 
+                  
+            </Paper>
           
         )
         
