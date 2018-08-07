@@ -114,14 +114,12 @@ class SeeMoreModal extends Component {
                                     <Divider />
 
                                 <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
-                                    <List>
+                                    <List style={{display: 'block'}}>
                                         <Typography variant='subheading'>Digital Crafts</Typography>
                                         {graduationDate? <ListItem><ListItemText primary={graduationDate} secondary="Graduated"/></ListItem> : null}
-                                        {selectedGrad.DCprogramType? <ListItem><ListItemText secondary="Program"/><Typography>{selectedGrad.DCprogramType}</Typography></ListItem>  : null}
+                                        {selectedGrad.DCprogramType? <ListItem><ListItemText primary={selectedGrad.DCprogramType} secondary="Course"/></ListItem>  : null}
                                     </List>
                                 </Paper>
-
-                        
 
                                 <Divider />
 

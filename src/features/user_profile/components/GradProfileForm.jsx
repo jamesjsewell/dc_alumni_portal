@@ -1,7 +1,7 @@
 import _ from "underscore"
 import React, { Component } from "react"
 import { Form, Field, reduxForm, change, reset } from "redux-form"
-import { FormField, TextArea, RadioSelect, DatePicker } from "../../forms/FormFields.jsx"
+import { FormField, TextArea, RadioSelect, DatePicker} from "../../forms/FormFields.jsx"
 import * as check from "../../forms/formValidation.js"
 
 import Grid from '@material-ui/core/Grid'
@@ -85,7 +85,7 @@ const afterSubmit = (result, dispatch, props) => {
 class GradProfileForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: this.props.user.skills}
+        this.state = {expanded: 'panel1', password_dialog_open: false, selectedSkills: this.props.user.skills, programType: this.props.user.DCprogramType}
         var userValues = _.omit(this.props.user, "__v", "_id", "updatedAt", "password")
         fieldValues = _.extend(fieldValues, userValues)
         
@@ -116,6 +116,7 @@ class GradProfileForm extends Component {
     doThisOnSubmit(input) {
        
         input.skills = this.state.selectedSkills
+        input.DCprogramType = this.state.programType
         this.props.updateUser(this.props.user._id, input)
        
     }
@@ -126,6 +127,10 @@ class GradProfileForm extends Component {
             this.setState({ selectedSkills: event.target.value })
         }
       
+    }
+
+    selectProgramType(event){
+        this.setState({ programType: event.target.value })
     }
 
     handleExpansionPanel(event, expanded, panel){
@@ -144,7 +149,7 @@ class GradProfileForm extends Component {
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
                 <Grid container spacing={24}>
                     <Grid item>
-                        <ExpansionPanel  expanded={expanded === 'panel2'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel2')}}>
+                        <ExpansionPanel expanded={expanded === 'panel2'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel2')}}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-2" />}>
                                 <Typography> Info </Typography>
                             </ExpansionPanelSummary>
@@ -156,8 +161,39 @@ class GradProfileForm extends Component {
                                     <Field type="text" name="state" label="State" component={FormField} validate={[check.alphaNumeric]}  />
                                     <Field type="text" name="website" label="Personal Website" component={FormField} />
                                     <Field type="text" name="publicEmail" label="Public Email" component={FormField} validate={[check.email]}  />
-                                    <Field id="willingnessToRelocate" name="willingnessToRelocate" component={RadioSelect} type="checkbox" label="Willing to Relocate?"/>
-                                    <Field id="DCgraduationDate" name="DCgraduationDate" component={DatePicker} label="Graduated from DC"/>
+                        
+                                        <Typography style={{marginTop: '1rem'}}> Course Type </Typography>
+                                        <Select
+                                                
+                                            style={{marginBottom: '2rem'}}
+                                            value={this.state.programType}
+                                            onChange={(event)=>{this.selectProgramType(event)}}
+                                            input={<Input placeholder="Course Type" name="DCprogramType" />}
+                                            renderValue={selected => (
+                                                <Typography variant="caption">
+                                                    {selected}
+                                                </Typography>
+                                            )}
+                                                
+                                            >
+                                            
+                                                <MenuItem
+                                                    value="Immersive"
+                                                >
+                                                    Immersive
+                                                </MenuItem>
+
+                                                <MenuItem
+                                                    value="Flex"
+                                                >
+                                                    Flex
+                                                </MenuItem>
+                                        
+                                        </Select>
+                                
+                                        <Field id="DCgraduationDate" name="DCgraduationDate" component={DatePicker} label="graduation"/>
+                                        <Field id="willingnessToRelocate" name="willingnessToRelocate" component={RadioSelect} type="checkbox" label="Willing to Relocate?"/>
+                                        
                                 </FormGroup>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -196,15 +232,12 @@ class GradProfileForm extends Component {
                         </ExpansionPanel>
                             
                     </Grid>
-
-                    <Grid item>
-
-                        <Button variant="outlined" type="submit">
-                            Save
-                        </Button>
-                    </Grid>
-
+        
                 </Grid>
+
+                <Button style={{margin: '1rem'}} variant="outlined" type="submit">
+                    Save
+                </Button>
             
             </form >)
     }

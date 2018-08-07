@@ -55,7 +55,7 @@ export const TextArea = ({
     initialValues,
     meta: { touched, error, warning, value, asyncValidating, pristine }
 }) => (
-    <Paper>
+    <Paper style={{width: '100%'}}>
 
     
         <TextField
@@ -88,15 +88,15 @@ export const RadioSelect = ({
     meta: {  value }
 }) => (
     <FormControlLabel
-          control={
+        style={{marginTop: '2rem'}}
+        control={
             <Switch
-              checked={input.checked}
-              onChange={input.onChange}
-              value={input.value.toString()}
-              color="default"
-            />
-          }
-          label={label}
+                checked={input.checked}
+                onChange={input.onChange}
+                value={input.value.toString()}
+                color="default"
+            />}
+        label={label}
         />
 )
 
