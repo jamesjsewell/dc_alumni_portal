@@ -46,9 +46,9 @@ class ProfileCard extends Component {
     
     return (
 
-      <Grid item xs>
+      <Grid item>
       
-        <Card>
+        <Card elevation={5} style={{ width: '300px'}}>
             <CardHeader
 
                 avatar={
@@ -57,30 +57,37 @@ class ProfileCard extends Component {
                     />}
                 
                 title={ grad.fname && grad.lname? grad.fname + " " + grad.lname : ''}
-                subheader={grad.city && grad.state? grad.city + " " + grad.state : ''}
+        
             >
 
             </CardHeader>
             <CardContent>
+
+                <Paper elevation={0} style={{width: '98%' , height: '25px', padding: '.2rem', margin: '.2rem'}} elevation={0}>
+                    <Typography variant="caption">{grad.city && grad.state? grad.city + " " + grad.state : 'location not set'}</Typography>
+                </Paper>
+
+                <Divider />
                 
-                {grad.bio? <Typography component="p">{grad.bio}</Typography>  : null}
+                <Paper elevation={0} style={{ margin: 'auto', width: '98%', height: '90px', padding: '.2rem', margin: '.2rem' }}><Typography component="p">{grad.bio}</Typography></Paper>
 
-                {grad.skills && grad.skills.length? <List component="ul">
-                    <ListSubheader component="div">skills</ListSubheader>
-                    <Divider />
-                    
-                    {grad.skills.map((skill)=>{
+                <Paper elevation={0} style={{ margin: 'auto', marginBottom: '1rem', width: '98%', height: '70px', padding: '.2rem', margin: '.2rem'}}> {grad.skills && grad.skills.length? 
+                    <div>
+                        <Typography style={{padding: '.2rem'}} align="left" variant="subheading">skills</Typography>
+            
+                        {grad.skills.map((skill)=>{
 
-                        return ( 
-                            <ListItem>
-                                <ListItemText primary={skill} />
-                            </ListItem>)
+                            return (<Chip style={{fontSize: '.6rem', background: 'none', border: `solid rgba(0,0,0,.1)`}} label={skill} />)
 
-                    })}
+                        })}
     
-                </List> : null}
+                    </div> : null} 
+                    
+                </Paper>
+
+                <Divider />
                 
-                {grad.willingnessToRelocate? <Paper elevation={0} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography component="span">willing to relocate</Typography></Paper>: null}
+                <Paper  elevation={0} style={{ width: '98%', height: '40px', padding: '.2rem', margin: '.2rem', marginTop: '2rem'}} square> {grad.willingnessToRelocate? <div style={{display: 'flex', width: '100%'}}><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography align="right" variant="caption">willing to relocate</Typography></div> : <div><Typography component="p"></Typography></div> }</Paper>
             
                 
             </CardContent>

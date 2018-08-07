@@ -43,8 +43,10 @@ class ProfileView extends Component {
     
     return (
     
-      
-        <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} /> 
+        <div>
+          <Typography style={{marginTop: '1rem'}} align="center" variant="display1"> Account </Typography>
+          <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} /> 
+        </div>
 
     )
   }

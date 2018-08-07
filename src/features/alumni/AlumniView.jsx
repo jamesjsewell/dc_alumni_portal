@@ -11,9 +11,10 @@ import ProfileCard from "./ProfileCard.jsx"
 import Grid from '@material-ui/core/Grid'
 import AlumniLayout from './AlumniLayout.jsx'
 import { withStyles } from '@material-ui/core/styles';
+import Typography from "@material-ui/core/Typography";
 
 const styles = {
-  
+
 }
 class AlumniView extends Component {
 
@@ -28,7 +29,10 @@ class AlumniView extends Component {
     const { user } = this.props
     
     return (
-      <AlumniLayout {...this.props} />
+      <div>
+        <Typography  align="center" style={{margin: 'auto', padding: '1rem'}} variant="display1">Digital Crafts Alumni</Typography>
+        <AlumniLayout {...this.props} />
+      </div>
     )
   }
 }

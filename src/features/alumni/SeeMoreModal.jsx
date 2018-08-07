@@ -100,12 +100,12 @@ class SeeMoreModal extends Component {
                                     <Paper elevation={0} style={{ maxWidth: '100%', padding: '.5rem'}}>
                                 
 
-                                        <Paper style={{width: 'auto', margin: '.5rem', padding: '.5rem'}}>
+                                        <Paper elevation={0} style={{width: 'auto', margin: '.5rem', padding: '.5rem'}}>
                                             <Typography style={{padding: '.2rem'}} variant="subheading" >skills</Typography>
                                             { selectedGrad.skills.length? selectedGrad.skills.map((skill)=>{ return <Chip style={{fontSize: '.8rem', background: 'none', border: `.2rem solid rgba(0,0,0,.1)`}} label={skill}></Chip> }) : null }
                                         </Paper>
 
-                                        <Paper sstyle={{width: 'auto', margin: '.5rem', padding: '.5rem'}}> 
+                                        <Paper elevation={0} sstyle={{width: 'auto', margin: '.5rem', padding: '.5rem'}}> 
                                             <List>
                                                 <Typography variant='subheading'>Digital Crafts</Typography>
                                                 {selectedGrad.DCgraduationDate? <ListItem><ListItemText secondary="Graduated"/><Typography>{selectedGrad.DCgraduationDate}</Typography></ListItem> : null}

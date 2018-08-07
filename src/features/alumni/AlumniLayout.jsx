@@ -111,7 +111,7 @@ class AlumniLayout extends Component {
         
         return (
 
-            <Grid justify="center" alignItems="stretch" container spacing={16}>
+            <Grid style={{marginTop: '2rem'}} justify="center" alignItems="stretch" alignContent="stretch"  container spacing={16}>
 
                 {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
 

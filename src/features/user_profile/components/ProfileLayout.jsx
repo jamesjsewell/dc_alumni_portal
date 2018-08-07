@@ -42,7 +42,7 @@ export default class ProfileLayout extends Component {
         const { user, updateUser} = this.props
         return(
             
-            <Grid container justify="center" spacing={24}>
+            <Grid style={{marginTop: '2rem'}} container justify="center" spacing={24}>
                <Grid item>
                     <Card>
                         <CardContent>
