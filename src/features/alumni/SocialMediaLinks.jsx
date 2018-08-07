@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import githubIcon from '../../images/github.svg'
 import linkedinIcon from '../../images/linkedin.svg'
 import stackOverflowIcon from '../../images/stack_overflow.svg'
+import mediumIcon from '../../images/medium_com.svg'
 
 import Chip from '@material-ui/core/Chip'
 import Paper from '@material-ui/core/Paper'
@@ -23,7 +24,8 @@ const styles={
         margin: 'auto',
         width: '90%',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: '.2rem'
     },
 
     avatar:{
@@ -41,13 +43,14 @@ class SocialMediaLinks extends Component{
           
             <Paper elevation={0} className={classes.root} component="div">
                     
-                        <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={githubIcon} />
+                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={githubIcon} />
                     
-                        <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={linkedinIcon} />
+                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={linkedinIcon} />
             
-                        <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={stackOverflowIcon} />
+                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={stackOverflowIcon} />
                  
-                  
+                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={mediumIcon} />
+
             </Paper>
           
         )
