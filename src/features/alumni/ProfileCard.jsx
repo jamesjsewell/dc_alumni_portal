@@ -77,7 +77,7 @@ class ProfileCard extends Component {
             
                         {grad.skills.map((skill)=>{
 
-                            return (<Chip style={{fontSize: '.6rem', background: 'none', border: `solid rgba(0,0,0,.1)`}} label={skill} />)
+                            return (<Chip style={{fontSize: '.8rem', background: 'none', border: 'none'}} label={skill} />)
 
                         })}
     

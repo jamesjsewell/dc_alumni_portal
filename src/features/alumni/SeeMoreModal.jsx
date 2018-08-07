@@ -76,9 +76,9 @@ class SeeMoreModal extends Component {
                 <DialogTitle>{selectedGrad.fname + ' ' + selectedGrad.lname}</DialogTitle>
                     <DialogContent>
 
-                        <Paper style={{display: 'flex', flexWrap: 'wrap'}}>
+                        <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap'}}>
                             
-                            <Paper elevation={1} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', margin: 'auto', padding: '.5rem'}}>
+                            <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', margin: 'auto', padding: '.5rem'}}>
                                 <Paper elevation={0} style={{margin: 'auto', width:'140px', padding: '.5rem'}}>   
                                     <img style={{width: '140px', height: 'auto'}} src={selectedGrad.avatar} />
                                     <SocialMediaLinks />
@@ -103,31 +103,29 @@ class SeeMoreModal extends Component {
                             </Paper> 
                              
                             
-                            <Paper elevation={0} style={{padding: '.5rem', margin: '.5rem'}}>
-                            
-                                <Paper elevation={0} style={{ width: 'auto', padding: '.5rem'}}>
+                            <Paper elevation={0} style={{padding: '.5rem', marginLeft: '.5rem'}}>
                             
 
-                                    <Paper elevation={0} style={{width: '90%', margin: '.5rem', padding: '.5rem'}}>
-                                        <Typography style={{padding: '.2rem'}} variant="subheading" >skills</Typography>
-                                        { selectedGrad.skills.length? selectedGrad.skills.map((skill)=>{ return <Chip style={{fontSize: '.8rem', background: 'none', border: `none`}} label={skill}></Chip> }) : null }
-                                    </Paper>
-
-                                     <Divider />
-
-                                    <Paper elevation={0} sstyle={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
-                                        <List>
-                                            <Typography variant='subheading'>Digital Crafts</Typography>
-                                            {graduationDate? <ListItem><ListItemText primary={graduationDate} secondary="Graduated"/></ListItem> : null}
-                                            {selectedGrad.DCprogramType? <ListItem><ListItemText secondary="Program"/><Typography>{selectedGrad.DCprogramType}</Typography></ListItem>  : null}
-                                        </List>
-                                    </Paper>
-
+                                <Paper elevation={0} style={{width: '90%', margin: '.5rem', padding: '.5rem'}}>
+                                    <Typography style={{padding: '.2rem'}} variant="subheading" >skills</Typography>
+                                    { selectedGrad.skills.length? selectedGrad.skills.map((skill)=>{ return <Chip style={{ border: `none`}} label={skill}></Chip> }) : null }
                                 </Paper>
+
+                                    <Divider />
+
+                                <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
+                                    <List>
+                                        <Typography variant='subheading'>Digital Crafts</Typography>
+                                        {graduationDate? <ListItem><ListItemText primary={graduationDate} secondary="Graduated"/></ListItem> : null}
+                                        {selectedGrad.DCprogramType? <ListItem><ListItemText secondary="Program"/><Typography>{selectedGrad.DCprogramType}</Typography></ListItem>  : null}
+                                    </List>
+                                </Paper>
+
+                        
 
                                 <Divider />
 
-                                {selectedGrad.willingnessToRelocate? <Paper elevation={0} style={{marginTop: '1rem'}} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography component="span">willing to relocate</Typography></Paper>: null}
+                                {selectedGrad.willingnessToRelocate? <Paper elevation={0} style={{marginTop: '1rem'}} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography variant="caption">willing to relocate</Typography></Paper>: null}
                                 
                             </Paper>
 
