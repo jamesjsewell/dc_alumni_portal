@@ -161,38 +161,44 @@ class GradProfileForm extends Component {
                                     <Field type="text" name="state" label="State" component={FormField} validate={[check.alphaNumeric]}  />
                                     <Field type="text" name="website" label="Personal Website" component={FormField} />
                                     <Field type="text" name="publicEmail" label="Public Email" component={FormField} validate={[check.email]}  />
-                        
-                                        <Typography style={{marginTop: '1rem'}}> Course Type </Typography>
-                                        <Select
-                                                
-                                            style={{marginBottom: '2rem'}}
-                                            value={this.state.programType}
-                                            onChange={(event)=>{this.selectProgramType(event)}}
-                                            input={<Input placeholder="Course Type" name="DCprogramType" />}
-                                            renderValue={selected => (
-                                                <Typography variant="caption">
-                                                    {selected}
-                                                </Typography>
-                                            )}
-                                                
-                                            >
-                                            
-                                                <MenuItem
-                                                    value="Immersive"
-                                                >
-                                                    Immersive
-                                                </MenuItem>
 
-                                                <MenuItem
-                                                    value="Flex"
+                                        <Paper style={{padding: '.8rem', marginTop: '1rem'}}>
+
+                                            <Typography> Course Type </Typography>
+
+                                            <Select
+                                                style={{marginBottom: '1rem'}}
+                                                value={this.state.programType}
+                                                onChange={(event)=>{this.selectProgramType(event)}}
+                                                input={<Input placeholder="Course Type" name="DCprogramType" />}
+                                                renderValue={selected => (
+                                                    <Typography variant="caption">
+                                                        {selected}
+                                                    </Typography>
+                                                )}
+                                                    
                                                 >
-                                                    Flex
-                                                </MenuItem>
-                                        
-                                        </Select>
-                                
-                                        <Field id="DCgraduationDate" name="DCgraduationDate" component={DatePicker} label="graduation"/>
-                                        <Field id="willingnessToRelocate" name="willingnessToRelocate" component={RadioSelect} type="checkbox" label="Willing to Relocate?"/>
+                                                
+                                                    <MenuItem
+                                                        value="Immersive"
+                                                    >
+                                                        Immersive
+                                                    </MenuItem>
+
+                                                    <MenuItem
+                                                        value="Flex"
+                                                    >
+                                                        Flex
+                                                    </MenuItem>
+                                            
+                                            </Select>
+                                            
+                                            <Typography> Graduation </Typography>
+                                            <Field id="DCgraduationDate" name="DCgraduationDate" component={DatePicker}/>
+
+                                        </Paper>
+
+                                        <Field id="willingnessToRelocate" name="willingnessToRelocate" component={RadioSelect} type="checkbox" label="Willing to Relocate?"/>   
                                         
                                 </FormGroup>
                             </ExpansionPanelDetails>
@@ -235,7 +241,7 @@ class GradProfileForm extends Component {
         
                 </Grid>
 
-                <Button style={{margin: '1rem'}} variant="outlined" type="submit">
+                <Button style={{margin: '1rem'}} variant="contained" type="submit">
                     Save
                 </Button>
             

@@ -99,22 +99,18 @@ export const RadioSelect = ({
         label={label}
         />
 )
-
+    
 export const DatePicker = ({
     input,
     label,
     meta: {  value }
 }) => (
 
-    <FormControlLabel
-          control={
-            <TextField
-                value={input.value}
-                onChange={input.onChange}
-                type="date"
-            />
-          }
-          label={label}
-        />
+    <TextField
+        value={input.value}
+        onChange={input.onChange}
+        type="date"
+    />    
+    
 )
 
