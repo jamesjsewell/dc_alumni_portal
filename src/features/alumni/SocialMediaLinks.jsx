@@ -43,13 +43,13 @@ class SocialMediaLinks extends Component{
           
             <Paper elevation={0} className={classes.root} component="div">
                     
-                { github? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={githubIcon} /> : null}
+                { github? <Avatar className={classes.avatar} component="a" href={github} src={githubIcon} /> : null}
                     
-                { linkedin? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={linkedinIcon} /> : null}
+                { linkedin? <Avatar className={classes.avatar} component="a" href={linkedin} src={linkedinIcon} /> : null}
             
-                { stackOverflow? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={stackOverflowIcon} /> : null}
+                { stackOverflow? <Avatar className={classes.avatar} component="a" href={stackOverflow} src={stackOverflowIcon} /> : null}
                  
-                { medium? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={mediumIcon} /> : null}
+                { medium? <Avatar className={classes.avatar} component="a" href={medium} src={mediumIcon} /> : null}
 
             </Paper>
           

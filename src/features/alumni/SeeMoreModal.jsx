@@ -89,9 +89,9 @@ class SeeMoreModal extends Component {
                                 {selectedGrad.bio? 
                                     <Paper elevation={0} style={{margin: '.1rem'}} >
                                         <Paper elevation={0} style={{maxWidth: '100%', padding: '.1rem', display: 'flex', flexWrap: 'wrap' , justifyContent: 'center'}}>
-                                            <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href="http://www.jamesjsewell.com">website</Button>
-                                            <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href="http://www.jamesjsewell.com">portfolio</Button>
-                                            <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href="http://www.jamesjsewell.com">resume</Button>  
+                                            { selectedGrad.website? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.website}>website</Button> : null}
+                                            { selectedGrad.portfolio? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.portfolio} >portfolio</Button> : null}
+                                            { selectedGrad.resume? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.resume} >resume</Button> : null} 
                                     
                                         </Paper> 
                                         
