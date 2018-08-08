@@ -61,17 +61,18 @@ class ProfileCard extends Component {
             >
 
             </CardHeader>
-            <CardContent>
+            <CardContent style={{paddingBottom: '0'}}>
 
-                <Paper elevation={0} style={{width: '98%' , height: '25px', padding: '.2rem', margin: '.2rem'}} elevation={0}>
-                    <Typography variant="caption">{grad.city && grad.state? grad.city + " " + grad.state : 'location not set'}</Typography>
+                <Paper elevation={0} style={{width: '98%' , height: '25px', padding: '.2rem', marginBottom: '1rem', marginTop: '0px'}} elevation={0}>
+                    <Typography variant="caption">{grad.city && grad.state? grad.city + ", " + grad.state : 'location not set'}</Typography>
+                    {grad.willingnessToRelocate? <Typography  align="right" variant="caption">willing to relocate</Typography> : null}
                 </Paper>
 
                 <Divider />
                 
                 <Paper elevation={0} style={{ margin: 'auto', width: '98%', height: '90px', padding: '.2rem', margin: '.2rem' }}><Typography component="p">{grad.bio}</Typography></Paper>
 
-                <Paper elevation={0} style={{ margin: 'auto', marginBottom: '1rem', width: '98%', height: '70px', padding: '.2rem', margin: '.2rem'}}> {grad.skills && grad.skills.length? 
+                <Paper elevation={0} style={{ margin: 'auto', marginBottom: '0px', width: '98%', height: '70px', padding: '.2rem', margin: '.2rem'}}> {grad.skills && grad.skills.length? 
                     <div>
                         <Typography style={{padding: '.2rem'}} align="left" variant="subheading">skills</Typography>
             
@@ -84,10 +85,6 @@ class ProfileCard extends Component {
                     </div> : null} 
                     
                 </Paper>
-
-                <Divider />
-                
-                <Paper  elevation={0} style={{ width: '98%', height: '40px', padding: '.2rem', margin: '.2rem', marginTop: '2rem'}} square> {grad.willingnessToRelocate? <div style={{display: 'flex', width: '100%'}}><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography align="right" variant="caption">willing to relocate</Typography></div> : <div><Typography component="p"></Typography></div> }</Paper>
             
                 
             </CardContent>
