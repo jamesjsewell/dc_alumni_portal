@@ -1,29 +1,49 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
+
+import GradProfileForm from "./GradProfileForm.jsx"
+import UppyDashboardComponent from "./FileUploader.jsx"
+import EmployerProfileForm from "./EmployerProfileForm.jsx"
+import ForgotPasswordForm from "../../user_auth/components/ForgotPasswordForm.jsx"
 
 //material-ui
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
-import CardHeader from '@material-ui/core/CardHeader';
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Icon from '@material-ui/core/Icon'
+import IconButton from '@material-ui/core/IconButton'
+import Avatar from '@material-ui/core/Avatar'
+import CardHeader from '@material-ui/core/CardHeader'
+import Divider from '@material-ui/core/Divider'
 
-import GradProfileForm from "./GradProfileForm.jsx"
-import UppyDashboardComponent from "./FileUploader.jsx"
-import EmployerProfileForm from "./EmployerProfileForm.jsx";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 
 export default class ProfileLayout extends Component {
+
     constructor(props) {
-        super(props);
+        super(props)
+        this.state = {password_dialog_open: false}
 
     }
+
+    openPasswordDialog(){
+        this.setState({password_dialog_open: true})
+    }
+
+    closePasswordDialog(){
+        this.setState({password_dialog_open: false})
+    }
+
 
     removeFile(type){
         var userId = this.props.user._id
@@ -39,15 +59,22 @@ export default class ProfileLayout extends Component {
     }
 
     render(){
-        const { user, updateUser} = this.props
+        const { user, updateUser, getForgotPasswordToken} = this.props
+        const { password_request } = this.props.userState
         return(
             
             <Grid style={{marginTop: '2rem'}} container justify="center" spacing={24}>
                <Grid item>
                     <Card>
                         <CardContent>
+                        
+                        <Divider />
                         {user && user.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} /> : null}
                         {user && user.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
+
+                        <Divider />
+
+                        <Button style={{margin: '.5rem'}} variant="outlined" size="small" onClick={()=>{this.openPasswordDialog()}}>reset password?</Button>
                         </CardContent>
                     </Card>
                </Grid> 
@@ -83,7 +110,37 @@ export default class ProfileLayout extends Component {
                             {user.resume? <IconButton onClick={(event)=>{this.removeFile('resume')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
+
+                    
                </Grid> : null } 
+
+               <Dialog
+                    fullScreen={false}
+                    open={this.state.password_dialog_open ? true : false}
+                    // onClose={this.handleClose}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <DialogTitle id="responsive-dialog-title">{password_request === "sent"? "Success!" : "Password Change "}</DialogTitle>
+
+                    <DialogContent>
+                        <Card>
+                            <CardContent>
+                                <DialogContentText>
+                                    { password_request === null || password_request === "failed" ? "enter the email associated with this account" : null }
+                                    { password_request === "sending" ? "...sending request" : null }
+                                    { password_request === "sent" ? "an email was sent to the address you provided, open the email to continue. Follow the link in the most recent email from us. If you do not receive the email soon, try again." : null }
+                                </DialogContentText>
+                            </CardContent>
+                        </Card>
+                        <ForgotPasswordForm password_request={password_request} getForgotPasswordToken={getForgotPasswordToken}/> 
+                    
+                    </DialogContent>
+                    <DialogActions>
+                        { password_request != "sending"? <Button onClick={()=>{this.closePasswordDialog()}} color="primary">
+                            close
+                        </Button> : null }
+                    </DialogActions>
+                </Dialog>
             </Grid>
        )
     }
