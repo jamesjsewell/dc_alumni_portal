@@ -52,7 +52,7 @@ class RegisterForm extends Component {
 
                     <CardContent>
 
-                        <Typography color="secondary" gutterBottom variant="headline" component="h2">
+                        <Typography gutterBottom variant="headline" component="h2">
                             Register
                         </Typography>
 
@@ -74,7 +74,7 @@ class RegisterForm extends Component {
                                     <Field type="text" name="phone" label="Phone Number" component={FormField} /> 
                                 </div> : null }
 
-                            <Button color="secondary" type="submit">
+                            <Button type="submit">
                                 register
                             </Button>
 

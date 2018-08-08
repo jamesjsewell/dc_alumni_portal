@@ -25,7 +25,7 @@ export default class AuthLayout extends Component {
 
         return(
 
-            <Grid  justify="center" direction="row" container spacing={16}>
+            <Grid style={{marginTop: '2rem'}} justify="center" direction="row" container spacing={16}>
 
                 <LoginForm 
 

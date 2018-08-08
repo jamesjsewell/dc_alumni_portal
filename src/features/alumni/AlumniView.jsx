@@ -30,7 +30,7 @@ class AlumniView extends Component {
     
     return (
       <div>
-        <Typography  align="center" style={{margin: 'auto', padding: '1rem'}} variant="display1">Digital Crafts Alumni</Typography>
+        <Typography  align="center" style={{marginTop: '1rem'}} variant="display1">Digital Crafts Alumni</Typography>
         <AlumniLayout {...this.props} />
       </div>
     )
