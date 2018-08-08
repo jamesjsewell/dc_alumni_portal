@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
-import * as controller from "./alumni.js"
 import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
@@ -26,30 +25,6 @@ import Paper from '@material-ui/core/Paper'
 import Chip from '@material-ui/core/Chip'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-
-
-// fname 
-// lname 
-// city
-// state
-// bio
-
-// resume
-
-// website
-// github
-
-// linkedin
-// stackOverflow
-// mediumBlog
-// portfolio
-// publicEmail 
-
-// skills
-
-// willingnessToRelocate 
-// DCgraduationDate
-// DCprogramType
 
 
 class AlumniLayout extends Component {

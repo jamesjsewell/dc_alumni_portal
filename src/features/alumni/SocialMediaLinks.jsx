@@ -38,18 +38,18 @@ const styles={
 class SocialMediaLinks extends Component{
     
     render(){
-        const {classes} = this.props
+        const {classes, github, linkedin, stackOverflow, medium} = this.props
         return(
           
             <Paper elevation={0} className={classes.root} component="div">
                     
-                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={githubIcon} />
+                { github? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={githubIcon} /> : null}
                     
-                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={linkedinIcon} />
+                { linkedin? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={linkedinIcon} /> : null}
             
-                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={stackOverflowIcon} />
+                { stackOverflow? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={stackOverflowIcon} /> : null}
                  
-                <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={mediumIcon} />
+                { medium? <Avatar className={classes.avatar} component="a" href="https://www.google.com" src={mediumIcon} /> : null}
 
             </Paper>
           

@@ -73,7 +73,7 @@ class LoginForm extends Component {
                             <Field type="email" name="email_login" label="email" component={FormField} validate={[check.required, check.email]} required={true}  />
                             <Field type="password" name="password_login" label="password" component={FormField} validate={[check.required]} required={true}  />
 
-                            <Button color="primary" variant="contained" type="submit">
+                            <Button style={{marginTop: '1rem'}} size="small" color="primary" variant="contained" type="submit">
                                 Login
                             </Button>
 

@@ -74,7 +74,7 @@ class RegisterForm extends Component {
                                     <Field type="text" name="phone" label="Phone Number" component={FormField} /> 
                                 </div> : null }
 
-                            <Button type="submit">
+                            <Button style={{marginTop: '1rem'}} type="submit">
                                 register
                             </Button>
 

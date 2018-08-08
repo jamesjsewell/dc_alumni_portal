@@ -48,7 +48,7 @@ class ProfileCard extends Component {
 
       <Grid item>
       
-        <Card elevation={5} style={{ width: '300px'}}>
+        <Card style={{ width: '300px'}}>
             <CardHeader
 
                 avatar={

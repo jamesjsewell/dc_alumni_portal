@@ -81,7 +81,7 @@ class SeeMoreModal extends Component {
                             <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', margin: 'auto', padding: '.5rem'}}>
                                 <Paper elevation={0} style={{margin: 'auto', width:'140px', padding: '.5rem'}}>   
                                     <img style={{width: '140px', height: 'auto'}} src={selectedGrad.avatar} />
-                                    <SocialMediaLinks />
+                                    <SocialMediaLinks github={selectedGrad.github? selectedGrad.github : null} linkedin={selectedGrad.linkedin? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog? selectedGrad.mediumBlog : null}/>
 
                                 </Paper>
                                 
