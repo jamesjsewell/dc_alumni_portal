@@ -149,6 +149,7 @@ class GradProfileForm extends Component {
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
                 <Grid container spacing={24}>
                     <Grid item>
+                        <Typography style={{margin: '.5rem'}} variant="caption">for external links, please use full links copied from your browser</Typography>
                         <ExpansionPanel expanded={expanded === 'panel2'} onChange={(event, expanded)=>{this.handleExpansionPanel(event, expanded, 'panel2')}}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="panel-2" />}>
                                 <Typography> Info </Typography>

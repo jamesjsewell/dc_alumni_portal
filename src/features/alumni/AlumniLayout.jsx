@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
+import Cookies from "universal-cookie"
 import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
@@ -26,6 +27,8 @@ import Chip from '@material-ui/core/Chip'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 
+const cookies = new Cookies()
+
 
 class AlumniLayout extends Component {
 
@@ -34,16 +37,50 @@ class AlumniLayout extends Component {
         super(props)
         this.state = { alumniArray: [], modalOpen: false, selectedGrad: {} }
         this.getAlumniArray()
+        
+        var selected_grad_id = cookies.get("selected_grad")
+        
+
+        console.log(selected_grad_id)
+
+        if(selected_grad_id && selected_grad_id.length){
+
+            this.setState({modalOpen: true})
+
+            axios
+			.get(`${API_URL}/users/${selected_grad_id}`)
+			.then(response => {
+               
+				if(response && response.data){
+                   
+					this.setState({selectedGrad: response.data[0], modalOpen: true})
+                }
+                else{
+                    this.setState({modalOpen: false})
+                }
+            
+			
+			})
+			.catch(error => {
+            
+                this.setState({modalOpen: false})
+			})
+
+        }
 
     }
 
     openModal(grad){
+
+        cookies.set("selected_grad", grad._id, { path: "/" })
     
         this.setState({modalOpen: true, selectedGrad: grad })
 
     }
 
     closeModal(){
+
+        cookies.remove("selected_grad", { path: "/" })
 
         this.setState({modalOpen: false, selectedGrad: {}})
 
