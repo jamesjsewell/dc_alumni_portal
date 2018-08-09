@@ -26,13 +26,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
+import DeleteAccountForm from "./DeleteAccountForm.jsx";
 
 
 export default class ProfileLayout extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {password_dialog_open: false}
+        this.state = {password_dialog_open: false, delete_account_open: false}
 
     }
 
@@ -44,6 +45,20 @@ export default class ProfileLayout extends Component {
         this.setState({password_dialog_open: false})
     }
 
+    openDeleteAccount(){
+        this.setState({delete_account_open: true})
+    }
+
+    closeDeleteAccount(){
+        this.setState({delete_account_open: false})
+    }
+
+    removeAccount(email){
+        
+        if(email === this.props.user.email){
+            this.props.deleteUser(this.props.user._id)
+        }
+    }
 
     removeFile(type){
         var userId = this.props.user._id
@@ -74,7 +89,8 @@ export default class ProfileLayout extends Component {
 
                         <Divider />
 
-                        <Button style={{margin: '.5rem'}} variant="outlined" size="small" onClick={()=>{this.openPasswordDialog()}}>reset password?</Button>
+                        <Button style={{margin: '.5rem'}} variant="outlined" size="small" onClick={()=>{this.openPasswordDialog()}}>reset password</Button>
+                        <Button style={{margin: '.5rem'}} size="small" onClick={()=>{this.openDeleteAccount()}}> <Icon>delete</Icon> delete account</Button>
                         </CardContent>
                     </Card>
                </Grid> 
@@ -139,6 +155,34 @@ export default class ProfileLayout extends Component {
                         { password_request != "sending"? <Button onClick={()=>{this.closePasswordDialog()}} color="primary">
                             close
                         </Button> : null }
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    fullScreen={false}
+                    open={this.state.delete_account_open ? true : false}
+                    // onClose={this.handleClose}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <DialogTitle id="responsive-dialog-title">remove account</DialogTitle>
+
+                    <DialogContent>
+                        <DialogContentText>enter the email you used to sign in to permanently remove this account</DialogContentText>
+                        <Card>
+                            <CardContent>
+                                
+                                <DialogContentText>
+                                    <DeleteAccountForm removeAccount={this.removeAccount.bind(this)} />
+                                </DialogContentText>
+                            </CardContent>
+                        </Card>
+                        
+                    
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={()=>{this.closeDeleteAccount()}} color="primary">
+                            close
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </Grid>

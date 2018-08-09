@@ -16,7 +16,7 @@ userRoutes.post("/users/filter", userController.get)
 userRoutes.get("/users/:id", userController.get)
 userRoutes.get("/users", userController.get)
 userRoutes.put("/users/:id", requireAuth, userController.update)
-userRoutes.delete("/users/:id", requireAuth, userController.delete)
+// userRoutes.delete("/users/:id", requireAuth, userController.delete)
 
 
 userRoutes.post("/user/register", userController.register)
@@ -25,5 +25,6 @@ userRoutes.post("/user/forgot-password", userController.forgotPassword)
 userRoutes.post("/user/reset-password/:token", userController.changePassword)
 userRoutes.get("/user/authenticate/:_id", requireAuth, userController.authenticate)
 userRoutes.put("/user/:id", requireAuth, userController.update)
+userRoutes.delete("/user/:id", requireAuth, userController.delete)
 
 module.exports = userRoutes

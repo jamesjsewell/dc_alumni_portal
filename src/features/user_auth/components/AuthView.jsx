@@ -44,11 +44,12 @@ class AuthView extends Component {
           <Typography style={{marginTop: '1rem'}} align="center" variant="display1">welcome</Typography>
           <Typography align="center" variant="caption">login or register</Typography>
           <AuthLayout 
-              match={this.props.match}
-              account_type={this.props.account_type}
+
               register={this.props.actions.register.bind(this)}
               login={this.props.actions.login.bind(this)}
               getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} 
+              match={this.props.match}
+              account_type={this.props.account_type}
               login_error_message={userState.login_error_message}
               register_error_message={userState.register_error_message}
               password_request={userState.password_request}

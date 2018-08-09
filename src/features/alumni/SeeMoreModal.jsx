@@ -66,79 +66,83 @@ class SeeMoreModal extends Component {
         }
 
         return(  selectedGrad && selectedGrad.email ? 
-                <Dialog
-                    fullScreen={false}
-                    open={modalOpen ? true : false}
-                    aria-labelledby="responsive-dialog-title"
-                    classes={{paper: classes.paper}}
-                
-                >
-                <DialogTitle>{selectedGrad.fname + ' ' + selectedGrad.lname}</DialogTitle>
-                    <DialogContent>
+            <Dialog
+                fullScreen={false}
+                open={modalOpen ? true : false}
+                aria-labelledby="responsive-dialog-title"
+                classes={{paper: classes.paper}}
+            
+            >
+            <DialogTitle >
+                {selectedGrad.fname + ' ' + selectedGrad.lname}  
 
-                        <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center'}}>
-                            
-                            <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
-                                <Paper elevation={0} style={{margin: 'auto', width:'140px', padding: '.5rem'}}>   
-                                    <img style={{width: '140px', height: 'auto'}} src={selectedGrad.avatar} />
-                                    <SocialMediaLinks github={selectedGrad.github? selectedGrad.github : null} linkedin={selectedGrad.linkedin? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog? selectedGrad.mediumBlog : null}/>
+                { selectedGrad.city && selectedGrad.state? <Typography align="center" variant="caption">{selectedGrad.city + ', ' + selectedGrad.state}</Typography> : null }
+            </DialogTitle>
+                <DialogContent>
 
-                                </Paper>
-                                
+                    <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center'}}>
+                       
+                        <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
+                            <Paper elevation={0} style={{margin: 'auto', width:'140px', padding: '.5rem'}}>   
+                                <img style={{width: '140px', height: 'auto'}} src={selectedGrad.avatar} />
+                                <SocialMediaLinks github={selectedGrad.github? selectedGrad.github : null} linkedin={selectedGrad.linkedin? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog? selectedGrad.mediumBlog : null}/>
+
+                            </Paper>
                             
-                                
-                                    <Paper elevation={0} style={{margin: '.1rem'}} >
-                                        <Paper elevation={0} style={{maxWidth: '100%', padding: '.1rem', display: 'flex', flexWrap: 'wrap' , justifyContent: 'center'}}>
-                                            { selectedGrad.website? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.website}>website</Button> : null}
-                                            { selectedGrad.portfolio? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.portfolio} >portfolio</Button> : null}
-                                            { selectedGrad.resume? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.resume} >resume</Button> : null} 
-                                    
-                                        </Paper> 
-                                    
-                                
-                                    </Paper> 
-                                
-                                
+            
+                            <Paper elevation={0} style={{margin: '.1rem'}} >
+                                <Paper elevation={0} style={{maxWidth: '100%', padding: '.1rem', display: 'flex', flexWrap: 'wrap' , justifyContent: 'center'}}>
+                                    { selectedGrad.website? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.website}>website</Button> : null}
+                                    { selectedGrad.portfolio? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.portfolio} >portfolio</Button> : null}
+                                    { selectedGrad.resume? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant="outlined" href={selectedGrad.resume} >resume</Button> : null} 
+                            
+                                </Paper> 
+                            
+                        
                             </Paper> 
-                             
                             
-                            <Paper elevation={0} style={{padding: '.5rem', marginLeft: '.5rem'}}>
+                            
+                        </Paper> 
+                            
+                        
+                        <Paper elevation={0} style={{padding: '.5rem', marginLeft: '.5rem'}}>
 
-                                {selectedGrad.bio? <DialogContentText style={{maxWidth: '200px', padding: '.2rem'}}>{selectedGrad.bio}</DialogContentText> : null}
 
-                                <Paper elevation={0} style={{width: '90%', margin: '.5rem', padding: '.5rem'}}>
-                                    <Typography style={{padding: '.2rem'}} variant="subheading" >skills</Typography>
-                                    { selectedGrad.skills.length? selectedGrad.skills.map((skill)=>{ return <Chip style={{ border: `none`}} label={skill}></Chip> }) : null }
-                                </Paper>
+                            {selectedGrad.bio? <DialogContentText style={{maxWidth: '200px', padding: '.2rem'}}>{selectedGrad.bio}</DialogContentText> : null}
 
-                                    <Divider />
-
-                                <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
-                                    <List style={{display: 'block'}}>
-                                        <Typography variant='subheading'>Digital Crafts</Typography>
-                                        {graduationDate? <ListItem><ListItemText primary={graduationDate} secondary="Graduated"/></ListItem> : null}
-                                        {selectedGrad.DCprogramType? <ListItem><ListItemText primary={selectedGrad.DCprogramType} secondary="Course"/></ListItem>  : null}
-                                    </List>
-                                </Paper>
+                            <Paper elevation={0} style={{width: '90%', margin: '.5rem', padding: '.5rem'}}>
+                                <Typography style={{padding: '.2rem'}} variant="subheading" >skills</Typography>
+                                { selectedGrad.skills.length? selectedGrad.skills.map((skill)=>{ return <Chip style={{ border: `none`}} label={skill}></Chip> }) : null }
+                            </Paper>
 
                                 <Divider />
 
-                                {selectedGrad.willingnessToRelocate? <Paper elevation={0} style={{marginTop: '1rem'}} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography variant="caption">willing to relocate</Typography></Paper>: null}
-                                
+                            <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
+                                <List style={{display: 'block'}}>
+                                    <Typography variant='subheading'>Digital Crafts</Typography>
+                                    {graduationDate? <ListItem><ListItemText primary={graduationDate} secondary="Graduated"/></ListItem> : null}
+                                    {selectedGrad.DCprogramType? <ListItem><ListItemText primary={selectedGrad.DCprogramType} secondary="Course"/></ListItem>  : null}
+                                </List>
                             </Paper>
 
+                            <Divider />
+
+                            {selectedGrad.willingnessToRelocate? <Paper elevation={0} style={{marginTop: '1rem'}} square><Icon title="willing to relocate" style={{ fontSize: 30 }} >commute</Icon><Typography variant="caption">willing to relocate</Typography></Paper>: null}
+                            
                         </Paper>
-                        
 
-                    </DialogContent>
-                
-                    <DialogActions>
-                        <Button onClick={()=>{closeModal()}} color="primary">
-                            close
-                        </Button> 
-                    </DialogActions>
+                    </Paper>
+                    
 
-                </Dialog> : null )
+                </DialogContent>
+            
+                <DialogActions>
+                    <Button onClick={()=>{closeModal()}} color="primary">
+                        close
+                    </Button> 
+                </DialogActions>
+
+            </Dialog> : null )
 
     }
 

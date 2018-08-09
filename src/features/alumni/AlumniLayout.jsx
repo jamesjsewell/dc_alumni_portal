@@ -125,7 +125,7 @@ class AlumniLayout extends Component {
 
                 {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
 
-                <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} />
+                <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} />
 
 
             </Grid>
