@@ -39,9 +39,7 @@ class AlumniLayout extends Component {
         this.getAlumniArray()
         
         var selected_grad_id = cookies.get("selected_grad")
-        
-
-        console.log(selected_grad_id)
+    
 
         if(selected_grad_id && selected_grad_id.length){
 

@@ -21,7 +21,9 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 	RESET_PASSWORD = "reset_password",
 	RESET_PASSWORD_ERROR = "reset_password_error",
 	UPDATE_USER = "update_user",
-	ERROR_UPDATING_USER = "error_updating_user"
+	ERROR_UPDATING_USER = "error_updating_user",
+	DELETE_USER = "delete_user",
+	ERROR_DELETING_USER = "error_deleting_user"
 
 
 export function auto_log_in(authenticate_user, loggedInUser){
@@ -261,6 +263,30 @@ export function updateUser(userId, updated) {
 	}
 }
 
+export function deleteUser(userId) {
+	
+	return function(dispatch){
+
+		var token = cookies.get("user_token")
+	
+		axios({ method: 'delete', url: `${API_URL}/user/${userId}`, headers: { Authorization: cookies.get("user_token") }})
+			.then(response => {
+				
+				dispatch({
+					type: DELETE_USER,
+					payload: null
+				})
+			})
+			.catch(error => {
+				
+				dispatch({
+					type: ERROR_DELETING_USER,
+					payload: null
+				})
+			})
+	}
+}
+
 const initial_user = {}
 
 export const userReducer = function(state = initial_user, action) {
@@ -300,6 +326,11 @@ export const userReducer = function(state = initial_user, action) {
             return _.extend({}, state, user)
             break
 
+		}
+
+		case DELETE_USER: {
+
+			return {}
 		}
 
     }

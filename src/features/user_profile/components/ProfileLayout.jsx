@@ -98,7 +98,7 @@ export default class ProfileLayout extends Component {
                             {user.avatar? <IconButton onClick={(event)=>{this.removeFile('avatar')}} size="large" arial_label="remove"><Icon>delete_forever</Icon></IconButton> : null}
                         </CardActions>
                     </Card>
-
+                                    
                     <Card>
                         <CardHeader title="Resume" subheader="Update your resume" />
                         <CardContent>
