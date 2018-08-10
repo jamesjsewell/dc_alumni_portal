@@ -27,6 +27,8 @@ import Chip from '@material-ui/core/Chip'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 
+import FilterGrads from './FilterGrads.jsx'
+
 const cookies = new Cookies()
 
 
@@ -121,14 +123,19 @@ class AlumniLayout extends Component {
         
         return (
 
-            <Grid style={{marginTop: '2rem'}} justify="center" alignItems="stretch" alignContent="stretch"  container spacing={16}>
+            <div style={{marginTop: '2rem'}}>
 
-                {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
+                <FilterGrads />
+                
+                <Grid justify="center" alignItems="stretch" alignContent="stretch"  container spacing={16}>
 
-                <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} />
+                    {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
+
+                    <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} />
 
 
-            </Grid>
+                </Grid>
+            </div>
         )
     }
 }
