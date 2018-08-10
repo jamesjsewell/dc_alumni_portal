@@ -6,6 +6,7 @@ import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
 import SeeMoreModal from "./SeeMoreModal.jsx"
+import FilterGrads from './FilterGrads.jsx'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -26,8 +27,16 @@ import Paper from '@material-ui/core/Paper'
 import Chip from '@material-ui/core/Chip'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import Icon from '@material-ui/core/Icon'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import FilterGrads from './FilterGrads.jsx'
+
+
+
 
 const cookies = new Cookies()
 
@@ -37,7 +46,7 @@ class AlumniLayout extends Component {
     constructor(props) {
 
         super(props)
-        this.state = { alumniArray: [], filteredAlumniArray: null, modalOpen: false, selectedGrad: {} }
+        this.state = { alumniArray: [], filteredAlumniArray: null, filterEnabled: false, modalOpen: false, selectedGrad: {} }
         this.getAlumniArray()
         
         var selected_grad_id = cookies.get("selected_grad")
@@ -160,7 +169,44 @@ class AlumniLayout extends Component {
 
             <div style={{marginTop: '2rem'}}>
 
-                <FilterGrads unFilter={()=>{this.setState({filteredAlumniArray: null})}} filterArray={this.filterArray.bind(this)} grads={this.state.alumniArray} />
+                <ExpansionPanel style={{margin: 'auto', marginBottom: '2rem', maxWidth: '600px'}}>
+                    
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="filter_panel" />}>
+                        {!filteredAlumniArray? <Typography> Filter </Typography> : null}
+                
+                    </ExpansionPanelSummary>
+
+                    <ExpansionPanelDetails style={{display: 'block'}}>
+
+                        {filteredAlumniArray? 
+                            <div><Paper elevation={0}>
+                            
+                                <Button 
+                                    
+                                    onClick={(e)=>{
+                                        e.preventDefault()
+                                        this.setState({filteredAlumniArray: null})
+                                    }} 
+                                    variant="outlined"
+                                    size="small">
+
+                                    <Typography variant="caption"> clear filter  </Typography>
+                                    
+                                </Button> 
+                            
+                                </Paper> 
+                                
+                                <Divider style={{margin: '.5rem'}} />
+                            
+                            </div>: null }
+                            
+                        
+                        <Paper style={{width: '300px', padding: '.5rem'}}><FilterGrads filterEnabled={this.state.filteredAlumniArray? true : false} filterArray={this.filterArray.bind(this)} grads={this.state.alumniArray} /></Paper>
+
+                    </ExpansionPanelDetails>
+
+                </ExpansionPanel>
+                
 
                 <Grid justify="center" alignItems="stretch" alignContent="stretch"  container spacing={16}>
 
@@ -176,3 +222,5 @@ class AlumniLayout extends Component {
 }
 
 export default withRouter(AlumniLayout)
+
+

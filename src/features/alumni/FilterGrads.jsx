@@ -26,6 +26,8 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Input from '@material-ui/core/Input'
 import Switch from '@material-ui/core/Switch'
+import Icon from '@material-ui/core/Icon'
+import IconButton from '@material-ui/core/IconButton'
 
 
 
@@ -78,47 +80,20 @@ class FilterGrads extends Component {
         
     }
 
-    clearForm(){
-        this.setState({ relocate: false, selectedSkills: []})
-        this.props.unFilter()
+    componentWillReceiveProps(nextProps){
+        const {filterEnabled} = this.props
+        if(filterEnabled != nextProps.filterEnabled && nextProps.filterEnabled === false) {
+            this.state.selectedSkills = []
+            this.state.relocate = false
+        }
     }
 
-    // formChange(event){
-
-    //     var filtered = []
-        
-    //     this.props.grads.map((grad) => {
-
-    //         if(this.state.relocate === grad.willingnessToRelocate){
-
-    //             if(this.state.selectedSkills && this.state.selectedSkills.length){
-
-    //                 let found = arr1.some(r=> arr2.indexOf(r) >= 0)
-
-    //                 if(found){
-    //                     return filtered.push(grad)
-    //                 }
-    //                 else{
-    //                     return
-    //                 }
-
-    //             }
-
-    //             filtered.push(grad)
-               
-    //         }   
-
-    //     })
-
-    //     console.log('shit', filtered)
-        
-    // }
-
     render() {
+
         
         return (
 
-            <form>
+            <form style={{display: 'block'}}>
 
                 <FormControl>
 
@@ -130,7 +105,7 @@ class FilterGrads extends Component {
                         onChange={(event)=>{this.handleSkillSelect(event)}}
                         input={<Input id="select-multiple-chip" />}
                         renderValue={selected => (
-                            <div style={{maxWidth: '160px'}}>
+                            <div style={{width: '160px'}}>
                                 {selected.map(value => <Chip key={value} label={value} />)}
                             </div>
                         )}
@@ -147,10 +122,10 @@ class FilterGrads extends Component {
                     </Select>
                 </FormControl> 
 
-
+                <Divider />
                 <FormControlLabel
                     onChange={(event)=>{this.handleRelocate(event)}}
-                    style={{marginTop: '2rem'}}
+                    style={{marginTop: '.5rem'}}
                     control={
                         <Switch
                             name="relocate"
@@ -161,17 +136,6 @@ class FilterGrads extends Component {
                         />}
                     label="willing to relocate"
                     />
-
-                {this.state.relocate || this.state.selectedSkills.length? 
-                <Button 
-                    onClick={(e)=>{
-                        e.preventDefault()
-                        this.clearForm()
-                    }} 
-                    variant="outlined" 
-                    size="small">
-                    clear
-                </Button> : null }
 
             </form>
         )
