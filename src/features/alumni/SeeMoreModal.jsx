@@ -110,20 +110,21 @@ class SeeMoreModal extends Component {
 
                             {selectedGrad.bio? <DialogContentText style={{maxWidth: '200px', padding: '.2rem'}}>{selectedGrad.bio}</DialogContentText> : null}
 
+                            { selectedGrad.skills && selectedGrad.skills.length?
                             <Paper elevation={0} style={{width: '90%', margin: '.5rem', padding: '.5rem'}}>
                                 <Typography style={{padding: '.2rem'}} variant="subheading" >skills</Typography>
-                                { selectedGrad.skills.length? selectedGrad.skills.map((skill)=>{ return <Chip style={{ border: `none`}} label={skill}></Chip> }) : null }
-                            </Paper>
+                                 {selectedGrad.skills.map((skill)=>{ return <Chip style={{ border: `none`}} label={skill}></Chip> }) }
+                            </Paper> : null }
 
-                                <Divider />
+                            <Divider />
 
-                            <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
+                            {selectedGrad.DCprogramType || graduationDate? <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}> 
                                 <List style={{display: 'block'}}>
                                     <Typography variant='subheading'>Digital Crafts</Typography>
                                     {graduationDate? <ListItem><ListItemText primary={graduationDate} secondary="Graduated"/></ListItem> : null}
                                     {selectedGrad.DCprogramType? <ListItem><ListItemText primary={selectedGrad.DCprogramType} secondary="Course"/></ListItem>  : null}
                                 </List>
-                            </Paper>
+                            </Paper> : null}
 
                             <Divider />
 
