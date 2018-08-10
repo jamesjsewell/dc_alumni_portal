@@ -37,7 +37,7 @@ class AlumniLayout extends Component {
     constructor(props) {
 
         super(props)
-        this.state = { alumniArray: [], modalOpen: false, selectedGrad: {} }
+        this.state = { alumniArray: [], filteredAlumniArray: null, modalOpen: false, selectedGrad: {} }
         this.getAlumniArray()
         
         var selected_grad_id = cookies.get("selected_grad")
@@ -86,6 +86,41 @@ class AlumniLayout extends Component {
 
     }
 
+    filterArray(relocate, skillsArray){
+
+
+        var filtered = []
+        
+        this.state.alumniArray.map((grad) => {
+
+            if(relocate === grad.willingnessToRelocate){
+
+                if(skillsArray && skillsArray.length){
+
+                    let found = grad.skills.some(skill=> skillsArray.indexOf(skill) >= 0)
+
+                    if(found){
+                        return filtered.push(grad)
+                    }
+                    else{
+                        return
+                    }
+
+                }
+
+                return filtered.push(grad)
+               
+            }   
+
+        })
+
+
+        this.setState({filteredAlumniArray: filtered})
+        
+       
+    
+    }
+
     getAlumniArray(){
         
         axios
@@ -119,17 +154,17 @@ class AlumniLayout extends Component {
 
     render() {
     
-        const { selectedGrad } = this.state
+        const { selectedGrad, alumniArray, filteredAlumniArray } = this.state
         
         return (
 
             <div style={{marginTop: '2rem'}}>
 
-                <FilterGrads />
-                
+                <FilterGrads unFilter={()=>{this.setState({filteredAlumniArray: null})}} filterArray={this.filterArray.bind(this)} grads={this.state.alumniArray} />
+
                 <Grid justify="center" alignItems="stretch" alignContent="stretch"  container spacing={16}>
 
-                    {this.state.alumniArray.length? this.generateProfileCards(this.state.alumniArray) : null}
+                    {alumniArray.length? this.generateProfileCards(!filteredAlumniArray? alumniArray : filteredAlumniArray) : null}
 
                     <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} />
 

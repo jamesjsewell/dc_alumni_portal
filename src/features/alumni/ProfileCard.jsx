@@ -74,7 +74,7 @@ class ProfileCard extends Component {
 
                 <Paper elevation={0} style={{ margin: 'auto', marginBottom: '0px', width: '98%', height: '70px', padding: '.2rem', margin: '.2rem'}}> {grad.skills && grad.skills.length? 
                     <div>
-                        <Typography style={{padding: '.2rem'}} align="left" variant="subheading">skills</Typography>
+                        <Typography style={{padding: '.2rem'}} align="left" variant="caption">top 3 skills</Typography>
             
                         {grad.skills.map((skill)=>{
 
