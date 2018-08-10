@@ -271,11 +271,25 @@ export function deleteUser(userId) {
 	
 		axios({ method: 'delete', url: `${API_URL}/user/${userId}`, headers: { Authorization: cookies.get("user_token") }})
 			.then(response => {
+
+				if(response.data && response.data.id){
+
+					dispatch({
+						type: DELETE_USER,
+						payload: null
+					})
+					
+				}
+				else{
+
+					dispatch({
+						type: ERROR_DELETING_USER,
+						payload: null
+					})
 				
-				dispatch({
-					type: DELETE_USER,
-					payload: null
-				})
+				}
+				
+				
 			})
 			.catch(error => {
 				
@@ -347,7 +361,8 @@ const initial_user_state = {
 	email_recipient: null,
 	password_did_reset: false,
 	error_resetting_password: false,
-	error_updating_user: true
+	error_updating_user: false,
+	error_deleting_user: false
 
 }
 
@@ -410,6 +425,23 @@ export const userStateReducer = function(state = initial_user_state, action) {
 
 			return _.extend({}, state, { error_updating_user: true})
 			break
+		}
+
+		case UPDATE_USER: {
+
+			return _.extend({}, state, { error_updating_user: false })
+		}
+
+		case ERROR_DELETING_USER: {
+			
+			return _.extend({}, state, { error_deleting_user: true})
+			break
+		}
+
+		case DELETE_USER: {
+
+			return _.extend({}, state, { error_deleting_user: false})
+
 		}
 
     }

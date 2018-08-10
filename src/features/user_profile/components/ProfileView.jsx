@@ -25,7 +25,7 @@ class ProfileView extends Component {
 
   render() {
 
-    const { user, account_type, history, routes, userState } = this.props
+    const { user, account_type, history, routes, userState, error_deleting_user } = this.props
 
     if(user){
       if(!user.email){
@@ -45,7 +45,7 @@ class ProfileView extends Component {
     
         <div>
           <Typography style={{marginTop: '1rem'}} align="center" variant="display1"> Account </Typography>
-          <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} userState={userState} getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)}/> 
+          <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} userState={userState} getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} error_deleting_user={this.props.userState.error_deleting_user}/> 
         </div>
 
     )

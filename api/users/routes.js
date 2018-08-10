@@ -10,14 +10,9 @@ const express = require("express"),
 const requireAuth = passport.authenticate("jwt", { session: false })
 const requireLogin = passport.authenticate("local", { session: false })
 
-
-userRoutes.post("/users", userController.register)
 userRoutes.post("/users/filter", userController.get)
 userRoutes.get("/users/:id", userController.get)
 userRoutes.get("/users", userController.get)
-userRoutes.put("/users/:id", requireAuth, userController.update)
-// userRoutes.delete("/users/:id", requireAuth, userController.delete)
-
 
 userRoutes.post("/user/register", userController.register)
 userRoutes.post("/user/login", requireLogin, userController.login)

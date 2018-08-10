@@ -23,41 +23,49 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
 
-var fieldValues = {}        
+     
 const afterSubmit = (result, dispatch, props) => {
     props.reset()
     props.untouch([])
 
 }
 
+
 class DeleteAccountForm extends Component {
     constructor(props) {
         super(props)
-        this.state = { expanded: 'panel1', password_dialog_open: false }
-        var userValues = _.omit(this.props.user, "__v", "_id", "updatedAt")
-        fieldValues = _.extend(fieldValues, userValues)
+        this.state = { }
+
+        this.emailsMatch = email => ( email != this.props.user.email? 'must match account email' : null )
+        
         
     }
 
     doThisOnSubmit(input) {
        
-
-        this.props.removeAccount(input.email)
+        console.log(input)
+        this.props.removeAccount(input.account_email)
        
     }
 
     render() {
         
-        const { handleSubmit } = this.props
+        const { handleSubmit, error_deleting_user} = this.props
         const { expanded } = this.state
 
         return (
             
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
                                 
-                <Field type="email" name="email" label="email" component={FormField} validate={[check.email]} />
-                
-                <Button variant="outlined" type="submit">
+                <Field 
+                    type="email" 
+                    name="account_email" 
+                    label="email" 
+                    component={FormField}
+                    validate={[check.required, this.emailsMatch]} 
+                />
+                {error_deleting_user === true? <Typography style={{margin: '.5rem'}} color="error">error deleting user</Typography> : null}
+                <Button style={{margin: '.5rem'}} variant="outlined" type="submit">
                     Save
                 </Button>
                   
@@ -71,6 +79,5 @@ export default reduxForm({
     // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
     // asyncBlurFields: ["name"],
     // shouldAsyncValidate,
-    onSubmitSuccess: afterSubmit,
-    initialValues: fieldValues
+    onSubmitSuccess: afterSubmit
 })(DeleteAccountForm)

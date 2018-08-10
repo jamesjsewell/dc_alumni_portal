@@ -58,6 +58,7 @@ export default class ProfileLayout extends Component {
         if(email === this.props.user.email){
             this.props.deleteUser(this.props.user._id)
         }
+        
     }
 
     removeFile(type){
@@ -74,7 +75,7 @@ export default class ProfileLayout extends Component {
     }
 
     render(){
-        const { user, updateUser, getForgotPasswordToken} = this.props
+        const { user, userState, updateUser, getForgotPasswordToken, error_deleting_user} = this.props
         const { password_request } = this.props.userState
         return(
             
@@ -87,6 +88,7 @@ export default class ProfileLayout extends Component {
                         {user && user.account_type === "grad"? <GradProfileForm updateUser={updateUser} user={user} /> : null}
                         {user && user.account_type === "employer"? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
 
+                        {userState.error_updating_user? <Typography style={{padding: '.5rem', maring: '.5rem'}} color="error">error updating user</Typography> : null}
                         <Divider />
 
                         <Button style={{margin: '.5rem'}} variant="outlined" size="small" onClick={()=>{this.openPasswordDialog()}}>reset password</Button>
@@ -172,7 +174,7 @@ export default class ProfileLayout extends Component {
                             <CardContent>
                                 
                                 <DialogContentText>
-                                    <DeleteAccountForm removeAccount={this.removeAccount.bind(this)} />
+                                    <DeleteAccountForm removeAccount={this.removeAccount.bind(this)} error_deleting_user={error_deleting_user} user={this.props.user} />
                                 </DialogContentText>
                             </CardContent>
                         </Card>
