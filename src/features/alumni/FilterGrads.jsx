@@ -105,7 +105,7 @@ class FilterGrads extends Component {
                         onChange={(event)=>{this.handleSkillSelect(event)}}
                         input={<Input id="select-multiple-chip" />}
                         renderValue={selected => (
-                            <div style={{width: '160px'}}>
+                            <div style={{display: 'flex', flexWrap: 'wrap', maxHeight: '40px'}}>
                                 {selected.map(value => <Chip key={value} label={value} />)}
                             </div>
                         )}

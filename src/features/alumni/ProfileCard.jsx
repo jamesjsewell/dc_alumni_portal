@@ -64,7 +64,7 @@ class ProfileCard extends Component {
             <CardContent style={{paddingBottom: '0'}}>
 
                 <Paper elevation={0} style={{width: '98%' , height: '25px', padding: '.2rem', marginBottom: '1rem', marginTop: '0px'}} elevation={0}>
-                    <Typography variant="body1">{grad.city && grad.state? grad.city + ", " + grad.state : 'location not set'}</Typography>
+                    <Typography variant="body1">{grad.city && grad.state? grad.city + ", " + grad.state : ''}</Typography>
                     {grad.willingnessToRelocate? <Typography  align="right" variant="caption">willing to relocate</Typography> : null}
                 </Paper>
 
