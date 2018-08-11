@@ -45,7 +45,7 @@ class AlumniLayout extends Component {
     constructor(props) {
 
         super(props)
-        this.state = { alumniArray: [], filteredAlumniArray: null, searchResult: null, filterEnabled: false, modalOpen: false, selectedGrad: {} }
+        this.state = { alumniArray: [], filteredAlumniArray: null, searchResult: null, queryString: null, filterEnabled: false, modalOpen: false, selectedGrad: {} }
         this.getAlumniArray()
         
         var selected_grad_id = cookies.get("selected_grad")
@@ -96,6 +96,7 @@ class AlumniLayout extends Component {
     handleSearch(event){
 
         var query = event.target.value
+        
         var splitQuery = event.target.value.split(" ")
 
         var firstName = null
@@ -139,6 +140,8 @@ class AlumniLayout extends Component {
         else{
             this.setState({searchResult: null})
         }
+
+        this.setState({queryString: query})
 
     }
 
@@ -205,7 +208,7 @@ class AlumniLayout extends Component {
     }
 
     render() {
-    
+       
         const { selectedGrad, alumniArray, filteredAlumniArray, searchResult } = this.state
         
         return (
@@ -229,12 +232,12 @@ class AlumniLayout extends Component {
                                     
                                     onClick={(e)=>{
                                         e.preventDefault()
-                                        this.setState({searchResult: null})
+                                        this.setState({searchResult: null, queryString: null})
                                     }} 
                                     variant="outlined"
                                     size="small">
 
-                                    <Typography variant="caption"> clear filter  </Typography>
+                                    <Typography variant="caption"> clear search  </Typography>
                                     
                                 </Button> 
                             
@@ -245,7 +248,7 @@ class AlumniLayout extends Component {
                             </div>: null }
                             
                         
-                            <TextField onChange={(event)=>{this.handleSearch(event)}} label="name" style={{margin: '.5rem'}} placeholder="name"  />
+                            <TextField value={this.state.queryString? this.state.queryString : ""}  onChange={(event)=>{this.handleSearch(event)}} label="name" style={{margin: '.5rem'}} placeholder="name"  />
 
                     </ExpansionPanelDetails>
 
