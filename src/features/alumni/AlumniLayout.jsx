@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { withRouter } from "react-router"
 import Cookies from "universal-cookie"
+import _ from "underscore"
 import { API_URL } from "../../global_vars.js"
 import axios from "axios"
 import ProfileCard from "./ProfileCard.jsx"
@@ -33,9 +34,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-
-
-
+import TextField from '@material-ui/core/TextField'
 
 
 const cookies = new Cookies()
@@ -46,12 +45,11 @@ class AlumniLayout extends Component {
     constructor(props) {
 
         super(props)
-        this.state = { alumniArray: [], filteredAlumniArray: null, filterEnabled: false, modalOpen: false, selectedGrad: {} }
+        this.state = { alumniArray: [], filteredAlumniArray: null, searchResult: null, filterEnabled: false, modalOpen: false, selectedGrad: {} }
         this.getAlumniArray()
         
         var selected_grad_id = cookies.get("selected_grad")
     
-
         if(selected_grad_id && selected_grad_id.length){
 
             this.setState({modalOpen: true})
@@ -95,8 +93,56 @@ class AlumniLayout extends Component {
 
     }
 
-    filterArray(relocate, skillsArray){
+    handleSearch(event){
 
+        var query = event.target.value
+        var splitQuery = event.target.value.split(" ")
+
+        var firstName = null
+        var lastName = null
+
+        if(splitQuery.length > 1 ){
+
+            firstName = splitQuery[0]
+            lastName = splitQuery[1]
+            
+        }
+
+        var result = []
+
+        var found =  _.find(this.state.alumniArray, (grad)=>{
+              
+            if(firstName && grad.fname && firstName.includes(grad.fname)){
+                result.push(grad)
+                return grad
+            }
+
+            if(lastName && grad.lname && lastName.includes(grad.lname)){
+                result.push(grad)
+                return grad
+            }
+
+
+            if(!firstName && !lastName){
+                if(query.includes(grad.fname) || query.includes(grad.lname)){
+                    result.push(grad)
+                    return grad
+                }
+            }
+                
+        }) 
+        
+        if(found){
+      
+            this.setState({searchResult: result})
+        }
+        else{
+            this.setState({searchResult: null})
+        }
+
+    }
+
+    filterArray(relocate, skillsArray){
 
         var filtered = []
         
@@ -123,10 +169,7 @@ class AlumniLayout extends Component {
 
         })
 
-
         this.setState({filteredAlumniArray: filtered})
-        
-       
     
     }
 
@@ -163,14 +206,53 @@ class AlumniLayout extends Component {
 
     render() {
     
-        const { selectedGrad, alumniArray, filteredAlumniArray } = this.state
+        const { selectedGrad, alumniArray, filteredAlumniArray, searchResult } = this.state
         
         return (
 
             <div style={{marginTop: '2rem'}}>
 
+                <ExpansionPanel style={{margin: 'auto', maxWidth: '600px'}}>
+                
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="filter_panel" />}>
+                        
+                        <Typography> Search </Typography> 
+                
+                    </ExpansionPanelSummary>
+
+                    <ExpansionPanelDetails style={{display: 'block'}}>
+
+                        {searchResult? 
+                            <div><Paper elevation={0}>
+                            
+                                <Button 
+                                    
+                                    onClick={(e)=>{
+                                        e.preventDefault()
+                                        this.setState({searchResult: null})
+                                    }} 
+                                    variant="outlined"
+                                    size="small">
+
+                                    <Typography variant="caption"> clear filter  </Typography>
+                                    
+                                </Button> 
+                            
+                                </Paper> 
+                                
+                                <Divider style={{margin: '.5rem'}} />
+                            
+                            </div>: null }
+                            
+                        
+                            <TextField onChange={(event)=>{this.handleSearch(event)}} label="name" style={{margin: '.5rem'}} placeholder="name"  />
+
+                    </ExpansionPanelDetails>
+
+                </ExpansionPanel>
+
                 <ExpansionPanel style={{margin: 'auto', marginBottom: '2rem', maxWidth: '600px'}}>
-                    
+                
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id="filter_panel" />}>
                         {!filteredAlumniArray? <Typography> Filter </Typography> : null}
                 
@@ -210,12 +292,14 @@ class AlumniLayout extends Component {
 
                 <Grid justify="center" alignItems="stretch" alignContent="stretch"  container spacing={16}>
 
-                    {alumniArray.length? this.generateProfileCards(!filteredAlumniArray? alumniArray : filteredAlumniArray) : null}
+                    {alumniArray.length && !searchResult? this.generateProfileCards(!filteredAlumniArray? alumniArray : filteredAlumniArray) : null}
+
+                    {searchResult? this.generateProfileCards(searchResult) : null}
 
                     <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} />
 
-
                 </Grid>
+
             </div>
         )
     }

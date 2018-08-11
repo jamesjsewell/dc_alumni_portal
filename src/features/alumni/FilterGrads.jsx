@@ -28,6 +28,7 @@ import Input from '@material-ui/core/Input'
 import Switch from '@material-ui/core/Switch'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
+import TextField from '@material-ui/core/TextField'
 
 
 
@@ -63,7 +64,7 @@ class FilterGrads extends Component {
     constructor(props) {
 
         super(props)
-        this.state = { selectedSkills: [], relocate: false }
+        this.state = { selectedSkills: [], relocate: false, nameOfGrad: null}
     
     }
 
@@ -80,6 +81,7 @@ class FilterGrads extends Component {
         
     }
 
+
     componentWillReceiveProps(nextProps){
         const {filterEnabled} = this.props
         if(filterEnabled != nextProps.filterEnabled && nextProps.filterEnabled === false) {
@@ -87,6 +89,8 @@ class FilterGrads extends Component {
             this.state.relocate = false
         }
     }
+
+
 
     render() {
 
@@ -123,6 +127,7 @@ class FilterGrads extends Component {
                 </FormControl> 
 
                 <Divider />
+                
                 <FormControlLabel
                     onChange={(event)=>{this.handleRelocate(event)}}
                     style={{marginTop: '.5rem'}}
@@ -136,6 +141,8 @@ class FilterGrads extends Component {
                         />}
                     label="willing to relocate"
                     />
+
+                <Divider />
 
             </form>
         )
