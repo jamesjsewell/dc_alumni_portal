@@ -35,8 +35,8 @@ export function auto_log_in(authenticate_user, loggedInUser){
 
 		if(!loggedInUser.email){
 
-			var token = cookies.get("user_token")
-			var user = cookies.get("user")
+			var token = cookies.get("dc_user_token")
+			var user = cookies.get("dc_user_obj")
 		
 			if (token && user) {
 				authenticate_user(user, token)
@@ -57,9 +57,9 @@ export function login({ email, password }) {
 			.post(`${API_URL}/user/login`, { email, password })
 			.then(response => {
 				
-				if(response && response.data && response.data.user_token){
-					cookies.set("user_token", response.data.user_token, { path: "/" })
-					cookies.set("user", response.data.user, { path: "/" })
+				if(response && response.data && response.data.dc_user_token){
+					cookies.set("dc_user_token", response.data.dc_user_token, { path: "/" })
+					cookies.set("dc_user_obj", response.data.user, { path: "/" })
 					dispatch({ type: AUTHENTICATE, payload: { user: response.data.user } })
 				}
 
@@ -97,7 +97,7 @@ export function authenticate(user, token) {
 
 			axios
 			.get(`${API_URL}/user/authenticate/${user._id}`, {
-				headers: { Authorization: token? token : cookies.get("user_token") }
+				headers: { Authorization: token? token : cookies.get("dc_user_token") }
 			})
 			.then(response => {
 			
@@ -129,9 +129,9 @@ export function register(info) {
 			.post(`${API_URL}/user/register`, info)
 			.then(response => {
 				
-				if(response && response.data && response.data.user_token){
-					cookies.set("user_token", response.data.user_token, { path: "/" })
-					cookies.set("user", response.data.user, { path: "/" })
+				if(response && response.data && response.data.dc_user_token){
+					cookies.set("dc_user_token", response.data.dc_user_token, { path: "/" })
+					cookies.set("dc_user_obj", response.data.user, { path: "/" })
 					dispatch({ type: AUTHENTICATE, payload: { user: response.data.user }})
 
 				}
@@ -163,8 +163,8 @@ export function logout(history, user, routes) {
 
 	return function(dispatch){
 
-		cookies.remove("user_token", { path: "/" })
-        cookies.remove("user", { path: "/" })
+		cookies.remove("dc_user_token", { path: "/" })
+        cookies.remove("dc_user_obj", { path: "/" })
         
         if(user.account_type === "grad"){
             history.replace( routes.GRAD_LOGIN )
@@ -220,19 +220,19 @@ export function getForgotPasswordToken(email) {
 	}
 }
 
-export function resetPassword(user_token, password, routes, history) {
+export function resetPassword(dc_user_token, password, routes, history) {
 
 	return function(dispatch){
 
 		dispatch({type: ASYNC, payload: { async: true }})
 
 		axios
-		.post(`${API_URL}/user/reset-password/${user_token}`, { password: password })
+		.post(`${API_URL}/user/reset-password/${dc_user_token}`, { password: password })
 		.then(response => {
 
-            if(response && response.data && response.data.user_token){
-                cookies.set("user_token", response.data.user_token, { path: "/" })
-                cookies.set("user", response.data.user, { path: "/" })
+            if(response && response.data && response.data.dc_user_token){
+                cookies.set("dc_user_token", response.data.dc_user_token, { path: "/" })
+                cookies.set("dc_user_obj", response.data.user, { path: "/" })
                 dispatch({
                     type: RESET_PASSWORD,
                     payload: {user: response.data.user}
@@ -276,11 +276,11 @@ export function updateUser(userId, updated) {
 	
 	return function(dispatch){
 
-		var token = cookies.get("user_token")
+		var token = cookies.get("dc_user_token")
 
 		dispatch({type: ASYNC, payload: { async: true }})
 	
-		axios({ method: 'put', url: `${API_URL}/user/${userId}`, data: updated, headers: { Authorization: cookies.get("user_token") }})
+		axios({ method: 'put', url: `${API_URL}/user/${userId}`, data: updated, headers: { Authorization: cookies.get("dc_user_token") }})
 			.then(response => {
 				
 				dispatch({
@@ -306,11 +306,11 @@ export function deleteUser(userId) {
 	
 	return function(dispatch){
 
-		var token = cookies.get("user_token")
+		var token = cookies.get("dc_user_token")
 
 		dispatch({type: ASYNC, payload: { async: true }})
 	
-		axios({ method: 'delete', url: `${API_URL}/user/${userId}`, headers: { Authorization: cookies.get("user_token") }})
+		axios({ method: 'delete', url: `${API_URL}/user/${userId}`, headers: { Authorization: cookies.get("dc_user_token") }})
 			.then(response => {
 
 				if(response.data && response.data.id){

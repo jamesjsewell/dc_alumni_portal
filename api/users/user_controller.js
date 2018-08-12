@@ -177,7 +177,7 @@ module.exports = {
 
                 var userMinusPassword = _.omit(userExisting.toObject(), 'password')
                 res.status(200).json({
-                    user_token: `JWT ${generateToken(userMinusPassword)}`,
+                    dc_user_token: `JWT ${generateToken(userMinusPassword)}`,
                     user: userMinusPassword
                 })
                 
@@ -232,7 +232,7 @@ module.exports = {
                 var userMinusPassword = _.omit(savedUser.toObject(), 'password')
                 
                 res.status(201).json({
-                    user_token: `JWT ${generateToken(userMinusPassword)}`,
+                    dc_user_token: `JWT ${generateToken(userMinusPassword)}`,
                     user: userMinusPassword
                 })
             })
@@ -379,7 +379,7 @@ module.exports = {
                         message: "Password changed successfully. Please login with your new password.",
                         didReset: true,
                         user: userMinusPassword,
-                        user_token: `JWT ${generateToken(userMinusPassword)}`
+                        dc_user_token: `JWT ${generateToken(userMinusPassword)}`
                     })
                 })
             }
