@@ -7,6 +7,13 @@ const ASYNC = "aysnc"
 const initial_state = { asyncActive: false }
 
 
+export function setAsync(status) {
+	
+	return function(dispatch){
+
+		dispatch({type: ASYNC, payload: { async: status }})
+	}
+}
 
 export const utilReducer = function(state = initial_state, action) {
 

@@ -26,6 +26,9 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 	ERROR_DELETING_USER = "error_deleting_user"
 
 
+import { setAsync } from "./util.js"
+export { setAsync }
+
 export function auto_log_in(authenticate_user, loggedInUser){
     
 	return function(dispatch){

@@ -36,9 +36,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import TextField from '@material-ui/core/TextField'
 
-
 const cookies = new Cookies()
-
 
 class AlumniLayout extends Component {
 
@@ -177,6 +175,8 @@ class AlumniLayout extends Component {
     }
 
     getAlumniArray(){
+
+        this.props.actions.setAsync(true)
         
         axios
             .get(`${API_URL}/users`)
@@ -187,8 +187,9 @@ class AlumniLayout extends Component {
                     this.setState({ alumniArray: response.data })
                     
                 }
+                this.props.actions.setAysnc(false)
             })
-            .catch(error => { return })
+            .catch(error => { this.props.actions.setAsync(false) })
     }
 
     generateProfileCards(alumniArray) {
