@@ -29,8 +29,9 @@ const PASSWORD_RESET_REQUEST = "password_reset_request",
 export function auto_log_in(authenticate_user, loggedInUser){
     
 	return function(dispatch){
-		
+
 		if(!loggedInUser.email){
+
 			var token = cookies.get("user_token")
 			var user = cookies.get("user")
 		
@@ -46,6 +47,8 @@ export function login({ email, password }) {
 	return function(dispatch){
 
 		if(email && password){
+
+			dispatch({type: ASYNC, payload: { async: true }})
 
 			axios
 			.post(`${API_URL}/user/login`, { email, password })
@@ -64,6 +67,7 @@ export function login({ email, password }) {
 					})
 				}
 				
+				dispatch({type: ASYNC, payload: { async: false }})
 			
 			})
 			.catch(error => {
@@ -72,6 +76,8 @@ export function login({ email, password }) {
 					type: LOGIN_ERROR,
 					payload: { message: " make sure the email and password are correct" }
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 
 		}	
@@ -83,6 +89,9 @@ export function authenticate(user, token) {
 	return function(dispatch){
 
 		if(user){
+
+			dispatch({type: ASYNC, payload: { async: true }})
+
 			axios
 			.get(`${API_URL}/user/authenticate/${user._id}`, {
 				headers: { Authorization: token? token : cookies.get("user_token") }
@@ -95,8 +104,10 @@ export function authenticate(user, token) {
 						payload: { user: response.data.user }
 					})
 				}
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
-			.catch(error => { return })
+			.catch(error => { dispatch({type: ASYNC, payload: { async: false }}) })
 		}
 	}
 }
@@ -108,6 +119,8 @@ export function register(info) {
 		const { email, password } = info
 		
 		if(email && password){
+
+			dispatch({type: ASYNC, payload: { async: true }})
 
 			axios
 			.post(`${API_URL}/user/register`, info)
@@ -126,6 +139,8 @@ export function register(info) {
 					})
 				}
 
+				dispatch({type: ASYNC, payload: { async: false }})
+
 			})
 			.catch(error => {
 			
@@ -133,6 +148,8 @@ export function register(info) {
 					type: ERROR_REGISTERING,
 					payload: { message: " something went wrong, unable to create account" }
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 
 		}	
@@ -174,6 +191,8 @@ export function getForgotPasswordToken(email) {
 			type: PASSWORD_RESET_REQUEST,
 			payload: email
 		})
+
+		dispatch({type: ASYNC, payload: { async: true }})
 	
 		axios
 			.post(`${API_URL}/user/forgot-password`, { email: email })
@@ -183,6 +202,8 @@ export function getForgotPasswordToken(email) {
 					type: PASSWORD_REQUEST_SENT,
 					payload: email
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 			.catch(error => {
 				
@@ -190,6 +211,8 @@ export function getForgotPasswordToken(email) {
 					type: PASSWORD_REQUEST_FAILED,
 					payload: null
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 	}
 }
@@ -197,6 +220,8 @@ export function getForgotPasswordToken(email) {
 export function resetPassword(user_token, password, routes, history) {
 
 	return function(dispatch){
+
+		dispatch({type: ASYNC, payload: { async: true }})
 
 		axios
 		.post(`${API_URL}/user/reset-password/${user_token}`, { password: password })
@@ -225,15 +250,20 @@ export function resetPassword(user_token, password, routes, history) {
                     type: RESET_PASSWORD_ERROR,
                     payload: null
                 })
-            }
+			}
+			
+			dispatch({type: ASYNC, payload: { async: false }})
 			
 		})
 		.catch(error => {
+
         
 			dispatch({
 				type: RESET_PASSWORD_ERROR,
 				payload: null
 			})
+
+			dispatch({type: ASYNC, payload: { async: false }})
 		})
 	}
 }
@@ -244,6 +274,8 @@ export function updateUser(userId, updated) {
 	return function(dispatch){
 
 		var token = cookies.get("user_token")
+
+		dispatch({type: ASYNC, payload: { async: true }})
 	
 		axios({ method: 'put', url: `${API_URL}/user/${userId}`, data: updated, headers: { Authorization: cookies.get("user_token") }})
 			.then(response => {
@@ -252,6 +284,8 @@ export function updateUser(userId, updated) {
 					type: UPDATE_USER,
 					payload: { user: response.data.user }
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 			.catch(error => {
 				
@@ -259,6 +293,8 @@ export function updateUser(userId, updated) {
 					type: ERROR_UPDATING_USER,
 					payload: null
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 	}
 }
@@ -268,6 +304,8 @@ export function deleteUser(userId) {
 	return function(dispatch){
 
 		var token = cookies.get("user_token")
+
+		dispatch({type: ASYNC, payload: { async: true }})
 	
 		axios({ method: 'delete', url: `${API_URL}/user/${userId}`, headers: { Authorization: cookies.get("user_token") }})
 			.then(response => {
@@ -288,6 +326,8 @@ export function deleteUser(userId) {
 					})
 				
 				}
+
+				dispatch({type: ASYNC, payload: { async: false }})
 				
 				
 			})
@@ -297,6 +337,8 @@ export function deleteUser(userId) {
 					type: ERROR_DELETING_USER,
 					payload: null
 				})
+
+				dispatch({type: ASYNC, payload: { async: false }})
 			})
 	}
 }
@@ -451,8 +493,10 @@ export const userStateReducer = function(state = initial_user_state, action) {
 
 const user = state => state.user
 const userState = state => state.userState
+const util = state => state.util
 
 export const selector = createStructuredSelector({
     user,
-    userState
+	userState,
+	util
 })

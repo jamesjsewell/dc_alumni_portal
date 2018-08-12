@@ -16,6 +16,8 @@ import Paper from "@material-ui/core/Paper"
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 
+import CircularProgress from "@material-ui/core/CircularProgress"
+
 @connect(
     state => controller.selector(state),
     dispatch => ({
@@ -87,14 +89,17 @@ class Page extends Component {
 
     render() {
         
-        const { user } = this.props
+        const { user, util } = this.props
         
         return (<div> 
             
+            {util.asyncActive? <div style={{backgroundColor: 'rgba(0,0,0,.2)', position: 'fixed', width: '100vw', height: '100vh', zIndex: '500' }}><div style={{ padding: '.5rem', borderRadius: '.5rem', backgroundColor: 'rgba(255,255,255,.8)', position: 'absolute', width: 'auto', height: 'auto', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}><CircularProgress thickness={7} /></div></div> : null}
+
             <Navbar {...this.props}/> 
                 
             {this.showPage()}
-                
+
+                 
         </div>)
 
     }
