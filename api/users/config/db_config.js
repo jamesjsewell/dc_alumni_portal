@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 // the password for atlas cluster, not necessary for connecting to local db
 const password = process.env.DB_PASS
@@ -9,17 +9,16 @@ process.env.MONGODB_URI = `mongodb://jamesjsewell:${password}@cluster0-shard-00-
 // establishes a connection to the mongodb atlas cluster, can also connect to local db
 module.exports = {
 
-    connectToDB: function(projectName) {
-        
-        // connects to a mongodb
-        mongoose.connect(process.env.MONGODB_URI, (err, db) => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log(
-                    "\n\n===== Connected to: " + 'mongodb' + "=====\n\n"
-                )
-            }
-        })
-    }
+  connectToDB: function (projectName) {
+    // connects to a mongodb
+    mongoose.connect(process.env.MONGODB_URI, (err, db) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(
+          '\n\n===== Connected to: ' + 'mongodb' + '=====\n\n'
+        )
+      }
+    })
+  }
 }
