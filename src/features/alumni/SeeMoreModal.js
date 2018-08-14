@@ -70,10 +70,10 @@ class SeeMoreModal extends Component {
         <DialogTitle >
           {selectedGrad.fname + ' ' + selectedGrad.lname}
 
-          { selectedGrad.city && selectedGrad.state ? <Typography align='center' variant='caption'>{selectedGrad.city + ', ' + selectedGrad.state}</Typography> : null }
+          { selectedGrad.city && selectedGrad.state ? <Typography align='left' variant='caption'>{selectedGrad.city + ', ' + selectedGrad.state}</Typography> : null }
         </DialogTitle>
         <DialogContent>
-          <Typography variant='caption'>scroll to see more</Typography>
+          <Typography style={{textAlign: 'right'}} align='right' variant='caption'>scroll down on this dialog to see more if needed</Typography>
           <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center'}}>
 
             <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
@@ -127,7 +127,7 @@ class SeeMoreModal extends Component {
 
         <DialogActions>
 
-          <Button onClick={() => { closeModal() }} color='primary'>
+          <Button align='right' onClick={() => { closeModal() }} color='primary'>
                           close
           </Button>
 
