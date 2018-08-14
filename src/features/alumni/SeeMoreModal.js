@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import account_box from '../../images/account_box.svg'
 import { withStyles } from '@material-ui/core/styles'
 
 import Grid from '@material-ui/core/Grid'
@@ -72,12 +73,12 @@ class SeeMoreModal extends Component {
           { selectedGrad.city && selectedGrad.state ? <Typography align='center' variant='caption'>{selectedGrad.city + ', ' + selectedGrad.state}</Typography> : null }
         </DialogTitle>
         <DialogContent>
-
+          <Typography variant='caption'>scroll to see more</Typography>
           <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center'}}>
 
             <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
               <Paper elevation={0} style={{margin: 'auto', width: '140px', padding: '.5rem'}}>
-                <img style={{width: '140px', height: 'auto'}} src={selectedGrad.avatar} />
+                <img style={{width: selectedGrad.avatar ? '140px' : '64px', height: 'auto'}} src={selectedGrad.avatar ? selectedGrad.avatar : account_box} />
                 <SocialMediaLinks github={selectedGrad.github ? selectedGrad.github : null} linkedin={selectedGrad.linkedin ? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow ? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog ? selectedGrad.mediumBlog : null} />
 
               </Paper>
@@ -125,9 +126,11 @@ class SeeMoreModal extends Component {
         </DialogContent>
 
         <DialogActions>
+
           <Button onClick={() => { closeModal() }} color='primary'>
-                        close
+                          close
           </Button>
+
         </DialogActions>
 
       </Dialog> : null)

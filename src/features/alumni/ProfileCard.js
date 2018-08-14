@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import account_box from '../../images/account_box.svg'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -44,10 +45,10 @@ class ProfileCard extends Component {
 
         <Card style={{ width: '300px'}}>
           <CardHeader
-
+            onClick={() => { openModal(grad) }}
             avatar={
               <Avatar
-                src={grad.avatar}
+                src={grad.avatar ? grad.avatar : account_box}
               />}
 
             title={grad.fname && grad.lname ? grad.fname + ' ' + grad.lname : ''}
