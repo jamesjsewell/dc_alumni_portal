@@ -119,7 +119,7 @@ ReactDOM.render(
           <Route exact path={routes.EMPLOYER_PROFILE} component={EmployerProfilePage} />
           <Route exact path='/alumni' render={AlumniPage} />
           <Route location={location} key={location.key} exact path='/reset-password/:resetToken' component={ResetPasswordPage} />
-          <Route path='*' component={Blank} />
+          <Route path='*' component={AlumniPage} />
 
         </Switch>
 

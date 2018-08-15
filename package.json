@@ -4,8 +4,9 @@
   "description": "general purpose api",
   "main": "index.js",
   "scripts": {
+    "start": "node ./api/server.js",
     "dev": "run-p dev_api dev_webpack",
-    "dev_api": "NODE_ENV=development nodemon api/server.js",
+    "dev_api": "NODE_ENV=development nodemon ./api/server.js",
     "dev_webpack": "webpack-dev-server --open --config webpack.dev.js -d",
     "prod_api": "NODE_ENV=production node ./api/server.js",
     "prod_build": "webpack --config webpack.prod.js"
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@material-ui/core": "1.3.1",
     "@material-ui/icons": "1.1.0",
+    "@sendgrid/mail": "^6.3.1",
     "@uppy/aws-s3": "0.26.0",
     "@uppy/core": "0.26.0",
     "@uppy/react": "0.26.0",
@@ -45,6 +47,7 @@
     "passport": "0.4.0",
     "passport-jwt": "4.0.0",
     "passport-local": "1.0.0",
+    "postcss-loader": "^3.0.0",
     "postcss-preset-env": "5.2.1",
     "react": "16.4.1",
     "react-dom": "16.2.0",
