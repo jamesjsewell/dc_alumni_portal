@@ -1,12 +1,10 @@
 // mongooese model imported from the User's schema file
 const User = require('./schema.js')
-
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
-// const mailchimp = require('../config/mailchimp');
+const sgMail = require('@sendgrid/mail')
 
 const getRole = require('../util/getRole.js').getRole
-const nodemailer = require('nodemailer')
 const _ = require('underscore')
 
 // Generate JWT
@@ -264,33 +262,25 @@ module.exports = {
                             `If you did not request this, please ignore this email and your password will remain unchanged.\n`
           }
 
-          const nodemailer = require('nodemailer')
-
-          // create reusable transporter object using the default SMTP transport
-          let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            port: 25,
-            secure: false, // secure:true for port 465, secure:false for port 587
-            auth: {
-              user: process.env.NODEMAILER_USERNAME,
-              pass: process.env.NODEMAILER_PASSWORD
-            }
-          })
-
-          // setup email data with unicode symbols
-          let mailOptions = {
-            from: process.env.NODEMAILER_USERNAME, // sender address
-            to: userExisting.email, // list of receivers
-            subject: 'reset password', // Subject line
-            text: message.body,
-            html: '' // html body
+          // using SendGrid's v3 Node.js Library
+          // https://github.com/sendgrid/sendgrid-nodejs
+          sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+          const msg = {
+            to: userExisting.email,
+            from: 'alumni_portal@digitalcrafts.com',
+            subject: 'Reset Password',
+            text: message.body
+            // html: '<p>and easy to do anywhere, even with Node.js</p>'
           }
 
-          // send mail with defined transport object
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-
-            }
+          sgMail.send(msg).then((response) => {
+            return res.status(200).json({
+              message: 'Please check your email for the link to reset your password.'
+            })
+          }).catch((error) => {
+            return res.status(422).json({
+              error: 'there was an error sending the email'
+            })
           })
 
           return res.status(200).json({
