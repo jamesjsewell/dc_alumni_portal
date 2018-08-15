@@ -62,7 +62,7 @@ class SeeMoreModal extends Component {
     return (selectedGrad && selectedGrad.email
       ? <Dialog
         fullScreen={false}
-        open={!!modalOpen}
+        open={!modalOpen}
         aria-labelledby='responsive-dialog-title'
         classes={{paper: classes.paper}}
 

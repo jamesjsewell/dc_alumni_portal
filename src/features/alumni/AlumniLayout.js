@@ -78,6 +78,7 @@ class AlumniLayout extends Component {
 
   handleSearch (event) {
     var query = event.target.value
+    query = query.toLowerCase()
 
     var splitQuery = event.target.value.split(' ')
 
@@ -87,6 +88,8 @@ class AlumniLayout extends Component {
     if (splitQuery.length > 1) {
       firstName = splitQuery[0]
       lastName = splitQuery[1]
+      firstName = firstName.toLowerCase()
+      lastName = lastName.toLowerCase()
     }
 
     var result = []
@@ -254,10 +257,8 @@ class AlumniLayout extends Component {
 
           {searchResult ? this.generateProfileCards(searchResult) : null}
 
-          <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} />
-
         </Grid>
-
+        <SeeMoreModal selectedGrad={selectedGrad} modalOpen={this.state.modalOpen} closeModal={this.closeModal.bind(this)} />
       </div>
     )
   }
