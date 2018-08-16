@@ -47,8 +47,6 @@ class AlumniLayout extends Component {
     var selected_grad_id = cookies.get('selected_grad')
 
     if (selected_grad_id && selected_grad_id.length) {
-      this.setState({modalOpen: true})
-
       axios
         .get(`${API_URL}/users/${selected_grad_id}`)
         .then(response => {
@@ -204,7 +202,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-                <Divider style={{margin: '.5rem'}} />
+              <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 
@@ -241,7 +239,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-              <Divider style={{margin: '.5rem'}} />
+                <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 

@@ -61,10 +61,14 @@ class SeeMoreModal extends Component {
 
     return (selectedGrad && selectedGrad.email
       ? <Dialog
-        fullScreen={false}
-        open={!modalOpen}
+
+        open={!!modalOpen}
         aria-labelledby='responsive-dialog-title'
-        classes={{paper: classes.paper}}
+        // classes={{paper: classes.paper}}
+        fullWidth
+        maxWidth={false}
+        keepMounted
+        onClose={closeModal}
 
       >
         <DialogTitle >
@@ -73,10 +77,10 @@ class SeeMoreModal extends Component {
           { selectedGrad.city && selectedGrad.state ? <Typography align='left' variant='caption'>{selectedGrad.city + ', ' + selectedGrad.state}</Typography> : null }
         </DialogTitle>
         <DialogContent>
-          <Typography style={{textAlign: 'right'}} align='right' variant='caption'>scroll down on this dialog to see more if needed</Typography>
+          {/* <Typography style={{textAlign: 'right'}} align='right' variant='caption'>scroll down to see more if needed</Typography> */}
           <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center'}}>
 
-            <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
+            <Paper style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
               <Paper elevation={0} style={{margin: 'auto', width: '140px', padding: '.5rem'}}>
                 <img style={{width: selectedGrad.avatar ? '140px' : '64px', height: 'auto'}} src={selectedGrad.avatar ? selectedGrad.avatar : account_box} />
                 <SocialMediaLinks github={selectedGrad.github ? selectedGrad.github : null} linkedin={selectedGrad.linkedin ? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow ? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog ? selectedGrad.mediumBlog : null} />
@@ -127,7 +131,11 @@ class SeeMoreModal extends Component {
 
         <DialogActions>
 
-          <Button align='right' onClick={() => { closeModal() }} color='primary'>
+          <Button variant='outlined' onClick={(event) => {
+            event.preventDefault()
+            closeModal()
+          }
+          } color='primary' autoFocus>
                           close
           </Button>
 
