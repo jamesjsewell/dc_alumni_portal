@@ -32,7 +32,7 @@ class DeleteAccountForm extends Component {
     super(props)
     this.state = { }
 
-    this.emailsMatch = email => (email != this.props.user.email ? 'must match account email' : null)
+    this.emailsMatch = email => (email && this.props.user.email && email.toLowerCase() != this.props.user.email.toLowerCase() ? 'must match account email' : null)
   }
 
   doThisOnSubmit (input) {

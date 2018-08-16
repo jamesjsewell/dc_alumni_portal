@@ -51,8 +51,10 @@ export default class ProfileLayout extends Component {
   }
 
   removeAccount (email) {
-    if (email === this.props.user.email) {
-      this.props.deleteUser(this.props.user._id)
+    if (email && this.props.user.email) {
+      if (email.toLowerCase === this.props.user.email.toLowerCase) {
+        this.props.deleteUser(this.props.user._id)
+      }
     }
   }
 
