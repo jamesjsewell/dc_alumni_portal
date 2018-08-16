@@ -80,7 +80,7 @@ class SeeMoreModal extends Component {
           {/* <Typography style={{textAlign: 'right'}} align='right' variant='caption'>scroll down to see more if needed</Typography> */}
           <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center'}}>
 
-            <Paper style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
+            <Paper elevation={0} style={{ minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
               <Paper elevation={0} style={{margin: 'auto', width: '140px', padding: '.5rem'}}>
                 <img style={{width: selectedGrad.avatar ? '140px' : '64px', height: 'auto'}} src={selectedGrad.avatar ? selectedGrad.avatar : account_box} />
                 <SocialMediaLinks github={selectedGrad.github ? selectedGrad.github : null} linkedin={selectedGrad.linkedin ? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow ? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog ? selectedGrad.mediumBlog : null} />
@@ -99,22 +99,24 @@ class SeeMoreModal extends Component {
 
             </Paper>
 
-            <Paper elevation={0} style={{padding: '.5rem', marginLeft: '.5rem'}}>
+            <Paper style={{padding: '.5rem', marginLeft: '.5rem'}}>
 
               {selectedGrad.bio ? <DialogContentText style={{maxWidth: '200px', padding: '.2rem'}}>{selectedGrad.bio}</DialogContentText> : null}
 
               { selectedGrad.skills && selectedGrad.skills.length
-                ? <Paper elevation={0} style={{width: '90%', margin: '.5rem', padding: '.5rem'}}>
+                ? <Paper elevation={0} style={{width: '90%', margin: 'auto', marginBottom: '.5rem'}}>
                   <Typography style={{padding: '.2rem'}} variant='subheading' >skills</Typography>
+                  <Typography variant='caption'>top 3</Typography>
                   {selectedGrad.skills.map((skill) => { return <Chip style={{ border: `none`}} label={skill} /> }) }
                 </Paper> : null }
 
               <Divider />
 
-              {selectedGrad.DCprogramType || graduationDate ? <Paper elevation={0} style={{width: '100%', margin: '.5rem', padding: '.5rem'}}>
+              {selectedGrad.DCprogramType || graduationDate ? <Paper style={{width: '90%', margin: 'auto', marginTop: '.5rem', marginBottom: '.5rem', padding: '.5rem'}}>
                 <List style={{display: 'block'}}>
                   <Typography variant='subheading'>Digital Crafts</Typography>
                   {graduationDate ? <ListItem><ListItemText primary={graduationDate} secondary='Graduated' /></ListItem> : null}
+                  <Divider />
                   {selectedGrad.DCprogramType ? <ListItem><ListItemText primary={selectedGrad.DCprogramType} secondary='Course' /></ListItem> : null}
                 </List>
               </Paper> : null}
