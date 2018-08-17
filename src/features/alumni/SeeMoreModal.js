@@ -99,12 +99,12 @@ class SeeMoreModal extends Component {
 
             </Paper>
 
-            <Paper style={{padding: '.5rem', marginLeft: '.5rem'}}>
+            <Paper elevation={0} style={{padding: '.5rem', marginLeft: '.5rem'}}>
 
               {selectedGrad.bio ? <DialogContentText style={{maxWidth: '200px', padding: '.2rem'}}>{selectedGrad.bio}</DialogContentText> : null}
 
               { selectedGrad.skills && selectedGrad.skills.length
-                ? <Paper elevation={0} style={{width: '90%', margin: 'auto', marginBottom: '.5rem'}}>
+                ? <Paper style={{width: '90%', padding: '.5rem', margin: 'auto', marginBottom: '.5rem'}}>
                   <Typography style={{padding: '.2rem'}} variant='subheading' >skills</Typography>
                   <Typography variant='caption'>top 3</Typography>
                   {selectedGrad.skills.map((skill) => { return <Chip style={{ border: `none`}} label={skill} /> }) }
