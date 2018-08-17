@@ -17,6 +17,19 @@ const afterSubmit = (result, dispatch, props) => {
   props.untouch(['new_password'])
 }
 
+const Error_resetting = (props) => {
+  const { password_error_msg } = props
+  return (<Grid item>
+    <Card>
+      <CardContent>
+        <Typography color='error' component='p'>
+          {password_error_msg}
+        </Typography>
+      </CardContent>
+    </Card>
+  </Grid>)
+}
+
 class ResetPasswordForm extends Component {
   constructor (props) {
     super(props)
@@ -37,7 +50,7 @@ class ResetPasswordForm extends Component {
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, password_error_msg, error_resetting } = this.props
 
     return (
       <Grid item>
@@ -62,6 +75,8 @@ class ResetPasswordForm extends Component {
               </Button>
 
             </form >
+
+            {error_resetting ? <Error_resetting password_error_msg={password_error_msg} /> : null }
 
           </CardContent>
 

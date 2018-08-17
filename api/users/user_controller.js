@@ -296,21 +296,22 @@ module.exports = {
 
     User.findOne(
       {
-        email: the_email
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { $gt: Date.now() }
       },
       (err, user) => {
         // If query returned no results, token expired or was invalid. Return error.
         if (!user) {
           res.json({
-            error: 'an account could not be found with that email, try correcting the email'
+            error: 'Your token has expired. Please request to reset your password again.'
           })
 
           return next()
         }
 
-        if (user.resetPasswordToken != req.params.token || user.resetPasswordExpires != { $gt: Date.now() }) {
+        if (the_email.toLowerCase() != user.email.toLowerCase()) {
           res.json({
-            error: 'Your token has expired. Please request to reset your password again.'
+            error: 'that email address does not match the one associated with this account'
           })
 
           return next()

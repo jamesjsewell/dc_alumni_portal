@@ -14,18 +14,6 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
-const Error_resetting = (props) => {
-  return (<Grid item>
-    <Card>
-      <CardContent>
-        <Typography color='error' component='p'>
-                    Something went wrong resetting the password
-        </Typography>
-      </CardContent>
-    </Card>
-  </Grid>)
-}
-
 const Did_Reset = (props) => {
   return (<Grid item>
     <Card>
@@ -53,21 +41,12 @@ export default class ResetPasswordLayout extends Component {
   }
 
   render () {
-    const {user, routes, error_resetting, did_reset, password_request, getForgotPasswordToken, resetPassword, match, history} = this.props
+    const {user, routes, error_resetting, password_error_msg, did_reset, password_request, getForgotPasswordToken, resetPassword, match, history} = this.props
     return (
       <div>
         <Grid container spacing={24}>
 
-          {did_reset === false && error_resetting === false ? <ResetPasswordForm match={match} resetPassword={resetPassword} history={history} routes={routes} /> : null}
-          {error_resetting === true
-            ? <Grid item>
-              <Card>
-                <CardContent>
-                  <Error_resetting />
-
-                </CardContent>
-              </Card>
-            </Grid> : null}
+          {did_reset === false ? <ResetPasswordForm match={match} resetPassword={resetPassword} history={history} routes={routes} error_resetting={error_resetting} password_error_msg={password_error_msg} /> : null}
 
           {did_reset === true ? <Did_Reset user={user} routes={routes} /> : null}
         </Grid>

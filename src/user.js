@@ -217,14 +217,13 @@ export function resetPassword (dc_user_token, password, email, routes, history) 
         if (response && response.data && response.data.error) {
           dispatch({
             type: RESET_PASSWORD_ERROR,
-            payload: null
+            payload: response.data.error
           })
         }
 
         dispatch({type: ASYNC, payload: { async: false }})
       })
       .catch(error => {
-        console.log(error)
         dispatch({
           type: RESET_PASSWORD_ERROR,
           payload: null
@@ -342,6 +341,7 @@ const initial_user_state = {
   email_recipient: null,
   password_did_reset: false,
   error_resetting_password: false,
+  password_error_msg: null,
   error_updating_user: false,
   error_deleting_user: false
 
@@ -392,7 +392,7 @@ export const userStateReducer = function (state = initial_user_state, action) {
     }
 
     case RESET_PASSWORD_ERROR: {
-      return _.extend({}, state, { password_did_reset: false, error_resetting_password: true })
+      return _.extend({}, state, { password_did_reset: false, error_resetting_password: true, password_error_msg: action.payload })
       break
     }
 
