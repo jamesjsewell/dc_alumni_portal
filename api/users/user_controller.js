@@ -292,14 +292,23 @@ module.exports = {
   },
 
   changePassword: function (req, res, next) {
+    const the_email = req.body.email
+
     User.findOne(
       {
-        resetPasswordToken: req.params.token,
-        resetPasswordExpires: { $gt: Date.now() }
+        email: the_email
       },
       (err, user) => {
         // If query returned no results, token expired or was invalid. Return error.
         if (!user) {
+          res.status(422).json({
+            error: 'an account could not be found with that email, try correcting the email'
+          })
+
+          return next()
+        }
+
+        if (user.resetPasswordToken != req.params.token || user.resetPasswordExpires != { $gt: Date.now() }) {
           res.status(422).json({
             error: 'Your token has expired. Please request to reset your password again.'
           })

@@ -32,7 +32,7 @@ class ResetPasswordForm extends Component {
 
   doThisOnSubmit (input) {
     const resetToken = this.props.match.params.resetToken
-    this.props.resetPassword(resetToken, input.new_password, this.props.routes, this.props.history)
+    this.props.resetPassword(resetToken, input.new_password, input.the_email, this.props.routes, this.props.history)
     // this.state.dispatchedReset = true
   }
 
@@ -54,6 +54,7 @@ class ResetPasswordForm extends Component {
             </Typography>
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
+              <Field type='email' name='the_email' label='email' component={FormField} validate={[check.required]} required />
               <Field type='password' name='new_password' label='new password' component={FormField} validate={[check.required]} required />
 
               <Button type='submit'>

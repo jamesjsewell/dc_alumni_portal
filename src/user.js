@@ -191,12 +191,12 @@ export function getForgotPasswordToken (email) {
   }
 }
 
-export function resetPassword (dc_user_token, password, routes, history) {
+export function resetPassword (dc_user_token, password, email, routes, history) {
   return function (dispatch) {
     dispatch({type: ASYNC, payload: { async: true }})
 
     axios
-      .post(`${API_URL}/user/reset-password/${dc_user_token}`, { password: password })
+      .post(`${API_URL}/user/reset-password/${dc_user_token}`, { password: password, email: email })
       .then(response => {
         if (response && response.data && response.data.dc_user_token) {
           cookies.set('dc_user_token', response.data.dc_user_token, { path: '/' })
@@ -351,7 +351,12 @@ export const userStateReducer = function (state = initial_user_state, action) {
 
   switch (action.type) {
     case AUTHENTICATE: {
-      return _.extend({}, state, payload, { login_error_message: null, register_error_message: null })
+      return { initial_user_state }
+      break
+    }
+
+    case UNAUTHENTICATE: {
+      return { initial_user_state }
       break
     }
 

@@ -86,13 +86,13 @@ class LoginForm extends Component {
             // onClose={this.handleClose}
             aria-labelledby='responsive-dialog-title'
           >
-            <DialogTitle id='responsive-dialog-title'>{password_request === 'sent' ? 'Success!' : 'Password Change '}</DialogTitle>
+            <DialogTitle id='responsive-dialog-title'>{password_request === 'sent' ? 'Success!' : 'Request Password Change '}</DialogTitle>
 
             <DialogContent>
               <Card>
                 <CardContent>
                   <DialogContentText>
-                    { password_request === null || password_request === 'failed' ? 'enter the email associated with this account' : null }
+                    { !password_request || password_request === null || password_request === 'failed' ? 'enter the email associated with the account' : null }
                     { password_request === 'sending' ? '...sending request' : null }
                     { password_request === 'sent' ? 'an email was sent to the address you provided, open the email to continue. Follow the link in the most recent email from us. If you do not receive the email soon, try again.' : null }
                   </DialogContentText>
