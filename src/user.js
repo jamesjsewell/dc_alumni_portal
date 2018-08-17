@@ -351,12 +351,12 @@ export const userStateReducer = function (state = initial_user_state, action) {
 
   switch (action.type) {
     case AUTHENTICATE: {
-      return { initial_user_state }
+      return initial_user_state
       break
     }
 
     case UNAUTHENTICATE: {
-      return { initial_user_state }
+      return initial_user_state
       break
     }
 
