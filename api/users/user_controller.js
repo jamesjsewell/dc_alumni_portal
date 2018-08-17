@@ -301,7 +301,7 @@ module.exports = {
       (err, user) => {
         // If query returned no results, token expired or was invalid. Return error.
         if (!user) {
-          res.status(422).json({
+          res.json({
             error: 'an account could not be found with that email, try correcting the email'
           })
 
@@ -309,7 +309,7 @@ module.exports = {
         }
 
         if (user.resetPasswordToken != req.params.token || user.resetPasswordExpires != { $gt: Date.now() }) {
-          res.status(422).json({
+          res.json({
             error: 'Your token has expired. Please request to reset your password again.'
           })
 

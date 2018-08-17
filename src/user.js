@@ -224,6 +224,7 @@ export function resetPassword (dc_user_token, password, email, routes, history) 
         dispatch({type: ASYNC, payload: { async: false }})
       })
       .catch(error => {
+        console.log(error)
         dispatch({
           type: RESET_PASSWORD_ERROR,
           payload: null
