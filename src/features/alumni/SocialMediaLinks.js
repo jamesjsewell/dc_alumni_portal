@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import SvgIcon from '@material-ui/core/SvgIcon'
+import Icon from '@material-ui/core/Icon'
 
 import List from '@material-ui/core/ListItem'
 import ListItem from '@material-ui/core/ListItem'
@@ -37,10 +38,10 @@ const styles = {
 
 class SocialMediaLinks extends Component {
   render () {
-    const {classes, github, linkedin, stackOverflow, medium} = this.props
+    const {classes, github, linkedin, stackOverflow, medium } = this.props
     return (
 
-      <Paper elevation={0} className={classes.root} component='div'>
+      <Paper style={{margin: 'auto'}} elevation={0} className={classes.root} component='div'>
 
         { github ? <Avatar className={classes.avatar} component='a' href={github} src={githubIcon} /> : null}
 
