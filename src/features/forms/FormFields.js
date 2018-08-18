@@ -82,12 +82,13 @@ export const TextArea = ({
 )
 
 export const RadioSelect = ({
+  style,
   input,
   label,
   meta: { value }
 }) => (
   <FormControlLabel
-    style={{marginTop: '2rem'}}
+    style={style}
     control={
       <Switch
         checked={input.checked}

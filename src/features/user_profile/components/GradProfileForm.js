@@ -45,6 +45,11 @@ const skills = [
 
 ]
 
+const fieldStyle = {
+  paddingLeft: '.5rem',
+  marginRight: '.5rem'
+}
+
 const SkillsSelect = ({selectedSkills, handleSkills}) => (
   <FormControl>
     <Typography>Select top 3 Skills</Typography>
@@ -133,101 +138,98 @@ class GradProfileForm extends Component {
     return (
 
       <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
-        <Grid container spacing={24}>
-          <Grid item>
 
-            <Typography style={{margin: '.5rem'}} variant='caption'>for external links, please use full links copied from your browser</Typography>
-            <ExpansionPanel expanded={expanded === 'panel2'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel2') }}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-2' />}>
-                <Typography> Info </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <FormGroup>
-                  <Field type='text' name='fname' label='First Name' component={FormField} validate={[check.alphaNumeric]} />
-                  <Field type='text' name='lname' label='Last Name' component={FormField} validate={[check.alphaNumeric]} />
-                  <Field type='text' name='city' label='City' component={FormField} validate={[check.alphaNumeric]} />
-                  <Field type='text' name='state' label='State' component={FormField} validate={[check.alphaNumeric]} />
-                  <Field type='text' name='website' label='Personal Website' component={FormField} />
-                  <Field type='text' name='publicEmail' label='Public Email' component={FormField} validate={[check.email]} />
+        <Typography style={{margin: '.5rem'}} variant='caption'>for external links, please use full links copied from your browser</Typography>
+        <ExpansionPanel expanded={expanded === 'panel2'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel2') }}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-2' />}>
+            <Typography> Info </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Paper style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', maxWidth: '98%', padding: '.5rem'}}>
 
-                  <Paper style={{padding: '.8rem', marginTop: '1rem'}}>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='fname' label='First Name' component={FormField} validate={[check.alphaNumeric]} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='lname' label='Last Name' component={FormField} validate={[check.alphaNumeric]} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='city' label='City' component={FormField} validate={[check.alphaNumeric]} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='state' label='State' component={FormField} validate={[check.alphaNumeric]} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='website' label='Personal Website' component={FormField} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='publicEmail' label='Public Email' component={FormField} validate={[check.email]} /></Paper>
 
-                    <Typography> Course Type </Typography>
+              <Paper style={{padding: '.8rem', margin: '.5rem'}}>
 
-                    <Select
-                      style={{marginBottom: '1rem'}}
-                      value={this.state.programType}
-                      onChange={(event) => { this.selectProgramType(event) }}
-                      input={<Input placeholder='Course Type' name='DCprogramType' />}
-                      renderValue={selected => (
-                        <Typography variant='caption'>
-                          {selected}
-                        </Typography>
-                      )}
+                <Typography> Course Type </Typography>
 
-                    >
+                <Select
 
-                      <MenuItem
-                        value='Immersive'
-                      >
+                  value={this.state.programType}
+                  onChange={(event) => { this.selectProgramType(event) }}
+                  input={<Input placeholder='Course Type' name='DCprogramType' />}
+                  renderValue={selected => (
+                    <Typography variant='caption'>
+                      {selected}
+                    </Typography>
+                  )}
+
+                >
+
+                  <MenuItem
+                    value='Immersive'
+                  >
                                                         Immersive
-                      </MenuItem>
+                  </MenuItem>
 
-                      <MenuItem
-                        value='Flex'
-                      >
+                  <MenuItem
+                    value='Flex'
+                  >
                                                         Flex
-                      </MenuItem>
+                  </MenuItem>
 
-                    </Select>
+                </Select>
 
-                    <Typography> Graduation </Typography>
-                    <Field id='DCgraduationDate' name='DCgraduationDate' component={DatePicker} />
+                <Divider style={{margin: '.5rem'}} />
 
-                  </Paper>
+                <Typography> Graduation </Typography>
+                <Field id='DCgraduationDate' name='DCgraduationDate' component={DatePicker} />
 
-                  <Field id='willingnessToRelocate' name='willingnessToRelocate' component={RadioSelect} type='checkbox' label='Willing to Relocate?' />
+              </Paper>
 
-                </FormGroup>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+              <Field style={{margin: '.5rem'}} id='willingnessToRelocate' name='willingnessToRelocate' component={RadioSelect} type='checkbox' label='Willing to Relocate?' />
 
-            <ExpansionPanel expanded={expanded === 'panel3'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel3') }}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-4' />}>
-                <Typography> Social </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <FormGroup>
-                  <Field type='text' name='github' label='Github' component={FormField} />
-                  <Field type='text' name='linkedin' label='Linkedin' component={FormField} />
-                  <Field type='text' name='stackOverflow' label='Stack Overflow' component={FormField} />
-                  <Field type='text' name='mediumBlog' label='Medium Blog' component={FormField} />
-                  <Field type='text' name='portfolio' label='Portfolio Url' component={FormField} />
-                </FormGroup>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+            </Paper>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
 
-            <ExpansionPanel expanded={expanded === 'panel4'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel4') }}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-3' />}>
-                <Typography> bio </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Field type='text' name='bio' label='Bio' component={TextArea} validate={[check.maxLength140]} />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+        <ExpansionPanel expanded={expanded === 'panel3'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel3') }}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-4' />}>
+            <Typography> Social </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Paper style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', maxWidth: '98%', padding: '.5rem'}}>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='github' label='Github' component={FormField} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='linkedin' label='Linkedin' component={FormField} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='stackOverflow' label='Stack Overflow' component={FormField} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='mediumBlog' label='Medium Blog' component={FormField} /></Paper>
+              <Paper elevation={0} style={fieldStyle}><Field type='text' name='portfolio' label='Portfolio Url' component={FormField} /></Paper>
+            </Paper>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
 
-            <ExpansionPanel expanded={expanded === 'panel5'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel5') }}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-3' />}>
-                <Typography> skills </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <SkillsSelect handleSkills={this.handleSkills.bind(this)} selectedSkills={this.state.selectedSkills} />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+        <ExpansionPanel expanded={expanded === 'panel4'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel4') }}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-3' />}>
+            <Typography> bio </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Field type='text' name='bio' label='Bio' component={TextArea} validate={[check.maxLength140]} />
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
 
-          </Grid>
-
-        </Grid>
+        <ExpansionPanel expanded={expanded === 'panel5'} onChange={(event, expanded) => { this.handleExpansionPanel(event, expanded, 'panel5') }}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='panel-3' />}>
+            <Typography> skills </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <SkillsSelect handleSkills={this.handleSkills.bind(this)} selectedSkills={this.state.selectedSkills} />
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
 
         <Button style={{margin: '1rem'}} variant='contained' type='submit'>
                     Save

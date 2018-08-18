@@ -75,57 +75,56 @@ export default class ProfileLayout extends Component {
     const { password_request } = this.props.userState
     return (
 
-      <Grid style={{marginTop: '2rem'}} container justify='center' spacing={24}>
-        <Grid item>
-          <Card>
-            <CardContent>
+      <Paper elevation={0} style={{marginTop: '2rem', margin: 'auto', display: 'block'}}>
 
-              <Divider />
-              {user && user.account_type === 'grad' ? <GradProfileForm updateUser={updateUser} user={user} /> : null}
-              {user && user.account_type === 'employer' ? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
-
-              {userState.error_updating_user ? <Typography style={{padding: '.5rem', maring: '.5rem'}} color='error'>error updating user</Typography> : null}
-              <Divider />
-
-              <Button style={{margin: '.5rem'}} variant='outlined' size='small' onClick={() => { this.openPasswordDialog() }}>reset password</Button>
-              <Button style={{margin: '.5rem'}} size='small' onClick={() => { this.openDeleteAccount() }}> <Icon>delete</Icon> delete account</Button>
-            </CardContent>
-          </Card>
-        </Grid>
         { user.account_type === 'grad'
-          ? <Grid item>
+          ? <Paper elevation={0} style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '600px', margin: 'auto'}}>
 
-            <Card style={{margin: '.5rem'}}>
-              <CardHeader subheader='Update your profile image' />
-              <CardContent>
+            <Paper style={{maxWidth: '200px', margin: '.5rem', padding: '.5rem'}} >
+              <Typography variant='caption'>Profile Image</Typography>
+              {user.avatar ? <Avatar
+                style={{marginTop: '.5rem'}}
+                sizes='large'
+                src={user.avatar}
+              /> : null}
 
-                {user.avatar ? <Avatar
-                  sizes='large'
-                  src={user.avatar}
-                /> : <Typography component='p'>Upload a profile image</Typography>}
+              {!user.avatar ? <UppyDashboardComponent style={{margin: '.2rem', padding: '.2rem'}} user={user} updateUser={updateUser} avatar /> : null}
 
-                {!user.avatar ? <UppyDashboardComponent user={user} updateUser={updateUser} avatar /> : null}
+              {!user.avatar ? <IconButton style={{margin: '.5rem', padding: '.5rem'}} size='large' className='uppy_opener_avatar' arial_label='Upload'><Icon>camera_alt</Icon></IconButton> : null}
+              {user.avatar ? <IconButton style={{margin: '.5rem', padding: '.5rem'}} onClick={(event) => { this.removeFile('avatar') }} size='large' arial_label='remove'><Icon>delete_forever</Icon></IconButton> : null}
+              <Divider />
 
-              </CardContent>
-              <CardActions>
-                {!user.avatar ? <IconButton size='large' className='uppy_opener_avatar' arial_label='Upload'><Icon>camera_alt</Icon></IconButton> : null}
-                {user.avatar ? <IconButton onClick={(event) => { this.removeFile('avatar') }} size='large' arial_label='remove'><Icon>delete_forever</Icon></IconButton> : null}
-              </CardActions>
-            </Card>
+              <Typography variant='caption'>changes to profile image auto save and can't be undone</Typography>
+            </Paper>
 
-            <Card style={{margin: '.5rem'}}>
-              <CardHeader subheader='Update your resume' />
-              <CardContent>
-                {user.resume ? <Button href={user.resume} variant='outlined'>view</Button> : <Typography component='p'>Upload your resume</Typography>}
-                {!user.resume ? <UppyDashboardComponent user={user} updateUser={updateUser} resume /> : null}
-              </CardContent>
-              <CardActions>
-                {!user.resume ? <IconButton size='large' className='uppy_opener_resume' arial_label='Upload'><Icon>description</Icon></IconButton> : null}
-                {user.resume ? <IconButton onClick={(event) => { this.removeFile('resume') }} size='large' arial_label='remove'><Icon>delete_forever</Icon></IconButton> : null}
-              </CardActions>
-            </Card>
+            <Paper style={{maxWidth: '200px', margin: '.5rem', padding: '.5rem'}}>
+              <Typography variant='caption'>Resume</Typography>
+              {user.resume ? <Button size='small' style={{margin: '.5rem', padding: '.5rem'}} href={user.resume} variant='outlined'>view</Button> : null}
+              {!user.resume ? <UppyDashboardComponent user={user} updateUser={updateUser} resume /> : null}
 
-          </Grid> : null }
+              {!user.resume ? <IconButton style={{margin: '.5rem', padding: '.5rem'}} size='large' className='uppy_opener_resume' arial_label='Upload'><Icon>description</Icon></IconButton> : null}
+              {user.resume ? <IconButton style={{margin: '.5rem', padding: '.5rem'}} onClick={(event) => { this.removeFile('resume') }} size='large' arial_label='remove'><Icon>delete_forever</Icon></IconButton> : null}
+              <Divider />
+
+              <Typography variant='caption'>changes to resume auto save and can't be undone</Typography>
+            </Paper>
+
+          </Paper> : null }
+
+        <Card elevation={0} style={{margin: 'auto', width: 'auto', maxWidth: '800px'}}>
+          <CardContent>
+
+            <Divider />
+            {user && user.account_type === 'grad' ? <GradProfileForm updateUser={updateUser} user={user} /> : null}
+            {user && user.account_type === 'employer' ? <EmployerProfileForm updateUser={updateUser} user={user} /> : null}
+
+            {userState.error_updating_user ? <Typography style={{padding: '.5rem', maring: '.5rem'}} color='error'>error updating user</Typography> : null}
+            <Divider />
+
+            <Button style={{margin: '.5rem'}} variant='outlined' size='small' onClick={() => { this.openPasswordDialog() }}>reset password</Button>
+            <Button style={{margin: '.5rem'}} size='small' onClick={() => { this.openDeleteAccount() }}> <Icon>delete</Icon> delete account</Button>
+          </CardContent>
+        </Card>
 
         <Dialog
           fullScreen={false}
@@ -168,7 +167,6 @@ export default class ProfileLayout extends Component {
           <DialogContent>
             <DialogContentText>enter the email you used to sign in to permanently remove this account</DialogContentText>
 
-
             <DialogContentText>
               <DeleteAccountForm removeAccount={this.removeAccount.bind(this)} error_deleting_user={error_deleting_user} user={this.props.user} />
             </DialogContentText>
@@ -180,7 +178,7 @@ export default class ProfileLayout extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </Grid>
+      </Paper>
     )
   }
 }
