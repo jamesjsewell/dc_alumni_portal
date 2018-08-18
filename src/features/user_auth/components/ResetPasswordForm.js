@@ -13,10 +13,10 @@ import Paper from '@material-ui/core/Paper'
 import { FormField } from '../../forms/FormFields.js'
 import * as check from '../../forms/formValidation.js'
 
-const afterSubmit = (result, dispatch, props) => {
-  props.reset()
-  props.untouch(['new_password'])
-}
+// const afterSubmit = (result, dispatch, props) => {
+//   props.reset()
+//   props.untouch(['new_password'])
+// }
 
 const Error_resetting = (props) => {
   const { password_error_msg } = props
@@ -78,10 +78,10 @@ class ResetPasswordForm extends Component {
 }
 
 export default reduxForm({
-  form: 'reset_password',
+  form: 'reset_password'
   // fields: ["name"],
   // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
   // asyncBlurFields: ["name"],
   // shouldAsyncValidate,
-  onSubmitSuccess: afterSubmit
+  // onSubmitSuccess: afterSubmit
 })(ResetPasswordForm)

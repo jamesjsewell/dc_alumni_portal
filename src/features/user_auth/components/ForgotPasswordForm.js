@@ -12,10 +12,10 @@ import Typography from '@material-ui/core/Typography'
 import { FormField } from '../../forms/FormFields.js'
 import * as check from '../../forms/formValidation.js'
 
-const afterSubmit = (result, dispatch, props) => {
-  props.reset()
-  props.untouch(['email'])
-}
+// const afterSubmit = (result, dispatch, props) => {
+//   props.reset()
+//   props.untouch(['email'])
+// }
 
 class ForgotPasswordForm extends Component {
   constructor (props) {
@@ -58,10 +58,10 @@ class ForgotPasswordForm extends Component {
 }
 
 export default reduxForm({
-  form: 'forgot_password',
+  form: 'forgot_password'
   // fields: ["name"],
   // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
   // asyncBlurFields: ["name"],
   // shouldAsyncValidate,
-  onSubmitSuccess: afterSubmit
+  // onSubmitSuccess: afterSubmit
 })(ForgotPasswordForm)

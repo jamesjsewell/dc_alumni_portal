@@ -22,10 +22,10 @@ import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
-const afterSubmit = (result, dispatch, props) => {
-  props.reset()
-  props.untouch([])
-}
+// const afterSubmit = (result, dispatch, props) => {
+//   props.reset()
+//   props.untouch([])
+// }
 
 class DeleteAccountForm extends Component {
   constructor (props) {
@@ -65,10 +65,10 @@ class DeleteAccountForm extends Component {
 }
 
 export default reduxForm({
-  form: 'delete_account_form',
+  form: 'delete_account_form'
   // fields: ["name"],
   // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
   // asyncBlurFields: ["name"],
   // shouldAsyncValidate,
-  onSubmitSuccess: afterSubmit
+  // onSubmitSuccess: afterSubmit
 })(DeleteAccountForm)
