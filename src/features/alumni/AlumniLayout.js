@@ -93,18 +93,18 @@ class AlumniLayout extends Component {
     var result = []
 
     var found = _.find(this.state.alumniArray, (grad) => {
-      if (firstName && grad.fname && firstName.includes(grad.fname)) {
+      if (firstName && grad.fname && firstName.includes(grad.fname.toLowerCase())) {
         result.push(grad)
         return grad
       }
 
-      if (lastName && grad.lname && lastName.includes(grad.lname)) {
+      if (lastName && grad.lname && lastName.includes(grad.lname.toLowerCase())) {
         result.push(grad)
         return grad
       }
 
       if (!firstName && !lastName) {
-        if (query.includes(grad.fname) || query.includes(grad.lname)) {
+        if (query.includes(grad.fname.toLowerCase()) || query.includes(grad.lname.toLowerCase())) {
           result.push(grad)
           return grad
         }
