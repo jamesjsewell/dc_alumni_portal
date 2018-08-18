@@ -28,9 +28,9 @@ const NavMenu = (props) => {
   return (
     <AppBar color='primary' position='static'>
       <Toolbar>
-        <Button color='inherit' disabled={currentRoute === '/alumni'} onClick={(event) => { navigateToAlumni(event) }}>Alumni</Button>
+        <Button color={currentRoute != '/alumni' ? 'inherit' : ''} onClick={(event) => { navigateToAlumni(event) }}>Alumni</Button>
         {user && user.email
-          ? <Button color='inherit' disabled={!!(currentRoute === routes.GRAD_PROFILE || currentRoute === routes.EMPLOYER_PROFILE)} onClick={(event) => { navigateToAccount(event) }} >Account</Button> : null
+          ? <Button color={currentRoute != routes.GRAD_PROFILE || currentRoute === routes.EMPLOYER_PROFILE ? 'inherit' : ''} onClick={(event) => { navigateToAccount(event) }} >Account</Button> : null
         }
         {user && user.email
           ? <Button color='inherit' onClick={(event) => { logout(event) }} >Logout</Button> : null
