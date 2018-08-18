@@ -202,7 +202,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-              <Divider style={{margin: '.5rem'}} />
+                <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 
@@ -215,7 +215,7 @@ class AlumniLayout extends Component {
         <ExpansionPanel style={{margin: 'auto', marginBottom: '2rem', maxWidth: '600px'}}>
 
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon id='filter_panel' />}>
-            {!filteredAlumniArray ? <Typography> Filter </Typography> : null}
+            <Typography> Filter </Typography>
 
           </ExpansionPanelSummary>
 
@@ -239,7 +239,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-                <Divider style={{margin: '.5rem'}} />
+              <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 
