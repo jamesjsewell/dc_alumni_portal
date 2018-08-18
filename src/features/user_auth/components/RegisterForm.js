@@ -27,6 +27,8 @@ class RegisterForm extends Component {
 
   doThisOnSubmit (input) {
     input.account_type = this.props.account_type
+    input.fname = input.fname.toLowerCase()
+    input.lname = input.lname.toLowerCase()
     this.props.register(input)
   }
 
