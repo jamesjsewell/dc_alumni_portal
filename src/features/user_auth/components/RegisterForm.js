@@ -14,22 +14,15 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { FormField } from '../../forms/FormFields.js'
 import * as check from '../../forms/formValidation.js'
 
-const afterSubmit = (result, dispatch, props) => {
-  props.reset()
-  props.untouch(['email', 'password', 'fname', 'lname'])
-}
+// const afterSubmit = (result, dispatch, props) => {
+//   props.reset()
+//   props.untouch(['email', 'password', 'fname', 'lname'])
+// }
 
 class RegisterForm extends Component {
   constructor (props) {
     super(props)
     this.state = {}
-  }
-
-  componentWillReceiveProps (nextProps) {
-
-    // to reset the form
-    // this.props.reset()
-
   }
 
   doThisOnSubmit (input) {
@@ -90,10 +83,10 @@ class RegisterForm extends Component {
 }
 
 export default reduxForm({
-  form: 'register',
+  form: 'register'
   // fields: ["name"],
   // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
   // asyncBlurFields: ["name"],
   // shouldAsyncValidate,
-  onSubmitSuccess: afterSubmit
+  // onSubmitSuccess: afterSubmit
 })(RegisterForm)

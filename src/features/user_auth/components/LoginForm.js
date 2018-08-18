@@ -20,10 +20,10 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
 import CardHeader from '@material-ui/core/CardHeader'
 
-const afterSubmit = (result, dispatch, props) => {
-  props.reset()
-  props.untouch(['email_login', 'password_login'])
-}
+// const afterSubmit = (result, dispatch, props) => {
+//   props.reset()
+//   props.untouch(['email_login', 'password_login'])
+// }
 
 class LoginForm extends Component {
   constructor (props) {
@@ -117,10 +117,10 @@ class LoginForm extends Component {
 }
 
 export default reduxForm({
-  form: 'login',
+  form: 'login'
   // fields: ["name"],
   // asyncValidate: (values, dispatch, validationType)=>{ return asyncValidate(values, dispatch, validationType, 'itemForm') },
   // asyncBlurFields: ["name"],
   // shouldAsyncValidate,
-  onSubmitSuccess: afterSubmit
+  // onSubmitSuccess: afterSubmit
 })(LoginForm)
