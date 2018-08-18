@@ -146,7 +146,7 @@ class AlumniLayout extends Component {
     this.props.actions.setAsync(true)
 
     axios
-      .get(`${API_URL}/users`)
+      .post(`${API_URL}/users/filter`, {account_type: 'grad'})
       .then(response => {
         if (response.data) {
           this.setState({ alumniArray: response.data })
@@ -202,7 +202,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-                <Divider style={{margin: '.5rem'}} />
+              <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 
@@ -239,7 +239,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-              <Divider style={{margin: '.5rem'}} />
+                <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 
