@@ -45,11 +45,11 @@ class ForgotPasswordForm extends Component {
 
         <Field type='email' name='email' label='email' component={FormField} validate={[check.required, check.email]} required />
 
-        { password_request != 'sending' ? <Button variant='contained' type='submit'>
+        { password_request != 'sending' ? <Button style={{margin: '.5rem'}} variant='outlined' size='small' type='submit'>
                     request
         </Button> : null}
 
-        { password_request === 'failed' ? <Card><CardContent><Typography component='p' color='error'>something went wrong, try again</Typography></CardContent></Card> : null }
+        { password_request === 'failed' ? <Typography style={{margin: '.5rem'}} component='p' color='error'>something went wrong, try again</Typography> : null }
 
       </form >
 

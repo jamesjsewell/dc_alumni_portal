@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 import { FormField } from '../../forms/FormFields.js'
 import * as check from '../../forms/formValidation.js'
 
@@ -19,15 +20,10 @@ const afterSubmit = (result, dispatch, props) => {
 
 const Error_resetting = (props) => {
   const { password_error_msg } = props
-  return (<Grid item>
-    <Card>
-      <CardContent>
-        <Typography color='error' component='p'>
-          {password_error_msg}
-        </Typography>
-      </CardContent>
-    </Card>
-  </Grid>)
+  return (
+    <Typography color='error' component='p'>
+      {password_error_msg}
+    </Typography>)
 }
 
 class ResetPasswordForm extends Component {
@@ -53,36 +49,29 @@ class ResetPasswordForm extends Component {
     const { handleSubmit, password_error_msg, error_resetting } = this.props
 
     return (
-      <Grid item>
 
-        <Card>
+      <Paper elevation={0} style={{margin: 'auto', marginTop: '1rem', marginBottom: '1rem', padding: '.5rem', maxWidth: '600px'}}>
 
-          <CardContent>
-
-            <Typography gutterBottom variant='headline' component='h2'>
+        <Typography gutterBottom variant='headline' component='h2'>
                             Reset Password
-            </Typography>
-            <Typography component='p'>
+        </Typography>
+        <Typography component='p'>
                             enter the new password you wish to use
-            </Typography>
-            <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
+        </Typography>
+        <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>
 
-              <Field type='email' name='the_email' label='email' component={FormField} validate={[check.required]} required />
-              <Field type='password' name='new_password' label='new password' component={FormField} validate={[check.required]} required />
+          <Field type='email' name='the_email' label='email' component={FormField} validate={[check.required]} required />
+          <Field type='password' name='new_password' label='new password' component={FormField} validate={[check.required]} required />
 
-              <Button type='submit'>
+          <Button type='submit'>
                                 submit
-              </Button>
+          </Button>
 
-            </form >
+        </form >
 
-            {error_resetting ? <Error_resetting password_error_msg={password_error_msg} /> : null }
+        {error_resetting ? <Error_resetting password_error_msg={password_error_msg} /> : null }
 
-          </CardContent>
-
-        </Card>
-
-      </Grid>
+      </Paper>
 
     )
   }

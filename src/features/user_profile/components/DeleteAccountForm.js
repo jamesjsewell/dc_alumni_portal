@@ -56,7 +56,7 @@ class DeleteAccountForm extends Component {
           validate={[check.required, this.emailsMatch]}
         />
         {error_deleting_user === true ? <Typography style={{margin: '.5rem'}} color='error'>error deleting user</Typography> : null}
-        <Button color='red' style={{margin: '.5rem'}} variant='outlined' type='submit'>
+        <Button size='small' color='red' style={{margin: '.5rem'}} variant='outlined' type='submit'>
                     delete account
         </Button>
 

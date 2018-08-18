@@ -35,7 +35,7 @@ class AuthView extends Component {
 
     return (
       <div>
-        <Typography style={{marginTop: '1rem'}} align='center' variant='display1'>welcome</Typography>
+        <Typography style={{marginTop: '1rem'}} align='center' variant='headline'>welcome</Typography>
         <Typography align='center' variant='caption'>login or register</Typography>
         <AuthLayout
 

@@ -15,15 +15,10 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 const Did_Reset = (props) => {
-  return (<Grid item>
-    <Card>
-      <CardContent>
-        <Typography color='primary' component='p'>
+  return (
+    <Typography color='primary' component='p'>
                     Your password has been reset
-        </Typography>
-      </CardContent>
-    </Card>
-  </Grid>)
+    </Typography>)
 }
 
 export default class ResetPasswordLayout extends Component {
@@ -43,13 +38,13 @@ export default class ResetPasswordLayout extends Component {
   render () {
     const {user, routes, error_resetting, password_error_msg, did_reset, password_request, getForgotPasswordToken, resetPassword, match, history} = this.props
     return (
-      <div>
-        <Grid container spacing={24}>
 
-          {did_reset === false ? <ResetPasswordForm match={match} resetPassword={resetPassword} history={history} routes={routes} error_resetting={error_resetting} password_error_msg={password_error_msg} /> : null}
+      <Paper style={{margin: 'auto'}}>
 
-          {did_reset === true ? <Did_Reset user={user} routes={routes} /> : null}
-        </Grid>
-      </div>)
+        {did_reset === false ? <ResetPasswordForm match={match} resetPassword={resetPassword} history={history} routes={routes} error_resetting={error_resetting} password_error_msg={password_error_msg} /> : null}
+
+        {did_reset === true ? <Did_Reset user={user} routes={routes} /> : null}
+      </Paper>
+    )
   }
 }

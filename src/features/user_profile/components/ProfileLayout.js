@@ -95,8 +95,8 @@ export default class ProfileLayout extends Component {
         { user.account_type === 'grad'
           ? <Grid item>
 
-            <Card>
-              <CardHeader title='Profile Image' subheader='Update your profile image' />
+            <Card style={{margin: '.5rem'}}>
+              <CardHeader subheader='Update your profile image' />
               <CardContent>
 
                 {user.avatar ? <Avatar
@@ -113,8 +113,8 @@ export default class ProfileLayout extends Component {
               </CardActions>
             </Card>
 
-            <Card>
-              <CardHeader title='Resume' subheader='Update your resume' />
+            <Card style={{margin: '.5rem'}}>
+              <CardHeader subheader='Update your resume' />
               <CardContent>
                 {user.resume ? <Button href={user.resume} variant='outlined'>view</Button> : <Typography component='p'>Upload your resume</Typography>}
                 {!user.resume ? <UppyDashboardComponent user={user} updateUser={updateUser} resume /> : null}
@@ -132,19 +132,19 @@ export default class ProfileLayout extends Component {
           open={!!this.state.password_dialog_open}
           // onClose={this.handleClose}
           aria-labelledby='responsive-dialog-title'
+          fullWidth
+          maxWidth={false}
         >
           <DialogTitle id='responsive-dialog-title'>{password_request === 'sent' ? 'Success!' : 'Password Change '}</DialogTitle>
 
           <DialogContent>
-            <Card>
-              <CardContent>
-                <DialogContentText>
-                  { !password_request || password_request === null || password_request === 'failed' ? 'enter the email associated with this account' : null }
-                  { password_request === 'sending' ? '...sending request' : null }
-                  { password_request === 'sent' ? 'an email was sent to the address you provided, open the email to continue. Follow the link in the most recent email from us. If you do not receive the email soon, try again.' : null }
-                </DialogContentText>
-              </CardContent>
-            </Card>
+
+            <DialogContentText>
+              { !password_request || password_request === null || password_request === 'failed' ? 'enter the email associated with this account' : null }
+              { password_request === 'sending' ? '...sending request' : null }
+              { password_request === 'sent' ? 'an email was sent to the address you provided, open the email to continue. Follow the link in the most recent email from us. If you do not receive the email soon, try again.' : null }
+            </DialogContentText>
+
             <ForgotPasswordForm password_request={password_request} getForgotPasswordToken={getForgotPasswordToken} />
 
           </DialogContent>
@@ -160,19 +160,18 @@ export default class ProfileLayout extends Component {
           open={!!this.state.delete_account_open}
           // onClose={this.handleClose}
           aria-labelledby='responsive-dialog-title'
+          fullWidth
+          maxWidth={false}
         >
           <DialogTitle id='responsive-dialog-title'>remove account</DialogTitle>
 
           <DialogContent>
             <DialogContentText>enter the email you used to sign in to permanently remove this account</DialogContentText>
-            <Card>
-              <CardContent>
 
-                <DialogContentText>
-                  <DeleteAccountForm removeAccount={this.removeAccount.bind(this)} error_deleting_user={error_deleting_user} user={this.props.user} />
-                </DialogContentText>
-              </CardContent>
-            </Card>
+
+            <DialogContentText>
+              <DeleteAccountForm removeAccount={this.removeAccount.bind(this)} error_deleting_user={error_deleting_user} user={this.props.user} />
+            </DialogContentText>
 
           </DialogContent>
           <DialogActions>
