@@ -87,16 +87,17 @@ class SeeMoreModal extends Component {
 
               </Paper>
 
-              <Paper style={{margin: '.1rem'}} >
-                <Paper elevation={0} style={{maxWidth: '100%', padding: '.1rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-                  { selectedGrad.website ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={selectedGrad.website}>website</Button> : null}
-                  { selectedGrad.portfolio ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={selectedGrad.portfolio} >portfolio</Button> : null}
-                  { selectedGrad.resume ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={selectedGrad.resume} >resume</Button> : null}
-                  { selectedGrad.publicEmail ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={`mailto:${selectedGrad.publicEmail}`}><Icon>email</Icon></Button> : null}
+              { selectedGrad.website || selectedGrad.portfolio || selectedGrad.resume || selectedGrad.publicEmail ?
+                <Paper style={{margin: '.1rem'}} >
+                  <Paper elevation={0} style={{maxWidth: '100%', padding: '.1rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+                    { selectedGrad.website ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={selectedGrad.website}>website</Button> : null}
+                    { selectedGrad.portfolio ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={selectedGrad.portfolio} >portfolio</Button> : null}
+                    { selectedGrad.resume ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={selectedGrad.resume} >resume</Button> : null}
+                    { selectedGrad.publicEmail ? <Button classes={{root: classes.buttonLink}} style={{fontSize: '.5rem'}} variant='outlined' href={`mailto:${selectedGrad.publicEmail}`}><Icon>email</Icon></Button> : null}
 
-                </Paper>
+                  </Paper>
 
-              </Paper>
+                </Paper> : null}
 
             </Paper>
 

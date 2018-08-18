@@ -26,7 +26,7 @@ const NavMenu = (props) => {
   const { currentRoute, routes, history, user, logout, navigateToAccount, navigateToAlumni} = props
 
   return (
-    <AppBar position='static'>
+    <AppBar color='primary' position='static'>
       <Toolbar>
         <Button color='inherit' disabled={currentRoute === '/alumni'} onClick={(event) => { navigateToAlumni(event) }}>Alumni</Button>
         {user && user.email

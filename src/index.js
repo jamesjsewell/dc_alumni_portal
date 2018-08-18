@@ -16,16 +16,11 @@ import './style.scss'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#7cc342',
-      main: '#5A8836'
-      // dark: '',
-      // contrastText: will be calculated to contast with palette.primary.main
-    },
-    secondary: {
       light: '#358fcd',
-      main: '#358fcd',
-      dark: '#358fcd',
-      contrastText: '#f29e33'
+      main: '#216fb8',
+      dark: '#1f66a3'
+
+      // contrastText: will be calculated to contast with palette.primary.main
     }
     // error: will use the default color
   }

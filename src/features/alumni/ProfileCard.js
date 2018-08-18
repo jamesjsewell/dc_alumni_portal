@@ -43,14 +43,13 @@ class ProfileCard extends Component {
 
       <Grid item>
 
-        <Card style={{ width: '300px'}}>
+        <Card style={{width: '300px'}}>
           <CardHeader
             onClick={() => { openModal(grad) }}
             avatar={
               <Avatar
                 src={grad.avatar ? grad.avatar : account_box}
               />}
-
             title={grad.fname && grad.lname ? grad.fname + ' ' + grad.lname : ''}
 
           />

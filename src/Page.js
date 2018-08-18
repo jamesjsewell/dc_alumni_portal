@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import * as controller from './user.js'
-
+import dc_logo from './images/digitalcrafts-site-logo.png'
 import AuthView from './features/user_auth/components/AuthView.js'
 import ResetPasswordView from './features/user_auth/components/ResetPasswordView.js'
 import ProfileView from './features/user_profile/components/ProfileView.js'
@@ -83,6 +83,8 @@ class Page extends Component {
     const { user, util } = this.props
 
     return (<div>
+
+      <Paper square style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><img style={{maxHeight: '50px', width: 'auto', padding: '.5rem', margin: '.5rem', borderRadius: '.2rem' }} src={dc_logo} /><Typography variant="display1">Alumni Portal</Typography></Paper>
 
       {util.asyncActive ? <div style={{backgroundColor: 'rgba(0,0,0,.2)', position: 'fixed', width: '100vw', height: '100vh', zIndex: '500' }}><div style={{ padding: '.5rem', borderRadius: '.5rem', backgroundColor: 'rgba(255,255,255,.8)', position: 'absolute', width: 'auto', height: 'auto', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}><CircularProgress thickness={7} /></div></div> : null}
 
