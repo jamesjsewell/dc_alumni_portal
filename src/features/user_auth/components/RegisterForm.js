@@ -42,12 +42,8 @@ class RegisterForm extends Component {
 
           <CardContent>
 
-            <Typography gutterBottom variant='headline' component='h2'>
-                            Register
-            </Typography>
-
-            <Typography component='p'>
-                            create an account
+            <Typography variant='caption'>
+                            don't have an account? create one
             </Typography>
 
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>

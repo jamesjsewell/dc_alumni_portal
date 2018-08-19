@@ -57,10 +57,7 @@ class LoginForm extends Component {
 
           <CardContent>
 
-            <Typography color='primary' gutterBottom variant='headline' component='h2'>
-                            Login
-            </Typography>
-            <Typography component='p'>
+            <Typography variant='caption'>
                             enter your login credentials
             </Typography>
             <form onSubmit={handleSubmit(this.doThisOnSubmit.bind(this))}>

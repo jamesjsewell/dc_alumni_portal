@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import dc_logo from '../../images/digitalcrafts-site-logo.png'
 // import * as controller from "./navbar.js"
 import * as links from '../../nav_links.js'
 
@@ -26,16 +27,23 @@ const NavMenu = (props) => {
   const { currentRoute, routes, history, user, logout, navigateToAccount, navigateToAlumni} = props
 
   return (
-    <AppBar color='primary' position='static'>
-      <Toolbar>
-        <Button color={currentRoute != '/alumni' ? 'inherit' : ''} onClick={(event) => { navigateToAlumni(event) }}>Alumni</Button>
-        {user && user.email
-          ? <Button color={currentRoute != routes.GRAD_PROFILE && currentRoute != routes.EMPLOYER_PROFILE ? 'inherit' : ''} onClick={(event) => { navigateToAccount(event) }} >Account</Button> : null
-        }
-        {user && user.email
-          ? <Button color='inherit' onClick={(event) => { logout(event) }} >Logout</Button> : null
-        }
+    <AppBar color='' position='static'>
+
+      <Toolbar style={{display: 'flex', justifyContent: 'space-between', backgroundColor: 'none'}}>
+
+        <div style={{display: 'flex', alignItems: 'center'}}><img style={{margin: 'auto', maxHeight: '40px', width: 'auto', padding: '.5rem', borderRadius: '.2rem' }} src={dc_logo} /><Typography color='primary' style={{textAlign: 'right'}} variant='headline'>Alumni Portal</Typography></div>
+
+        <div><Button variant='text' color={currentRoute != '/alumni' ? 'secondary' : 'primary'} onClick={(event) => { navigateToAlumni(event) }}>Alumni</Button>
+          {user && user.email
+            ? <Button variant='text' color={currentRoute != routes.GRAD_PROFILE && currentRoute != routes.EMPLOYER_PROFILE ? 'secondary' : 'primary'} onClick={(event) => { navigateToAccount(event) }} >Account</Button> : null
+          }
+          {user && user.email
+            ? <Button variant='text' color='secondary' onClick={(event) => { logout(event) }} >Logout</Button> : null
+          }
+        </div>
+
       </Toolbar>
+
     </AppBar>
   )
 }

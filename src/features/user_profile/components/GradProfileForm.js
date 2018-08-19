@@ -112,6 +112,8 @@ class GradProfileForm extends Component {
   doThisOnSubmit (input) {
     input.skills = this.state.selectedSkills
     input.DCprogramType = this.state.programType
+    input.fname = input.fname.toLowerCase()
+    input.lname = input.lname.toLowerCase()
     this.props.updateUser(this.props.user._id, input)
   }
 

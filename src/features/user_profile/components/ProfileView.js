@@ -37,7 +37,7 @@ class ProfileView extends Component {
     return (
 
       <div>
-        <Typography style={{marginTop: '1rem'}} align='center' variant='headline'> Account </Typography>
+        <Typography style={{marginTop: '1rem'}} align='center' variant='title'> Account </Typography>
         <ProfileLayout user={user} updateUser={this.props.actions.updateUser.bind(this)} userState={userState} getForgotPasswordToken={this.props.actions.getForgotPasswordToken.bind(this)} deleteUser={this.props.actions.deleteUser.bind(this)} error_deleting_user={this.props.userState.error_deleting_user} />
       </div>
 

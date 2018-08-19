@@ -36,23 +36,8 @@ const skills = [
   'css',
   'javascript',
   'python',
-  'c',
-  'r',
   'java',
-  'sdd',
-  'rtta',
-  'asdf',
-  'sdfasd',
-  'safds',
-  'adadfd',
-  'asdsdafd',
-  'dfsadf',
-  'dafds',
-  'sdfsda',
-  'sdfasd',
-  'sdfdf',
-  'sdfasdf',
-  'sdfadsf'
+  'c#'
 
 ]
 
