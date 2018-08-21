@@ -113,10 +113,13 @@ class Navbar extends Component {
         <Hidden mdUp>
 
           <AppBar position='static'>
-            <Toolbar>
+
+            <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+
               <IconButton onClick={(event) => { this.handleToggleDrawer(event, true) }} color='inherit' aria-label='Menu'>
                 <MenuIcon />
               </IconButton>
+              <div style={{display: 'flex', alignItems: 'center'}}><img style={{margin: 'auto', maxHeight: '40px', width: 'auto', padding: '.5rem', borderRadius: '.2rem' }} src={dc_logo} /><Typography color='secondary' style={{textAlign: 'right'}} variant='headline'>Alumni Portal</Typography></div>
             </Toolbar>
           </AppBar>
 
