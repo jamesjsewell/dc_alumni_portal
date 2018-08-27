@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import Cookies from 'universal-cookie'
 import _ from 'underscore'
@@ -11,25 +10,9 @@ import FilterGrads from './FilterGrads.js'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import withMobileDialog from '@material-ui/core/withMobileDialog'
-import Avatar from '@material-ui/core/Avatar'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 import Paper from '@material-ui/core/Paper'
-import Chip from '@material-ui/core/Chip'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import Icon from '@material-ui/core/Icon'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -44,11 +27,11 @@ class AlumniLayout extends Component {
     this.state = { alumniArray: [], filteredAlumniArray: null, searchResult: null, queryString: null, filterEnabled: false, modalOpen: false, selectedGrad: {} }
     this.getAlumniArray()
 
-    var selected_grad_id = cookies.get('selected_grad')
+    var gradId = cookies.get('selected_grad')
 
-    if (selected_grad_id && selected_grad_id.length) {
+    if (gradId && gradId.length) {
       axios
-        .get(`${API_URL}/users/${selected_grad_id}`)
+        .get(`${API_URL}/users/${gradId}`)
         .then(response => {
           if (response && response.data) {
             this.setState({selectedGrad: response.data[0], modalOpen: true})
@@ -56,7 +39,7 @@ class AlumniLayout extends Component {
             this.setState({modalOpen: false})
           }
         })
-        .catch(error => {
+        .catch(response => {
           this.setState({modalOpen: false})
         })
     }
@@ -65,7 +48,7 @@ class AlumniLayout extends Component {
   openModal (grad) {
     cookies.set('selected_grad', grad._id, { path: '/' })
 
-    this.setState({modalOpen: true, selectedGrad: grad })
+    this.setState({ modalOpen: true, selectedGrad: grad })
   }
 
   closeModal () {
@@ -153,7 +136,7 @@ class AlumniLayout extends Component {
         }
         this.props.actions.setAysnc(false)
       })
-      .catch(error => { this.props.actions.setAsync(false) })
+      .catch(response => { this.props.actions.setAsync(false) })
   }
 
   generateProfileCards (alumniArray) {
@@ -202,7 +185,7 @@ class AlumniLayout extends Component {
 
               </Paper>
 
-              <Divider style={{margin: '.5rem'}} />
+                <Divider style={{margin: '.5rem'}} />
 
               </div> : null }
 

@@ -5,19 +5,8 @@ import linkedinIcon from '../../images/linkedin.svg'
 import stackOverflowIcon from '../../images/stack_overflow.svg'
 import mediumIcon from '../../images/medium_com.svg'
 
-import Chip from '@material-ui/core/Chip'
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
-import Typography from '@material-ui/core/Typography'
-import SvgIcon from '@material-ui/core/SvgIcon'
-import Icon from '@material-ui/core/Icon'
-
-import List from '@material-ui/core/ListItem'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import Divider from '@material-ui/core/Divider'
 
 const styles = {
 
@@ -38,7 +27,7 @@ const styles = {
 
 class SocialMediaLinks extends Component {
   render () {
-    const {classes, github, linkedin, stackOverflow, medium } = this.props
+    const { classes, github, linkedin, stackOverflow, medium } = this.props
     return (
 
       <Paper style={{margin: 'auto'}} elevation={0} className={classes.root} component='div'>

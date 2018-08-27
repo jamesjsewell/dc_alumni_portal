@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import account_box from '../../images/account_box.svg'
+import accountBoxIcon from '../../images/account_box.svg'
 import { withStyles } from '@material-ui/core/styles'
 
-import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
 import Paper from '@material-ui/core/Paper'
 import Icon from '@material-ui/core/Icon'
 import SocialMediaLinks from './SocialMediaLinks.js'
@@ -13,15 +11,13 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import withMobileDialog from '@material-ui/core/withMobileDialog'
+
 import Chip from '@material-ui/core/Chip'
 import Typography from '@material-ui/core/Typography'
 
-import List from '@material-ui/core/ListItem'
+import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
-import ListSubheader from '@material-ui/core/ListSubheader'
 import Divider from '@material-ui/core/Divider'
 
 const styles = {
@@ -82,7 +78,7 @@ class SeeMoreModal extends Component {
 
             <Paper elevation={0} style={{minWidth: '160px', maxWidth: '400px', display: 'block', padding: '.5rem'}}>
               <Paper elevation={0} style={{margin: 'auto', width: '150px', padding: '.5rem'}}>
-                <img style={{width: selectedGrad.avatar ? '140px' : '64px', height: 'auto'}} src={selectedGrad.avatar ? selectedGrad.avatar : account_box} />
+                <img style={{width: selectedGrad.avatar ? '140px' : '64px', height: 'auto'}} src={selectedGrad.avatar ? selectedGrad.avatar : accountBoxIcon} />
                 <SocialMediaLinks github={selectedGrad.github ? selectedGrad.github : null} linkedin={selectedGrad.linkedin ? selectedGrad.linkedin : null} stackOverflow={selectedGrad.stackOverflow ? selectedGrad.stackOverflow : null} medium={selectedGrad.mediumBlog ? selectedGrad.mediumBlog : null} />
 
               </Paper>
@@ -109,7 +105,7 @@ class SeeMoreModal extends Component {
                 ? <Paper style={{width: '90%', padding: '.5rem', margin: 'auto', marginBottom: '.5rem'}}>
                   <Typography style={{padding: '.2rem'}} variant='subheading' >skills</Typography>
                   <Typography variant='caption'>top 3</Typography>
-                  {selectedGrad.skills.map((skill) => { return <Chip style={{ border: `none`}} label={skill} /> }) }
+                  {selectedGrad.skills.map((skill) => { return <Chip style={{ border: `none` }} label={skill} /> }) }
                 </Paper> : null }
 
               <Divider />

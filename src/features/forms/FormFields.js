@@ -1,12 +1,8 @@
-import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Switch from '@material-ui/core/Switch'
 
 // example for the outer div, for styling based on state: className={asyncValidating ? 'async-validating' : ''} required={required} error={error && touched ? true : false}
@@ -19,7 +15,7 @@ export const FormField = ({
   required,
   asyncValidation,
   initialValues,
-  meta: { touched, error, warning, value, asyncValidating, pristine}
+  meta: { touched, error, warning, value, asyncValidating, pristine }
 }) => (
   <div>
 
