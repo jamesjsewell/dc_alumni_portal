@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import dc_logo from '../../images/digitalcrafts-site-logo.png'
 // import * as controller from "./navbar.js"
-import * as links from '../../nav_links.js'
+import * as links from '../../../nav_links.js'
 
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'

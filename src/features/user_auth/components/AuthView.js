@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 // import * as controller from "../user_auth.js"
 import AuthLayout from './AuthLayout.js'
-import { Typography } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
 
 // @connect(
 //   state => controller.selector(state),

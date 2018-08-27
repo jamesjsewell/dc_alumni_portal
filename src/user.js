@@ -64,7 +64,7 @@ export function login ({ email, password }) {
 
           dispatch({type: ASYNC, payload: { async: false }})
         })
-        .catch(error => {
+        .catch(response => {
           dispatch({
             type: LOGIN_ERROR,
             payload: { message: ' make sure the email and password are correct' }
@@ -95,7 +95,7 @@ export function authenticate (user, token) {
 
           dispatch({type: ASYNC, payload: { async: false }})
         })
-        .catch(error => { dispatch({type: ASYNC, payload: { async: false }}) })
+        .catch(response => { dispatch({type: ASYNC, payload: { async: false }}) })
     }
   }
 }
@@ -124,7 +124,7 @@ export function register (info) {
 
           dispatch({type: ASYNC, payload: { async: false }})
         })
-        .catch(error => {
+        .catch(response => {
           dispatch({
             type: ERROR_REGISTERING,
             payload: { message: ' something went wrong, unable to create account' }
@@ -180,7 +180,7 @@ export function getForgotPasswordToken (email) {
 
         dispatch({type: ASYNC, payload: { async: false }})
       })
-      .catch(error => {
+      .catch(response => {
         dispatch({
           type: PASSWORD_REQUEST_FAILED,
           payload: null
@@ -223,7 +223,7 @@ export function resetPassword (dc_user_token, password, email, routes, history) 
 
         dispatch({type: ASYNC, payload: { async: false }})
       })
-      .catch(error => {
+      .catch(response => {
         dispatch({
           type: RESET_PASSWORD_ERROR,
           payload: null
@@ -249,7 +249,7 @@ export function updateUser (userId, updated) {
 
         dispatch({type: ASYNC, payload: { async: false }})
       })
-      .catch(error => {
+      .catch(response => {
         dispatch({
           type: ERROR_UPDATING_USER,
           payload: null
@@ -282,7 +282,7 @@ export function deleteUser (userId) {
 
         dispatch({type: ASYNC, payload: { async: false }})
       })
-      .catch(error => {
+      .catch(response => {
         dispatch({
           type: ERROR_DELETING_USER,
           payload: null
