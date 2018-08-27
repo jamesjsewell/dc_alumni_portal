@@ -1,8 +1,7 @@
 **files that need to be created by you**
 1. create a nav_links.js file and add the contents of nav_links.placeholder.js to it. Replace the values of the variables with the routes you would like the front-end to use. The routes should be prefixed with a / for example /grad-dashboard
 
-2. create a .env file ( . infront of the file makes it hidden )
-copy the contents of the existing .env.default to file
+2. create a .env file ( . infront of the file makes it hidden ), copy the contents of the existing .env.default to it
 
 **explanation of the variables in .env.default**
 
