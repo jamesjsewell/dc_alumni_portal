@@ -11,6 +11,8 @@ import thunk from 'redux-thunk'
 import * as routes from '../nav_links.js'
 import Page from './Page.js'
 import ResetPasswordView from './features/user_auth/components/ResetPasswordView.js'
+import '@uppy/core/dist/style.css'
+import '@uppy/dashboard/dist/style.css'
 import './style.scss'
 
 const theme = createMuiTheme({
