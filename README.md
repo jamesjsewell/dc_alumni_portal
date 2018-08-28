@@ -14,6 +14,8 @@
     AUTH_SECRET="a random string you come up with"
     API_PASS="another random string you come up with"
 
+Note that the global_vars.js file in the src folder contains the API_URL that the front end will use when making ajax calls. When in development i have that API_URL variable set to 'http://localhost:3000' before building for production i have it set to 'https://dc-portal-api.herokuapp.com'
+
 **npm scripts**
 * "start": "node ./api/server.js",
     * this is used in production by heroku to run the server
@@ -28,4 +30,4 @@
 * "prod_build": "webpack --config webpack.prod.js"
     * this populates the dist folder with the bundled production files
 
-Note that the global_vars.js file in the src folder contains the API_URL that the front end will use when making ajax calls. When in development i have that API_URL variable set to 'http://localhost:3000' before building for production i have it set to 'https://dc-portal-api.herokuapp.com'
+
