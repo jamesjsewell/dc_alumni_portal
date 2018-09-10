@@ -1,18 +1,9 @@
 
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
-import { withRouter } from 'react-router'
-// import * as controller from "../user_auth.js"
-import ResetPasswordLayout from './ResetPasswordLayout.js'
 
-// @connect(
-//   state => controller.selector(state),
-//   dispatch => ({
-//     actions: bindActionCreators(controller, dispatch)
-//   })
-// )
+import { withRouter } from 'react-router'
+
+import ResetPasswordLayout from './ResetPasswordLayout.js'
 
 class ResetPasswordView extends Component {
   constructor (props) {

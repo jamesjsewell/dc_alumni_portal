@@ -1,20 +1,9 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import ProfileLayout from './ProfileLayout.js'
-import Navbar from '../../navbar/Navbar.js'
 import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
-import CardContent from '@material-ui/core/CardContent'
-import Card from '@material-ui/core/Card'
 
 class ProfileView extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentWillReceiveProps (nextProps) {
 
   }

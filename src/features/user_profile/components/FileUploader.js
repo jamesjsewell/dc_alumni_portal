@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dashboard } from '@uppy/react'
+
 import { DashboardModal } from '@uppy/react'
 const Uppy = require('@uppy/core')
 const AwsS3 = require('@uppy/aws-s3')
@@ -43,14 +43,13 @@ class UppyDashboardComponent extends Component {
   }
 
   render () {
-    const {resume, avatar} = this.props
+    const { resume } = this.props
 
     return (
       <DashboardModal
         uppy={this.uppy}
         inline={false}
         trigger={resume ? '.uppy_opener_resume' : '.uppy_opener_avatar'}
-        inline={false}
         showProgressDetails
         note='Images only, 1 file, up to 4 MB'
         closeModalOnClickOutside

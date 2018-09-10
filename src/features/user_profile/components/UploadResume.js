@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Dashboard from 'uppy/lib/react/Dashboard'
 const Uppy = require('uppy/lib/core')

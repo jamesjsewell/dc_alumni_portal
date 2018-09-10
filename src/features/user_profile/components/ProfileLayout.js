@@ -5,27 +5,20 @@ import UppyDashboardComponent from './FileUploader.js'
 import EmployerProfileForm from './EmployerProfileForm.js'
 import ForgotPasswordForm from '../../user_auth/components/ForgotPasswordForm.js'
 
-// material-ui
-import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 import Avatar from '@material-ui/core/Avatar'
-import CardHeader from '@material-ui/core/CardHeader'
 import Divider from '@material-ui/core/Divider'
-
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import withMobileDialog from '@material-ui/core/withMobileDialog'
 import DeleteAccountForm from './DeleteAccountForm.js'
 
 export default class ProfileLayout extends Component {
@@ -71,7 +64,7 @@ export default class ProfileLayout extends Component {
   }
 
   render () {
-    const { user, userState, updateUser, getForgotPasswordToken, error_deleting_user} = this.props
+    const { user, userState, updateUser, getForgotPasswordToken, error_deleting_user } = this.props
     const { password_request } = this.props.userState
     return (
 

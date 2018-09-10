@@ -1,40 +1,22 @@
 import _ from 'underscore'
 import React, { Component } from 'react'
-import { Form, Field, reduxForm, change, reset } from 'redux-form'
-import { FormField, TextArea, RadioSelect, DatePicker} from '../../forms/FormFields.js'
+import { Field, reduxForm } from 'redux-form'
+import { FormField, TextArea, RadioSelect, DatePicker } from '../../forms/FormFields.js'
 import * as check from '../../forms/formValidation.js'
 
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import withMobileDialog from '@material-ui/core/withMobileDialog'
-import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-
 import Chip from '@material-ui/core/Chip'
 import Select from '@material-ui/core/Select'
 import FormControl from '@material-ui/core/FormControl'
-import FormGroup from '@material-ui/core/FormGroup'
 import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Divider from '@material-ui/core/Divider'
-import CardHeader from '@material-ui/core/CardHeader'
 
 const skills = [
 

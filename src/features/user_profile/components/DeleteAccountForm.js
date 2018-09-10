@@ -1,31 +1,11 @@
-import _ from 'underscore'
+
 import React, { Component } from 'react'
-import { Form, Field, reduxForm, change, reset } from 'redux-form'
-import { FormField, TextArea } from '../../forms/FormFields.js'
+import { Field, reduxForm } from 'redux-form'
+import { FormField } from '../../forms/FormFields.js'
 import * as check from '../../forms/formValidation.js'
 
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
-
-import Chip from '@material-ui/core/Chip'
-import Select from '@material-ui/core/Select'
-import FormControl from '@material-ui/core/FormControl'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-
-// const afterSubmit = (result, dispatch, props) => {
-//   props.reset()
-//   props.untouch([])
-// }
 
 class DeleteAccountForm extends Component {
   constructor (props) {
@@ -42,7 +22,6 @@ class DeleteAccountForm extends Component {
 
   render () {
     const { handleSubmit, error_deleting_user} = this.props
-    const { expanded } = this.state
 
     return (
 
